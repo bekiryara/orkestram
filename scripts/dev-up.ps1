@@ -58,6 +58,29 @@ function Assert-MountSource {
     Write-Host "[dev-up] mount OK $Container -> $source"
 }
 
+function Ensure-RuntimePermissions {
+    param([string]$Container)
+
+    $permissionCommand = @'
+set -e
+mkdir -p /var/www/html/storage/framework/views
+mkdir -p /var/www/html/storage/framework/cache
+mkdir -p /var/www/html/storage/logs
+mkdir -p /var/www/html/bootstrap/cache
+chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+chmod -R ug+rwX /var/www/html/storage /var/www/html/bootstrap/cache
+test -w /var/www/html/storage/framework/views
+test -w /var/www/html/bootstrap/cache
+'@
+
+    & docker exec $Container sh -lc $permissionCommand
+    if ($LASTEXITCODE -ne 0) {
+        throw "Runtime izin preflight FAIL: $Container (storage/bootstrap-cache yazma izni saglanamadi)"
+    }
+
+    Write-Host "[dev-up] runtime-permissions OK $Container"
+}
+
 $targets = @()
 if ($App -eq "both") {
     $targets = @(
@@ -95,6 +118,7 @@ Invoke-WslBash -User $LinuxDockerUser -Command $composeCommand
 $expectedPrefix = "/home/$LinuxUser/orkestram/local-rebuild/apps/"
 foreach ($t in $targets) {
     Assert-MountSource -Container $t.Container -ExpectedPrefix $expectedPrefix
+    Ensure-RuntimePermissions -Container $t.Container
 }
 
 foreach ($t in $targets) {
