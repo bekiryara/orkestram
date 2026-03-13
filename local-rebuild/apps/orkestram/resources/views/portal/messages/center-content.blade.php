@@ -42,7 +42,7 @@
         <input type="hidden" name="listing_slug" value="{{ $selectedConversation->listing?->slug ?? $listingInputValue }}">
         <label class="form-label">{{ $isOwnerView ? 'Yanit' : 'Yeni Mesaj' }}</label>
         <textarea class="form-control" name="content" rows="4" placeholder="Mesajinizi yazin...">{{ old('content') }}</textarea>
-        <div class="actions mt-2">
+        <div class="actions mt-2 d-flex flex-column flex-sm-row gap-2">
             <button class="btn btn-primary" type="submit">Gonder</button>
             @if($selectedConversation->listing?->slug)
                 <a class="btn btn-outline-secondary" href="{{ route('listing.show', ['slug' => $selectedConversation->listing->slug]) }}" target="_blank" rel="noopener">Ilana Git</a>
@@ -52,7 +52,7 @@
 @else
     <h3 class="h5 mb-3">Mesaj Listesi</h3>
 
-    <form id="owner-message-bulk-form" method="post" action="{{ route('messages.bulk') }}" class="message-toolbar card mb-3">
+    <form id="owner-message-bulk-form" method="post" action="{{ route('messages.bulk') }}" class="message-toolbar card mb-3 p-3">
         @csrf
         <input type="hidden" name="box" value="{{ $inboxType }}">
         <input type="hidden" name="ids_csv" id="owner_message_ids_csv" value="">
@@ -64,7 +64,7 @@
                     <option value="block">Engelle</option>
                 </select>
             </div>
-            <div class="col-12 col-lg-auto">
+            <div class="col-12 col-lg-auto d-grid">
                 <button class="btn btn-primary" type="submit" @disabled(!$canBulk)>Uygula</button>
             </div>
             @if(!$canBulk)
@@ -74,14 +74,14 @@
     </form>
 
     @if($listingInputValue !== '')
-        <form method="post" action="{{ route('messages.reply') }}" class="message-toolbar card mb-3 message-compose">
+        <form method="post" action="{{ route('messages.reply') }}" class="message-toolbar card mb-3 message-compose p-3">
             @csrf
             <input type="hidden" name="box" value="{{ $inboxType }}">
             <input type="hidden" name="listing_slug" value="{{ $listingInputValue }}">
             <div class="d-flex flex-column gap-2">
                 <label class="form-label mb-0">Yeni Mesaj (Secili ilan)</label>
                 <textarea class="form-control" name="content" rows="3" placeholder="Mesajinizi yazin...">{{ old('content') }}</textarea>
-                <div><button class="btn btn-primary" type="submit">Gonder</button></div>
+                <div class="d-grid d-sm-inline"><button class="btn btn-primary" type="submit">Gonder</button></div>
             </div>
         </form>
     @endif
