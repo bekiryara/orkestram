@@ -35,6 +35,7 @@ class PublicController extends Controller
 
         $featuredListings = Listing::query()
             ->with([
+                'category:id,name,slug',
                 'attributeValues.attribute:id,label,field_type,is_active,is_visible_in_card,is_visible_in_detail',
             ])
             ->visibleForSite($site)

@@ -480,6 +480,20 @@ Tarih: 2026-03-11
    - `portal.php` + kritik portal blade dosyalari icin iki app hash parity PASS.
    - Not:
      - Bu turda kod davranisi degismedi; sadece kapanis dogrulamasi ve dokuman kilidi yapildi.
+55. Frontend listing karti parity refactoru yapildi:
+   - Yeni ortak partial:
+     - `resources/views/frontend/partials/listing-card.blade.php` (`izmirorkestra`)
+   - `izmirorkestra` tarafinda kart render noktalari ortak partiala tasindi:
+     - `frontend/home.blade.php`
+     - `frontend/service-category.blade.php`
+   - Etki:
+     - kart metni (`Baslangic`) ve alan yerlesimi `orkestram` ile hizalandi
+     - home + kategori kartlarinda tekrar eden markup azaltildi
+    - Dogrulama:
+      - partial dosya hash parity PASS (`orkestram` == `izmirorkestra`)
+      - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` PASS
+    - Not:
+      - Dogrulama Docker uzerinden alindi (validate quick both + smoke).
 
 ## Guncel Net Durum (2026-03-12)
 1. Kategori/lokasyon akisi deterministic adres modeline tasindi (iki app parity).
@@ -574,6 +588,17 @@ Tarih: 2026-03-11
    - Dogrulama:
      - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\security-gate.ps1` PASS
      - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` PASS
+19. Listing kart standardi tek partiala alindi (iki app parity):
+   - Ortak kart partiali eklendi:
+     - `resources/views/frontend/partials/listing-card.blade.php` (`orkestram`)
+     - `resources/views/frontend/partials/listing-card.blade.php` (`izmirorkestra`)
+   - Kart render noktalarinda tek kaynak kullanimi aktif:
+     - `frontend/home.blade.php`
+     - `frontend/listings.blade.php`
+     - `frontend/service-category.blade.php`
+   - Home + kategori akislarinda kart ozellikleri (`cardAttributesByListing`) controller tarafinda aktiflendi.
+   - Dogrulama:
+     - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\smoke-test.ps1 -App both` PASS
 
 ## Siradaki 5 Is
 1. Teklif formu Faz 2 (zengin alanlar, validasyon, owner tarafi takip paneli) planlamak.

@@ -194,3 +194,52 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - Bu tur dokuman/verification turudur; mevcut frontend farklara dokunulmamistir.
+
+### [2026-03-14 02:45] Listing Karti Tek Partial Standardi (Iki App Parity)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Listing karti tek partiala tasindi (`frontend/partials/listing-card.blade.php`) ve iki appte parity kuruldu.
+  - `home`, `listings`, `service-category` ekranlari ayni kart partialini kullanacak sekilde birlestirildi.
+  - Home + category akislarinda kart ozellikleri icin `cardAttributesByListing` beslemesi controller tarafinda aktiflendi.
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/app/Http/Controllers/PublicController.php`
+  - `local-rebuild/apps/orkestram/resources/views/frontend/home.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/frontend/listings.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/frontend/service-category.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/frontend/partials/listing-card.blade.php`
+  - `local-rebuild/apps/izmirorkestra/app/Http/Controllers/PublicController.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/home.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listings.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/service-category.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/partials/listing-card.blade.php`
+  - `docs/NEXT_TASK.md`
+  - `docs/PROJECT_STATUS_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\smoke-test.ps1 -App both`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Kart standardi artik home/listings/service-category ekranlarinda tek kaynak partialdan uretiliyor.
+
+### [2026-03-13 08:06] Frontend Listing Card Parity Refactoru
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `izmirorkestra` app'te listing kart markup'i ortak partial kullanimina tasindi.
+  - Home ve kategori sayfasinda tekrarlanan kart HTML bloklari `frontend.partials.listing-card` ile birlestirildi.
+  - Kart partial parity'si `orkestram` ile hash bazli dogrulandi.
+- Degisen Dosyalar:
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/home.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/service-category.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/partials/listing-card.blade.php`
+  - `docs/PROJECT_STATUS_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git diff -- local-rebuild/apps/izmirorkestra/resources/views/frontend/home.blade.php`
+  - `git diff -- local-rebuild/apps/izmirorkestra/resources/views/frontend/service-category.blade.php`
+  - `Get-FileHash .../frontend/partials/listing-card.blade.php` (iki app parity)
+  - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS (parity + pre-pr quick)`
+- Not:
+  - Mevcut frontend farklara dokunmama karari korunmustur; bu tur sadece hedef parity refactorunu kapsar.

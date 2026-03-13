@@ -2,29 +2,29 @@
 
 Durum: `DONE`  
 Sorumlu: `ajan`  
-Baslangic: `2026-03-13 08:05`  
-Hedef Bitis: `2026-03-13 07:43`
+Baslangic: `2026-03-14 02:20`  
+Hedef Bitis: `2026-03-14 02:45`
 
 ## Gorev Tanimi
-- Portal label standardini uygulama katmaninda merkezilestir ve dokumanla kilitle.
+- Listing kartini tek partial standardina al ve home/listings/service-category ekranlarinda ayni karti kullan.
 
 ## Kapsam (In)
-- [x] `UI_LABEL_SOZLUGU_TR.md` ile kod etiketlerinin birebir uyumunu dogrula
-- [x] `portal.*` label anahtarlarini tek kaynakta tut
-- [x] parity kontrolunu (`orkestram` + `izmirorkestra`) tamamla
+- [x] `frontend/partials/listing-card.blade.php` ortak kart partiali (iki app)
+- [x] `home`, `listings`, `service-category` ekranlarinda ortak karta gecis (iki app)
+- [x] Home + category aksinda kart ozellikleri (`cardAttributesByListing`) parity hizasi (iki app)
 
 ## Kapsam Disi (Out)
-- [x] Frontend tema/icerik degisiklikleri (mevcut farklara dokunma)
-- [x] Business logic degisikligi
+- [x] Fiyat/icerik metin stratejisi degisikligi
+- [x] Yeni business logic veya yeni endpoint
 
 ## Kabul Kriteri
-- [x] `/hesabim` ve `/owner` label seti sozlukle uyumlu
-- [x] `Sorular/Sorularim` aktif menu setinde gecmiyor
-- [x] iki app parity hash kontrolu PASS
+- [x] Ana sayfa, ilanlar ve kategori kartlari ayni markup ile render olur
+- [x] Kart ozellikleri (ornek: enstruman/sure) home + listings + kategori akislarda gorunur
+- [x] `scripts/smoke-test.ps1 -App both` PASS
 
 ## Zorunlu Komutlar
 ```powershell
-Get-Content D:\orkestram\docs\UI_LABEL_SOZLUGU_TR.md
+powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\smoke-test.ps1 -App both
 ```
 
 ## Tamamlandiginda Isaretlenecekler
