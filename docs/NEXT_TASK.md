@@ -2,29 +2,29 @@
 
 Durum: `DONE`  
 Sorumlu: `ajan`  
-Baslangic: `2026-03-14 01:45`  
-Hedef Bitis: `2026-03-14 02:20`
+Baslangic: `2026-03-13 08:05`  
+Hedef Bitis: `2026-03-13 07:43`
 
 ## Gorev Tanimi
-- `ci-gate` yanina ikinci zorunlu kontrolu ekle: `security-gate`.
+- Portal label standardini uygulama katmaninda merkezilestir ve dokumanla kilitle.
 
 ## Kapsam (In)
-- [x] `scripts/security-gate.ps1` eklendi
-- [x] `.github/workflows/security-gate.yml` eklendi
-- [x] `scripts/pre-pr.ps1` icine security adimi baglandi
+- [x] `UI_LABEL_SOZLUGU_TR.md` ile kod etiketlerinin birebir uyumunu dogrula
+- [x] `portal.*` label anahtarlarini tek kaynakta tut
+- [x] parity kontrolunu (`orkestram` + `izmirorkestra`) tamamla
 
 ## Kapsam Disi (Out)
-- [ ] Uygulama UI degisiklikleri
-- [ ] Mesaj/yorum business logic degisikligi
+- [x] Frontend tema/icerik degisiklikleri (mevcut farklara dokunma)
+- [x] Business logic degisikligi
 
 ## Kabul Kriteri
-- [x] Push/PR tarafinda ikinci check workflow'u hazir
-- [x] Local security taramasi PASS
-- [x] `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` PASS
+- [x] `/hesabim` ve `/owner` label seti sozlukle uyumlu
+- [x] `Sorular/Sorularim` aktif menu setinde gecmiyor
+- [x] iki app parity hash kontrolu PASS
 
 ## Zorunlu Komutlar
 ```powershell
-powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\security-gate.ps1
+Get-Content D:\orkestram\docs\UI_LABEL_SOZLUGU_TR.md
 ```
 
 ## Tamamlandiginda Isaretlenecekler

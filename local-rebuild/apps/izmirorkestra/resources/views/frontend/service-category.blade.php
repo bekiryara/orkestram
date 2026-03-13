@@ -44,6 +44,14 @@
                         <div class="meta">{{ $item->city }}{{ $item->district ? ' / ' . $item->district : '' }}</div>
                         <p>{{ $item->summary ?: 'Kisa tanitim metni girilmemis.' }}</p>
                         <p><strong>Baslangic:</strong> {{ $item->price_label ?: 'Iletisim ile netlesir' }}</p>
+                        @php($cardAttrs = $cardAttributesByListing[$item->id] ?? [])
+                        @if(is_array($cardAttrs) && count($cardAttrs))
+                            <div class="meta">
+                                @foreach($cardAttrs as $row)
+                                    <div><strong>{{ $row['label'] }}:</strong> {{ $row['value'] }}</div>
+                                @endforeach
+                            </div>
+                        @endif
                         <a class="btn card-btn" href="{{ route('listing.show', ['slug' => $item->slug]) }}">{{ $siteMeta['listing_cta'] ?? 'Detaylari Incele' }}</a>
                     </article>
                 @endforeach

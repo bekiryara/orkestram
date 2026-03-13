@@ -34,12 +34,22 @@ class PublicController extends Controller
             ->first();
 
         $featuredListings = Listing::query()
+            ->with([
+                'attributeValues.attribute:id,label,field_type,is_active,is_visible_in_card,is_visible_in_detail',
+            ])
             ->visibleForSite($site)
             ->where('status', 'published')
             ->orderByDesc('published_at')
             ->orderByDesc('id')
             ->limit(6)
             ->get();
+        $cardAttributesByListing = [];
+        foreach ($featuredListings as $listing) {
+            if (!$listing instanceof Listing) {
+                continue;
+            }
+            $cardAttributesByListing[(int) $listing->id] = $this->visibleAttributesForListing($listing, 'card');
+        }
 
         $featuredCities = CityPage::query()
             ->where('site', $site)
@@ -51,7 +61,7 @@ class PublicController extends Controller
 
         $canonicalUrl = rtrim($request->getSchemeAndHttpHost(), '/') . '/';
         $siteMeta = $this->siteMeta($site);
-        return view('frontend.home', compact('site', 'siteMeta', 'heroPage', 'featuredListings', 'featuredCities', 'canonicalUrl'));
+        return view('frontend.home', compact('site', 'siteMeta', 'heroPage', 'featuredListings', 'featuredCities', 'cardAttributesByListing', 'canonicalUrl'));
     }
 
     public function listings(Request $request): View
@@ -371,7 +381,10 @@ class PublicController extends Controller
             ->firstOrFail();
 
         $items = Listing::query()
-            ->with('category:id,name,slug')
+            ->with([
+                'category:id,name,slug',
+                'attributeValues.attribute:id,label,field_type,is_active,is_visible_in_card,is_visible_in_detail',
+            ])
             ->visibleForSite($site)
             ->where('status', 'published')
             ->where('category_id', $category->id)
@@ -385,6 +398,13 @@ class PublicController extends Controller
             ->orderByDesc('id')
             ->paginate(12)
             ->withQueryString();
+        $cardAttributesByListing = [];
+        foreach ($items->items() as $listing) {
+            if (!$listing instanceof Listing) {
+                continue;
+            }
+            $cardAttributesByListing[(int) $listing->id] = $this->visibleAttributesForListing($listing, 'card');
+        }
 
         $canonicalUrl = rtrim($request->getSchemeAndHttpHost(), '/') . '/hizmet/' . ltrim($category->slug, '/');
         $siteMeta = $this->siteMeta($site);
@@ -396,6 +416,7 @@ class PublicController extends Controller
             'siteMeta',
             'category',
             'items',
+            'cardAttributesByListing',
             'canonicalUrl',
             'metaRobots',
             'isEmpty'
@@ -421,7 +442,10 @@ class PublicController extends Controller
         }
 
         $items = Listing::query()
-            ->with('category:id,name,slug')
+            ->with([
+                'category:id,name,slug',
+                'attributeValues.attribute:id,label,field_type,is_active,is_visible_in_card,is_visible_in_detail',
+            ])
             ->visibleForSite($site)
             ->where('status', 'published')
             ->where('category_id', $category->id)
@@ -430,6 +454,13 @@ class PublicController extends Controller
             ->orderByDesc('id')
             ->paginate(12)
             ->withQueryString();
+        $cardAttributesByListing = [];
+        foreach ($items->items() as $listing) {
+            if (!$listing instanceof Listing) {
+                continue;
+            }
+            $cardAttributesByListing[(int) $listing->id] = $this->visibleAttributesForListing($listing, 'card');
+        }
 
         $canonicalUrl = rtrim($request->getSchemeAndHttpHost(), '/') . '/hizmet/' . ltrim($category->slug, '/') . '/' . $canonicalCitySlug;
         $siteMeta = $this->siteMeta($site);
@@ -441,6 +472,7 @@ class PublicController extends Controller
             'siteMeta',
             'category',
             'items',
+            'cardAttributesByListing',
             'canonicalUrl',
             'metaRobots',
             'isEmpty'
@@ -483,7 +515,10 @@ class PublicController extends Controller
         }
 
         $items = Listing::query()
-            ->with('category:id,name,slug')
+            ->with([
+                'category:id,name,slug',
+                'attributeValues.attribute:id,label,field_type,is_active,is_visible_in_card,is_visible_in_detail',
+            ])
             ->visibleForSite($site)
             ->where('status', 'published')
             ->where('category_id', $category->id)
@@ -497,6 +532,13 @@ class PublicController extends Controller
             ->orderByDesc('id')
             ->paginate(12)
             ->withQueryString();
+        $cardAttributesByListing = [];
+        foreach ($items->items() as $listing) {
+            if (!$listing instanceof Listing) {
+                continue;
+            }
+            $cardAttributesByListing[(int) $listing->id] = $this->visibleAttributesForListing($listing, 'card');
+        }
 
         $canonicalUrl = rtrim($request->getSchemeAndHttpHost(), '/') . '/hizmet/' . ltrim($category->slug, '/') . '/' . $canonicalCitySlug . '/' . $canonicalDistrictSlug;
         $siteMeta = $this->siteMeta($site);
@@ -508,6 +550,7 @@ class PublicController extends Controller
             'siteMeta',
             'category',
             'items',
+            'cardAttributesByListing',
             'canonicalUrl',
             'metaRobots',
             'isEmpty'

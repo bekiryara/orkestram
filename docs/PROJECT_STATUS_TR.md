@@ -474,6 +474,12 @@ Tarih: 2026-03-11
    - Dogrulama:
      - dosya hash parity PASS (`apps/orkestram` == `apps/izmirorkestra`)
      - otomatik test: ortamda `php` komutu bulunamadigi icin calistirilamadi
+54. Label standardi kapanis dogrulamasi tamamlandi:
+   - `UI_LABEL_SOZLUGU_TR.md` ile portal menu/baslik label uyumu tekrar tarandi.
+   - `Sorular/Sorularim` label'larinin aktif menu setinde olmadigi dogrulandi.
+   - `portal.php` + kritik portal blade dosyalari icin iki app hash parity PASS.
+   - Not:
+     - Bu turda kod davranisi degismedi; sadece kapanis dogrulamasi ve dokuman kilidi yapildi.
 
 ## Guncel Net Durum (2026-03-12)
 1. Kategori/lokasyon akisi deterministic adres modeline tasindi (iki app parity).

@@ -159,3 +159,38 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `ETKILESIM_MERKEZI_TEMIZLIK_PLANI_TR.md` ve `FEEDBACK_V1_TR.md` icindeki `Sorular yok` kayitlari tarihsel/kuralsal kaldirma notu olarak korunmustur.
+
+### [2026-03-13 07:52] Portal Label Merkezi Lang Entegrasyonu
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Portal label merkezi `lang` baglantisinin iki appte de aktif oldugu dogrulandi.
+  - `hesabim`, `owner`, `customer` ekranlarinda `portal.*` anahtar kullanimlari kontrol edildi.
+  - Dosya hash parity kontrolu ile iki app eslesmesi dogrulandi.
+- Degisen Dosyalar:
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `Get-FileHash parity kontrolu`
+  - `php artisan test --filter=PortalSessionAuthTest` (orkestram/izmirorkestra)
+- Sonuc:
+  - `PASS (parity) / TEST SKIP (php komutu ortamda yok) / NO-OP (kod diff yok)`
+- Not:
+  - Test dogrulamasi icin PHP runtime bulunan ortamda ayni komut tekrar calistirilmalidir.
+
+### [2026-03-13 07:43] Label Standardi Kapanis Dogrulamasi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Sozluk-kod uyumu tekrar tarandi ve aktif menu seti dogrulandi.
+  - `Sorular/Sorularim` label'larinin aktif portal ekranlarinda olmadigi teyit edildi.
+  - Iki app icin portal kritik dosya hash parity kontrolu tamamlandi.
+- Degisen Dosyalar:
+  - `docs/NEXT_TASK.md`
+  - `docs/PROJECT_STATUS_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `Select-String ... UI_LABEL_SOZLUGU_TR.md -Pattern "Sorularim|Sorular"`
+  - `Select-String ... resources/views/portal/** -Pattern "Sorularim|Sorular"`
+  - `Get-FileHash parity kontrolu (portal.php + portal blade seti)`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Bu tur dokuman/verification turudur; mevcut frontend farklara dokunulmamistir.
