@@ -89,6 +89,7 @@ class ListingController extends Controller
     ): RedirectResponse {
         $data = $payloadBuilder->build($request->validated());
         $attributeService->validateForCategory($request, (int) ($data['category_id'] ?? 0));
+        $this->guardTitleAgainstMediaOnlyCategoryOverwrite($request, $listing, $data);
         $this->syncServiceTypeFromCategory($data);
         $data = $mediaService->apply($request, $data, $listing);
         $listing->update($data);
@@ -134,6 +135,34 @@ class ListingController extends Controller
 
         if (empty($data['service_type'])) {
             $data['service_type'] = $category->name;
+        }
+    }
+
+    private function guardTitleAgainstMediaOnlyCategoryOverwrite(Request $request, Listing $listing, array &$data): void
+    {
+        $hasMediaUpload = $request->hasFile('cover_image') || $request->hasFile('gallery_images');
+        if (!$hasMediaUpload) {
+            return;
+        }
+
+        $incomingName = trim((string) ($data['name'] ?? ''));
+        $currentName = trim((string) $listing->name);
+        if ($incomingName === '' || $currentName === '' || mb_strtolower($incomingName) === mb_strtolower($currentName)) {
+            return;
+        }
+
+        $categoryId = (int) ($data['category_id'] ?? 0);
+        if ($categoryId <= 0) {
+            return;
+        }
+
+        $categoryName = trim((string) (Category::query()->whereKey($categoryId)->value('name') ?? ''));
+        if ($categoryName === '') {
+            return;
+        }
+
+        if (mb_strtolower($incomingName) === mb_strtolower($categoryName)) {
+            $data['name'] = $listing->name;
         }
     }
 }

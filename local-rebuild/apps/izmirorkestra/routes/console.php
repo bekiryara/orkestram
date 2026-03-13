@@ -84,6 +84,138 @@ Artisan::command('content:import {type} {file} {--site=} {--published}', functio
     return 0;
 })->purpose('CSV dosyasindan pages/listings/city-pages import eder');
 
+Artisan::command('listings:repair-title-category {manifest} {--site=} {--dry-run}', function () {
+    $manifest = (string) $this->argument('manifest');
+    $site = trim((string) ($this->option('site') ?: 'orkestram.net'));
+    $dryRun = (bool) $this->option('dry-run');
+
+    if (!is_file($manifest)) {
+        $this->error("Manifest bulunamadi: $manifest");
+        return 1;
+    }
+
+    $rows = array_map('str_getcsv', file($manifest));
+    if (count($rows) < 2) {
+        $this->error('Manifest bos veya sadece header var.');
+        return 1;
+    }
+
+    $normalize = static function (?string $value): string {
+        $value = trim((string) $value);
+        if ($value === '') {
+            return '';
+        }
+
+        $value = mb_strtolower($value, 'UTF-8');
+        $value = str_replace([' ', '-', '.'], '_', $value);
+        return trim($value, '_');
+    };
+
+    $headers = array_map($normalize, $rows[0]);
+    $indexMap = array_flip($headers);
+    $pick = static function (array $indexMap, array $candidates): ?int {
+        foreach ($candidates as $key) {
+            if (array_key_exists($key, $indexMap)) {
+                return (int) $indexMap[$key];
+            }
+        }
+
+        return null;
+    };
+
+    $slugIdx = $pick($indexMap, ['slug', 'listing_slug', 'ilan_slug']);
+    $nameIdx = $pick($indexMap, ['name', 'title', 'listing_name', 'ilan_adi', 'ilan_basligi']);
+    $categorySlugIdx = $pick($indexMap, ['category_slug', 'kategori_slug']);
+
+    if ($slugIdx === null || $categorySlugIdx === null) {
+        $this->error('Gerekli kolonlar bulunamadi. Beklenen: slug + category_slug (name/title opsiyonel).');
+        return 1;
+    }
+
+    $stats = [
+        'rows' => 0,
+        'listing_found' => 0,
+        'updated' => 0,
+        'unchanged' => 0,
+        'missing_listing' => 0,
+        'missing_category' => 0,
+        'invalid_row' => 0,
+    ];
+
+    for ($i = 1; $i < count($rows); $i++) {
+        $stats['rows']++;
+        $row = $rows[$i];
+
+        $listingSlug = trim((string) ($row[$slugIdx] ?? ''));
+        $targetCategorySlug = trim((string) ($row[$categorySlugIdx] ?? ''));
+        $targetName = $nameIdx !== null ? trim((string) ($row[$nameIdx] ?? '')) : '';
+
+        if ($listingSlug === '' || $targetCategorySlug === '') {
+            $stats['invalid_row']++;
+            $this->warn("satir {$i}: slug/category_slug bos, atlandi");
+            continue;
+        }
+
+        $listing = Listing::query()->where('site', $site)->where('slug', $listingSlug)->first();
+        if (!$listing) {
+            $stats['missing_listing']++;
+            $this->warn("satir {$i}: listing bulunamadi -> {$listingSlug}");
+            continue;
+        }
+        $stats['listing_found']++;
+
+        $category = Category::query()->where('slug', $targetCategorySlug)->first();
+        if (!$category) {
+            $stats['missing_category']++;
+            $this->warn("satir {$i}: category bulunamadi -> {$targetCategorySlug}");
+            continue;
+        }
+
+        $updates = [];
+        if ($listing->category_id !== $category->id) {
+            $updates['category_id'] = $category->id;
+        }
+        if ($targetName !== '' && $listing->name !== $targetName) {
+            $updates['name'] = $targetName;
+        }
+
+        if ($updates === []) {
+            $stats['unchanged']++;
+            continue;
+        }
+
+        if ($dryRun) {
+            $this->line(
+                sprintf(
+                    '[DRY] %s | name: "%s" -> "%s" | category: "%s" -> "%s"',
+                    $listingSlug,
+                    $listing->name,
+                    $updates['name'] ?? $listing->name,
+                    (string) optional($listing->category)->slug,
+                    $targetCategorySlug
+                )
+            );
+        } else {
+            $listing->fill($updates)->save();
+            $this->line("[OK] {$listingSlug} guncellendi");
+        }
+
+        $stats['updated']++;
+    }
+
+    $mode = $dryRun ? 'DRY-RUN' : 'APPLY';
+    $this->info("listings:repair-title-category {$mode} tamamlandi");
+    $this->line('rows=' . $stats['rows']);
+    $this->line('listing_found=' . $stats['listing_found']);
+    $this->line('updated=' . $stats['updated']);
+    $this->line('unchanged=' . $stats['unchanged']);
+    $this->line('missing_listing=' . $stats['missing_listing']);
+    $this->line('missing_category=' . $stats['missing_category']);
+    $this->line('invalid_row=' . $stats['invalid_row']);
+
+    return 0;
+})->purpose('Manifestteki slug + category_slug (+name/title) verisine gore sadece listing name/category onarir');
+
 Artisan::command('locations:import {--from=} {--truncate}', function (LocationSnapshotImporter $importer) {
     $from = (string) $this->option('from');
     if ($from === '') {
