@@ -1289,6 +1289,12 @@ a { color: inherit; text-decoration: none; }
   padding: 18px;
 }
 
+.portal-shell #owner-message-bulk-form {
+  position: sticky;
+  top: 8px;
+  z-index: 5;
+}
+
 .portal-shell .message-toolbar {
   border: 1px solid var(--line-soft);
   border-radius: 12px;
@@ -1329,6 +1335,7 @@ a { color: inherit; text-decoration: none; }
   max-height: 420px;
   overflow-y: auto;
   padding-right: 4px;
+  overscroll-behavior: contain;
 }
 
 .portal-shell .message-list {
@@ -1547,6 +1554,48 @@ a { color: inherit; text-decoration: none; }
   }
   .portal-shell .metric-grid {
     grid-template-columns: 1fr;
+  }
+  .portal-shell .message-center-root {
+    padding: 10px;
+  }
+  .portal-shell .message-thread {
+    max-height: min(52vh, 380px);
+  }
+  .portal-shell .message-detail-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .portal-shell .message-list-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .portal-shell .message-list-row-check {
+    justify-content: flex-start;
+    padding: 0;
+  }
+  .portal-shell .message-list-item {
+    gap: 10px;
+    padding: 10px;
+  }
+  .portal-shell .message-list-actions {
+    width: 100%;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .portal-shell .message-center-root {
+    padding: 8px;
+  }
+  .portal-shell .message-toolbar {
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .portal-shell .message-thread {
+    max-height: min(48vh, 320px);
+  }
+  .portal-shell .message-bubble {
+    padding: 10px;
   }
 }
 
