@@ -31,3 +31,10 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
 ## Not
 1. Ayni makinede 3 ajan calisacaksa farkli klasor/worktree onerilir.
 2. Lock/Task kaydi olmayan is "resmi is" sayilmaz.
+
+## Yeni Gelen Ajan Kurali (Zorunlu)
+1. Ilk adimda `AGENTS.md` okunur.
+2. Branch disiplini zorunlu: `agent/<ajan>/<task-id>`.
+3. Lock almadan dosya degistirmek yasak.
+4. Is bitiminde lock `closed` yapilmadan gorev kapatilmaz.
+5. `pre-pr` PASS olmayan is commit/push edilmez.
