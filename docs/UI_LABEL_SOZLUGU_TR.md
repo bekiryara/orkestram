@@ -29,7 +29,6 @@ Durum: Aktif Standard
 - `Taleplerim`
 - `Mesajlarim`
 - `Yorumlarim`
-- `Sorularim`
 - `Profilim`
 - `Guvenlik`
 - Owner aksiyonu: `Ilan Yonetimine Gec`
@@ -46,8 +45,7 @@ Durum: Aktif Standard
   - `Isler / Talepler`
   - `Ilan Mesajlari`
   - `Yorumlar`
-  - `Sorular`
-  - `Sahiplik ve Yetki`
+  - `Sahiplik ve Yetki Ayarlari`
 - Form/sayfa basliklari:
   - `Yeni Ilan`
   - `Ilan Duzenle`

@@ -12,7 +12,7 @@
                 <p class="muted">Ilan Yonetimi</p>
                 <p class="muted">Ilanlarina gelen kayitlari yonet ve gecmisi takip et.</p>
             </div>
-            <a class="btn btn-outline-secondary" href="{{ route('auth.account', ['tab' => 'overview']) }}">Hesap Paneline Don</a>
+            <a class="btn btn-outline-secondary" href="{{ route('auth.account', ['tab' => 'overview']) }}">{{ __('portal.owner.back_to_account') }}</a>
         </div>
     </div>
 

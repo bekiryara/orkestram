@@ -4,10 +4,10 @@
     <div class="card shadow-sm">
         <div class="account-header">
             <div>
-                <h2>Ilan Yonetimi</h2>
-                <p class="muted">Ilan operasyonlarini, mesajlarini ve yorumlarini tek merkezden yonet.</p>
+                <h2>{{ __('portal.owner.title') }}</h2>
+                <p class="muted">{{ __('portal.owner.subtitle') }}</p>
             </div>
-            <a class="btn btn-outline-secondary" href="{{ route('auth.account', ['tab' => 'overview']) }}">Hesap Paneline Don</a>
+            <a class="btn btn-outline-secondary" href="{{ route('auth.account', ['tab' => 'overview']) }}">{{ __('portal.owner.back_to_account') }}</a>
         </div>
     </div>
 
@@ -15,7 +15,7 @@
         @include('portal.owner.partials.menu', ['ownerTab' => 'overview'])
 
         <section class="card shadow-sm">
-            <h2>Genel Bakis</h2>
+            <h2>{{ __('portal.owner.menu.overview') }}</h2>
             <div class="metric-grid account-mt-10">
                 <div class="metric">
                     <span class="k">Toplam Ilan</span>

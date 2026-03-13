@@ -24,6 +24,10 @@ Run-Step -Name "ci-gate local" -Action {
     powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\ci-gate.ps1
 }
 
+Run-Step -Name "security-gate local" -Action {
+    powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\security-gate.ps1
+}
+
 if ($Mode -eq "full") {
     Run-Step -Name "validate full both" -Action {
         powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\validate.ps1 -App both

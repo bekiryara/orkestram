@@ -4,7 +4,7 @@
     <div class="card shadow-sm">
         <div class="account-header">
             <div>
-                <h2>Ilanlarim</h2>
+                <h2>{{ __('portal.owner.menu.listings') }}</h2>
                 <p class="muted">Ilanlarini ekle, duzenle ve yayin durumlarini yonet.</p>
             </div>
             <a class="btn btn-primary" href="{{ route('owner.listings.create') }}">Yeni Ilan</a>

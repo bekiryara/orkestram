@@ -4,7 +4,7 @@
     <div class="card shadow-sm">
         <div class="account-header">
             <div>
-                <h2>Sahiplik ve Yetki Ayarlari</h2>
+                <h2>{{ __('portal.owner.menu.settings') }}</h2>
                 <p class="muted">Hesap sahipligi ve panel erisim yetkileri bu alanda goruntulenir.</p>
             </div>
         </div>

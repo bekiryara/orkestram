@@ -4,7 +4,7 @@
     <div class="card shadow-sm">
         <div class="account-header">
             <div>
-                <h2>Isler / Talepler</h2>
+                <h2>{{ __('portal.owner.menu.leads') }}</h2>
                 <p class="muted">Ilanlarina gelen talepleri takip et ve durumunu guncelle.</p>
             </div>
         </div>

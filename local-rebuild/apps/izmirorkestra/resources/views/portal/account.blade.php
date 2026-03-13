@@ -9,46 +9,46 @@
     @php($profileMode = request('mode', $profileHasErrors ? 'edit' : 'view'))
     @php($profileMode = in_array($profileMode, ['view', 'edit'], true) ? $profileMode : 'view')
     @php($isEditingProfile = $tab === 'profile' && $profileMode === 'edit')
-    @php($roleLabels = ['listing_owner' => 'Ilan Veren', 'customer' => 'Musteri', 'support_agent' => 'Destek', 'admin' => 'Admin', 'super_admin' => 'Super Admin'])
+    @php($roleLabels = trans('portal.roles'))
     @php($activeRoleLabel = $roleLabels[$activeRole] ?? $activeRole)
 
     <div class="card shadow-sm">
         <div class="account-header">
             <div>
-                <h2>Hesabim</h2>
-                <p class="muted">Hesabini ve kisisel bilgilerini buradan yonetebilirsin.</p>
-                <p class="muted">Aktif Rol: {{ $activeRoleLabel }}</p>
+                <h2>{{ __('portal.account.title') }}</h2>
+                <p class="muted">{{ __('portal.account.subtitle') }}</p>
+                <p class="muted">{{ __('portal.account.active_role', ['role' => $activeRoleLabel]) }}</p>
             </div>
             @if($activeRole === 'listing_owner')
-                <a class="btn btn-primary" href="{{ route('owner.dashboard') }}">Ilan Yonetimine Gec</a>
+                <a class="btn btn-primary" href="{{ route('owner.dashboard') }}">{{ __('portal.account.switch_to_owner') }}</a>
             @endif
         </div>
 
         <div class="tabs-mobile">
             <div class="tabs-mobile-wrap">
-                <a class="account-tab {{ $tab === 'overview' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'overview']) }}">Genel Bakis</a>
-                <a class="account-tab {{ $tab === 'requests' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'requests']) }}">Taleplerim</a>
-                <a class="account-tab {{ $tab === 'messages' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'messages']) }}">Mesajlarim</a>
-                <a class="account-tab {{ $tab === 'comments' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'comments']) }}">Yorumlarim</a>
-                <a class="account-tab {{ $tab === 'profile' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'profile']) }}">Profilim</a>
-                <a class="account-tab {{ $tab === 'security' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'security']) }}">Guvenlik</a>
+                <a class="account-tab {{ $tab === 'overview' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'overview']) }}">{{ __('portal.account.tabs.overview') }}</a>
+                <a class="account-tab {{ $tab === 'requests' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'requests']) }}">{{ __('portal.account.tabs.requests') }}</a>
+                <a class="account-tab {{ $tab === 'messages' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'messages']) }}">{{ __('portal.account.tabs.messages') }}</a>
+                <a class="account-tab {{ $tab === 'comments' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'comments']) }}">{{ __('portal.account.tabs.comments') }}</a>
+                <a class="account-tab {{ $tab === 'profile' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'profile']) }}">{{ __('portal.account.tabs.profile') }}</a>
+                <a class="account-tab {{ $tab === 'security' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'security']) }}">{{ __('portal.account.tabs.security') }}</a>
             </div>
         </div>
     </div>
 
     <div class="account-shell">
         <aside class="card shadow-sm account-nav">
-            <a class="account-tab {{ $tab === 'overview' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'overview']) }}">Genel Bakis</a>
-            <a class="account-tab {{ $tab === 'requests' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'requests']) }}">Taleplerim</a>
-            <a class="account-tab {{ $tab === 'messages' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'messages']) }}">Mesajlarim</a>
-            <a class="account-tab {{ $tab === 'comments' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'comments']) }}">Yorumlarim</a>
-            <a class="account-tab {{ $tab === 'profile' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'profile']) }}">Profilim</a>
-            <a class="account-tab {{ $tab === 'security' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'security']) }}">Guvenlik</a>
+            <a class="account-tab {{ $tab === 'overview' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'overview']) }}">{{ __('portal.account.tabs.overview') }}</a>
+            <a class="account-tab {{ $tab === 'requests' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'requests']) }}">{{ __('portal.account.tabs.requests') }}</a>
+            <a class="account-tab {{ $tab === 'messages' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'messages']) }}">{{ __('portal.account.tabs.messages') }}</a>
+            <a class="account-tab {{ $tab === 'comments' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'comments']) }}">{{ __('portal.account.tabs.comments') }}</a>
+            <a class="account-tab {{ $tab === 'profile' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'profile']) }}">{{ __('portal.account.tabs.profile') }}</a>
+            <a class="account-tab {{ $tab === 'security' ? 'active' : '' }}" href="{{ route('auth.account', ['tab' => 'security']) }}">{{ __('portal.account.tabs.security') }}</a>
         </aside>
 
         <section class="card shadow-sm">
             @if($tab === 'overview')
-                <h2>Genel Bakis</h2>
+                <h2>{{ __('portal.account.tabs.overview') }}</h2>
                 <div class="metric-grid account-mt-10">
                     @foreach(($summaryCards ?? []) as $card)
                         <div class="metric">
@@ -60,7 +60,7 @@
             @endif
 
             @if($tab === 'requests')
-                <h2>Taleplerim</h2>
+                <h2>{{ __('portal.account.tabs.requests') }}</h2>
                 <div class="table-wrap table-responsive account-mt-10">
                     <table class="table table-striped align-middle mb-0">
                         <thead>
@@ -95,7 +95,7 @@
 
             @if($tab === 'messages')
                 <div class="account-section-top">
-                    <h2 class="account-heading-compact">Mesajlarim</h2>
+                    <h2 class="account-heading-compact">{{ __('portal.account.tabs.messages') }}</h2>
                 </div>
                 <div class="account-mt-10 message-center-root">
                     @if(!empty($messageCenter) && is_array($messageCenter))
@@ -110,7 +110,7 @@
             @endif
 
             @if($tab === 'comments')
-                <h2>Yorumlarim</h2>
+                <h2>{{ __('portal.account.tabs.comments') }}</h2>
                 <div class="table-wrap table-responsive account-mt-10">
                     <table class="table table-striped align-middle mb-0">
                         <thead>
@@ -145,7 +145,7 @@
             @endif
 
             @if($tab === 'profile')
-                <h2>Profilim</h2>
+                <h2>{{ __('portal.account.tabs.profile') }}</h2>
                 @if(session('ok_profile'))
                     <div class="alert alert-success py-2 px-3">{{ session('ok_profile') }}</div>
                 @endif
@@ -169,7 +169,7 @@
                         @endif
                     </div>
                     <div class="actions account-mt-12">
-                        <a class="btn btn-primary" href="{{ route('auth.account', ['tab' => 'profile', 'mode' => 'edit']) }}">Profili Duzenle</a>
+                        <a class="btn btn-primary" href="{{ route('auth.account', ['tab' => 'profile', 'mode' => 'edit']) }}">{{ __('portal.account.profile.edit') }}</a>
                     </div>
                 @else
                     <form method="post" action="{{ route('auth.account.profile', ['tab' => 'profile', 'mode' => 'edit']) }}" enctype="multipart/form-data">
@@ -214,15 +214,15 @@
                         @endif
 
                         <div class="actions">
-                            <button class="btn btn-primary" type="submit">Profili Kaydet</button>
-                            <a class="btn btn-outline-secondary" href="{{ route('auth.account', ['tab' => 'profile']) }}">Iptal</a>
+                            <button class="btn btn-primary" type="submit">{{ __('portal.account.profile.save') }}</button>
+                            <a class="btn btn-outline-secondary" href="{{ route('auth.account', ['tab' => 'profile']) }}">{{ __('portal.account.profile.cancel') }}</a>
                         </div>
                     </form>
                 @endif
             @endif
 
             @if($tab === 'security')
-                <h2>Guvenlik</h2>
+                <h2>{{ __('portal.account.tabs.security') }}</h2>
                 @if(session('ok_password'))
                     <div class="alert alert-success py-2 px-3">{{ session('ok_password') }}</div>
                 @endif
@@ -231,17 +231,17 @@
                 @endif
                 <form method="post" action="{{ route('auth.account.password', ['tab' => 'security']) }}">
                     @csrf
-                    <label class="form-label">Mevcut Sifre</label>
+                    <label class="form-label">{{ __('portal.account.security.current_password') }}</label>
                     <input class="form-control" type="password" name="current_password" required>
 
-                    <label class="form-label mt-2">Yeni Sifre</label>
+                    <label class="form-label mt-2">{{ __('portal.account.security.new_password') }}</label>
                     <input class="form-control" type="password" name="new_password" required>
 
-                    <label class="form-label mt-2">Yeni Sifre (Tekrar)</label>
+                    <label class="form-label mt-2">{{ __('portal.account.security.new_password_repeat') }}</label>
                     <input class="form-control" type="password" name="new_password_confirmation" required>
 
                     <div class="actions">
-                        <button class="btn btn-primary" type="submit">Sifreyi Guncelle</button>
+                        <button class="btn btn-primary" type="submit">{{ __('portal.account.security.update') }}</button>
                     </div>
                 </form>
             @endif

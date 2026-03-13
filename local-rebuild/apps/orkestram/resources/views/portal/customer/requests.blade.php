@@ -3,8 +3,8 @@
 @section('content')
     <div class="card">
         <div class="page-head">
-            <h2>Taleplerim</h2>
-            <a class="btn btn-primary" href="/customer">Yeni Talep</a>
+            <h2>{{ __('portal.customer.requests_title') }}</h2>
+            <a class="btn btn-primary" href="/customer">{{ __('portal.customer.new_request') }}</a>
         </div>
         @if(session('ok'))
             <p class="muted mt-8 status-ok">{{ session('ok') }}</p>

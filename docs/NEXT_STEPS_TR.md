@@ -16,9 +16,9 @@
 ## Simdi (Oncelikli)
 1. Hesabim + Owner hibrit akis Faz 2:
    - `/hesabim` menu yapisini plan kilidine gore koru:
-     - `Genel Bakis`, `Taleplerim`, `Mesajlarim`, `Yorumlarim`, `Sorularim`, `Profilim`, `Guvenlik`
+     - `Genel Bakis`, `Taleplerim`, `Mesajlarim`, `Yorumlarim`, `Profilim`, `Guvenlik`
    - `/owner` menu yapisini plan kilidine gore koru:
-     - `Genel Bakis`, `Ilanlarim`, `Isler / Talepler`, `Ilan Mesajlari`, `Yorumlar`, `Sorular`, `Sahiplik ve Yetki Ayarlari`
+     - `Genel Bakis`, `Ilanlarim`, `Isler / Talepler`, `Ilan Mesajlari`, `Yorumlar`, `Sahiplik ve Yetki Ayarlari`
    - owner gecis aksiyonunu tek kapida tut:
      - `/hesabim > Genel Bakis` icinde `Ilan Yonetimine Gec` (`btn-primary`)
    - gorunur rol etiketi standardi:
@@ -44,4 +44,4 @@
 2. Son fazda URL mapping ve sehir/listing sayfa operasyonunu kapat.
 3. Hibrit akis genisletme:
    - owner `Sahiplik ve Yetki Ayarlari` ekranini operasyonel aksiyonlarla genislet
-   - `/owner` altinda ilan mesajlari/yorumlar/sorular icin filtre ve hizli islem derinligi arttir
+   - `/owner` altinda ilan mesajlari/yorumlar icin filtre ve hizli islem derinligi arttir

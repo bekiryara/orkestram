@@ -103,3 +103,7 @@ Bu kosullar olmadan deploy yok:
      - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
 6. `.github/pull_request_template.md`
    - PR acilisinda ozet + test + dosya listesi zorunlu format.
+7. `scripts/security-gate.ps1`
+   - Potansiyel secret/key sizintilarini tarar.
+   - Standart:
+     - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\security-gate.ps1`

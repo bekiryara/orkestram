@@ -428,24 +428,24 @@ Tarih: 2026-03-11
      - `scripts/smoke-test.ps1` PASS (iki app)
 51. UI label standardi merkezi sozluge baglandi:
    - Yeni dokuman:
-     - `UI_LABEL_SOZLUGU_TR.md`
+      - `UI_LABEL_SOZLUGU_TR.md`
    - Kapsam:
-     - rol label standardi (`listing_owner` => `Ilan Sahibi`)
-     - `hesabim` / `owner` / `customer` gorunur metin standardi
-     - yasakli varyant listesi (`Owner Dashboard`, `Owner Leadler`, vb.)
+      - rol label standardi (`listing_owner` => `Ilan Veren`)
+      - `hesabim` / `owner` / `customer` gorunur metin standardi
+      - yasakli varyant listesi (`Owner Dashboard`, `Owner Leadler`, vb.)
    - Uygulanan ek duzeltmeler:
-     - owner ilan form basliklari `Yeni Ilan` ve `Ilan Duzenle` olarak tekillestirildi.
+      - owner ilan form basliklari `Yeni Ilan` ve `Ilan Duzenle` olarak tekillestirildi.
 52. Hesabim + Owner ana planina birebir hizalama turu uygulandi (iki app parity):
    - Aktif plan:
      - `docs/archive/legacy-engagement/HESABIM_OWNER_AKIS_PLAN_TR.md` (DEPRECATED)
    - Uygulananlar:
-     - `/hesabim` sekmeleri plana gore genisletildi:
-       - `Genel Bakis`, `Taleplerim`, `Mesajlarim`, `Yorumlarim`, `Sorularim`, `Profilim`, `Guvenlik`
-     - owner gecis aksiyonu korundu:
-       - `Ilan Yonetimine Gec` (`btn-primary`) -> `/owner`
-     - `/owner` paneli ayni UI iskeletine tasindi (hesabim ile hizali):
-       - ortak sol menu omurgasi + kart/tablo/buton hiyerarsisi
-       - menu: `Ilanlarim`, `Isler / Talepler`, `Ilan Mesajlari`, `Yorumlar`, `Sorular`, `Sahiplik ve Yetki Ayarlari`
+      - `/hesabim` sekmeleri plana gore genisletildi:
+        - `Genel Bakis`, `Taleplerim`, `Mesajlarim`, `Yorumlarim`, `Profilim`, `Guvenlik`
+      - owner gecis aksiyonu korundu:
+        - `Ilan Yonetimine Gec` (`btn-primary`) -> `/owner`
+      - `/owner` paneli ayni UI iskeletine tasindi (hesabim ile hizali):
+        - ortak sol menu omurgasi + kart/tablo/buton hiyerarsisi
+        - menu: `Ilanlarim`, `Isler / Talepler`, `Ilan Mesajlari`, `Yorumlar`, `Sahiplik ve Yetki Ayarlari`
      - yeni owner endpoint/sayfa:
        - `GET /owner/settings`
        - `portal/owner/settings.blade.php`
@@ -456,9 +456,24 @@ Tarih: 2026-03-11
      - `OwnerPanelActionsTest` PASS (iki app)
      - `ListingEngagementFlowTest` PASS (iki app)
      - `EndToEndRoleJourneyTest` PASS (iki app)
-   - Runtime notu:
-     - `/owner/listings` 500 kok nedeni `storage/framework/views` yazma izniydi.
-     - cozum: container icinde `storage` + `bootstrap/cache` izin duzeltmesi + `view:clear` + `cache:clear`.
+    - Runtime notu:
+      - `/owner/listings` 500 kok nedeni `storage/framework/views` yazma izniydi.
+      - cozum: container icinde `storage` + `bootstrap/cache` izin duzeltmesi + `view:clear` + `cache:clear`.
+53. Portal labellari merkezi `lang` katmanina baglandi (iki app parity):
+   - Yeni dosyalar:
+     - `local-rebuild/apps/orkestram/lang/en/portal.php`
+     - `local-rebuild/apps/orkestram/lang/tr/portal.php`
+     - `local-rebuild/apps/izmirorkestra/lang/en/portal.php`
+     - `local-rebuild/apps/izmirorkestra/lang/tr/portal.php`
+   - Blade entegrasyonu:
+     - `/hesabim` sekme/baslik/rol metinleri `portal.*` anahtarlarina tasindi
+     - `/owner` menu ve ana baslik/donus metinleri `portal.*` anahtarlarina tasindi
+     - `/customer` baslik ve buton metinleri `portal.*` anahtarlarina tasindi
+   - Not:
+     - Bu turda sadece label merkeziyetine odaklanildi; business logic degismedi.
+   - Dogrulama:
+     - dosya hash parity PASS (`apps/orkestram` == `apps/izmirorkestra`)
+     - otomatik test: ortamda `php` komutu bulunamadigi icin calistirilamadi
 
 ## Guncel Net Durum (2026-03-12)
 1. Kategori/lokasyon akisi deterministic adres modeline tasindi (iki app parity).
@@ -546,11 +561,18 @@ Tarih: 2026-03-11
    - `docs/REPO_DISCIPLINE_TR.md` icine `pre-pr` zorunlu kapisi baglandi.
    - Dogrulama:
      - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` PASS
+18. Security gate (2. check) tamamlandi:
+   - `scripts/security-gate.ps1` eklendi (potansiyel secret/key deseni taramasi).
+   - `.github/workflows/security-gate.yml` eklendi (push + PR tetikleme).
+   - `scripts/pre-pr.ps1` icine security adimi baglandi.
+   - Dogrulama:
+     - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\security-gate.ps1` PASS
+     - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` PASS
 
 ## Siradaki 5 Is
 1. Teklif formu Faz 2 (zengin alanlar, validasyon, owner tarafi takip paneli) planlamak.
 2. Validate gate workflow'unu zorunlu merge politikasiyla bagla (branch protection / required checks).
-2. `ci-gate` yanina ihtiyaca gore ikinci zorunlu check (or. guvenlik/lint) ekleme kararini netlestir.
+2. Branch protection'ta `security-gate` check'ini da required olarak etkinlestir.
 3. Performans baseline olcumu (cold/warm endpoint raporu) ve yavaslama kaynagi raporu.
 4. Service area string fallback daraltma fazi:
    - backfill eslesmeyen kayitlari raporla

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card">
-        <h1>Yeni Talep Olustur</h1>
+        <h1>{{ __('portal.customer.new_request_title') }}</h1>
         <p class="muted">Etkinligin icin ihtiyacini yaz, uygun ekipler seninle iletisime gecsin.</p>
         @if($listing)
             <p class="muted mt-8">Secili ilan: <strong>{{ $listing->name }}</strong></p>
@@ -20,8 +20,8 @@
             <textarea class="form-control" name="message" rows="4" placeholder="Etkinlik tarihi, saat araligi, konum ve beklentini yazabilirsin.">{{ old('message') }}</textarea>
             <div class="actions">
                 <button class="btn btn-primary" type="submit">Talep Gonder</button>
-                <a class="btn" href="/customer/requests">Taleplerim</a>
-                <a class="btn btn-outline-secondary" href="{{ route('messages.index', ['box' => 'personal']) }}">Mesajlarim</a>
+                <a class="btn" href="/customer/requests">{{ __('portal.customer.requests_title') }}</a>
+                <a class="btn btn-outline-secondary" href="{{ route('messages.index', ['box' => 'personal']) }}">{{ __('portal.customer.messages') }}</a>
             </div>
         </form>
     </div>

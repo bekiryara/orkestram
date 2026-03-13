@@ -97,3 +97,65 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - PR acmadan once tek komutla gate kontrolu standartlasti.
+
+### [2026-03-14 02:10] Security Gate (2. Required Check) Eklendi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `security-gate` scripti eklendi (token/key/private key desen taramasi).
+  - GitHub workflow olarak push/PR tetikleyicisi eklendi.
+  - `pre-pr` akisi icine security adimi baglandi.
+- Degisen Dosyalar:
+  - `scripts/security-gate.ps1`
+  - `.github/workflows/security-gate.yml`
+  - `scripts/pre-pr.ps1`
+  - `docs/NEXT_TASK.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\security-gate.ps1`
+  - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Branch protection'da ikinci required check olarak `security-gate` secilebilir.
+
+### [2026-03-13 07:16] UI Label Standarda Baglama Plani Kilidi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - UI label standardizasyonu icin fazli uygulama plani dokumani olusturuldu.
+  - `/hesabim` ve `/owner` icin ilk sapma envanteri dosya/satir referanslariyla kilitlendi.
+  - Sozluk ve aktif hedef dokumanlari arasinda cakismazlik hiyerarsisi tanimlandi.
+- Degisen Dosyalar:
+  - `docs/UI_LABEL_STANDARD_BAGLAMA_PLANI_TR.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `Get-Content D:\orkestram\docs\UI_LABEL_SOZLUGU_TR.md`
+  - `Get-Content D:\orkestram\docs\NEXT_STEPS_TR.md`
+  - `Get-Content D:\orkestram\local-rebuild\apps\orkestram\resources\views\portal\account.blade.php`
+  - `Get-Content D:\orkestram\local-rebuild\apps\orkestram\resources\views\portal\owner\partials\menu.blade.php`
+  - `Get-FileHash parity kontrolu`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Bu tur plan/discovery kapsaminda oldugu icin uygulama koduna degisiklik yapilmadi.
+
+### [2026-03-13 07:32] Sorular Kapsam Disi Dokuman Hizalamasi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - UI label ve sonraki adim dokumanlarinda `Sorular/Sorularim` menu beklentileri kaldirildi.
+  - Proje durum kaydinda aktif menu seti `Sorular` icermeyecek sekilde guncellendi.
+  - Rol label referansi `listing_owner => Ilan Veren` olarak hizalandi.
+- Degisen Dosyalar:
+  - `docs/UI_LABEL_SOZLUGU_TR.md`
+  - `docs/NEXT_STEPS_TR.md`
+  - `docs/UI_LABEL_STANDARD_BAGLAMA_PLANI_TR.md`
+  - `docs/PROJECT_STATUS_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `Select-String D:\orkestram\docs\*.md -Pattern "Sorularim|Sorular"`
+  - `git diff -- docs/UI_LABEL_SOZLUGU_TR.md`
+  - `git diff -- docs/NEXT_STEPS_TR.md`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `ETKILESIM_MERKEZI_TEMIZLIK_PLANI_TR.md` ve `FEEDBACK_V1_TR.md` icindeki `Sorular yok` kayitlari tarihsel/kuralsal kaldirma notu olarak korunmustur.

@@ -11,7 +11,7 @@
 <body class="portal-shell site-{{ $shellSiteMeta['theme'] ?? 'orkestram' }}">
 <div class="wrap">
     @php($identity = $shellIdentity ?? [])
-    @php($roleLabels = ['customer' => 'Musteri', 'listing_owner' => 'Ilan Veren', 'support_agent' => 'Destek', 'admin' => 'Admin', 'super_admin' => 'Super Admin', 'content_editor' => 'Icerik Editoru', 'listing_editor' => 'Ilan Editoru', 'viewer' => 'Goruntuleyici'])
+    @php($roleLabels = trans('portal.roles'))
     @php($activeRole = (string) ($identity['role'] ?? ''))
     @php($allRoles = array_values(array_filter(array_map('strval', (array) ($identity['roles'] ?? [])))))
     @include('partials.site-header', ['siteHeaderName' => ($shellSiteMeta['name'] ?? 'Orkestram')])
