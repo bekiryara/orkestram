@@ -95,6 +95,19 @@ foreach ($rel in @($policy.deploy.writable_dirs)) {
     if (-not (Test-WriteableDir -FullPath $full)) { Add-Fail "Yazilabilir degil: $rel" }
 }
 
+if ([bool]$profilePolicy.enforce_runtime_writable_paths) {
+    foreach ($rel in @($policy.deploy.runtime_writable_paths)) {
+        $full = Join-Path $DeployPackPath $rel
+        if (-not (Test-Path -LiteralPath $full -PathType Container)) {
+            Add-Fail "Runtime path eksik: $rel (profile=$Profile)"
+            continue
+        }
+        if (-not (Test-WriteableDir -FullPath $full)) {
+            Add-Fail "Runtime path yazilabilir degil: $rel (profile=$Profile)"
+        }
+    }
+}
+
 $ignorePatterns = @($profilePolicy.ignore_forbidden_patterns)
 $forbiddenPatterns = @($policy.deploy.forbidden_path_patterns)
 $allItems = Get-ChildItem -LiteralPath $DeployPackPath -Recurse -Force

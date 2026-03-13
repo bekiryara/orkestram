@@ -33,3 +33,23 @@ powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode q
 - `pre-pr` sonucunda:
   - `[pre-pr] PASS`
 
+## Faz 2 (Guard Fail-Fast)
+- `scripts/deploy-guard.ps1` profile bazli runtime writable kontrolu uygular.
+- Kontrol edilen runtime path'ler:
+  - `storage/framework/views`
+  - `bootstrap/cache`
+- Path eksikse veya yazilabilir degilse guard deterministik `FAIL` verir.
+
+## Rollout
+1. `dev-up` ile lokal ortam acilir.
+2. `pre-pr -Mode quick` calistirilir.
+3. Gerekirse tekil guard kontrolu:
+```powershell
+powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\deploy-guard.ps1 -Profile predeploy-check -Domain orkestram.net -EnvFilePath D:\orkestram\local-rebuild\apps\orkestram\.env -DeployPackPath D:\orkestram\local-rebuild\apps\orkestram
+```
+
+## Rollback
+1. `scripts/deploy-guard.policy.json` icinde `enforce_runtime_writable_paths` degerini gecici olarak `false` yap.
+2. Runtime path listesinde sorunlu patikayi gecici olarak kaldir.
+3. `pre-pr -Mode quick` tekrar calistir, sorunun kaynagini kalici cozumle duzelt, sonra policy'yi tekrar sikilastir.
+
