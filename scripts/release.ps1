@@ -21,6 +21,8 @@ if ($OnayKodu -ne "HAZIR-YAYIN") {
     throw "Onay kodu eksik/yanlis. Release icin: -OnayKodu HAZIR-YAYIN"
 }
 
+$releaseContextToken = [Guid]::NewGuid().ToString("N")
+
 function Invoke-CategoryFlowTest {
     param([string]$Target)
 
@@ -65,9 +67,15 @@ if ($LASTEXITCODE -ne 0) { throw "smoke FAIL" }
 Write-Host "[release] step=build-deploy-pack"
 try {
     $env:ORKESTRAM_VALIDATE_GATE_PASSED = "1"
-    & $pack -App $App
+    $env:ORKESTRAM_RELEASE_CONTEXT = "release.ps1"
+    $env:ORKESTRAM_RELEASE_APPROVED = $OnayKodu
+    $env:ORKESTRAM_RELEASE_CONTEXT_TOKEN = $releaseContextToken
+    & $pack -App $App -ReleaseContextToken $releaseContextToken
 } finally {
     Remove-Item Env:ORKESTRAM_VALIDATE_GATE_PASSED -ErrorAction SilentlyContinue
+    Remove-Item Env:ORKESTRAM_RELEASE_CONTEXT -ErrorAction SilentlyContinue
+    Remove-Item Env:ORKESTRAM_RELEASE_APPROVED -ErrorAction SilentlyContinue
+    Remove-Item Env:ORKESTRAM_RELEASE_CONTEXT_TOKEN -ErrorAction SilentlyContinue
 }
 if ($LASTEXITCODE -ne 0) { throw "build-deploy-pack FAIL" }
 

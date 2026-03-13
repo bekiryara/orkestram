@@ -298,3 +298,23 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `pre-pr` zinciri: `ci-gate + security-gate + validate quick both + smoke` PASS.
+
+### [2026-03-13 12:40] TASK-012 Release Gate Enforcement V2
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `build-deploy-pack` trusted caller bypass'i context dogrulamasina baglandi.
+  - `release.ps1` icine tek-kullanimlik release context token aktarimi eklendi.
+  - Yeni teknik dokuman eklendi: `RELEASE_GATE_ENFORCEMENT_V2_TR.md`.
+- Degisen Dosyalar:
+  - `scripts/build-deploy-pack.ps1`
+  - `scripts/release.ps1`
+  - `docs/RELEASE_GATE_ENFORCEMENT_V2_TR.md`
+  - `docs/tasks/TASK-012.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+- Calistirilan Komutlar:
+  - `powershell -NoProfile -Command "[scriptblock]::Create((Get-Content 'D:\orkestram\scripts\build-deploy-pack.ps1' -Raw)) | Out-Null; 'build-deploy-pack:OK'"`
+  - `powershell -NoProfile -Command "[scriptblock]::Create((Get-Content 'D:\orkestram\scripts\release.ps1' -Raw)) | Out-Null; 'release:OK'"`
+  - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`

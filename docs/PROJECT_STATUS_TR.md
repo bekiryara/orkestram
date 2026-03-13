@@ -21,6 +21,10 @@ Tarih: 2026-03-11
      - listing detayda `Yorumlar` icerik kontrolu
      - admin panelde `Feedbackler` icerik kontrolu
      - city-options duplicate kontrolu PASS
+7. 2026-03-13 Release gate enforcement v2 tamamlandi:
+   - `build-deploy-pack` trusted caller kontrolu context token + onay bilgisine baglandi.
+   - `release.ps1` context token uretip paketleme adimina guvenli sekilde aktarir.
+   - Dokuman: `docs/RELEASE_GATE_ENFORCEMENT_V2_TR.md`
 
 ## Master Plan Durumu
 1. Faz 0 (Plan/Hazirlik): Tamam
