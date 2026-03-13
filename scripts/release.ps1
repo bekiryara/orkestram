@@ -1,7 +1,9 @@
 param(
     [ValidateSet("orkestram", "izmirorkestra", "both")]
     [string]$App = "both",
-    [switch]$BuildImages
+    [switch]$BuildImages,
+    [switch]$OnayliYayin,
+    [string]$OnayKodu
 )
 
 $ErrorActionPreference = "Stop"
@@ -10,6 +12,14 @@ $devUp = "D:\orkestram\scripts\dev-up.ps1"
 $validate = "D:\orkestram\scripts\validate.ps1"
 $smoke = "D:\orkestram\scripts\smoke-test.ps1"
 $pack = "D:\orkestram\scripts\build-deploy-pack.ps1"
+
+if (-not $OnayliYayin) {
+    throw "Release kilidi aktif. Hazir degilsen calismaz. Hazir oldugunda: powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\release.ps1 -App both -OnayliYayin -OnayKodu HAZIR-YAYIN"
+}
+
+if ($OnayKodu -ne "HAZIR-YAYIN") {
+    throw "Onay kodu eksik/yanlis. Release icin: -OnayKodu HAZIR-YAYIN"
+}
 
 function Invoke-CategoryFlowTest {
     param([string]$Target)
