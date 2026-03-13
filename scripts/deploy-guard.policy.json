@@ -39,6 +39,7 @@
       "enforce_domain_in_app_url": false,
       "enforce_domain_db_match": false,
       "enforce_disallowed_values_scan": false,
+      "enforce_runtime_writable_paths": true,
       "allowed_db_hosts": ["localhost", "127.0.0.1", "mysql"],
       "ignore_forbidden_patterns": [
         "(^|/)\\.env$"
@@ -51,6 +52,7 @@
       "enforce_domain_in_app_url": true,
       "enforce_domain_db_match": true,
       "enforce_disallowed_values_scan": true,
+      "enforce_runtime_writable_paths": true,
       "allowed_db_hosts": ["localhost", "127.0.0.1"],
       "ignore_forbidden_patterns": []
     }
@@ -88,6 +90,10 @@
     ],
     "writable_dirs": [
       "storage",
+      "bootstrap/cache"
+    ],
+    "runtime_writable_paths": [
+      "storage/framework/views",
       "bootstrap/cache"
     ],
     "disallowed_values": [
