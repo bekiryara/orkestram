@@ -107,3 +107,9 @@ Bu kosullar olmadan deploy yok:
    - Potansiyel secret/key sizintilarini tarar.
    - Standart:
      - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\security-gate.ps1`
+8. `docs/TASK_LOCKS.md` + `docs/tasks/_TEMPLATE.md`
+   - Gorev lock ve task kaydi script bagimsiz (manual) acilir.
+   - Standart:
+     - `docs/tasks/TASK-001.md` olustur
+     - `docs/TASK_LOCKS.md` icine `active` satiri ekle
+     - `git checkout -b agent/codex-a/task-001` ile branch ac

@@ -222,6 +222,29 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Not:
   - Kart standardi artik home/listings/service-category ekranlarinda tek kaynak partialdan uretiliyor.
 
+### [2026-03-14 03:05] Multi-Agent Task Lock Disiplini
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Multi-agent calisma kurallari dokumani eklendi (`MULTI_AGENT_RULES_TR.md`).
+  - Task lock tablosu ve task template dosyalari eklendi (`TASK_LOCKS.md`, `docs/tasks/_TEMPLATE.md`).
+  - Gorev baslatma akisi script bagimsiz (manual lock + task kaydi + branch acma) olarak standartlasti.
+  - Repo disiplini dokumanina task-lock + branch standardi eklendi.
+- Degisen Dosyalar:
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/tasks/_TEMPLATE.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/PROJECT_STATUS_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `Get-Content D:\orkestram\docs\MULTI_AGENT_RULES_TR.md`
+  - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Bu turda sadece operasyon/disiplin katmani guncellendi; runtime koduna etkisi yok.
+
 ### [2026-03-13 08:06] Frontend Listing Card Parity Refactoru
 - Sorumlu: `codex`
 - Is Ozeti:
@@ -243,3 +266,35 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS (parity + pre-pr quick)`
 - Not:
   - Mevcut frontend farklara dokunmama karari korunmustur; bu tur sadece hedef parity refactorunu kapsar.
+
+### [2026-03-13 08:20] Repo Disiplini Dogrulama Kapanisi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Repo disiplini DoD geregi zorunlu `validate -App both` kapisi calistirildi.
+  - WSL sync + docker mount guard + feature test + smoke zinciri uc uca dogrulandi.
+- Degisen Dosyalar:
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\validate.ps1 -App both`
+- Sonuc:
+  - `PASS`
+- Not:
+  - local-check adiminda PHP `xml` extension icin WARN cikti; gate fail kriterine girmedi.
+
+
+### [2026-03-13 08:38] start-task Script Geri Yukleme (Disiplin Tutarliligi)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Kayip olan `scripts/start-task.ps1` dosyasi yeniden olusturuldu.
+  - Script parse dogrulamasi tekrar alindi.
+  - Repo disiplin kapisi icin `pre-pr -Mode quick` tekrar PASS aldi.
+- Degisen Dosyalar:
+  - `scripts/start-task.ps1`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -NoProfile -Command "[scriptblock]::Create((Get-Content 'D:\orkestram\scripts\start-task.ps1' -Raw)) | Out-Null; 'OK'"`
+  - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `pre-pr` zinciri: `ci-gate + security-gate + validate quick both + smoke` PASS.
