@@ -32,6 +32,9 @@ class EndToEndRoleJourneyTest extends TestCase
     {
         [$customer, $owner, $support, $admin] = $this->seedActors();
 
+        $this->get('/ilanlar')->assertOk();
+        $this->get('/hizmet/dugun-orkestrasi')->assertOk();
+
         $listing = Listing::query()->create([
             'site' => 'orkestram.net',
             'owner_user_id' => $owner->id,
@@ -112,6 +115,11 @@ class EndToEndRoleJourneyTest extends TestCase
             'status' => 'answered',
             'owner_reply' => 'E2E owner yaniti',
             'answered_by_user_id' => $owner->id,
+        ]);
+        $this->assertDatabaseHas('listings', [
+            'id' => $listing->id,
+            'status' => 'published',
+            'site' => 'orkestram.net',
         ]);
     }
 

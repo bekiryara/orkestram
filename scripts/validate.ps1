@@ -51,6 +51,22 @@ function Run-FeatureTestsFor {
     }
 }
 
+function Run-AcceptanceGateFor {
+    param([string]$Container)
+
+    Run-Step -Name "$Container EndToEndRoleJourneyTest" -Action {
+        docker exec $Container php artisan test --filter=EndToEndRoleJourneyTest
+    }
+
+    Run-Step -Name "$Container PublicAndSeoRoutesTest" -Action {
+        docker exec $Container php artisan test --filter=PublicAndSeoRoutesTest
+    }
+
+    Run-Step -Name "$Container AdminAccessTest" -Action {
+        docker exec $Container php artisan test --filter=AdminAccessTest
+    }
+}
+
 if ($Mode -eq "full") {
     Run-Step -Name "dev-up ($App)" -Action {
         powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\dev-up.ps1 -App $App
@@ -59,10 +75,12 @@ if ($Mode -eq "full") {
 
 if ($App -in @("orkestram", "both")) {
     Run-FeatureTestsFor -Container "orkestram-local-web"
+    Run-AcceptanceGateFor -Container "orkestram-local-web"
 }
 
 if ($App -in @("izmirorkestra", "both")) {
     Run-FeatureTestsFor -Container "izmirorkestra-local-web"
+    Run-AcceptanceGateFor -Container "izmirorkestra-local-web"
 }
 
 Run-Step -Name "smoke-test ($App)" -Action {
