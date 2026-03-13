@@ -1,0 +1,21 @@
+﻿FINAL TREE V5 CLEAN REPORT
+Keep: 132
+Drop: 37
+
+Ana kategori dagilimi:
+- Etkinlik Organizasyon: 27
+- Muzik Gruplari: 26
+- Guzellik ve Hazirlik: 24
+- Davetiye Hediyelik ve Cicek: 16
+- Mekanlar: 12
+- Fotograf ve Video: 11
+- Ikram ve Catering: 10
+- Gelin Arabasi ve Transfer: 6
+
+Kaynak dagilimi:
+- merged: 132
+
+Dosyalar:
+- D:\orkestram\docs\category-workspace\FINAL_TREE_V5_CLEAN.txt
+- D:\orkestram\docs\category-workspace\FINAL_TREE_V5_TREEVIEW.txt
+- D:\orkestram\docs\category-workspace\exports\FINAL_TREE_V5_CLEAN.csv

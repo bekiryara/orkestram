@@ -1,0 +1,156 @@
+﻿FINAL CATEGORY LOCK V1
+Tarih: 2026-03-10
+Hedef: Kategori isini bu aksam kilitlemek; tekrar tekrar ugrasmamak.
+Model: Genis havuz + aktif/pasif yonetim.
+
+KURAL
+- Aktif: hemen landing/acik listeye cikacak, is getiren cekirdek.
+- Pasif: sistemde hazir duracak, veri/ilan geldikce aktive edilecek.
+- Tek niyet = tek kategori (duplike yok).
+
+========================
+A) AKTIF CEKIRDEK (P1)
+========================
+[muzik-ekipleri]
+- dugun-orkestrasi
+- bayan-orkestra
+- gelin-alma-bandosu
+- dj-kiralama
+- fasil-ekibi
+- mehter-takimi
+- ilahi-grubu
+
+[etkinlik-organizasyon]
+- dugun-organizasyon
+- kina-organizasyon
+- sunnet-organizasyon
+- nisan-organizasyon
+- soz-organizasyon
+- nikah-organizasyon
+
+[fotograf-ve-video]
+- dugun-fotografcisi
+- dugun-video-cekimi
+- dis-cekim-fotograf
+
+[etkinlik-mekanlari]
+- dugun-mekanlari
+- kina-mekanlari
+- nisan-mekanlari
+
+[ikram-ve-catering]
+- dugun-catering
+- kokteyl-catering
+- dugun-pastasi
+
+[gelin-arabasi-ve-transfer]
+- gelin-arabasi-kiralama
+- vip-transfer
+
+[guzellik-ve-hazirlik]
+- gelin-makyaji
+- gelin-saci
+- gelinlik-kiralama
+
+[davetiye-hediyelik-cicek]
+- davetiye
+- nikah-sekeri
+- cicekci
+
+Toplam Aktif: 33
+
+===========================
+B) PASIF HAZIR HAVUZ (P2)
+===========================
+[etkinlik-organizasyon]
+- mezuniyet-organizasyonu
+- dogum-gunu-organizasyonu
+- bekarliga-veda-organizasyonu
+- acilis-organizasyonu
+- kurumsal-etkinlik-organizasyonu
+- evde-nisan-organizasyonu
+- evde-soz-organizasyonu
+- soz-nisan-organizasyon
+- susleme-organizasyon
+- etkinlik-organizasyonu
+
+[sahne-dekor-ekipman]
+- kina-tahti-kiralama
+- nisan-masasi-kiralama
+- sunnet-tahti-kiralama
+- arka-fon-kiralama
+- tag-kemer-kiralama
+- gelin-yolu-susleme
+- nikah-masasi-susleme
+- masa-sandalye-kiralama
+- ses-sistem-kiralama
+- isik-sistem-kiralama
+- sahne-kiralama
+- palyanco-kiralama
+- animator-kiralama
+- sisme-oyun-parki-kiralama
+
+[fotograf-ve-video]
+- nikah-fotografcisi
+- nisan-fotografcisi
+- sunnet-fotografcisi
+- dugun-drone-cekimi
+- soz-fotograf-cekimi
+- evlilik-teklifi-fotograf-cekimi
+- mekan-fotografcisi
+
+[etkinlik-mekanlari]
+- soz-nisan-mekanlari
+- kir-dugunu
+- dugun-salonu
+- davet-salonu
+
+[ikram-ve-catering]
+- nisan-ikramliklari-catering
+- nisan-menusu-catering
+- nisan-pastasi
+- soz-pastasi
+- davet-catering
+
+[gelin-arabasi-ve-transfer]
+- sunnet-arabasi-kiralama
+- limuzin-kiralama
+- ustu-acik-gelin-arabasi-kiralama
+- vito-gelin-arabasi-kiralama
+
+[guzellik-ve-hazirlik]
+- nikah-makyaji
+- nisan-makyaji
+- sac-ve-makyaj
+- gelin-sac-makyaj
+- kiz-isteme-makyaji
+
+[davetiye-hediyelik-cicek]
+- davetiye-baski
+- dijital-davetiye
+- dugun-davetiyesi
+- nisan-hediyelik
+- dugun-hediyelik
+- mevlut-hediyelik
+- nikah-hediyelik
+- cicek-gonderme
+- cicek-tasarimi
+
+Toplam Pasif: 59
+
+========================
+C) SU AN DISARIDA (P3)
+========================
+- Cekirdek model disi, alakasiz, teknik servis veya pet/insaat vb. kategoriler.
+- Ancak yeni veriyle guclu sinyal gelirse P2'ye alinabilir.
+
+===========================
+D) ISLETIM KARARI (KILIT)
+===========================
+1) Bu gece sadece 33 aktif kategoriyle cik.
+2) 59 kategori pasif hazir dursun.
+3) Her hafta en fazla 5 kategori aktive et.
+4) Aktivasyon kosulu: en az 1 ilan + landing icerigi + SEO baslik/meta hazir.
+5) Duplike slug acma; canonical slug disina cikma.
+
+Durum: LOCKED (V1)

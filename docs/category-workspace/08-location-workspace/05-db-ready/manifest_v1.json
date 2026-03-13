@@ -1,0 +1,25 @@
+{
+    "version":  "locations_v1",
+    "source":  {
+                   "neighborhoods_path":  "D:\\stack-data\\catalog-dataset\\out\\manifests\\options\\neighborhoods.tr.json",
+                   "districts_path":  "D:\\stack-data\\catalog-dataset\\out\\manifests\\options\\districts.tr.json",
+                   "neighborhoods_sha256":  "ffd7a30de6f46ada9fbddd7de3d260016754842d4f19291225712c5a9524d7d2",
+                   "districts_sha256":  "61cd57c853d28bbd36ce5f019094dc008327244702742c06b15aefd27cc90c43"
+               },
+    "outputs":  {
+                    "districts_sha256":  "92214190b8d8ec711a75d16c60260a4b6604e6acbe47f844503a6bdb0b9c7d1b",
+                    "cities_csv":  "cities_v1.csv",
+                    "neighborhoods_sha256":  "20a4ba6d51600c06134497f8ea9890c4f35384f3a23491ba47e03690444ccb8b",
+                    "anomalies_report":  "location_anomalies_v1.txt",
+                    "neighborhoods_csv":  "neighborhoods_v1.csv",
+                    "cities_sha256":  "6230b4d7ff36ab1ebf2375a3cfd47733cbad82d7473f88fa85a17fe708ca847b",
+                    "districts_csv":  "districts_v1.csv"
+                },
+    "stats":  {
+                  "neighborhood_count":  31855,
+                  "anomaly_count":  8,
+                  "city_count":  81,
+                  "district_count":  973
+              },
+    "generated_at_utc":  "2026-03-11T12:51:00Z"
+}

@@ -1,0 +1,5 @@
+﻿domain=izmirorkestra.net
+dump=D:\orkestram\izmirorkestra.net.sql.gz
+all_urls=8460
+media_urls=1303
+page_like_urls=7157

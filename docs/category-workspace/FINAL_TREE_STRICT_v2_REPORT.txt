@@ -1,0 +1,25 @@
+﻿FINAL TREE STRICT v2 REPORT
+Toplam Keep: 152
+Toplam Drop: 81
+
+Ana kategori dagilimi:
+- dugun-organizasyon: 25
+- gelin-saci-ve-makyaji: 25
+- muzik: 20
+- dugun-mekanlari: 16
+- catering-hizmetleri: 14
+- gelin-arabasi: 13
+- nikah-sekeri-ve-hediyelik: 7
+- dugun-fotografcilari-video: 7
+- soz-ve-nisan: 6
+- gelinlik: 6
+- kina-ve-bekarliga-veda: 5
+- dugun-davetiyesi: 5
+- cicekciler: 3
+
+Dosyalar:
+- D:\orkestram\docs\category-workspace\04-approved-tree\FINAL_TREE_STRICT_v2.txt
+- D:\orkestram\docs\category-workspace\04-approved-tree\CLEAN_KEEP_v2.txt
+- D:\orkestram\docs\category-workspace\04-approved-tree\CLEAN_DROP_v2.txt
+- D:\orkestram\docs\category-workspace\exports\FINAL_TREE_STRICT_v2_KEEP.csv
+- D:\orkestram\docs\category-workspace\exports\FINAL_TREE_STRICT_v2_DROP.csv

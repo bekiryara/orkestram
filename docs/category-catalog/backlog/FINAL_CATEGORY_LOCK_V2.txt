@@ -1,0 +1,10 @@
+﻿FINAL CATEGORY LOCK V2
+Tarih: 2026-03-10
+Durum: Tum guclu kategoriler ACTIVE'e alinmistir.
+
+Karar:
+- V1'de pasifte tutulan guclu kategoriler active sete alinmistir.
+- Bu nedenle mevcut backlog havuzu bosaltildi.
+- Yeni kategori backlog'a ancak yeni taleple eklenecektir.
+
+Pasif Kategori Sayisi: 0

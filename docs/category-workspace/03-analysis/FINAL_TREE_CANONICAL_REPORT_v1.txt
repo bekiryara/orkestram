@@ -1,0 +1,21 @@
+﻿FINAL TREE CANONICAL REPORT v1
+Toplam: 233
+
+Ana kategori dagilimi:
+- dugun-fotografcilari-video: 61
+- catering-hizmetleri: 29
+- gelin-saci-ve-makyaji: 25
+- muzik: 25
+- soz-ve-nisan: 18
+- dugun-organizasyon: 17
+- gelin-arabasi: 14
+- dugun-mekanlari: 13
+- kina-ve-bekarliga-veda: 8
+- nikah-sekeri-ve-hediyelik: 6
+- cicekciler: 6
+- gelinlik: 6
+- dugun-davetiyesi: 5
+
+Dosyalar:
+- D:\orkestram\docs\category-workspace\04-approved-tree\FINAL_TREE_CANONICAL_v1.txt
+- D:\orkestram\docs\category-workspace\exports\FINAL_TREE_CANONICAL_v1.csv

@@ -1,0 +1,44 @@
+﻿ARMUT FINAL TREE RAPORU (v1)
+Tarih: 2026-03-09 20:28:33
+
+Toplam kaynak satir: 4923
+Aday (candidate): 581
+Final agaca giren: 577
+Manual review: 4
+Out-of-scope: 188
+
+Ana kategori dagilimi:
+- organizasyon-hizmetleri: 106
+- davet-destek-hizmetleri: 100
+- foto-video: 77
+- ulasim-kiralama: 71
+- guzellik-hazirlik: 60
+- mekanlar: 55
+- teknik-produksiyon: 41
+- muzik-gruplari: 40
+- ikram-catering: 23
+- eglence-sov-sanatci: 4
+
+Armut top_category dagilimi (final):
+- service-events-organization: 109
+- service-print-sign-ad: 89
+- service-rental: 72
+- service-photo-video-media: 72
+- service-other: 71
+- service-beauty-fashion: 53
+- service-pets-garden: 26
+- service-education-lessons: 22
+- service-construction-renovation: 20
+- service-repair-maintenance: 13
+- service-auto-services: 8
+- service-design-software-marketing: 8
+- service-home-furniture-wood: 6
+- service-home-cleaning: 4
+- service-glass-aluminum-pvc: 3
+- service-moving-logistics: 1
+
+Dosyalar:
+- D:\orkestram\docs\category-workspace\04-approved-tree\ARMUT_FINAL_TREE_v1.txt
+- D:\orkestram\docs\category-workspace\exports\final_tree_candidates_v1.csv
+- D:\orkestram\docs\category-workspace\exports\final_tree_manual_review_v1.csv
+- D:\orkestram\docs\category-workspace\exports\final_tree_out_scope_v1.csv

@@ -1,0 +1,32 @@
+﻿MUST-HAVE KATEGORI KILIDI (V1)
+Tarih: 2026-03-09
+Kural: Bu listedekiler final agacta kesin olacak.
+
+1) Armutta bulunanlar (source)
+- Kadin DJ [source_slug=service-kadin-dj] -> muzik-gruplari
+- Kina Organizasyon [source_slug=service-kina-organizasyon] -> organizasyon-hizmetleri
+- Gelin Alma Bandosu [source_slug=service-gelin-alma-bandosu] -> muzik-gruplari
+- Dugun Orkestrasi [source_slug=service-dugun-orkestrasi] -> muzik-gruplari
+- Dugun DJ [source_slug=service-dugun-dj] -> muzik-gruplari
+- Dugun Davulcusu [source_slug=service-dugun-davulcusu] -> muzik-gruplari
+- Dugun Bandosu [source_slug=service-dugun-bandosu] -> muzik-gruplari
+- Nisan Organizasyon [source_slug=service-nisan-organizasyon] -> organizasyon-hizmetleri
+- Dugun Salonu [source_slug=service-dugun-salonu] -> mekanlar
+- Nisan Fotografcisi [source_slug=service-nisan-fotografcisi] -> foto-video
+- Nikah Fotografcisi [source_slug=service-nikah-fotografcisi] -> foto-video
+
+2) Armutta birebir bulunamadi (manual_seed, kesin eklenecek)
+- Bayan Orkestra -> muzik-gruplari
+- Kina Tahti Kiralama -> organizasyon-hizmetleri
+- Nisan Masasi Kiralama -> organizasyon-hizmetleri
+- Sunnet Arabasi Kiralama -> davet-destek-hizmetleri
+- Mehter Takimi -> muzik-gruplari
+- Ilahi Grubu -> muzik-gruplari
+- Sunnet Organizasyonu -> organizasyon-hizmetleri
+- Sunnet Fotografcisi -> foto-video
+- Kina Fotografcisi -> foto-video
+
+Kabul kriteri:
+1) Final agac txt icinde bu basliklar birebir gecer.
+2) source olanlarda slug yazili olur.
+3) manual_seed olanlar importte custom seed satiri ile eklenir.

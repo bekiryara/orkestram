@@ -1,0 +1,210 @@
+﻿FINAL TREE OMURGA V4 MERGED (Deterministik)
+Tarih: 2026-03-09 21:55:43
+Model: STRICT_v2 + MUST_HAVE birleşik
+Toplam Alt Kategori: 169
+
+1. catering-hizmetleri (14)
+  - Catering [slug=service-catering; src=strict; src_slug=service-catering]
+  - Davet Catering [slug=service-davet-catering; src=strict; src_slug=service-davet-catering]
+  - Dogum Gunu Catering [slug=service-dogum-gunu-catering; src=strict; src_slug=service-dogum-gunu-catering]
+  - Dogum Gunu Ikramliklari [slug=service-dogum-gunu-ikramliklari; src=strict; src_slug=service-dogum-gunu-ikramliklari]
+  - Doner Catering [slug=service-doner-catering; src=strict; src_slug=service-doner-catering]
+  - Dugun Catering [slug=service-dugun-catering; src=strict; src_slug=service-dugun-catering]
+  - Dugun Ikramliklari [slug=service-dugun-ikramliklari; src=strict; src_slug=service-dugun-ikramliklari]
+  - Dugun Pastasi [slug=service-dugun-pastasi; src=strict; src_slug=service-dugun-pastasi]
+  - Iftar Yemegi Catering [slug=service-iftar-yemegi-catering; src=strict; src_slug=service-iftar-yemegi-catering]
+  - Kokteyl Catering [slug=service-kokteyl-catering; src=strict; src_slug=service-kokteyl-catering]
+  - Nisan Ikramliklari Catering [slug=service-nisan-ikramliklari-catering; src=strict; src_slug=service-nisan-ikramliklari-catering]
+  - Nisan Menusu Catering [slug=service-nisan-menusu-catering; src=strict; src_slug=service-nisan-menusu-catering]
+  - Nisan Pastasi [slug=service-nisan-pastasi; src=strict; src_slug=service-nisan-pastasi]
+  - Soz Pastasi [slug=service-soz-pastasi; src=strict; src_slug=service-soz-pastasi]
+
+2. cicekciler (3)
+  - Cicek Gonderme [slug=service-cicek-gonderme; src=strict; src_slug=service-cicek-gonderme]
+  - Cicek Tasarimi [slug=service-cicek-tasarimi; src=strict; src_slug=service-cicek-tasarimi]
+  - Cicekci [slug=service-cicekci; src=strict; src_slug=service-cicekci]
+
+3. davet-destek-hizmetleri (1)
+  - Sunnet Arabasi Kiralama [slug=sunnet-arabasi-kiralama; src=must]
+
+4. dugun-davetiyesi (5)
+  - Davetiye [slug=service-davetiye; src=strict; src_slug=service-davetiye]
+  - Davetiye Baski [slug=service-davetiye-baski; src=strict; src_slug=service-davetiye-baski]
+  - Davetiye Tasarim [slug=service-davetiye-tasarim; src=strict; src_slug=service-davetiye-tasarim]
+  - Dijital Davetiye [slug=service-dijital-davetiye; src=strict; src_slug=service-dijital-davetiye]
+  - Dugun Davetiyesi [slug=service-dugun-davetiyesi; src=strict; src_slug=service-dugun-davetiyesi]
+
+5. dugun-fotografcilari-video (7)
+  - Dis Cekim Fotograf [slug=service-dis-cekim-fotograf; src=strict; src_slug=service-dis-cekim-fotograf]
+  - Drone Cekimi [slug=service-drone-cekimi; src=strict; src_slug=service-drone-cekimi]
+  - Dugun Drone Cekimi [slug=service-dugun-drone-cekimi; src=strict; src_slug=service-dugun-drone-cekimi]
+  - Dugun Fotografcisi [slug=service-dugun-fotografcisi; src=strict; src_slug=service-dugun-fotografcisi]
+  - Dugun Video Cekimi [slug=service-dugun-video-cekimi; src=strict; src_slug=service-dugun-video-cekimi]
+  - Evlilik Teklifi Fotograf Cekimi [slug=service-evlilik-teklifi-fotograf-cekimi; src=strict; src_slug=service-evlilik-teklifi-fotograf-cekimi]
+  - Kameraman [slug=service-kameraman; src=strict; src_slug=service-kameraman]
+
+6. dugun-mekanlari (16)
+  - Bekarliga Veda Mekanlari [slug=service-bekarliga-veda-mekanlari; src=strict; src_slug=service-bekarliga-veda-mekanlari]
+  - Camekan Balkon [slug=service-camekan-balkon; src=strict; src_slug=service-camekan-balkon]
+  - Davet Salonu [slug=service-davet-salonu; src=strict; src_slug=service-davet-salonu]
+  - Dogum Gunu Mekanlari [slug=service-dogum-gunu-mekanlari; src=strict; src_slug=service-dogum-gunu-mekanlari]
+  - Dugun Mekanlari [slug=service-dugun-mekanlari; src=strict; src_slug=service-dugun-mekanlari]
+  - Dugun Salonu [slug=service-dugun-salonu; src=strict; src_slug=service-dugun-salonu]
+  - Ic Mekan Tasarimi [slug=service-ic-mekan-tasarimi; src=strict; src_slug=service-ic-mekan-tasarimi]
+  - Kina Mekanlari [slug=service-kina-mekanlari; src=strict; src_slug=service-kina-mekanlari]
+  - Kir Dugunu [slug=service-kir-dugunu; src=strict; src_slug=service-kir-dugunu]
+  - Mekan Fotografcisi [slug=service-mekan-fotografcisi; src=strict; src_slug=service-mekan-fotografcisi]
+  - Mekanik Cephe Kaplama [slug=service-mekanik-cephe-kaplama; src=strict; src_slug=service-mekanik-cephe-kaplama]
+  - Mekanik Proje [slug=service-mekanik-proje; src=strict; src_slug=service-mekanik-proje]
+  - Mekanik Proje Cizimi [slug=service-mekanik-proje-cizimi; src=strict; src_slug=service-mekanik-proje-cizimi]
+  - Nisan Mekanlari [slug=service-nisan-mekanlari; src=strict; src_slug=service-nisan-mekanlari]
+  - Soz Mekanlari [slug=service-soz-mekanlari; src=strict; src_slug=service-soz-mekanlari]
+  - Soz Nisan Mekanlari [slug=service-soz-nisan-mekanlari; src=strict; src_slug=service-soz-nisan-mekanlari]
+
+7. dugun-organizasyon (25)
+  - Acilis Balon Susleme [slug=service-acilis-balon-susleme; src=strict; src_slug=service-acilis-balon-susleme]
+  - Balon Susleme [slug=service-balon-susleme; src=strict; src_slug=service-balon-susleme]
+  - Dogum Gunu Balon Susleme [slug=service-dogum-gunu-balon-susleme; src=strict; src_slug=service-dogum-gunu-balon-susleme]
+  - Dogum Gunu Susleme [slug=service-dogum-gunu-susleme; src=strict; src_slug=service-dogum-gunu-susleme]
+  - Dogum Odasi Susleme [slug=service-dogum-odasi-susleme; src=strict; src_slug=service-dogum-odasi-susleme]
+  - Dugun Balon Susleme [slug=service-dugun-balon-susleme; src=strict; src_slug=service-dugun-balon-susleme]
+  - Dugun Organizasyon [slug=service-dugun-organizasyon; src=strict; src_slug=service-dugun-organizasyon]
+  - Etkinlik Fotografcisi [slug=service-etkinlik-fotografcisi; src=strict; src_slug=service-etkinlik-fotografcisi]
+  - Etkinlik Hostesi [slug=service-etkinlik-hostesi; src=strict; src_slug=service-etkinlik-hostesi]
+  - Evde Nisan Organizasyonu [slug=service-evde-nisan-organizasyonu; src=strict; src_slug=service-evde-nisan-organizasyonu]
+  - Evde Soz Organizasyonu [slug=service-evde-soz-organizasyonu; src=strict; src_slug=service-evde-soz-organizasyonu]
+  - Evlilik Teklifi Organizasyon [slug=service-evlilik-teklifi-organizasyon; src=strict; src_slug=service-evlilik-teklifi-organizasyon]
+  - Fuar Hostesi [slug=service-fuar-hostesi; src=strict; src_slug=service-fuar-hostesi]
+  - Gelin Arabasi Susleme [slug=service-gelin-arabasi-susleme; src=strict; src_slug=service-gelin-arabasi-susleme]
+  - Karsilama Hostesi [slug=service-karsilama-hostesi; src=strict; src_slug=service-karsilama-hostesi]
+  - Kina Organizasyon [slug=service-kina-organizasyon; src=strict; src_slug=service-kina-organizasyon]
+  - Konsept Fotograf Cekimi [slug=service-konsept-fotograf-cekimi; src=strict; src_slug=service-konsept-fotograf-cekimi]
+  - Muzik Organizasyonu [slug=service-muzik-organizasyonu; src=strict; src_slug=service-muzik-organizasyonu]
+  - Nikah Organizasyon [slug=service-nikah-organizasyon; src=strict; src_slug=service-nikah-organizasyon]
+  - Nisan Organizasyon [slug=service-nisan-organizasyon; src=strict; src_slug=service-nisan-organizasyon]
+  - Soz Nisan Organizasyon [slug=service-soz-nisan-organizasyon; src=strict; src_slug=service-soz-nisan-organizasyon]
+  - Soz Organizasyon [slug=service-soz-organizasyon; src=strict; src_slug=service-soz-organizasyon]
+  - Susleme Organizasyon [slug=service-susleme-organizasyon; src=strict; src_slug=service-susleme-organizasyon]
+  - Ucan Balon Susleme [slug=service-ucan-balon-susleme; src=strict; src_slug=service-ucan-balon-susleme]
+  - Zincir Balon Susleme [slug=service-zincir-balon-susleme; src=strict; src_slug=service-zincir-balon-susleme]
+
+8. foto-video (4)
+  - Kina Fotografcisi [slug=kina-fotografcisi; src=must]
+  - Nikah Fotografcisi [slug=nikah-fotografcisi; src=must; src_slug=service-nikah-fotografcisi]
+  - Nisan Fotografcisi [slug=nisan-fotografcisi; src=must; src_slug=service-nisan-fotografcisi]
+  - Sunnet Fotografcisi [slug=sunnet-fotografcisi; src=must]
+
+9. gelin-arabasi (13)
+  - Gelin Arabasi Kiralama [slug=service-gelin-arabasi-kiralama; src=strict; src_slug=service-gelin-arabasi-kiralama]
+  - Havaalani Transfer [slug=service-havaalani-transfer; src=strict; src_slug=service-havaalani-transfer]
+  - Karavan Transfer [slug=service-karavan-transfer; src=strict; src_slug=service-karavan-transfer]
+  - Kedi Transferi [slug=service-kedi-transferi; src=strict; src_slug=service-kedi-transferi]
+  - Kopek Transfer [slug=service-kopek-transfer; src=strict; src_slug=service-kopek-transfer]
+  - Limuzin Kiralama [slug=service-limuzin-kiralama; src=strict; src_slug=service-limuzin-kiralama]
+  - Motosiklet Transfer [slug=service-motosiklet-transfer; src=strict; src_slug=service-motosiklet-transfer]
+  - Sehirler Arasi Transfer [slug=service-sehirler-arasi-transfer; src=strict; src_slug=service-sehirler-arasi-transfer]
+  - Tekne Transferi [slug=service-tekne-transferi; src=strict; src_slug=service-tekne-transferi]
+  - Transfer [slug=service-transfer; src=strict; src_slug=service-transfer]
+  - Ustu Acik Gelin Arabasi Kiralama [slug=service-ustu-acik-gelin-arabasi-kiralama; src=strict; src_slug=service-ustu-acik-gelin-arabasi-kiralama]
+  - Vip Transfer [slug=service-vip-transfer; src=strict; src_slug=service-vip-transfer]
+  - Vito Gelin Arabasi Kiralama [slug=service-vito-gelin-arabasi-kiralama; src=strict; src_slug=service-vito-gelin-arabasi-kiralama]
+
+10. gelinlik (6)
+  - Gelinlik [slug=service-gelinlik; src=strict; src_slug=service-gelinlik]
+  - Gelinlik Dikimi [slug=service-gelinlik-dikimi; src=strict; src_slug=service-gelinlik-dikimi]
+  - Gelinlik Kiralama [slug=service-gelinlik-kiralama; src=strict; src_slug=service-gelinlik-kiralama]
+  - Gelinlik Kuru Temizleme [slug=service-gelinlik-kuru-temizleme; src=strict; src_slug=service-gelinlik-kuru-temizleme]
+  - Gelinlik Tadilati [slug=service-gelinlik-tadilati; src=strict; src_slug=service-gelinlik-tadilati]
+  - Tesettur Gelinlik Kiralama [slug=service-tesettur-gelinlik-kiralama; src=strict; src_slug=service-tesettur-gelinlik-kiralama]
+
+11. gelin-saci-ve-makyaji (25)
+  - Dogum Gunu Makyaji [slug=service-dogum-gunu-makyaji; src=strict; src_slug=service-dogum-gunu-makyaji]
+  - Dugun Makyaji [slug=service-dugun-makyaji; src=strict; src_slug=service-dugun-makyaji]
+  - Erkek Kuaforu [slug=service-erkek-kuaforu; src=strict; src_slug=service-erkek-kuaforu]
+  - Evde Kuafor [slug=service-evde-kuafor; src=strict; src_slug=service-evde-kuafor]
+  - Evde Makyaj [slug=service-evde-makyaj; src=strict; src_slug=service-evde-makyaj]
+  - Evde Nisan Makyaji [slug=service-evde-nisan-makyaji; src=strict; src_slug=service-evde-nisan-makyaji]
+  - Fotograf Cekimi Makyaji [slug=service-fotograf-cekimi-makyaji; src=strict; src_slug=service-fotograf-cekimi-makyaji]
+  - Gelin Makyaji [slug=service-gelin-makyaji; src=strict; src_slug=service-gelin-makyaji]
+  - Gelin Sac Makyaj [slug=service-gelin-sac-makyaj; src=strict; src_slug=service-gelin-sac-makyaj]
+  - Gelin Saci [slug=service-gelin-saci; src=strict; src_slug=service-gelin-saci]
+  - Glitter Makyaj [slug=service-glitter-makyaj; src=strict; src_slug=service-glitter-makyaj]
+  - Gunluk Makyaj [slug=service-gunluk-makyaj; src=strict; src_slug=service-gunluk-makyaj]
+  - Kiz Isteme Makyaji [slug=service-kiz-isteme-makyaji; src=strict; src_slug=service-kiz-isteme-makyaji]
+  - Kopek Kuaforu [slug=service-kopek-kuaforu; src=strict; src_slug=service-kopek-kuaforu]
+  - Kuafor [slug=service-kuafor; src=strict; src_slug=service-kuafor]
+  - Makyaj [slug=service-makyaj; src=strict; src_slug=service-makyaj]
+  - Makyaj Masasi Yapimi [slug=service-makyaj-masasi-yapimi; src=strict; src_slug=service-makyaj-masasi-yapimi]
+  - Nikah Makyaji [slug=service-nikah-makyaji; src=strict; src_slug=service-nikah-makyaji]
+  - Nisan Makyaji [slug=service-nisan-makyaji; src=strict; src_slug=service-nisan-makyaji]
+  - Ozel Gun Makyaji [slug=service-ozel-gun-makyaji; src=strict; src_slug=service-ozel-gun-makyaji]
+  - Pet Kuaforu [slug=service-pet-kuaforu; src=strict; src_slug=service-pet-kuaforu]
+  - Plastik Makyaj [slug=service-plastik-makyaj; src=strict; src_slug=service-plastik-makyaj]
+  - Porselen Makyaj [slug=service-porselen-makyaj; src=strict; src_slug=service-porselen-makyaj]
+  - Sac Ve Makyaj [slug=service-sac-ve-makyaj; src=strict; src_slug=service-sac-ve-makyaj]
+  - Yuz Tasi Makyaj [slug=service-yuz-tasi-makyaj; src=strict; src_slug=service-yuz-tasi-makyaj]
+
+12. kina-ve-bekarliga-veda (5)
+  - Kina Elbisesi Kiralama [slug=service-kina-elbisesi-kiralama; src=strict; src_slug=service-kina-elbisesi-kiralama]
+  - Kina Fotograf Cekimi [slug=service-kina-fotograf-cekimi; src=strict; src_slug=service-kina-fotograf-cekimi]
+  - Makinali Kara Siva [slug=service-makinali-kara-siva; src=strict; src_slug=service-makinali-kara-siva]
+  - Makinali Sap [slug=service-makinali-sap; src=strict; src_slug=service-makinali-sap]
+  - Ozel Makina Imalati [slug=service-ozel-makina-imalati; src=strict; src_slug=service-ozel-makina-imalati]
+
+13. mekanlar (1)
+  - Dugun Salonu [slug=dugun-salonu; src=must; src_slug=service-dugun-salonu]
+
+14. muzik (20)
+  - Bando Takimi [slug=service-bando-takimi; src=strict; src_slug=service-bando-takimi]
+  - Canli Muzik [slug=service-canli-muzik; src=strict; src_slug=service-canli-muzik]
+  - Dj Kiralama [slug=service-dj-kiralama; src=strict; src_slug=service-dj-kiralama]
+  - Dugun Bandosu [slug=service-dugun-bandosu; src=strict; src_slug=service-dugun-bandosu]
+  - Dugun Davulcusu [slug=service-dugun-davulcusu; src=strict; src_slug=service-dugun-davulcusu]
+  - Dugun Dj [slug=service-dugun-dj; src=strict; src_slug=service-dugun-dj]
+  - Dugun Orkestrasi [slug=service-dugun-orkestrasi; src=strict; src_slug=service-dugun-orkestrasi]
+  - Fasil Ekibi [slug=service-fasil-ekibi; src=strict; src_slug=service-fasil-ekibi]
+  - Gelin Alma Bandosu [slug=service-gelin-alma-bandosu; src=strict; src_slug=service-gelin-alma-bandosu]
+  - Kadin Dj [slug=service-kadin-dj; src=strict; src_slug=service-kadin-dj]
+  - Muzik Ekibi [slug=service-muzik-ekibi; src=strict; src_slug=service-muzik-ekibi]
+  - Muzik Grubu [slug=service-muzik-grubu; src=strict; src_slug=service-muzik-grubu]
+  - Muzik Produksiyon [slug=service-muzik-produksiyon; src=strict; src_slug=service-muzik-produksiyon]
+  - Muzik Studyosu Kiralama [slug=service-muzik-studyosu-kiralama; src=strict; src_slug=service-muzik-studyosu-kiralama]
+  - Muzik Yapimi [slug=service-muzik-yapimi; src=strict; src_slug=service-muzik-yapimi]
+  - Muzik Yetenek Sinavi Hazirlik [slug=service-muzik-yetenek-sinavi-hazirlik; src=strict; src_slug=service-muzik-yetenek-sinavi-hazirlik]
+  - Muzisyen [slug=service-muzisyen; src=strict; src_slug=service-muzisyen]
+  - Orkestra [slug=service-orkestra; src=strict; src_slug=service-orkestra]
+  - Profesyonel Dj [slug=service-profesyonel-dj; src=strict; src_slug=service-profesyonel-dj]
+  - Trio Muzik Grubu [slug=service-trio-muzik-grubu; src=strict; src_slug=service-trio-muzik-grubu]
+
+15. muzik-gruplari (6)
+  - Bayan Orkestra [slug=bayan-orkestra; src=must]
+  - Dugun Orkestrasi [slug=dugun-orkestrasi; src=must; src_slug=service-dugun-orkestrasi]
+  - Gelin Alma Bandosu [slug=gelin-alma-bandosu; src=must; src_slug=service-gelin-alma-bandosu]
+  - Ilahi Grubu [slug=ilahi-grubu; src=must]
+  - Kadin DJ [slug=kadin-dj; src=must; src_slug=service-kadin-dj]
+  - Mehter Takimi [slug=mehter-takimi; src=must]
+
+16. nikah-sekeri-ve-hediyelik (7)
+  - Dugun Hediyelik [slug=service-dugun-hediyelik; src=strict; src_slug=service-dugun-hediyelik]
+  - Hediyelik Yapimi [slug=service-hediyelik-yapimi; src=strict; src_slug=service-hediyelik-yapimi]
+  - Mevlut Hediyelik [slug=service-mevlut-hediyelik; src=strict; src_slug=service-mevlut-hediyelik]
+  - Nikah Hediyelik [slug=service-nikah-hediyelik; src=strict; src_slug=service-nikah-hediyelik]
+  - Nikah Sekeri [slug=service-nikah-sekeri; src=strict; src_slug=service-nikah-sekeri]
+  - Nisan Hediyelik [slug=service-nisan-hediyelik; src=strict; src_slug=service-nisan-hediyelik]
+  - Yenidogan Hediyelik [slug=service-yenidogan-hediyelik; src=strict; src_slug=service-yenidogan-hediyelik]
+
+17. organizasyon-hizmetleri (5)
+  - Kina Organizasyon [slug=kina-organizasyon; src=must; src_slug=service-kina-organizasyon]
+  - Kina Tahti Kiralama [slug=kina-tahti-kiralama; src=must]
+  - Nisan Masasi Kiralama [slug=nisan-masasi-kiralama; src=must]
+  - Nisan Organizasyon [slug=nisan-organizasyon; src=must; src_slug=service-nisan-organizasyon]
+  - Sunnet Organizasyonu [slug=sunnet-organizasyonu; src=must]
+
+18. soz-ve-nisan (6)
+  - Dansoz Kiralama [slug=service-dansoz-kiralama; src=strict; src_slug=service-dansoz-kiralama]
+  - Nisan Arka Fon Kiralama [slug=service-nisan-arka-fon-kiralama; src=strict; src_slug=service-nisan-arka-fon-kiralama]
+  - Nisan Cikolatasi [slug=service-nisan-cikolatasi; src=strict; src_slug=service-nisan-cikolatasi]
+  - Nisan Fotografcisi [slug=service-nisan-fotografcisi; src=strict; src_slug=service-nisan-fotografcisi]
+  - Nisan Yemegi [slug=service-nisan-yemegi; src=strict; src_slug=service-nisan-yemegi]
+  - Soz Fotograf Cekimi [slug=service-soz-fotograf-cekimi; src=strict; src_slug=service-soz-fotograf-cekimi]
+

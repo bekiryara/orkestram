@@ -1,0 +1,22 @@
+﻿name: predeploy-guard
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  guard:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Guard (Predeploy)
+        shell: pwsh
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\scripts\deploy-guard.ps1 `
+            -Profile predeploy-check `
+            -Domain orkestram.net `
+            -EnvFilePath .\local-rebuild\apps\orkestram\.env `
+            -DeployPackPath .\local-rebuild\apps\orkestram

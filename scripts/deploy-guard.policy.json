@@ -1,0 +1,126 @@
+﻿{
+  "mode": "laravel",
+  "php": {
+    "minimum": "8.3",
+    "minimum_id": 80300,
+    "observed_version": "8.3",
+    "required_extensions": [
+      "bcmath",
+      "ctype",
+      "curl",
+      "fileinfo",
+      "mbstring",
+      "openssl",
+      "pdo",
+      "pdo_mysql",
+      "tokenizer",
+      "zip",
+      "xml"
+    ],
+    "observed_extensions": {
+      "bcmath": true,
+      "ctype": true,
+      "curl": true,
+      "fileinfo": true,
+      "mbstring": true,
+      "openssl": true,
+      "pdo": true,
+      "pdo_mysql": true,
+      "tokenizer": true,
+      "zip": true,
+      "xml": false
+    }
+  },
+  "profiles": {
+    "local-check": {
+      "warn_only_extensions": ["xml"],
+      "enforce_exact_env_values": false,
+      "enforce_https_app_url": false,
+      "enforce_domain_in_app_url": false,
+      "enforce_domain_db_match": false,
+      "enforce_disallowed_values_scan": false,
+      "allowed_db_hosts": ["localhost", "127.0.0.1", "mysql"],
+      "ignore_forbidden_patterns": [
+        "(^|/)\\.env$"
+      ]
+    },
+    "predeploy-check": {
+      "warn_only_extensions": ["xml"],
+      "enforce_exact_env_values": true,
+      "enforce_https_app_url": true,
+      "enforce_domain_in_app_url": true,
+      "enforce_domain_db_match": true,
+      "enforce_disallowed_values_scan": true,
+      "allowed_db_hosts": ["localhost", "127.0.0.1"],
+      "ignore_forbidden_patterns": []
+    }
+  },
+  "domains": {
+    "orkestram.net": {
+      "docroot": "/public_html",
+      "db_name": "orkestra_ork989",
+      "db_prefix": "wpsz_"
+    },
+    "www.orkestram.net": {
+      "docroot": "/public_html",
+      "db_name": "orkestra_ork989",
+      "db_prefix": "wpsz_"
+    },
+    "izmirorkestra.net": {
+      "docroot": "/izmirorkestra.net",
+      "db_name": "orkestra_wp887",
+      "db_prefix": "wpmk_"
+    },
+    "www.izmirorkestra.net": {
+      "docroot": "/izmirorkestra.net",
+      "db_name": "orkestra_wp887",
+      "db_prefix": "wpmk_"
+    }
+  },
+  "deploy": {
+    "required_paths": [
+      "artisan",
+      "bootstrap/app.php",
+      "vendor/autoload.php",
+      "public/.htaccess",
+      "storage",
+      "bootstrap/cache"
+    ],
+    "writable_dirs": [
+      "storage",
+      "bootstrap/cache"
+    ],
+    "disallowed_values": [
+      "changeme",
+      "change_me",
+      "password",
+      "123456",
+      "null",
+      "none",
+      "test",
+      "demo"
+    ],
+    "forbidden_path_patterns": [
+      "(^|/)\\.git($|/)",
+      "(^|/)\\.env$",
+      "(^|/)phpinfo\\.php$",
+      "(^|/)xdebug\\.ini$",
+      "(^|/).*(dump|backup|export).*\\.sql(\\.gz)?$"
+    ]
+  },
+  "env": {
+    "required_keys": [
+      "APP_ENV",
+      "APP_DEBUG",
+      "APP_KEY",
+      "APP_URL",
+      "DB_HOST",
+      "DB_DATABASE",
+      "DB_USERNAME"
+    ],
+    "exact_values": {
+      "APP_ENV": "production",
+      "APP_DEBUG": "false"
+    }
+  }
+}

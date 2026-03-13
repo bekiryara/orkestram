@@ -1,0 +1,18 @@
+﻿name,slug,main_category,source_type,source_slug,status
+Bayan Orkestra,bayan-orkestra,muzik-gruplari,manual_seed,,must_have
+Kina Tahti Kiralama,kina-tahti-kiralama,organizasyon-hizmetleri,manual_seed,,must_have
+Nisan Masasi Kiralama,nisan-masasi-kiralama,organizasyon-hizmetleri,manual_seed,,must_have
+Sunnet Arabasi Kiralama,sunnet-arabasi-kiralama,davet-destek-hizmetleri,manual_seed,,must_have
+Mehter Takimi,mehter-takimi,muzik-gruplari,manual_seed,,must_have
+Ilahi Grubu,ilahi-grubu,muzik-gruplari,manual_seed,,must_have
+Sunnet Organizasyonu,sunnet-organizasyonu,organizasyon-hizmetleri,manual_seed,,must_have
+Sunnet Fotografcisi,sunnet-fotografcisi,foto-video,manual_seed,,must_have
+Kina Fotografcisi,kina-fotografcisi,foto-video,manual_seed,,must_have
+Kadin DJ,kadin-dj,muzik-gruplari,source,service-kadin-dj,must_have
+Kina Organizasyon,kina-organizasyon,organizasyon-hizmetleri,source,service-kina-organizasyon,must_have
+Gelin Alma Bandosu,gelin-alma-bandosu,muzik-gruplari,source,service-gelin-alma-bandosu,must_have
+Dugun Orkestrasi,dugun-orkestrasi,muzik-gruplari,source,service-dugun-orkestrasi,must_have
+Nisan Organizasyon,nisan-organizasyon,organizasyon-hizmetleri,source,service-nisan-organizasyon,must_have
+Dugun Salonu,dugun-salonu,mekanlar,source,service-dugun-salonu,must_have
+Nisan Fotografcisi,nisan-fotografcisi,foto-video,source,service-nisan-fotografcisi,must_have
+Nikah Fotografcisi,nikah-fotografcisi,foto-video,source,service-nikah-fotografcisi,must_have

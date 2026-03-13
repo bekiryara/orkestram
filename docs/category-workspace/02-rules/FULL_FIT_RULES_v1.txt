@@ -1,0 +1,14 @@
+﻿INCLUDE_REGEX=dugun|düğün|nisan|nişan|kina|kına|soz|söz|nikah|nikâh|davet|etkinlik|organizasyon|orkestra|muzik|müzik|dj|bando|fasil|fasıl|muzisyen|müzisyen|davul|zurna|keman|saksafon|gelin|damat|fotograf|fotoğraf|video|cekim|çekim|drone|klip|mekan|mekân|salon|kır bahcesi|kır bahçesi|otel|bahce|bahçe|catering|ikram|pasta|tatli|tatlı|ses sistemi|isik|ışık|sahne|led|hostes|animasyon|palyaco|palyaço|sunucu|konsept|susleme|süsleme|gelinlik|makyaj|kuafor|kuaför|arac kiralama|transfer|limuzin|nikah sekeri|nikah şekeri|davetiye
+EXCLUDE_REGEX=montaj|tamir|bakim|onarim|tesisat|dogalgaz|ariza|temizlik|nakliyat|kurye|ozel ders|özel ders|matematik|fizik|kimya|ingilizce|lgs|yks|ilkokul|ortaokul|hastane|doktor|dis hekimi|diş hekimi|oto tamir|lastik degisim|lastik değişim|cam balkon tamiri
+
+HEADING_RULES:
+- muzik-gruplari => orkestra|muzik|müzik|dj|bando|fasil|fasıl|muzisyen|müzisyen|davul|zurna|keman|saksafon|trio|canli muzik|canlı müzik
+- organizasyon-hizmetleri => organizasyon|etkinlik|dugun|düğün|nisan|nişan|kina|kına|soz|söz|nikah|nikâh|konsept|susleme|süsleme|hostes|sunucu|planlama
+- mekanlar => mekan|mekân|salon|kır bahcesi|kır bahçesi|otel|bahce|bahçe|davet alani|davet alanı
+- ikram-catering => catering|ikram|pasta|tatli|tatlı|menu|menü|kokteyl|yemek
+- foto-video => fotograf|fotoğraf|video|cekim|çekim|drone|klip|kameraman
+- teknik-produksiyon => ses sistemi|isik|ışık|sahne|led|mikser|hoparlor|hoparlör|jenerator|jeneratör
+- eglence-sov-sanatci => animasyon|palyaco|palyaço|sov|şov|dansci|dansçı|illuzyon|illüzyon|sanatci|sanatçı
+- davet-destek-hizmetleri => davetiye|nikah sekeri|nikah şekeri|hediyelik|arac kiralama|araç kiralama|transfer|limuzin|vale
+- guzellik-hazirlik => gelinlik|makyaj|kuafor|kuaför|sac tasarim|saç tasarım|manikur|manikür|prova
+- gelin-damat-aksesuar => gelin cicegi|gelin çiçeği|damatlik|aksesuar|taç|duvak|yuzuk|yüzük

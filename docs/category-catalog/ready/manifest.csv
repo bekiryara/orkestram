@@ -1,0 +1,6 @@
+﻿"artifact","type","status","version","notes"
+"FINAL_CATEGORY_ACTIVE_READY_V2.txt","tree_text","ready-current","v2","Current final active tree incl. canli dugun muzigi, trio, davul zurna, nedime"
+"categories_active_ready_v2.csv","machine_csv","ready-current","v2","Current DB/import ready active categories (97)"
+"FINAL_CATEGORY_ACTIVE_READY_V1.txt","tree_text","ready-previous","v1","Previous active tree"
+"categories_active_ready_v1.csv","machine_csv","ready-previous","v1","Previous active categories (92)"
+"CATEGORY_SYSTEM_APPLY_PLAN_V1.md","apply_plan","ready","v1","Deterministic apply plan baseline"

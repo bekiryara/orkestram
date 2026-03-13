@@ -1,0 +1,122 @@
+﻿FINAL TREE V6 SEO INTENT - DRAFT
+Tarih: 2026-03-10
+Amac: Gercek arama niyetine dayali, is getiren kategori omurgasi.
+
+KABUL KURALI (zorunlu)
+1) Araniyor mu?
+2) Is uretiyor mu?
+3) Bizim hizmet modelimize uyuyor mu?
+3/3 degilse kategori acilmaz.
+
+P1 - CEKIRDEK NIYET (KESIN)
+- dugun-organizasyon
+- kina-organizasyon
+- sunnet-organizasyon
+- nisan-organizasyon
+- soz-organizasyon
+- nikah-organizasyon
+- dugun-orkestrasi
+- bayan-orkestra
+- gelin-alma-bandosu
+- dj-kiralama
+- fasil-ekibi
+- mehter-takimi
+- ilahi-grubu
+- kina-tahti-kiralama
+- nisan-masasi-kiralama
+- sunnet-arabasi-kiralama
+
+P2 - GUCLU GENISLEME (TRAFIK + IS)
+- mezuniyet-organizasyonu
+- dogum-gunu-organizasyonu
+- bekarliga-veda-organizasyonu
+- acilis-organizasyonu
+- kurumsal-etkinlik-organizasyonu
+- dugun-fotografcisi
+- dugun-video-cekimi
+- dis-cekim-fotograf
+- dugun-mekanlari
+- kina-mekanlari
+- nisan-mekanlari
+- dugun-catering
+- kokteyl-catering
+- gelin-arabasi-kiralama
+- vip-transfer
+- gelin-makyaji
+- gelin-saci
+- gelinlik-kiralama
+
+P3 - UZUN KUYRUK (VERI GELDIKCE AKTIF)
+- kiz-isteme-makyaji
+- evde-nisan-organizasyonu
+- evde-soz-organizasyonu
+- soz-nisan-mekanlari
+- nisan-ikramliklari-catering
+- nisan-pastasi
+- soz-pastasi
+
+ANA AGAC (KOKTEN ASAGI)
+├── muzik-ekipleri
+│   ├── dugun-orkestrasi
+│   ├── bayan-orkestra
+│   ├── gelin-alma-bandosu
+│   ├── dj-kiralama
+│   ├── fasil-ekibi
+│   ├── mehter-takimi
+│   └── ilahi-grubu
+├── etkinlik-organizasyon
+│   ├── dugun-organizasyon
+│   ├── kina-organizasyon
+│   ├── sunnet-organizasyon
+│   ├── nisan-organizasyon
+│   ├── soz-organizasyon
+│   ├── nikah-organizasyon
+│   ├── mezuniyet-organizasyonu
+│   ├── dogum-gunu-organizasyonu
+│   ├── bekarliga-veda-organizasyonu
+│   ├── acilis-organizasyonu
+│   └── kurumsal-etkinlik-organizasyonu
+├── fotograf-ve-video
+│   ├── dugun-fotografcisi
+│   ├── dugun-video-cekimi
+│   └── dis-cekim-fotograf
+├── etkinlik-mekanlari
+│   ├── dugun-mekanlari
+│   ├── kina-mekanlari
+│   ├── nisan-mekanlari
+│   └── soz-nisan-mekanlari
+├── ikram-ve-catering
+│   ├── dugun-catering
+│   ├── kokteyl-catering
+│   ├── nisan-ikramliklari-catering
+│   ├── nisan-pastasi
+│   └── soz-pastasi
+├── gelin-arabasi-ve-transfer
+│   ├── gelin-arabasi-kiralama
+│   ├── sunnet-arabasi-kiralama
+│   └── vip-transfer
+└── guzellik-ve-hazirlik
+    ├── gelin-makyaji
+    ├── gelin-saci
+    ├── gelinlik-kiralama
+    └── kiz-isteme-makyaji
+
+NOT
+- Bu taslakta sadece is getirme potansiyeli olan niyetler tutuldu.
+- Tekrar eden/alay disi kategoriler bu listeye alinmadi.
+- Sonraki adim: eldeki tum kategorileri bu V6 omurgaya deterministik map etmek.
+
+P2 ADAY - EKLENECEK KATEGORILER (KULLANICI ONAYLI)
+- sunnet-tahti-kiralama
+- arka-fon-kiralama
+- tag-kemer-kiralama
+- gelin-yolu-susleme
+- nikah-masasi-susleme
+- masa-sandalye-kiralama
+- fotograf-cekim-platosu-kiralama
+- ses-sistem-kiralama
+- isik-sistem-kiralama
+- sahne-kiralama
+- palyanco-kiralama
+- animator-kiralama
+- sisme-oyun-parki-kiralama

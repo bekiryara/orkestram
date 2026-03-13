@@ -1,0 +1,42 @@
+# Archives / backups / dumps
+*.sql
+*.sql.gz
+*.zip
+*.7z
+*.tar
+*.tar.gz
+
+# Build outputs
+deploy/
+deploy-pack/
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Root local artifacts
+unknown_or_test.sql.gz
+deploy-pack.zip
+
+# Laravel app ignores (both apps under local-rebuild/apps/*)
+local-rebuild/apps/*/.env
+local-rebuild/apps/*/.env.*
+!local-rebuild/apps/*/.env.example
+local-rebuild/apps/*/vendor/
+local-rebuild/apps/*/node_modules/
+local-rebuild/apps/*/storage/
+!local-rebuild/apps/*/storage/.gitignore
+local-rebuild/apps/*/bootstrap/cache/*
+!local-rebuild/apps/*/bootstrap/cache/.gitignore
+local-rebuild/apps/*/public/uploads/
+local-rebuild/apps/*/public/storage
+local-rebuild/apps/*/.phpunit.result.cache
+
+# Test/runtime artifacts
+local-rebuild/tmp/
+
+# Optional local database snapshots (keep policy)
+*.sqlite

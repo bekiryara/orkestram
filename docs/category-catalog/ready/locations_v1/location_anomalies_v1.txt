@@ -1,0 +1,8 @@
+Duplicate neighborhood slug in district adana|karaisal: k-r-kl
+Duplicate neighborhood slug in district ankara|g-d-l: a-a
+Duplicate neighborhood slug in district anl-urfa|haliliye: konak
+Duplicate neighborhood slug in district anl-urfa|harran: alt-l
+Duplicate neighborhood slug in district diyarbak-r|bismil: tepe
+Duplicate neighborhood slug in district diyarbak-r|ermik: kala
+Duplicate neighborhood slug in district mersin|mut: narl
+Duplicate neighborhood slug in district zmir|bay-nd-r: alank-y

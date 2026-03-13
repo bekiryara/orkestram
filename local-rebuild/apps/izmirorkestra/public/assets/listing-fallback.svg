@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7efe3"/>
+      <stop offset="100%" stop-color="#e5f4f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <g fill="#7d6d5a">
+    <circle cx="260" cy="240" r="54"/>
+    <rect x="195" y="320" width="130" height="190" rx="14"/>
+    <circle cx="445" cy="200" r="46"/>
+    <rect x="392" y="274" width="108" height="210" rx="14"/>
+    <rect x="600" y="170" width="360" height="280" rx="16" fill="#d6c7b2"/>
+    <path d="M610 430l86-96 96 64 72-84 86 116z" fill="#f7efe3"/>
+  </g>
+  <text x="600" y="650" text-anchor="middle" font-family="Arial, sans-serif" font-size="52" fill="#5a4b3a">
+    Gorsel Eklenmedi
+  </text>
+</svg>

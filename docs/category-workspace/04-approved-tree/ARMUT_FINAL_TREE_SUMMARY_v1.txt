@@ -1,0 +1,601 @@
+﻿ARMUT FINAL TREE SUMMARY (v1)
+Tarih: 2026-03-09 20:31:00
+Toplam: 577
+
+# davet-destek-hizmetleri (100)
+- Afis Baski
+- Ajanda Baski
+- Alaturka Tuvaleti Klozete Cevirme
+- Anahtarlik Baski
+- Bardak Baski
+- Baski Beton
+- Bez Canta Baski
+- Billboard Reklam
+- Bloknot Baski
+- Branda Baski
+- Branda Tabela
+- Brosur Baski
+- Cakmak Baski
+- Canta Baski
+- Cnc Lazer Kesim
+- Cocuk Tuvalet Egitimi
+- Davetiye
+- Davetiye Baski
+- Davetiye Tasarim
+- Defter Baski
+- Dergi Baski
+- Dijital Baski
+- Dijital Davetiye
+- Dijital Reklam
+- Diploma Baski
+- Dis Cephe Yali Baski
+- Dosya Baski
+- Dtf Baski
+- Dukkan Tabelasi
+- Eczane Tabela
+- Facebook Reklam Verme
+- Facebook Reklam Yoneticisi
+- Folyo Baski
+- Google Reklam Ajansi
+- Hediyelik Yapimi
+- Instagram Reklam Verme
+- Kabartma Tabela
+- Kalem Baski
+- Karton Etiket Baski
+- Kartvizit Baski
+- Katalog Baski
+- Kayan Yazi Tabela
+- Kitap Baski
+- Kopek Tuvalet Egitimi
+- Kumas Baski
+- Kupa Baski
+- Kutu Baski
+- Kutu Harf Tabela
+- Lazer Baski
+- Lazer Kesim
+- Lazer Kesim Balkon Korkulugu
+- Lightbox Tabela
+- Magnet Baski
+- Matbaa Baski
+- Mdf Lazer Kesim
+- Meta Reklam Yoneticisi
+- Metal Lazer Kesim
+- Mevlut Hediyelik
+- Nakis Baski
+- Neon Tabela
+- One Way Vision Baski
+- Ozalit Baski
+- Pankart Baski
+- Pcb Baski
+- Personel Kimlik Karti Baski
+- Pleksi Lazer Kesim
+- Pleksi Tabela
+- Poset Baski
+- Poster Baski
+- Reklam Ajansi
+- Reklam Dubasi
+- Reklam Giydirme
+- Reklam Oyuncusu
+- Sac Lazer Kesim
+- Seffaf Etiket Baski
+- Serigrafi Baski
+- Sla Baski
+- Sticker Baski
+- Sticker Etiket Baski
+- Sweatshirt Baski
+- Tabela
+- Tabela Baski
+- Tabela Folyo Kaplama
+- Tahsilat Makbuzu Baski
+- Tekstil Baski
+- Tisort Baski
+- Totem Tabela
+- Tuvalet Acma
+- Tuvalet Fayans Doseme
+- Tuvalet Gider Borusu Doseme
+- Tuvalet Kapisi
+- Tuvalet Tikanikligi Acma
+- Urun Etiketi Baski
+- Uv Baski
+- Vinil Baski
+- Vinil Germe Tabela
+- Yaka Karti Baski
+- Yapiskanli Etiket Baski
+- Yenidogan Hediyelik
+- Zarf Baski
+
+# eglence-sov-sanatci (4)
+- After Effects Animasyon
+- Animasyon Yapimi
+- Dogum Gunu Animasyon
+- Mimari Animasyon
+
+# foto-video (77)
+- Aile Fotografcisi
+- Airbnb Fotografcisi
+- Araba Fotograf Cekimi
+- Bebek Fotograf Cekimi
+- Bebek Fotografcisi
+- Cizgi Film Seslendirme
+- Cocuk Elbisesi Dikimi
+- Cocuk Fotograf Cekimi
+- Dis Cekim Fotograf
+- Dogum Fotografcisi
+- Dogum Gunu Fotografcisi
+- Drone Cekimi
+- Drone Egitimi
+- Drone Kiralama
+- Drone Pilotu
+- E Ticaret Fotograf Cekimi
+- Emlak Drone Cekimi
+- Emlak Fotografcisi
+- Emlak Video Cekimi
+- Evlilik Teklifi Fotograf Cekimi
+- Fiber Kablo Cekimi
+- Fotograf Baski
+- Fotograf Birlestirme
+- Fotograf Buyutme
+- Fotograf Cekimi Makyaji
+- Fotograf Cercevesi Yapimi
+- Fotograf Cikartma
+- Fotograf Duzenleme
+- Fotograf Editoru
+- Fotograf Makinesi Kiralama
+- Fotograf Restorasyonu
+- Fotografci
+- Fotografcilik Dersi
+- Fotokopi Cekim
+- Hamile Fotograf Cekimi
+- Havadan Drone Fotograf Ve Video Cekimi
+- Instagram Icin Fotograf Cekimi
+- Kahve Kosesi Dolabi
+- Kamera Cekimi
+- Kameraman
+- Katalog Cekimi
+- Kisisel Fotograf Cekimi
+- Kitap Seslendirme
+- Klip Cekimi
+- Klipin Tavan
+- Mezuniyet Fotograf Cekimi
+- Oto Ses Ve Goruntu Sistemleri
+- Reklam Cekimi
+- Reklam Seslendirme
+- Ses Kaydi Duzenleme
+- Ses Teknisyeni
+- Seslendirme
+- Sosyal Medya Icin Fotograf Cekimi
+- Sosyal Medya Video Cekimi
+- Spor Fotografcisi
+- Studyo Fotograf Cekimi
+- Sunnet Dis Cekim
+- Sunnet Fotograf Cekimi
+- Taki Fotograf Cekimi
+- Tanitim Filmi Cekimi
+- Tv Ses Var Goruntu Yok
+- Urun Fotograf Cekimi
+- Urun Video Cekimi
+- Vesikalik Fotograf Cekimi
+- Video Cekimi
+- Video Duzenleme
+- Video Editorlugu Egitimi
+- Video Editoru
+- Video Intro Yapimi
+- Video Kalite Arttirma
+- Video Kaset Aktarma
+- Video Kurgu
+- Video Kurgu Egitimi
+- Video Produksiyon
+- Video Reklam
+- Yenidogan Fotograf Cekimi
+- Youtube Video Cekimi
+
+# guzellik-hazirlik (60)
+- Abiye Dikimi
+- Araba Koltuk Kilifi Dikimi
+- Canta Dikimi
+- Ceket Dikimi
+- Cocuk Kuaforu
+- Dogum Gunu Makyaji
+- Elbise Dikimi
+- Epilasyon
+- Erkek Epilasyon
+- Erkek Kuaforu
+- Etek Dikimi
+- Evde Kuafor
+- Evde Makyaj
+- Evde Protez Tirnak
+- Fidan Dikimi
+- Gelin Makyaji
+- Gelin Sac Makyaj
+- Gelinlik
+- Gelinlik Dikimi
+- Gelinlik Kiralama
+- Gelinlik Kuru Temizleme
+- Gelinlik Tadilati
+- Glitter Makyaj
+- Gomlek Dikimi
+- Gunluk Makyaj
+- Igneli Epilasyon
+- Jel Tirnak Yapimi
+- Kaban Dikimi
+- Kanepe Kilifi Dikimi
+- Kanepe Ortusu Dikimi
+- Kiyafet Dikimi
+- Kiz Isteme Makyaji
+- Koltuk Kilifi Dikimi
+- Koltuk Ortusu Dikimi
+- Kopek Kuaforu
+- Kuafor
+- Lastikli Koltuk Ortusu Dikimi
+- Makyaj
+- Makyaj Egitimi
+- Makyaj Masasi Yapimi
+- Minder Dikimi
+- Oto Kuafor
+- Ozel Gun Makyaji
+- Pantolon Dikimi
+- Perde Dikimi
+- Pet Kuaforu
+- Plastik Makyaj
+- Porselen Makyaj
+- Protez Tirnak
+- Protez Tirnak Cikarma
+- Protez Tirnak Egitimi
+- Protez Tirnak Yapimi
+- Sac Ve Makyaj
+- Sandalye Kilifi Dikimi
+- Takim Elbise Dikimi
+- Tesettur Elbise Dikimi
+- Tesettur Gelinlik Kiralama
+- Tul Perde Dikimi
+- Yorgan Dikimi
+- Yuz Tasi Makyaj
+
+# ikram-catering (23)
+- Bento Pasta
+- Butik Pasta
+- Butik Pasta Egitimi
+- Catering
+- Davet Catering
+- Dogum Gunu Catering
+- Dogum Gunu Ikramliklari
+- Dogum Gunu Menusu
+- Dogum Gunu Pastasi
+- Doner Catering
+- Ev Yapimi Pasta
+- Glutensiz Pasta
+- Iftar Yemegi Catering
+- Kokteyl Catering
+- Kuru Pasta
+- Maket Pasta
+- Ozel Pasta Siparisi
+- Pasta
+- Pasta Cila
+- Resimli Pasta
+- Seker Hamuru Pasta
+- Yas Pasta
+- Yerinde Pasta Cila
+
+# mekanlar (55)
+- Ahsap Bahce Saksisi Yapimi
+- Bahce Aydinlatma
+- Bahce Aydinlatma Diregi
+- Bahce Belleme
+- Bahce Budama
+- Bahce Capalama
+- Bahce Cit Teli
+- Bahce Citi
+- Bahce Dekorasyon
+- Bahce Demir Kapi
+- Bahce Duvari Boyama
+- Bahce Duvari Yapimi
+- Bahce Duzenleme
+- Bahce Filesi
+- Bahce Ilaclama
+- Bahce Kapisi
+- Bahce Kapisi Boyama
+- Bahce Kapisi Yapimi
+- Bahce Kulubesi Yapimi
+- Bahce Peyzaj
+- Bahce Sulama Sistemleri
+- Bahce Surme
+- Bahce Tas Doseme
+- Bahce Tasarim
+- Bahce Temizligi
+- Bekarliga Veda Mekanlari
+- Beton Bahce Duvari
+- Briket Bahce Duvari
+- Camekan Balkon
+- Davet Salonu
+- Demir Bahce Kapisi
+- Desenli Bahce Duvari
+- Dogum Gunu Mekanlari
+- Ferforje Bahce Kapisi
+- Ferforje Bahce Korkuluk
+- Ic Mekan Tasarimi
+- Kedi Oteli
+- Kis Bahcesi
+- Kis Bahcesi Branda
+- Kopek Oteli
+- Kus Oteli Pansiyonu
+- Lastik Oteli
+- Mekan Fotografcisi
+- Mekanik Cephe Kaplama
+- Mekanik Proje
+- Mekanik Proje Cizimi
+- Otel Camasir Yikama
+- Otel Fotograf Cekimi
+- Otel Temizligi
+- Oto Mekanik
+- Otomatik Bahce Kapisi
+- Sunnet Mekanlari
+- Surgulu Bahce Kapisi
+- Tas Bahce Duvari
+- Ytong Bahce Duvari
+
+# muzik-gruplari (40)
+- Asma Davul Dersi
+- Bando Takimi
+- Canli Muzik
+- Davul Ekibi
+- Davul Klarnet Kiralama
+- Davul Sov
+- Davul Zurnaci Kiralama
+- Davulcu Kiralama
+- Dj Dersi
+- Dj Egitimi
+- Dj Kiralama
+- Dugun Bandosu
+- Dugun Davulcusu
+- Dugun Dj
+- Dugun Orkestrasi
+- Fasil Ekibi
+- Gelin Alma Bandosu
+- Kabak Kemane Dersi
+- Kadin Dj
+- Keman Dersi
+- Keman Kursu
+- Keman Resitali
+- Kemanci Kiralama
+- Muzik Ekibi
+- Muzik Grubu
+- Muzik Organizasyonu
+- Muzik Produksiyon
+- Muzik Produksiyon Egitimi
+- Muzik Studyosu Kiralama
+- Muzik Yapimi
+- Muzik Yetenek Sinavi Hazirlik
+- Muzisyen
+- Okul Oncesi Muzik Egitimi
+- Online Keman Dersi
+- Orkestra
+- Profesyonel Dj
+- Saksafon Dersi
+- Temel Muzik Egitimi
+- Trio Muzik Grubu
+- Zurna Ekibi
+
+# organizasyon-hizmetleri (106)
+- Acilis Balon Susleme
+- Acilis Organizasyonu
+- Baby Shower Organizasyon
+- Balon Susleme
+- Dansoz Kiralama
+- Dini Nikah Kiyma
+- Dogum Gunu Animator
+- Dogum Gunu Balon Susleme
+- Dogum Gunu Organizasyonu
+- Dogum Gunu Susleme
+- Dogum Gunu Yemegi
+- Dogum Odasi Susleme
+- Dugun Balon Susleme
+- Dugun Catering
+- Dugun Dans Dersi
+- Dugun Dans Ekibi Kiralama
+- Dugun Dans Kursu
+- Dugun Davetiyesi
+- Dugun Drone Cekimi
+- Dugun Fotografcisi
+- Dugun Hediyelik
+- Dugun Hikayesi
+- Dugun Ikramliklari
+- Dugun Makyaji
+- Dugun Mekanlari
+- Dugun Organizasyon
+- Dugun Pastasi
+- Dugun Salonu
+- Dugun Sanatcisi
+- Dugun Servis Kiralama
+- Dugun Servisi
+- Dugun Ses Sistemi
+- Dugun Video Cekimi
+- Dugun Yemegi
+- Dugunlere Garson
+- Eglence Organizasyon
+- Etkinlik Fotografcisi
+- Etkinlik Hostesi
+- Etkinlik Organizasyonu
+- Evde Nisan Makyaji
+- Evde Nisan Organizasyonu
+- Evde Soz Organizasyonu
+- Evde Sunnet Mevlidi Organizasyonu
+- Evlilik Teklifi Organizasyon
+- Evlilik Yildonumu Organizasyon
+- Folklor Ekibi
+- Fuar Hostesi
+- Gelin Arabasi Susleme
+- Halk Oyunlari Ekibi
+- Horon Ekibi
+- Imam Nikahi Kiyma
+- Karsilama Hostesi
+- Kina Elbisesi Kiralama
+- Kina Fotograf Cekimi
+- Kina Mekanlari
+- Kina Organizasyon
+- Kir Dugunu
+- Konsept Fotograf Cekimi
+- Kurumsal Etkinlik Organizasyon
+- Makinali Kara Siva
+- Makinali Sap
+- Mevlut Organizasyonu
+- Mezuniyet Organizasyonu
+- Nikah Fotografcisi
+- Nikah Hediyelik
+- Nikah Makyaji
+- Nikah Organizasyon
+- Nikah Sekeri
+- Nikah Sonrasi Yemek
+- Nisan Arka Fon Kiralama
+- Nisan Cikolatasi
+- Nisan Fotografcisi
+- Nisan Hediyelik
+- Nisan Ikramliklari Catering
+- Nisan Makyaji
+- Nisan Mekanlari
+- Nisan Menusu Catering
+- Nisan Organizasyon
+- Nisan Pastasi
+- Nisan Yemegi
+- Organizasyon
+- Ozel Makina Imalati
+- Parti Organizasyon
+- Saz Ekibi
+- Seymen Ekibi
+- Sosis Baloncu
+- Soz Fotograf Cekimi
+- Soz Mekanlari
+- Soz Nisan Mekanlari
+- Soz Nisan Organizasyon
+- Soz Organizasyon
+- Soz Pastasi
+- Sunnet Organizasyon
+- Sunuculuk Egitimi
+- Susleme Organizasyon
+- Tanitim Organizasyon
+- Teknede Dogum Gunu
+- Temsili Nikah Memuru
+- Tiyatral Nikah Memuru
+- Tur Organizasyon
+- Ucan Balon Susleme
+- Yemek Organizasyon
+- Yetiskin Dogum Gunu Organizasyonu
+- Yilbasi Organizasyon
+- Zeybek Ekibi
+- Zincir Balon Susleme
+
+# teknik-produksiyon (41)
+- Alcipan Led
+- Alcipan Led Tavan
+- Awox Tv Led Degisimi
+- Axen Tv Led Degisimi
+- Beko Tv Led Degisimi
+- Bisiklet Dersi
+- Elektrikli Bisiklet Yuk Tasima
+- Eve Led Doseme
+- Gizli Isikli Tavan
+- Grundig Tv Led Degisimi
+- Hoparlor Kiralama
+- Isikli Tabela
+- Jenerator Kiralama
+- Kartonpiyer Led Tavan
+- Led Asma Tavan
+- Led Aydinlatma
+- Led Doseme
+- Led Isik
+- Led Isikli Tavan
+- Led Light Box
+- Led Tabela
+- Ledli Supurgelik
+- Lg Tv Led Degisimi
+- Mutfak Dolabi Led Aydinlatma
+- Neon Led
+- Oto Ses Sistemi
+- Regal Tv Led Degisimi
+- Sahne Isik Sistemleri
+- Sahne Kiralama
+- Sahne Ses Sistemleri
+- Samsung Tv Led Degisimi
+- Seg Tv Led Degisimi
+- Ses Isik Kiralama
+- Ses Sistemi Kiralama
+- Sony Tv Led Degisimi
+- Sunny Tv Led Degisimi
+- Tavan Isiklandirma
+- Tavan Led Doseme
+- Televizyon Led Degisimi
+- Toshiba Tv Led Degisimi
+- Vestel Tv Led Degisimi
+
+# ulasim-kiralama (71)
+- Asansor Kiralama
+- Balikci Teknesi Kiralama
+- Beko Loder Kiralama
+- Bilgisayar Kiralama
+- Buhar Makinesi Kiralama
+- Buharli Temizleyici Kiralama
+- Cekme Karavan Kiralama
+- Depo Kiralama
+- Ekskavator Kiralama
+- Forklift Kiralama
+- Fuar Stand Kiralama
+- Garson Kiralama
+- Gelin Arabasi Kiralama
+- Hakem Kiralama
+- Havaalani Transfer
+- Is Makinesi Kiralama
+- Iskele Kiralama
+- Jcb Kiralama
+- Kamera Kiralama
+- Kamyon Kiralama
+- Kamyonet Kiralama
+- Karaoke Kiralama
+- Karavan Kiralama
+- Karavan Transfer
+- Karcher Buharli Temizleyici Kiralama
+- Kedi Transferi
+- Kemenceci Kiralama
+- Kepce Kiralama
+- Klarnetci Kiralama
+- Klasik Araba Kiralama
+- Kopek Transfer
+- Kutu Kiralama
+- Limuzin Kiralama
+- Manitou Kiralama
+- Manlift Kiralama
+- Maskot Kiralama
+- Mini Ekskavator Kiralama
+- Mini Kepce Kiralama
+- Minibus Kiralama
+- Mobil Iskele Kiralama
+- Mobil Vinc Kiralama
+- Motosiklet Transfer
+- Nedime Kiralama
+- Oryantal Kiralama
+- Paletli Ekskavator Kiralama
+- Pamuk Seker Arabasi Kiralama
+- Panelvan Kiralama
+- Patlamis Misir Makinesi Kiralama
+- Piyanist Kiralama
+- Popcorn Arabasi Kiralama
+- Saatlik Yat Kiralama
+- Sehirler Arasi Transfer
+- Sisme Oyun Parki Kiralama
+- Sofor Kiralama
+- Soforlu Arac Kiralama
+- Soguk Hava Deposu Kiralama
+- Sunnet Tahti Kiralama
+- Tekne Kiralama
+- Tekne Transferi
+- Tir Kiralama
+- Toplanti Odasi Kiralama
+- Traktor Kiralama
+- Transfer
+- Ustu Acik Gelin Arabasi Kiralama
+- Vinc Kiralama
+- Vip Arac Kiralama
+- Vip Transfer
+- Vito Gelin Arabasi Kiralama
+- Vito Kiralama
+- Yat Kiralama
+- Zenne Kiralama
+

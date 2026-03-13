@@ -1,0 +1,57 @@
+﻿ARMUT -> SITEM KATEGORI UYUM TARAMASI (FULL FIT v1)
+Tarih: 2026-03-09 19:58:52
+
+Kaynak: D:\stack-data\catalog-dataset\csv\_imports\armut\categories_candidates_wave1_mapped.csv
+Toplam kaynak satir: 4923
+Kapsama giren aday satir (candidate): 375
+Dislanan satir (out): 35
+
+Onerilen ana baslik dagilimi:
+- foto-video: 66
+- organizasyon-hizmetleri: 61
+- mekanlar: 53
+- teknik-produksiyon: 39
+- muzik-gruplari: 34
+- guzellik-hazirlik: 28
+- ikram-catering: 22
+- davet-destek-hizmetleri: 19
+- organizasyon-hizmetleri|ikram-catering: 9
+- organizasyon-hizmetleri|foto-video: 9
+- organizasyon-hizmetleri|mekanlar: 6
+- muzik-gruplari|organizasyon-hizmetleri: 5
+- organizasyon-hizmetleri|davet-destek-hizmetleri: 5
+- eglence-sov-sanatci: 5
+- organizasyon-hizmetleri|guzellik-hazirlik: 4
+- manual-review: 4
+- mekanlar|foto-video: 2
+- organizasyon-hizmetleri|eglence-sov-sanatci: 1
+- organizasyon-hizmetleri|teknik-produksiyon: 1
+- foto-video|guzellik-hazirlik: 1
+- muzik-gruplari|eglence-sov-sanatci: 1
+
+Armut top_category dagilimi (candidate havuz):
+- service-events-organization: 98
+- service-other: 70
+- service-photo-video-media: 62
+- service-pets-garden: 26
+- service-beauty-fashion: 21
+- service-education-lessons: 20
+- service-construction-renovation: 18
+- service-rental: 14
+- service-repair-maintenance: 13
+- service-design-software-marketing: 8
+- service-auto-services: 8
+- service-home-furniture-wood: 5
+- service-home-cleaning: 4
+- service-print-sign-ad: 4
+- service-glass-aluminum-pvc: 3
+- service-moving-logistics: 1
+
+Notlar:
+1) Bu rapor 8 baslikla sinirli degil; ek ana basliklar da onerildi.
+2) Multi-match satirlar tek tek karar gerektirir (suggested_main alaninda | var).
+3) Nihai agac kilidi icin full_fit_candidates_v1.csv satir bazli gozden gecirilir.
+
+Cikti dosyalari:
+- D:\orkestram\docs\category-workspace\exports\full_fit_candidates_v1.csv
+- D:\orkestram\docs\category-workspace\exports\full_fit_out_v1.csv

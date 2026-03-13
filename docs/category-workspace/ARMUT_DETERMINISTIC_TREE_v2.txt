@@ -1,0 +1,181 @@
+﻿ARMUT -> DETERMINISTIK KATEGORI AGACI (v2)
+Tarih: 2026-03-09 22:41:07
+Kaynak: D:\stack-data\catalog-dataset\csv\_imports\armut\categories_candidates_wave1_mapped.csv
+Toplam kaynak satir: 4923
+Deterministik uygun satir: 143
+
+ANA KATEGORI SAYILARI:
+- organizasyon-hizmetleri: 57
+- muzik-gruplari: 21
+- ikram-catering: 11
+- eglence-sov-sanatci: 11
+- manual-review: 9
+- foto-video: 9
+- teknik-produksiyon: 8
+- mekanlar: 8
+- guzellik-hazirlik: 6
+- arac-transfer-kiralama: 3
+
+[organizasyon-hizmetleri] alt_kategori=57
+- service-acilis-balon-susleme | Acilis Balon Susleme | top=Etkinlik Ve Organizasyon | conf=medium | ev=28 | alt=organizasyon-hizmetleri
+- service-acilis-organizasyonu | Acilis Organizasyonu | top=Etkinlik Ve Organizasyon | conf=medium | ev=13 | alt=organizasyon-hizmetleri
+- service-baby-shower-organizasyon | Baby Shower Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=5 | alt=organizasyon-hizmetleri
+- service-balon-susleme | Balon Susleme | top=Etkinlik Ve Organizasyon | conf=medium | ev=8 | alt=organizasyon-hizmetleri
+- service-davetiye | Davetiye | top=Diger Hizmetler | conf=low | ev=5 | alt=organizasyon-hizmetleri
+- service-davetiye-baski | Davetiye Baski | top=Baski Tabela Reklam | conf=medium | ev=21 | alt=organizasyon-hizmetleri
+- service-davetiye-tasarim | Davetiye Tasarim | top=Tasarim Yazilim Ve Pazarlama | conf=medium | ev=4 | alt=organizasyon-hizmetleri
+- service-dijital-davetiye | Dijital Davetiye | top=Diger Hizmetler | conf=low | ev=3 | alt=organizasyon-hizmetleri
+- service-dogum-gunu-balon-susleme | Dogum Gunu Balon Susleme | top=Etkinlik Ve Organizasyon | conf=high | ev=8 | alt=organizasyon-hizmetleri
+- service-dogum-gunu-organizasyonu | Dogum Gunu Organizasyonu | top=Etkinlik Ve Organizasyon | conf=high | ev=25 | alt=organizasyon-hizmetleri
+- service-dogum-gunu-susleme | Dogum Gunu Susleme | top=Etkinlik Ve Organizasyon | conf=medium | ev=7 | alt=organizasyon-hizmetleri
+- service-dogum-odasi-susleme | Dogum Odasi Susleme | top=Diger Hizmetler | conf=low | ev=3 | alt=organizasyon-hizmetleri
+- service-dugun-balon-susleme | Dugun Balon Susleme | top=Etkinlik Ve Organizasyon | conf=high | ev=3 | alt=organizasyon-hizmetleri
+- service-dugun-davetiyesi | Dugun Davetiyesi | top=Etkinlik Ve Organizasyon | conf=medium | ev=8 | alt=organizasyon-hizmetleri
+- service-dugun-hediyelik | Dugun Hediyelik | top=Etkinlik Ve Organizasyon | conf=medium | ev=4 | alt=organizasyon-hizmetleri
+- service-dugun-hikayesi | Dugun Hikayesi | top=Etkinlik Ve Organizasyon | conf=medium | ev=3 | alt=organizasyon-hizmetleri
+- service-dugun-organizasyon | Dugun Organizasyon | top=Etkinlik Ve Organizasyon | conf=high | ev=28 | alt=organizasyon-hizmetleri
+- service-eglence-organizasyon | Eglence Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=5 | alt=organizasyon-hizmetleri
+- service-etkinlik-organizasyonu | Etkinlik Organizasyonu | top=Etkinlik Ve Organizasyon | conf=medium | ev=9 | alt=organizasyon-hizmetleri
+- service-evde-nisan-organizasyonu | Evde Nisan Organizasyonu | top=Etkinlik Ve Organizasyon | conf=high | ev=47 | alt=organizasyon-hizmetleri
+- service-evde-soz-organizasyonu | Evde Soz Organizasyonu | top=Etkinlik Ve Organizasyon | conf=medium | ev=13 | alt=organizasyon-hizmetleri
+- service-evde-sunnet-mevlidi-organizasyonu | Evde Sunnet Mevlidi Organizasyonu | top=Etkinlik Ve Organizasyon | conf=medium | ev=3 | alt=organizasyon-hizmetleri
+- service-evlilik-teklifi-organizasyon | Evlilik Teklifi Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=10 | alt=organizasyon-hizmetleri
+- service-evlilik-yildonumu-organizasyon | Evlilik Yildonumu Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=5 | alt=organizasyon-hizmetleri
+- service-gunluk-garson | Gunluk Garson | top=Diger Hizmetler | conf=low | ev=23 | alt=organizasyon-hizmetleri
+- service-hastane-odasi-balon-susleme | Hastane Odasi Balon Susleme | top=Etkinlik Ve Organizasyon | conf=medium | ev=3 | alt=organizasyon-hizmetleri
+- service-hastane-odasi-susleme | Hastane Odasi Susleme | top=Diger Hizmetler | conf=low | ev=6 | alt=organizasyon-hizmetleri
+- service-hediyelik-yapimi | Hediyelik Yapimi | top=Mobilya Ve Ahsap | conf=medium | ev=4 | alt=organizasyon-hizmetleri
+- service-kina-organizasyon | Kina Organizasyon | top=Etkinlik Ve Organizasyon | conf=high | ev=18 | alt=organizasyon-hizmetleri
+- service-kurumsal-etkinlik-organizasyon | Kurumsal Etkinlik Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=4 | alt=organizasyon-hizmetleri
+- service-mevlut-hediyelik | Mevlut Hediyelik | top=Diger Hizmetler | conf=low | ev=3 | alt=organizasyon-hizmetleri
+- service-mevlut-organizasyonu | Mevlut Organizasyonu | top=Etkinlik Ve Organizasyon | conf=medium | ev=6 | alt=organizasyon-hizmetleri
+- service-mezuniyet-organizasyonu | Mezuniyet Organizasyonu | top=Etkinlik Ve Organizasyon | conf=medium | ev=4 | alt=organizasyon-hizmetleri
+- service-mobil-oto-servis | Mobil Oto Servis | top=Tamir Ve Bakim | conf=medium | ev=6 | alt=organizasyon-hizmetleri
+- service-nikah-hediyelik | Nikah Hediyelik | top=Diger Hizmetler | conf=low | ev=3 | alt=organizasyon-hizmetleri
+- service-nikah-organizasyon | Nikah Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=5 | alt=organizasyon-hizmetleri
+- service-nisan-hediyelik | Nisan Hediyelik | top=Etkinlik Ve Organizasyon | conf=medium | ev=30 | alt=organizasyon-hizmetleri
+- service-nisan-organizasyon | Nisan Organizasyon | top=Etkinlik Ve Organizasyon | conf=high | ev=33 | alt=organizasyon-hizmetleri
+- service-organizasyon | Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=8 | alt=organizasyon-hizmetleri
+- service-oto-servis | Oto Servis | top=Tamir Ve Bakim | conf=medium | ev=6 | alt=organizasyon-hizmetleri
+- service-parti-organizasyon | Parti Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=3 | alt=organizasyon-hizmetleri
+- service-servis-tasimaciligi | Servis Tasimaciligi | top=Nakliyat Ve Tasima | conf=medium | ev=11 | alt=organizasyon-hizmetleri
+- service-soz-nisan-organizasyon | Soz Nisan Organizasyon | top=Etkinlik Ve Organizasyon | conf=high | ev=12 | alt=organizasyon-hizmetleri
+- service-soz-organizasyon | Soz Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=4 | alt=organizasyon-hizmetleri
+- service-sunnet-organizasyon | Sunnet Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=5 | alt=organizasyon-hizmetleri
+- service-susleme-organizasyon | Susleme Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=11 | alt=organizasyon-hizmetleri
+- service-tanitim-organizasyon | Tanitim Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=3 | alt=organizasyon-hizmetleri
+- service-temsili-nikah-memuru | Temsili Nikah Memuru | top=Diger Hizmetler | conf=low | ev=27 | alt=organizasyon-hizmetleri
+- service-tiyatral-nikah-memuru | Tiyatral Nikah Memuru | top=Diger Hizmetler | conf=low | ev=4 | alt=organizasyon-hizmetleri
+- service-tur-organizasyon | Tur Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=4 | alt=organizasyon-hizmetleri
+- service-ucan-balon-susleme | Ucan Balon Susleme | top=Etkinlik Ve Organizasyon | conf=medium | ev=3 | alt=organizasyon-hizmetleri
+- service-uydu-servisi-uyducu | Uydu Servisi Uyducu | top=Tamir Ve Bakim | conf=medium | ev=26 | alt=organizasyon-hizmetleri
+- service-yemek-organizasyon | Yemek Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=4 | alt=organizasyon-hizmetleri
+- service-yenidogan-hediyelik | Yenidogan Hediyelik | top=Diger Hizmetler | conf=low | ev=9 | alt=organizasyon-hizmetleri
+- service-yetiskin-dogum-gunu-organizasyonu | Yetiskin Dogum Gunu Organizasyonu | top=Etkinlik Ve Organizasyon | conf=high | ev=7 | alt=organizasyon-hizmetleri
+- service-yilbasi-organizasyon | Yilbasi Organizasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=4 | alt=organizasyon-hizmetleri
+- service-zincir-balon-susleme | Zincir Balon Susleme | top=Etkinlik Ve Organizasyon | conf=medium | ev=11 | alt=organizasyon-hizmetleri
+
+[muzik-gruplari] alt_kategori=21
+- service-bando-takimi | Bando Takimi | top=Etkinlik Ve Organizasyon | conf=medium | ev=31 | alt=muzik-gruplari
+- service-canli-muzik | Canli Muzik | top=Diger Hizmetler | conf=low | ev=11 | alt=muzik-gruplari
+- service-davul-ekibi | Davul Ekibi | top=Etkinlik Ve Organizasyon | conf=medium | ev=3 | alt=muzik-gruplari
+- service-davul-klarnet-kiralama | Davul Klarnet Kiralama | top=Kiralama | conf=medium | ev=6 | alt=muzik-gruplari
+- service-davul-zurnaci-kiralama | Davul Zurnaci Kiralama | top=Kiralama | conf=medium | ev=20 | alt=muzik-gruplari
+- service-davulcu-kiralama | Davulcu Kiralama | top=Kiralama | conf=medium | ev=10 | alt=muzik-gruplari
+- service-dj-kiralama | Dj Kiralama | top=Etkinlik Ve Organizasyon | conf=medium | ev=8 | alt=muzik-gruplari
+- service-dugun-bandosu | Dugun Bandosu | top=Etkinlik Ve Organizasyon | conf=high | ev=7 | alt=muzik-gruplari
+- service-dugun-davulcusu | Dugun Davulcusu | top=Etkinlik Ve Organizasyon | conf=medium | ev=8 | alt=muzik-gruplari
+- service-dugun-dj | Dugun Dj | top=Etkinlik Ve Organizasyon | conf=high | ev=12 | alt=muzik-gruplari
+- service-dugun-orkestrasi | Dugun Orkestrasi | top=Etkinlik Ve Organizasyon | conf=medium | ev=16 | alt=muzik-gruplari
+- service-dugun-sanatcisi | Dugun Sanatcisi | top=Etkinlik Ve Organizasyon | conf=medium | ev=4 | alt=muzik-gruplari
+- service-gelin-alma-bandosu | Gelin Alma Bandosu | top=Etkinlik Ve Organizasyon | conf=medium | ev=48 | alt=muzik-gruplari
+- service-kadin-dj | Kadin Dj | top=Etkinlik Ve Organizasyon | conf=medium | ev=5 | alt=muzik-gruplari
+- service-muzik-ekibi | Muzik Ekibi | top=Etkinlik Ve Organizasyon | conf=medium | ev=4 | alt=muzik-gruplari
+- service-muzik-grubu | Muzik Grubu | top=Diger Hizmetler | conf=low | ev=5 | alt=muzik-gruplari
+- service-orkestra | Orkestra | top=Diger Hizmetler | conf=low | ev=4 | alt=muzik-gruplari
+- service-profesyonel-dj | Profesyonel Dj | top=Etkinlik Ve Organizasyon | conf=medium | ev=41 | alt=muzik-gruplari
+- service-saz-ekibi | Saz Ekibi | top=Etkinlik Ve Organizasyon | conf=medium | ev=8 | alt=muzik-gruplari
+- service-trio-muzik-grubu | Trio Muzik Grubu | top=Diger Hizmetler | conf=low | ev=9 | alt=muzik-gruplari
+- service-zurna-ekibi | Zurna Ekibi | top=Etkinlik Ve Organizasyon | conf=medium | ev=5 | alt=muzik-gruplari
+
+[ikram-catering] alt_kategori=11
+- service-davet-catering | Davet Catering | top=Etkinlik Ve Organizasyon | conf=medium | ev=26 | alt=ikram-catering
+- service-davet-yemegi | Davet Yemegi | top=Diger Hizmetler | conf=low | ev=5 | alt=ikram-catering
+- service-dugun-catering | Dugun Catering | top=Etkinlik Ve Organizasyon | conf=high | ev=7 | alt=ikram-catering
+- service-dugun-ikramliklari | Dugun Ikramliklari | top=Etkinlik Ve Organizasyon | conf=medium | ev=3 | alt=ikram-catering
+- service-dugun-pastasi | Dugun Pastasi | top=Etkinlik Ve Organizasyon | conf=medium | ev=19 | alt=ikram-catering
+- service-dugun-yemegi | Dugun Yemegi | top=Etkinlik Ve Organizasyon | conf=medium | ev=8 | alt=ikram-catering
+- service-nisan-ikramliklari-catering | Nisan Ikramliklari Catering | top=Etkinlik Ve Organizasyon | conf=high | ev=22 | alt=ikram-catering
+- service-nisan-menusu-catering | Nisan Menusu Catering | top=Etkinlik Ve Organizasyon | conf=high | ev=12 | alt=ikram-catering
+- service-nisan-pastasi | Nisan Pastasi | top=Etkinlik Ve Organizasyon | conf=medium | ev=19 | alt=ikram-catering
+- service-nisan-yemegi | Nisan Yemegi | top=Etkinlik Ve Organizasyon | conf=medium | ev=8 | alt=ikram-catering
+- service-soz-pastasi | Soz Pastasi | top=Diger Hizmetler | conf=low | ev=16 | alt=ikram-catering
+
+[eglence-sov-sanatci] alt_kategori=11
+- service-after-effects-animasyon | After Effects Animasyon | top=Tasarim Yazilim Ve Pazarlama | conf=medium | ev=6 | alt=eglence-sov-sanatci
+- service-animasyon-yapimi | Animasyon Yapimi | top=Tasarim Yazilim Ve Pazarlama | conf=medium | ev=6 | alt=eglence-sov-sanatci
+- service-animator | Animator | top=Diger Hizmetler | conf=low | ev=13 | alt=eglence-sov-sanatci
+- service-dansoz-kiralama | Dansoz Kiralama | top=Kiralama | conf=medium | ev=51 | alt=eglence-sov-sanatci
+- service-dogum-gunu-animasyon | Dogum Gunu Animasyon | top=Etkinlik Ve Organizasyon | conf=medium | ev=10 | alt=eglence-sov-sanatci
+- service-dogum-gunu-animator | Dogum Gunu Animator | top=Etkinlik Ve Organizasyon | conf=medium | ev=4 | alt=eglence-sov-sanatci
+- service-dugun-dans-ekibi-kiralama | Dugun Dans Ekibi Kiralama | top=Etkinlik Ve Organizasyon | conf=high | ev=3 | alt=eglence-sov-sanatci
+- service-illuzyonist | Illuzyonist | top=Diger Hizmetler | conf=low | ev=3 | alt=eglence-sov-sanatci
+- service-mimari-animasyon | Mimari Animasyon | top=Tasarim Yazilim Ve Pazarlama | conf=medium | ev=3 | alt=eglence-sov-sanatci
+- service-palyaco | Palyaco | top=Diger Hizmetler | conf=low | ev=27 | alt=eglence-sov-sanatci
+- service-sove-kaplama | Sove Kaplama | top=Oto Hizmetleri | conf=medium | ev=11 | alt=eglence-sov-sanatci
+
+[manual-review] alt_kategori=9
+- service-davul-sov | Davul Sov | top=Diger Hizmetler | conf=low | ev=4 | alt=muzik-gruplari|eglence-sov-sanatci
+- service-dugun-servis-kiralama | Dugun Servis Kiralama | top=Etkinlik Ve Organizasyon | conf=medium | ev=7 | alt=organizasyon-hizmetleri|arac-transfer-kiralama
+- service-dugunlere-garson | Dugunlere Garson | top=Etkinlik Ve Organizasyon | conf=medium | ev=9 | alt=organizasyon-hizmetleri|davet-destek-hizmetleri
+- service-etkinlik-hostesi | Etkinlik Hostesi | top=Diger Hizmetler | conf=low | ev=5 | alt=organizasyon-hizmetleri|davet-destek-hizmetleri
+- service-fasil-ekibi | Fasil Ekibi | top=Etkinlik Ve Organizasyon | conf=medium | ev=3 | alt=muzik-gruplari|eglence-sov-sanatci
+- service-gelin-arabasi-susleme | Gelin Arabasi Susleme | top=Diger Hizmetler | conf=low | ev=5 | alt=organizasyon-hizmetleri|arac-transfer-kiralama
+- service-horon-ekibi | Horon Ekibi | top=Etkinlik Ve Organizasyon | conf=medium | ev=5 | alt=muzik-gruplari|eglence-sov-sanatci
+- service-muzik-organizasyonu | Muzik Organizasyonu | top=Etkinlik Ve Organizasyon | conf=medium | ev=4 | alt=muzik-gruplari|organizasyon-hizmetleri
+- service-zeybek-ekibi | Zeybek Ekibi | top=Etkinlik Ve Organizasyon | conf=medium | ev=5 | alt=muzik-gruplari|eglence-sov-sanatci
+
+[foto-video] alt_kategori=9
+- service-dis-cekim-fotograf | Dis Cekim Fotograf | top=Foto Video Ve Medya | conf=medium | ev=80 | alt=foto-video
+- service-dugun-drone-cekimi | Dugun Drone Cekimi | top=Etkinlik Ve Organizasyon | conf=medium | ev=31 | alt=foto-video
+- service-dugun-fotografcisi | Dugun Fotografcisi | top=Etkinlik Ve Organizasyon | conf=medium | ev=76 | alt=foto-video
+- service-dugun-video-cekimi | Dugun Video Cekimi | top=Etkinlik Ve Organizasyon | conf=medium | ev=24 | alt=foto-video
+- service-etkinlik-fotografcisi | Etkinlik Fotografcisi | top=Foto Video Ve Medya | conf=medium | ev=3 | alt=foto-video
+- service-kina-fotograf-cekimi | Kina Fotograf Cekimi | top=Etkinlik Ve Organizasyon | conf=medium | ev=8 | alt=foto-video
+- service-nikah-fotografcisi | Nikah Fotografcisi | top=Foto Video Ve Medya | conf=medium | ev=16 | alt=foto-video
+- service-nisan-fotografcisi | Nisan Fotografcisi | top=Etkinlik Ve Organizasyon | conf=medium | ev=47 | alt=foto-video
+- service-soz-fotograf-cekimi | Soz Fotograf Cekimi | top=Foto Video Ve Medya | conf=medium | ev=21 | alt=foto-video
+
+[teknik-produksiyon] alt_kategori=8
+- service-dugun-ses-sistemi | Dugun Ses Sistemi | top=Etkinlik Ve Organizasyon | conf=medium | ev=4 | alt=teknik-produksiyon
+- service-oto-ses-sistemi | Oto Ses Sistemi | top=Foto Video Ve Medya | conf=medium | ev=3 | alt=teknik-produksiyon
+- service-sahne-isik-sistemleri | Sahne Isik Sistemleri | top=Diger Hizmetler | conf=low | ev=5 | alt=teknik-produksiyon
+- service-sahne-kiralama | Sahne Kiralama | top=Kiralama | conf=medium | ev=4 | alt=teknik-produksiyon
+- service-sahne-ses-sistemleri | Sahne Ses Sistemleri | top=Foto Video Ve Medya | conf=medium | ev=4 | alt=teknik-produksiyon
+- service-ses-isik-kiralama | Ses Isik Kiralama | top=Foto Video Ve Medya | conf=medium | ev=3 | alt=teknik-produksiyon
+- service-ses-sistemi-kiralama | Ses Sistemi Kiralama | top=Foto Video Ve Medya | conf=medium | ev=19 | alt=teknik-produksiyon
+- service-ses-teknisyeni | Ses Teknisyeni | top=Foto Video Ve Medya | conf=medium | ev=3 | alt=teknik-produksiyon
+
+[mekanlar] alt_kategori=8
+- service-davet-salonu | Davet Salonu | top=Diger Hizmetler | conf=low | ev=4 | alt=mekanlar
+- service-dugun-mekanlari | Dugun Mekanlari | top=Etkinlik Ve Organizasyon | conf=medium | ev=4 | alt=mekanlar
+- service-dugun-salonu | Dugun Salonu | top=Etkinlik Ve Organizasyon | conf=medium | ev=21 | alt=mekanlar
+- service-kina-mekanlari | Kina Mekanlari | top=Etkinlik Ve Organizasyon | conf=medium | ev=3 | alt=mekanlar
+- service-kir-dugunu | Kir Dugunu | top=Etkinlik Ve Organizasyon | conf=medium | ev=5 | alt=mekanlar
+- service-nisan-mekanlari | Nisan Mekanlari | top=Etkinlik Ve Organizasyon | conf=medium | ev=7 | alt=mekanlar
+- service-soz-mekanlari | Soz Mekanlari | top=Diger Hizmetler | conf=low | ev=6 | alt=mekanlar
+- service-soz-nisan-mekanlari | Soz Nisan Mekanlari | top=Etkinlik Ve Organizasyon | conf=medium | ev=11 | alt=mekanlar
+
+[guzellik-hazirlik] alt_kategori=6
+- service-evde-nisan-makyaji | Evde Nisan Makyaji | top=Etkinlik Ve Organizasyon | conf=medium | ev=3 | alt=guzellik-hazirlik
+- service-gelin-makyaji | Gelin Makyaji | top=Guzellik Ve Moda | conf=medium | ev=12 | alt=guzellik-hazirlik
+- service-gelin-sac-makyaj | Gelin Sac Makyaj | top=Guzellik Ve Moda | conf=medium | ev=13 | alt=guzellik-hazirlik
+- service-gelin-saci | Gelin Saci | top=Diger Hizmetler | conf=low | ev=5 | alt=guzellik-hazirlik
+- service-nisan-makyaji | Nisan Makyaji | top=Etkinlik Ve Organizasyon | conf=medium | ev=6 | alt=guzellik-hazirlik
+- service-tesettur-gelin-basi | Tesettur Gelin Basi | top=Diger Hizmetler | conf=low | ev=3 | alt=guzellik-hazirlik
+
+[arac-transfer-kiralama] alt_kategori=3
+- service-gelin-arabasi-kiralama | Gelin Arabasi Kiralama | top=Kiralama | conf=medium | ev=27 | alt=arac-transfer-kiralama
+- service-ustu-acik-gelin-arabasi-kiralama | Ustu Acik Gelin Arabasi Kiralama | top=Kiralama | conf=medium | ev=5 | alt=arac-transfer-kiralama
+- service-vito-gelin-arabasi-kiralama | Vito Gelin Arabasi Kiralama | top=Kiralama | conf=medium | ev=4 | alt=arac-transfer-kiralama
+

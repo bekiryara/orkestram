@@ -1,0 +1,31 @@
+﻿FINAL TREE OMURGA V4 MERGED REPORT
+Toplam: 169
+
+Ana kategori dagilimi:
+- dugun-organizasyon: 25
+- gelin-saci-ve-makyaji: 25
+- muzik: 20
+- dugun-mekanlari: 16
+- catering-hizmetleri: 14
+- gelin-arabasi: 13
+- nikah-sekeri-ve-hediyelik: 7
+- dugun-fotografcilari-video: 7
+- soz-ve-nisan: 6
+- muzik-gruplari: 6
+- gelinlik: 6
+- dugun-davetiyesi: 5
+- organizasyon-hizmetleri: 5
+- kina-ve-bekarliga-veda: 5
+- foto-video: 4
+- cicekciler: 3
+- davet-destek-hizmetleri: 1
+- mekanlar: 1
+
+Kaynak dagilimi:
+- manual_seed: 9
+- source: 8
+- strict_v2: 152
+
+Dosyalar:
+- D:\orkestram\docs\category-workspace\FINAL_TREE_OMURGA_V4_MERGED.txt
+- D:\orkestram\docs\category-workspace\exports\FINAL_TREE_OMURGA_V4_MERGED.csv

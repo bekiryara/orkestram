@@ -1,0 +1,16 @@
+﻿SOURCE=D:\stack-data\catalog-dataset\csv\_imports\armut\categories_candidates_wave1_mapped.csv
+TOP_POOLS=service-events-organization,service-photo-video-media,service-rental,service-beauty-fashion,service-print-sign-ad
+INCLUDE_REGEX=dugun|dÃ¼ÄŸÃ¼n|nisan|niÅŸan|kina|kÄ±na|soz|sÃ¶z|nikah|nikÃ¢h|davet|etkinlik|organizasyon|orkestra|muzik|mÃ¼zik|dj|bando|fasil|fasÄ±l|muzisyen|mÃ¼zisyen|davul|zurna|keman|saksafon|gelin|damat|fotograf|fotoÄŸraf|video|cekim|Ã§ekim|drone|klip|mekan|mekÃ¢n|salon|kÄ±r bahcesi|kÄ±r bahÃ§esi|otel|bahce|bahÃ§e|catering|ikram|kokteyl|pasta|tatli|tatlÄ±|ses sistemi|isik|Ä±ÅŸÄ±k|sahne|led|hostes|animasyon|sunucu|konsept|susleme|sÃ¼sleme|gelinlik|makyaj|kuafor|kuafÃ¶r|davetiye|nikah sekeri|nikah ÅŸekeri|hediyelik|arac kiralama|araÃ§ kiralama|transfer|limuzin|vale
+EXCLUDE_REGEX=montaj|tamir|bakim|onarim|tesisat|dogalgaz|ariza|temizlik|nakliyat|kurye|ozel ders|Ã¶zel ders|matematik|fizik|kimya|ingilizce|lgs|yks|ilkokul|ortaokul|biyometrik|pasaport|hastane|doktor|dis hekimi|diÅŸ hekimi|oto tamir|servis bakim|servis bakÄ±m|cam balkon tamiri|makine montaji|makine montajÄ±
+
+MAIN_RULE_ORDER:
+- muzik-gruplari => orkestra|muzik|mÃ¼zik|dj|bando|fasil|fasÄ±l|muzisyen|mÃ¼zisyen|davul|zurna|keman|saksafon|trio|canli muzik|canlÄ± mÃ¼zik
+- organizasyon-hizmetleri => organizasyon|etkinlik|dugun|dÃ¼ÄŸÃ¼n|nisan|niÅŸan|kina|kÄ±na|soz|sÃ¶z|nikah|nikÃ¢h|konsept|susleme|sÃ¼sleme|hostes|sunucu|planlama
+- mekanlar => mekan|mekÃ¢n|salon|kÄ±r bahcesi|kÄ±r bahÃ§esi|otel|bahce|bahÃ§e|davet alani|davet alanÄ±
+- ikram-catering => catering|ikram|kokteyl|pasta|tatli|tatlÄ±|yemek|menu|menÃ¼
+- foto-video => fotograf|fotoÄŸraf|video|cekim|Ã§ekim|drone|klip|kameraman
+- teknik-produksiyon => ses sistemi|isik|Ä±ÅŸÄ±k|sahne|led|mikser|hoparlor|hoparlÃ¶r|jenerator|jeneratÃ¶r
+- eglence-sov-sanatci => animasyon|palyaco|palyaÃ§o|sov|ÅŸov|dansci|dansÃ§Ä±|illuzyon|illÃ¼zyon|sanatci|sanatÃ§Ä±
+- davet-destek-hizmetleri => davetiye|nikah sekeri|nikah ÅŸekeri|hediyelik|vale
+- guzellik-hazirlik => gelinlik|makyaj|kuafor|kuafÃ¶r|sac tasarim|saÃ§ tasarÄ±m|manikur|manikÃ¼r|prova
+- ulasim-kiralama => arac kiralama|araÃ§ kiralama|transfer|limuzin|vip arac|vip araÃ§

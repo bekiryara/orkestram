@@ -1,0 +1,5 @@
+﻿"slug","title_tr","top_category_slug","confidence","decision","main_category","reason"
+"service-davet-evi","Davet Evi","service-other","low","candidate","manual-review","fallback_manual"
+"service-davet-yemegi","Davet Yemegi","service-other","low","candidate","manual-review","fallback_manual"
+"service-gelin-saci","Gelin Saci","service-other","low","candidate","manual-review","fallback_manual"
+"service-tesettur-gelin-basi","Tesettur Gelin Basi","service-other","low","candidate","manual-review","fallback_manual"

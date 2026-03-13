@@ -1,0 +1,67 @@
+@extends('frontend.layout')
+
+@php
+    $metaTitle = ($category->seo_title ?: $category->name) . ' | ' . ($siteMeta['name'] ?? 'Orkestram');
+    $metaDescription = $category->seo_description ?: ($category->short_description ?: $category->name . ' kategorisindeki ilanlar.');
+@endphp
+
+@section('content')
+    <nav class="breadcrumbs">
+        <a href="{{ route('home') }}">Ana Sayfa</a>
+        <span>/</span>
+        <a href="{{ route('listing.index') }}">Ilanlar</a>
+        <span>/</span>
+        <span>{{ $category->name }}</span>
+    </nav>
+
+    <section class="section page-hero">
+        <h1>{{ $category->name }}</h1>
+        <p class="page-subtitle">{{ $category->short_description ?: 'Bu kategorideki ilanlari sehir ve ilceye gore inceleyebilirsin.' }}</p>
+    </section>
+
+    @if(!empty($category->cover_image_path))
+        <section class="section section-tight">
+            <img class="cover-banner" src="/{{ $category->cover_image_path }}" alt="{{ $category->name }}">
+        </section>
+    @endif
+
+    @if($isEmpty)
+        <section class="section">
+            <article class="empty-state">
+                <h3>Bu kategoride henuz aktif ilan yok</h3>
+                <p>Yeni ilan eklendiginde burada otomatik listelenecek.</p>
+                <a class="btn card-btn" href="{{ route('listing.index') }}">Tum Ilanlara Don</a>
+            </article>
+        </section>
+    @else
+        <section class="section">
+            <p class="lead"><strong>{{ $items->total() }}</strong> ilan bulundu.</p>
+            <div class="grid">
+                @foreach($items as $item)
+                    <article class="card">
+                        <img class="card-cover" src="/{{ $item->cover_image_path ?: 'assets/listing-fallback.svg' }}" alt="{{ $item->name }}">
+                        <h3><a href="{{ route('listing.show', ['slug' => $item->slug]) }}">{{ $item->name }}</a></h3>
+                        <div class="meta">{{ $item->city }}{{ $item->district ? ' / ' . $item->district : '' }}</div>
+                        <p>{{ $item->summary ?: 'Kisa tanitim metni girilmemis.' }}</p>
+                        <p><strong>Baslangic:</strong> {{ $item->price_label ?: 'Iletisim ile netlesir' }}</p>
+                        <a class="btn card-btn" href="{{ route('listing.show', ['slug' => $item->slug]) }}">{{ $siteMeta['listing_cta'] ?? 'Detaylari Incele' }}</a>
+                    </article>
+                @endforeach
+            </div>
+
+            @if($items->hasPages())
+                <div class="pagination-wrap">
+                    {{ $items->links() }}
+                </div>
+            @endif
+        </section>
+    @endif
+
+    @if(!empty($category->description))
+        <section class="section">
+            <article class="content">
+                {!! nl2br(e($category->description)) !!}
+            </article>
+        </section>
+    @endif
+@endsection

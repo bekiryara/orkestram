@@ -1,0 +1,5 @@
+﻿domain=orkestram.net
+dump=D:\orkestram\orkestram.net.sql.gz
+all_urls=6641
+media_urls=3100
+page_like_urls=3541

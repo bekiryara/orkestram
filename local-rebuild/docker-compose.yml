@@ -1,0 +1,75 @@
+services:
+  # NOTE: Active ports detected on this machine (do not reuse):
+  # - 3000 (stack-hos-api)
+  # - 3002 (stack-hos-web)
+  # - 8080 (stack-pazar-app)
+  # - 8090 (stack-messaging-api)
+  #
+  # This project uses:
+  # - 8180 (orkestram local)
+  # - 8181 (izmirorkestra local)
+  # - 8188 (adminer)
+  # - 3307 (mysql host port)
+
+  orkestram-web:
+    build:
+      context: .
+      dockerfile: docker/php-apache/Dockerfile
+    container_name: orkestram-local-web
+    command: >
+      bash -lc "a2enmod rewrite
+      && sed -ri -e 's!^[[:space:]]*DocumentRoot[[:space:]]+.*$!DocumentRoot /var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
+      && sed -ri -e 's!AllowOverride None!AllowOverride All!g' /etc/apache2/apache2.conf
+      && apache2-foreground"
+    ports:
+      - "8180:80"
+    volumes:
+      - ./apps/orkestram:/var/www/html:delegated
+    depends_on:
+      - mysql
+    restart: unless-stopped
+
+  izmirorkestra-web:
+    build:
+      context: .
+      dockerfile: docker/php-apache/Dockerfile
+    container_name: izmirorkestra-local-web
+    command: >
+      bash -lc "a2enmod rewrite
+      && sed -ri -e 's!^[[:space:]]*DocumentRoot[[:space:]]+.*$!DocumentRoot /var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
+      && sed -ri -e 's!AllowOverride None!AllowOverride All!g' /etc/apache2/apache2.conf
+      && apache2-foreground"
+    ports:
+      - "8181:80"
+    volumes:
+      - ./apps/izmirorkestra:/var/www/html:delegated
+    depends_on:
+      - mysql
+    restart: unless-stopped
+
+  mysql:
+    image: mysql:8.0
+    container_name: orkestram-local-mysql
+    command: ["--default-authentication-plugin=mysql_native_password"]
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: orkestram_local
+      MYSQL_USER: orkestram
+      MYSQL_PASSWORD: orkestram
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_local_data:/var/lib/mysql
+    restart: unless-stopped
+
+  adminer:
+    image: adminer:latest
+    container_name: orkestram-local-adminer
+    ports:
+      - "8188:8080"
+    depends_on:
+      - mysql
+    restart: unless-stopped
+
+volumes:
+  mysql_local_data:
