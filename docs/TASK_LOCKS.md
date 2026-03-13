@@ -22,3 +22,4 @@ Sabit Ajan Kimlikleri:
 | TASK-008 | codex-a | agent/codex-a/task-008 | closed | docs/tasks/TASK-008.md | 2026-03-13 23:58:00 | 2026-03-14 00:12:00 | Gorev kapatildi, pre-pr PASS |
 | TASK-009 | codex-b | agent/codex-b/task-009 | active | docs/tasks/TASK-009.md,docs/SERVICE_AREA_FALLBACK_DARALTMA_PLANI_TR.md | 2026-03-13 10:40:00 | 2026-03-13 10:40:00 | Service area fallback daraltma planini operasyonel checklist'e cevir |
 | TASK-010 | codex | agent/codex/task-001 | closed | docs/tasks/TASK-010.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/TASK_LOCKS.md | 2026-03-13 10:40:00 | 2026-03-13 11:20:00 | Koordinator sync turu tamamlandi, aktif gorevler netlestirildi |
+| TASK-011 | codex-a | agent/codex-a/task-011 | closed | docs/tasks/TASK-011.md,scripts/dev-up.ps1,scripts/validate.ps1,docs/RUNTIME_PERMISSION_HARDENING_TR.md | 2026-03-13 11:30:00 | 2026-03-13 12:24:00 | Runtime izin sertlestirme tamamlandi, pre-pr quick PASS |
