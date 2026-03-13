@@ -2,29 +2,29 @@
 
 Durum: `DONE`  
 Sorumlu: `ajan`  
-Baslangic: `2026-03-13 23:59`  
-Hedef Bitis: `2026-03-14 02:00`
+Baslangic: `2026-03-14 01:05`  
+Hedef Bitis: `2026-03-14 01:40`
 
 ## Gorev Tanimi
-- `validate` kapisini release akisina bagla; test/smoke PASS olmadan yayin adimi calismasin.
+- PR akisini standartlastir: PR template + pre-pr gate + dokuman baglantisi.
 
 ## Kapsam (In)
-- [x] `scripts/release.ps1` icinde `validate.ps1` zorunlu pre-check adimi eklendi
-- [x] `scripts/build-deploy-pack.ps1` icinde ayni gate kurali uygulandi
-- [x] FAIL durumunda net hata mesaji ile akisin durmasi saglandi
+- [x] `.github/pull_request_template.md` eklendi
+- [x] `scripts/pre-pr.ps1` eklendi
+- [x] `docs/PR_FLOW_TR.md` eklendi ve disiplin dokumanina baglandi
 
 ## Kapsam Disi (Out)
 - [ ] Uygulama UI degisiklikleri
 - [ ] Mesaj/yorum business logic degisiklikleri
 
 ## Kabul Kriteri
-- [x] `validate` FAIL iken release/build akisi duracak sekilde gate baglandi
-- [x] `validate` PASS iken release akisi devam edebilecek sekilde baglandi
-- [x] `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\validate.ps1 -App both` PASS
+- [x] PR acilisinda zorunlu checklist formati hazir
+- [x] PR oncesi tek komut hizli gate calisiyor
+- [x] `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` PASS
 
 ## Zorunlu Komutlar
 ```powershell
-powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\validate.ps1 -App both
+powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick
 ```
 
 ## Tamamlandiginda Isaretlenecekler

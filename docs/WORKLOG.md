@@ -78,3 +78,22 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - Artik gate atlama CLI bayragi yok; release disi build cagrilarinda validate otomatik calisir.
+
+### [2026-03-14 01:35] PR Akisi Standardizasyonu
+- Sorumlu: `codex`
+- Is Ozeti:
+  - PR template eklendi.
+  - `pre-pr` gate scripti eklendi (`ci-gate local + validate quick/full`).
+  - PR akis dokumani eklendi ve repo disiplin kurallarina baglandi.
+- Degisen Dosyalar:
+  - `.github/pull_request_template.md`
+  - `scripts/pre-pr.ps1`
+  - `docs/PR_FLOW_TR.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/NEXT_TASK.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - PR acmadan once tek komutla gate kontrolu standartlasti.

@@ -97,3 +97,9 @@ Bu kosullar olmadan deploy yok:
    - "Bitti" demeden once zorunlu dogrulama komutu.
    - Standart:
      - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\validate.ps1 -App both`
+5. `scripts/pre-pr.ps1`
+   - PR acmadan once zorunlu hizli kapidir.
+   - Standart:
+     - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
+6. `.github/pull_request_template.md`
+   - PR acilisinda ozet + test + dosya listesi zorunlu format.

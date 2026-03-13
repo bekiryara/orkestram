@@ -539,10 +539,18 @@ Tarih: 2026-03-11
    - `.github/workflows/validate-gate.yml` eklendi (`self-hosted, windows` runner'da `validate -App both`).
    - Dogrulama:
      - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\validate.ps1 -App both -Mode quick` PASS
+17. PR akisi standardizasyonu tamamlandi:
+   - `.github/pull_request_template.md` ile PR acilis formati zorunlu hale getirildi.
+   - `scripts/pre-pr.ps1` eklendi (`ci-gate` + `validate` quick/full).
+   - `docs/PR_FLOW_TR.md` ile branch->PR->merge adimlari dokumante edildi.
+   - `docs/REPO_DISCIPLINE_TR.md` icine `pre-pr` zorunlu kapisi baglandi.
+   - Dogrulama:
+     - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` PASS
 
 ## Siradaki 5 Is
 1. Teklif formu Faz 2 (zengin alanlar, validasyon, owner tarafi takip paneli) planlamak.
 2. Validate gate workflow'unu zorunlu merge politikasiyla bagla (branch protection / required checks).
+2. `ci-gate` yanina ihtiyaca gore ikinci zorunlu check (or. guvenlik/lint) ekleme kararini netlestir.
 3. Performans baseline olcumu (cold/warm endpoint raporu) ve yavaslama kaynagi raporu.
 4. Service area string fallback daraltma fazi:
    - backfill eslesmeyen kayitlari raporla
