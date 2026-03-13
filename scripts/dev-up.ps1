@@ -62,15 +62,14 @@ function Ensure-RuntimePermissions {
     param([string]$Container)
 
     $permissionCommand = @'
-set -e
-mkdir -p /var/www/html/storage/framework/views
-mkdir -p /var/www/html/storage/framework/cache
-mkdir -p /var/www/html/storage/logs
-mkdir -p /var/www/html/bootstrap/cache
-chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-chmod -R ug+rwX /var/www/html/storage /var/www/html/bootstrap/cache
-test -w /var/www/html/storage/framework/views
-test -w /var/www/html/bootstrap/cache
+mkdir -p /var/www/html/storage/framework/views \
+&& mkdir -p /var/www/html/storage/framework/cache \
+&& mkdir -p /var/www/html/storage/logs \
+&& mkdir -p /var/www/html/bootstrap/cache \
+&& chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+&& chmod -R ug+rwX /var/www/html/storage /var/www/html/bootstrap/cache \
+&& test -w /var/www/html/storage/framework/views \
+&& test -w /var/www/html/bootstrap/cache
 '@
 
     & docker exec $Container sh -lc $permissionCommand
@@ -97,12 +96,7 @@ if (-not $SkipSync) {
     $wslSourcePath = Convert-WindowsPathToWsl -Path $repoRoot
     Write-Host "[dev-up] sync windows -> wsl"
     $syncCommand = @"
-mkdir -p '$LinuxProjectRoot' && rsync -a --delete \
-  --exclude '.git/' \
-  --exclude 'local-rebuild/apps/*/vendor/' \
-  --exclude 'local-rebuild/apps/*/storage/' \
-  --exclude 'local-rebuild/apps/*/public/uploads/' \
-  '$wslSourcePath/' '$LinuxProjectRoot/'
+mkdir -p '$LinuxProjectRoot' && rsync -a --delete --exclude '.git/' --exclude 'local-rebuild/apps/*/vendor/' --exclude 'local-rebuild/apps/*/storage/' --exclude 'local-rebuild/apps/*/public/uploads/' '$wslSourcePath/' '$LinuxProjectRoot/'
 "@
     Invoke-WslBash -User $LinuxDockerUser -Command $syncCommand
 }

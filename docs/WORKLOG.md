@@ -318,3 +318,30 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
 - Sonuc:
   - `PASS`
+
+### [2026-03-13 13:45] Koordinator Lock Senkronu (TASK-016/017/019)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Stale active locklar temizlendi (`TASK-011`, `TASK-013` -> closed).
+  - Gercek aktif set tekleştirildi: `TASK-016`, `TASK-017`, `TASK-019`.
+  - Yeni gelen ajan icin `TASK-019` dosyasi olusturuldu.
+  - `codex-c` ajan kimligi lock tablosuna eklendi.
+- Degisen Dosyalar:
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/tasks/TASK-019.md`
+- Sonuc:
+  - `PASS (kordinasyon senkron)`
+
+### [2026-03-13 13:55] Koordinator Cakisma Onleme (TASK-017 vs TASK-019)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-017` ile `TASK-019` arasindaki lock cakismasi giderildi.
+  - `TASK-019` lock alani layout + shell partial ile sinirlandi.
+  - CSS ve `UX_STANDARD_DUGUN_PARITY_TR.md` sahipligi `TASK-017`de birakildi.
+- Degisen Dosyalar:
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/tasks/TASK-019.md`
+- Sonuc:
+  - `PASS (cakisma engellendi)`

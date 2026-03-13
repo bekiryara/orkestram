@@ -6,8 +6,8 @@
   --muted: #4f647d;
   --line: #cfd9e8;
   --line-soft: #dde6f2;
-  --brand: #0b2f59;
-  --primary: #0b2f59;
+  --brand: #E6007E;
+  --primary: #E6007E;
   --brand-2: #ea5f2d;
   --font-body: "Manrope", "Plus Jakarta Sans", "Inter", "Segoe UI", Arial, sans-serif;
   --font-head: "Manrope", "Plus Jakarta Sans", "Inter", "Segoe UI", Arial, sans-serif;
@@ -22,6 +22,10 @@
   --pill-bg: #fff;
   --card-radius: 14px;
   --btn-radius: 10px;
+  --container-max: 1120px;
+  --space-section: 24px;
+  --space-grid: 16px;
+  --space-card: 16px;
 }
 
 * { box-sizing: border-box; }
@@ -43,8 +47,8 @@ body {
   --muted: #526b7a;
   --line: #bfd7e5;
   --line-soft: #d9e9f2;
-  --brand: #0077b6;
-  --primary: #0077b6;
+  --brand: #E6007E;
+  --primary: #E6007E;
   --brand-2: #f57c00;
   --font-body: "Manrope", "Plus Jakarta Sans", "Inter", "Segoe UI", Arial, sans-serif;
   --font-head: "Manrope", "Plus Jakarta Sans", "Inter", "Segoe UI", Arial, sans-serif;
@@ -81,7 +85,7 @@ h3 {
 }
 
 a { color: inherit; text-decoration: none; }
-.wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+.wrap { width: min(var(--container-max), calc(100% - 32px)); margin: 0 auto; }
 
 .topbar {
   display: flex; align-items: center; justify-content: space-between;
@@ -135,7 +139,7 @@ a { color: inherit; text-decoration: none; }
 .btn.btn-primary { background: var(--brand); color: #fff; border-color: var(--brand); }
 .btn.btn-secondary { background: var(--brand-2); color: #fff; border-color: var(--brand-2); }
 
-.section { margin-top: 24px; }
+.section { margin-top: var(--space-section); }
 .section h2 { margin: 0 0 10px; }
 .section p.lead { margin: 0 0 16px; color: var(--muted); }
 .section h1 { margin: 0 0 10px; }
@@ -172,13 +176,13 @@ a { color: inherit; text-decoration: none; }
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
+  gap: var(--space-grid);
 }
 .card {
   border: 1px solid var(--line);
   border-radius: var(--card-radius);
   background: var(--surface-card);
-  padding: 16px;
+  padding: var(--space-card);
   overflow: hidden;
 }
 .card-cover {
@@ -302,7 +306,7 @@ a { color: inherit; text-decoration: none; }
 .listing-layout {
   display: grid;
   grid-template-columns: 320px minmax(0, 1fr);
-  gap: 18px;
+  gap: var(--space-grid);
   align-items: start;
 }
 

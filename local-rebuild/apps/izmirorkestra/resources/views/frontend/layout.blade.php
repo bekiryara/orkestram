@@ -16,13 +16,11 @@
 </head>
 <body class="site-{{ $siteMeta['theme'] ?? 'orkestram' }}">
 <div class="wrap">
-    @include('partials.site-header', ['siteHeaderName' => $siteMeta['name'] ?? $site])
+    @include('frontend.partials.site-shell-header')
 
     @yield('content')
 
-    <footer class="footer">
-        {{ $siteMeta['name'] ?? $site }} | v1 local tasarim
-    </footer>
+    @include('frontend.partials.site-shell-footer')
 </div>
 @include('partials.bootstrap-foot')
 </body>

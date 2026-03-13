@@ -70,39 +70,39 @@
                 @if(session('ok'))
                     <p class="meta mt-8">{{ session('ok') }}</p>
                 @endif
+
+                @if($shellAuthenticated ?? false)
+                    <section id="yorum-formu" class="listing-block">
+                        <h2>Yorum Yaz</h2>
+                        <form method="post" action="{{ route('customer.feedback.store') }}">
+                            @csrf
+                            <input type="hidden" name="listing_slug" value="{{ $item->slug }}">
+                            <input type="hidden" name="kind" value="comment">
+                            <input type="hidden" name="visibility" value="public">
+                            <textarea class="form-control" name="content" rows="4" placeholder="Yorumunuzu yazin..." required>{{ old('content') }}</textarea>
+                            <div class="actions mt-8">
+                                <button class="btn btn-primary" type="submit">Yorumu Gonder</button>
+                            </div>
+                        </form>
+                    </section>
+                @endif
+
+                <section class="listing-block">
+                    <h2>Yorumlar</h2>
+                    <p class="meta">Bu alanda yalnizca onayli yorumlar gosterilir.</p>
+                    @forelse(($publicComments ?? []) as $comment)
+                        <div class="card">
+                            <p><strong>{{ $comment->user?->name ?? 'Musteri' }}</strong> <span class="meta">{{ optional($comment->created_at)->format('d.m.Y H:i') }}</span></p>
+                            <p>{{ $comment->content }}</p>
+                            @if(!empty($comment->owner_reply))
+                                <p class="meta"><strong>Firma yaniti:</strong> {{ $comment->owner_reply }}</p>
+                            @endif
+                        </div>
+                    @empty
+                        <p class="meta">Henuz onayli yorum yok.</p>
+                    @endforelse
+                </section>
             </aside>
-        </section>
-
-        @if($shellAuthenticated ?? false)
-            <section id="yorum-formu" class="listing-block">
-                <h2>Yorum Yaz</h2>
-                <form method="post" action="{{ route('customer.feedback.store') }}">
-                    @csrf
-                    <input type="hidden" name="listing_slug" value="{{ $item->slug }}">
-                    <input type="hidden" name="kind" value="comment">
-                    <input type="hidden" name="visibility" value="public">
-                    <textarea class="form-control" name="content" rows="4" placeholder="Yorumunuzu yazin..." required>{{ old('content') }}</textarea>
-                    <div class="actions mt-8">
-                        <button class="btn btn-primary" type="submit">Yorumu Gonder</button>
-                    </div>
-                </form>
-            </section>
-        @endif
-
-        <section class="listing-block">
-            <h2>Yorumlar</h2>
-            <p class="meta">Bu alanda yalnizca onayli yorumlar gosterilir.</p>
-            @forelse(($publicComments ?? []) as $comment)
-                <div class="card">
-                    <p><strong>{{ $comment->user?->name ?? 'Musteri' }}</strong> <span class="meta">{{ optional($comment->created_at)->format('d.m.Y H:i') }}</span></p>
-                    <p>{{ $comment->content }}</p>
-                    @if(!empty($comment->owner_reply))
-                        <p class="meta"><strong>Firma yaniti:</strong> {{ $comment->owner_reply }}</p>
-                    @endif
-                </div>
-            @empty
-                <p class="meta">Henuz onayli yorum yok.</p>
-            @endforelse
         </section>
 
         @if($item->cover_image_path || (is_array($item->gallery_json) && count($item->gallery_json)))

@@ -9,12 +9,6 @@
     <section class="hero">
         <h1>{{ $heroPage?->title ?: ($siteMeta['tagline'] ?? 'Etkinligine Uygun Muzik Ekibini Bul') }}</h1>
         <p class="page-subtitle">{{ $heroPage?->excerpt ?: ($siteMeta['lead'] ?? 'Yeni sistemde sade ve hizli bir yapida, sehir ve hizmet bazli sayfalarla daha net teklif akisi kuruyoruz.') }}</p>
-        <div class="cta">
-            <a class="btn btn-primary" href="{{ route('listing.index') }}">Ilanlari Incele</a>
-            <a class="btn btn-primary" href="/admin/listings">Ilanlari Yonet</a>
-            <a class="btn btn-secondary" href="/admin/city-pages">Sehir Sayfalari</a>
-            <a class="btn" href="/admin/pages">Icerik Sayfalari</a>
-        </div>
     </section>
 
     <section class="section">
