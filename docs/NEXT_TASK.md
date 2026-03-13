@@ -4,14 +4,15 @@ Durum: `ACTIVE`
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
-## Aktif Gorevler
-1. `TASK-011` - `codex-a` - Runtime izin sertlestirme (startup + preflight).
-2. `TASK-013` - `codex-b` - Hesabim/Owner hibrit akis Faz 2 UI polish.
+## Aktif Gorevler (Tek Kaynak)
+1. `TASK-020` - `codex` - Merge tren koordinasyonu, lock hijyeni ve gate standardizasyonu.
+2. `TASK-021` - `codex-a` - Iki app acceptance/smoke toparlama ve regression temizligi.
+3. `TASK-022` - `codex-b` - Frontend son entegrasyon parity kapanisi.
 
-## Koordinator Notu
-1. Lock/branch sahipligi sadece `TASK_LOCKS.md` uzerinden takip edilir.
-2. Her kapanista zorunlu kanit:
+## Kapanis Kurali (Zorunlu)
+1. Kapanis kaniti olmadan task `closed` edilemez.
+2. Zorunlu kanit paketi:
    - `git branch --show-current`
    - `git status --short`
-   - `pre-pr -Mode quick` PASS
-3. Kapanis almayan gorev `closed` yapilmaz.
+   - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` sonucu `PASS`
+3. Kanit yoksa task durumu `active` kalir.

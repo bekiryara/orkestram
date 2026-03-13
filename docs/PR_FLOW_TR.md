@@ -18,6 +18,16 @@ Amac: Main branch'e sadece kontrollu, testli ve izlenebilir degisim gitsin.
 8. Merge sonrasi:
    - `docs/WORKLOG.md` ve `docs/PROJECT_STATUS_TR.md` guncelle
 
+## Kapanis Kaniti Zorunlu (Yeni)
+1. Task `closed` isaretlemeden once su 3 kanit zorunludur:
+   - `git branch --show-current`
+   - `git status --short`
+   - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` -> `PASS`
+2. Bu kanitlardan biri eksikse:
+   - Task lock satiri `active` kalir.
+   - PR acilsa bile merge edilmez.
+3. Koordinator, `docs/TASK_LOCKS.md` ve `docs/NEXT_TASK.md` uyumsuzlugunu ayni turda duzeltir.
+
 ## Yasaklar
 1. Main'e direkt push
 2. Test calistirmadan PR acma

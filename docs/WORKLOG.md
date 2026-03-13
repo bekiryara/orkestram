@@ -23,6 +23,29 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 
 ---
 
+### [2026-03-13 18:40] TASK-020 Merge Tren Disiplin Kapanisi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - TASK lock hijyeni gercek durumla hizalandi (stale active temizligi + yeni aktifler).
+  - `NEXT_TASK` paneli tek kaynak olacak sekilde sadece 3 aktif gorevle netlestirildi.
+  - PR akisi dokumanina "kapanis kaniti zorunlu" kurali acik eklendi.
+  - `pre-pr` quick cikti/fail nedeni standardize edildi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-020.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/PR_FLOW_TR.md`
+  - `scripts/pre-pr.ps1`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Kapanis kaniti olmayan tasklar aktif tutulur; koordinator paneli lock tablosuyla birebir gider.
+
+---
+
 ### [2026-03-13 23:59] Repo Disiplin Katmani Kurulumu
 - Sorumlu: `codex`
 - Is Ozeti:
