@@ -23,6 +23,22 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 
 ---
 
+### [2026-03-14 13:35] Category Workspace Export Notu (Noop)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `docs/category-workspace/exports/final_tree_manual_review_v1.csv` icin tespit edilen `decision=candidate` uyumsuzlugu runtime etkisi olmayan dokuman/export katmani olarak notlandi.
+  - Bu dosyanin canli kategori sistemi yerine harici kategori veri hazirlama akisi icin kullanildigi teyit edildi.
+- Degisen Dosyalar:
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `dokuman guncelleme (patch)`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Uretim akisinda degisiklik yapilmadi; bug kaydi bilgi amaclidir.
+
+---
+
 ### [2026-03-14 12:10] TASK-024 Kapanisi + Fiyat Faz Task Plani (TASK-025/026/027)
 - Sorumlu: `codex`
 - Is Ozeti:
