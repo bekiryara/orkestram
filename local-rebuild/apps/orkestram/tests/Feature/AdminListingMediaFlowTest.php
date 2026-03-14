@@ -42,6 +42,10 @@ class AdminListingMediaFlowTest extends TestCase
             'unit_no' => '5',
             'service_type' => 'Dugun Orkestrasi',
             'price_label' => 'Premium',
+            'price_min' => '12000',
+            'price_max' => '18000',
+            'currency' => 'TRY',
+            'price_type' => 'range',
             'summary' => 'Bu ozet metni test icin yeterli uzunlukta tutulmustur.',
             'content' => str_repeat('Detay metni. ', 12),
             'whatsapp' => '+90 532 111 22 33',
@@ -74,6 +78,10 @@ class AdminListingMediaFlowTest extends TestCase
         $this->assertSame('+905321112233', $listing->whatsapp);
         $this->assertSame('+902323334455', $listing->phone);
         $this->assertSame(['Canli muzik', '6 kisilik ekip'], $listing->features_json);
+        $this->assertSame('12000.00', (string) $listing->price_min);
+        $this->assertSame('18000.00', (string) $listing->price_max);
+        $this->assertSame('TRY', (string) $listing->currency);
+        $this->assertSame('range', (string) $listing->price_type);
         $this->assertTrue(file_exists(public_path($listing->cover_image_path)));
     }
 
@@ -105,6 +113,10 @@ class AdminListingMediaFlowTest extends TestCase
             'unit_no' => '2',
             'service_type' => 'Bando',
             'price_label' => 'Baslangic',
+            'price_min' => 9000,
+            'price_max' => 15000,
+            'currency' => 'TRY',
+            'price_type' => 'range',
             'summary' => 'Bu ozet metni test icin yeterli uzunlukta tutulmustur.',
             'content' => str_repeat('Detay metni. ', 12),
             'gallery_json' => [
@@ -130,6 +142,10 @@ class AdminListingMediaFlowTest extends TestCase
             'unit_no' => '2',
             'service_type' => 'Bando',
             'price_label' => 'Baslangic',
+            'price_min' => 10000,
+            'price_max' => 16000,
+            'currency' => 'USD',
+            'price_type' => 'starting_from',
             'summary' => 'Bu ozet metni test icin yeterli uzunlukta tutulmustur.',
             'content' => str_repeat('Detay metni. ', 12),
             'gallery_order' => json_encode([
@@ -149,6 +165,10 @@ class AdminListingMediaFlowTest extends TestCase
             ->assertRedirect('/admin/listings?site=orkestram.net');
 
         $listing->refresh();
+        $this->assertSame('10000.00', (string) $listing->price_min);
+        $this->assertSame('16000.00', (string) $listing->price_max);
+        $this->assertSame('USD', (string) $listing->currency);
+        $this->assertSame('starting_from', (string) $listing->price_type);
         $this->assertSame([
             'uploads/listings/sirala-sil-test/c.jpg',
             'uploads/listings/sirala-sil-test/b.jpg',

@@ -97,7 +97,9 @@ if (-not $SkipSync) {
     $wslSourcePath = Convert-WindowsPathToWsl -Path $repoRoot
     Write-Host "[dev-up] sync windows -> wsl"
     $syncCommand = @"
-mkdir -p '$LinuxProjectRoot' && rsync -a --delete \
+set -e
+mkdir -p '$LinuxProjectRoot'
+rsync -a --delete \
   --exclude '.git/' \
   --exclude 'local-rebuild/apps/*/vendor/' \
   --exclude 'local-rebuild/apps/*/storage/' \

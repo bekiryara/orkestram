@@ -5,9 +5,14 @@ Koordinator: `codex`
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
-1. `TASK-020` - `codex` - Merge tren koordinasyonu, lock hijyeni ve gate standardizasyonu.
-2. `TASK-021` - `codex-a` - Iki app acceptance/smoke toparlama ve regression temizligi.
-3. `TASK-022` - `codex-b` - Frontend son entegrasyon parity kapanisi.
+1. `TASK-026` - `codex-b` - Public liste/hizmet kategori fiyat filtre + siralama.
+2. `TASK-027` - `codex-c` - Listing detail structured data Offer (SEO).
+
+## Hazir Tasklar (Atama Bekliyor)
+1. Yeni task acilacaksa once `TASK_LOCKS.md` aktif lock cakismazligi kontrol edilir.
+
+## Son Kapanis
+1. `TASK-025` - Fiyat veri modeli + admin/owner parity tamamlandi (commit `3ff02ff`, pre-pr PASS).
 
 ## Kapanis Kurali (Zorunlu)
 1. Kapanis kaniti olmadan task `closed` edilemez.

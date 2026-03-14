@@ -1,6 +1,6 @@
 ﻿# TASK-024
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex-b`  
 Branch: `agent/codex-b/task-024`  
 Baslangic: `2026-03-14 00:00`
@@ -14,7 +14,7 @@ Baslangic: `2026-03-14 00:00`
 - [x] Fiyat `price_label` alanindan gelir.
 - [x] Kart ozellik satirlari kategori attribute sisteminden (kartta gorunur secilenler) gelir.
 - [x] Iki app parity saglanir.
-- [ ] `pre-pr -Mode quick` PASS.
+- [x] `pre-pr -Mode quick` PASS.
 
 ## Out of Scope
 - [x] Rating motoru (gercek puan hesaplama) gelistirme.
@@ -55,4 +55,12 @@ Baslangic: `2026-03-14 00:00`
 - [x] Fiyat her kartta ayni bolgede ve vurgulu.
 - [x] Ozellik satirlari adminde karta acilan alanlardan gelir.
 - [x] Yorum sayisi gercek veriden gorunur.
-- [ ] `pre-pr` PASS.
+- [x] `pre-pr` PASS.
+
+## Kapanis Kaniti
+- Commit: `3462d6e`
+- PR: `https://github.com/bekiryara/orkestram/pull/new/agent/codex-b/task-024`
+- Dogrulama:
+  - `git branch --show-current`
+  - `git status --short`
+  - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` -> PASS
