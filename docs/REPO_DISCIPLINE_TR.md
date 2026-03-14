@@ -19,7 +19,7 @@ Windows dizini:
 Kural:
 1. "Kod degisti ama calismiyor" durumunda ilk kontrol mount kaynagi olmalidir.
 2. WSL disinda calistirilan kod referans alinmaz.
-3. Stack ayağa kaldirma komutu standarttir:
+3. Stack ayaÄŸa kaldirma komutu standarttir:
    - `powershell -ExecutionPolicy Bypass -File scripts/dev-up.ps1 -App both`
 4. Dogrudan `docker compose up` ile manuel calistirma yapilmaz (yanlis mount riski).
 
@@ -140,3 +140,13 @@ Kurulum komutu:
 Dogrulama:
 1. Her klasorde `git branch --show-current` => `main`
 2. Her klasorde `git status --short` bos olmalidir.
+
+## 12) Dokuman Duzenleme Disiplini (Koordinator)
+
+Kural:
+1. Dokumanlarda toplu regex/replace ile coklu alan degisimi yapilmaz.
+2. Degisimler minimum kapsamda, satir bazli ve hedef odakli yapilir.
+3. Her dosya guncellemesinden hemen sonra dosya yeniden okunup kontrol edilir.
+4. Task dosyalari `docs/tasks/_TEMPLATE.md` baslik sirasina birebir uyar.
+5. Belge guncellemelerinde `main` yerine `agent/<ajan>/<task-id>` branch disiplini zorunludur.
+6. Kapanis oncesi zorunlu kapi: `pre-pr -Mode quick` PASS.

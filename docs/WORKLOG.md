@@ -525,3 +525,40 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - PASS
 - Not:
   - Dokuman drift'i kapatildi; branch kurali gent/<ajan>/<task-id> ile hizalandi.
+
+### [2026-03-15 01:07] TASK-030 Baslangic (Belge Duzenleme Disiplini)
+- Sorumlu: codex
+- Is Ozeti:
+  - Koordinator icin minimal degisim + satir bazli belge duzenleme kurali repo disiplinine baglandi.
+  - TASK-030 resmi kaydi ve lock acilisi tamamlandi.
+- Degisen Dosyalar:
+  - docs/tasks/TASK-030.md
+  - docs/REPO_DISCIPLINE_TR.md
+  - docs/TASK_LOCKS.md
+  - docs/NEXT_TASK.md
+  - docs/WORKLOG.md
+- Calistirilan Komutlar:
+  - powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick
+- Sonuc:
+  - IN_PROGRESS
+- Not:
+  - git fetch --all --prune ag erisimi nedeniyle fail.
+
+### [2026-03-15 01:11] TASK-030 Resmi Kapanis
+- Sorumlu: codex
+- Is Ozeti:
+  - TASK-030 durumu DONE olarak guncellendi.
+  - Lock kaydi closed yapildi ve pano FROZEN moduna alindi.
+  - Zorunlu kapanis kaniti olarak pre-pr -Mode quick PASS dogrulandi.
+- Degisen Dosyalar:
+  - docs/tasks/TASK-030.md
+  - docs/REPO_DISCIPLINE_TR.md
+  - docs/TASK_LOCKS.md
+  - docs/NEXT_TASK.md
+  - docs/WORKLOG.md
+- Calistirilan Komutlar:
+  - powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick
+- Sonuc:
+  - PASS
+- Not:
+  - Koordinator icin minimal degisim + satir bazli belge duzenleme kurali resmi hale getirildi.

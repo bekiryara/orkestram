@@ -12,9 +12,9 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
 2. Sonraki tasklar yalnizca koordinator onayi ile acilacak.
 
 ## Son Kapanis
-1. `TASK-029` - Dokuman drift hizalama tamamlandi (pre-pr PASS).
-2. `TASK-028` - WSL tek-kaynak runtime stabilizasyonu tamamlandi (commit `f592646`, pre-pr PASS).
-3. `TASK-027` - Listing detail Offer schema tamamlandi (commit `a8e818c`, pre-pr PASS).
+1. `TASK-030` - Belge duzenleme disiplini resmi kurala baglandi (pre-pr PASS).
+2. `TASK-029` - Dokuman drift hizalama tamamlandi (pre-pr PASS).
+3. `TASK-028` - WSL tek-kaynak runtime stabilizasyonu tamamlandi (commit `f592646`, pre-pr PASS).
 
 ## Kapanis Kurali (Zorunlu)
 1. Kapanis kaniti olmadan task `closed` edilemez.
