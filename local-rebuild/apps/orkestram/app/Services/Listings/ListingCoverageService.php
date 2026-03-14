@@ -22,12 +22,18 @@ class ListingCoverageService
     }
 
     /**
-     * @return array<int, array{city:string,district:string}>
+     * @return array<int, array{city:string,district:string,city_id:?int,district_id:?int}>
      */
     private function parseRawText(?string $raw): array
     {
-        if ($raw === null) {
+        $raw = trim((string) $raw);
+        if ($raw === '') {
             return [];
+        }
+
+        $jsonAreas = $this->parseJsonAreas($raw);
+        if ($jsonAreas !== []) {
+            return $jsonAreas;
         }
 
         $lines = preg_split('/\r\n|\r|\n/', $raw) ?: [];
@@ -35,7 +41,7 @@ class ListingCoverageService
         $rows = [];
 
         foreach ($lines as $line) {
-            [$city, $district] = $this->parseLine($line);
+            [$city, $district] = $this->parseLine((string) $line);
             if ($city === '') {
                 continue;
             }
@@ -49,6 +55,57 @@ class ListingCoverageService
             $rows[] = [
                 'city' => $city,
                 'district' => $district,
+                'city_id' => null,
+                'district_id' => null,
+            ];
+        }
+
+        return $rows;
+    }
+
+    /**
+     * @return array<int, array{city:string,district:string,city_id:?int,district_id:?int}>
+     */
+    private function parseJsonAreas(string $raw): array
+    {
+        if (!str_starts_with($raw, '[')) {
+            return [];
+        }
+
+        $decoded = json_decode($raw, true);
+        if (!is_array($decoded)) {
+            return [];
+        }
+
+        $rows = [];
+        $seen = [];
+        foreach ($decoded as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
+            $city = trim((string) ($item['city'] ?? ''));
+            $district = trim((string) ($item['district'] ?? ''));
+            $cityId = isset($item['city_id']) && is_numeric($item['city_id']) ? (int) $item['city_id'] : null;
+            $districtId = isset($item['district_id']) && is_numeric($item['district_id']) ? (int) $item['district_id'] : null;
+
+            if ($city === '' && $cityId === null) {
+                continue;
+            }
+
+            $key = ($cityId !== null ? ('c:' . $cityId) : ('cs:' . mb_strtolower($city)))
+                . '|'
+                . ($districtId !== null ? ('d:' . $districtId) : ('ds:' . mb_strtolower($district)));
+            if (isset($seen[$key])) {
+                continue;
+            }
+            $seen[$key] = true;
+
+            $rows[] = [
+                'city' => $city,
+                'district' => $district,
+                'city_id' => $cityId,
+                'district_id' => $districtId,
             ];
         }
 
@@ -83,48 +140,69 @@ class ListingCoverageService
     }
 
     /**
-     * @param array<int, array{city:string,district:string}> $areas
+     * @param array<int, array{city:string,district:string,city_id:?int,district_id:?int}> $areas
      * @return array<int, array{city_id:?int,district_id:?int,city:string,district:string}>
      */
     private function attachLocationIds(array $areas): array
     {
         if ($areas === [] || !City::query()->exists()) {
             return array_map(static fn(array $row): array => [
-                'city_id' => null,
-                'district_id' => null,
-                'city' => $row['city'],
-                'district' => $row['district'],
+                'city_id' => isset($row['city_id']) && is_numeric($row['city_id']) ? (int) $row['city_id'] : null,
+                'district_id' => isset($row['district_id']) && is_numeric($row['district_id']) ? (int) $row['district_id'] : null,
+                'city' => (string) ($row['city'] ?? ''),
+                'district' => (string) ($row['district'] ?? ''),
             ], $areas);
         }
 
-        $citiesByKey = City::query()
-            ->select(['id', 'name'])
-            ->get()
-            ->keyBy(fn(City $city): string => mb_strtolower(trim((string) $city->name)));
+        $cities = City::query()->select(['id', 'name'])->get();
+        $citiesById = $cities->keyBy('id');
+        $citiesByKey = $cities->keyBy(fn(City $city): string => mb_strtolower(trim((string) $city->name)));
 
-        $districtByCity = District::query()
-            ->select(['id', 'city_id', 'name'])
-            ->get()
+        $districts = District::query()->select(['id', 'city_id', 'name'])->get();
+        $districtByCity = $districts
             ->groupBy('city_id')
             ->map(fn($rows) => $rows->keyBy(fn(District $district): string => mb_strtolower(trim((string) $district->name))));
+        $districtById = $districts->keyBy('id');
 
         $normalized = [];
         $seen = [];
         foreach ($areas as $row) {
             $cityName = trim((string) ($row['city'] ?? ''));
             $districtName = trim((string) ($row['district'] ?? ''));
-            if ($cityName === '') {
+            $cityId = isset($row['city_id']) && is_numeric($row['city_id']) ? (int) $row['city_id'] : null;
+            $districtId = isset($row['district_id']) && is_numeric($row['district_id']) ? (int) $row['district_id'] : null;
+
+            if ($cityId !== null) {
+                $city = $citiesById->get($cityId);
+                if ($city) {
+                    $cityName = (string) $city->name;
+                } else {
+                    $cityId = null;
+                }
+            }
+
+            if ($cityId === null && $cityName !== '') {
+                $city = $citiesByKey->get(mb_strtolower($cityName));
+                if ($city) {
+                    $cityId = (int) $city->id;
+                    $cityName = (string) $city->name;
+                }
+            }
+
+            if ($cityId === null && $cityName === '') {
                 continue;
             }
 
-            $city = $citiesByKey->get(mb_strtolower($cityName));
-            $cityId = $city ? (int) $city->id : null;
-            if ($city) {
-                $cityName = (string) $city->name;
+            if ($districtId !== null) {
+                $district = $districtById->get($districtId);
+                if ($district && (int) $district->city_id === (int) $cityId) {
+                    $districtName = (string) $district->name;
+                } else {
+                    $districtId = null;
+                }
             }
 
-            $districtId = null;
-            if ($districtName !== '' && $cityId !== null) {
+            if ($districtId === null && $districtName !== '' && $cityId !== null) {
                 $district = $districtByCity->get($cityId)?->get(mb_strtolower($districtName));
                 if ($district) {
                     $districtId = (int) $district->id;
