@@ -120,6 +120,7 @@ class PublicController extends Controller
         $categorySlug = trim((string) $request->query('category'));
         $search = trim((string) $request->query('q'));
         $sort = trim((string) $request->query('sort', 'recommended'));
+        [$priceMin, $priceMax] = $this->readPriceRange($request);
 
         if ($city !== '') {
             $baseQuery->matchCoverage($city, $district, $cityId > 0 ? $cityId : null, $districtId > 0 ? $districtId : null);
@@ -223,27 +224,40 @@ class PublicController extends Controller
             }
         }
 
-        switch ($sort) {
-            case 'name_asc':
-                $baseQuery->orderBy('name');
-                break;
-            case 'name_desc':
-                $baseQuery->orderByDesc('name');
-                break;
-            case 'oldest':
-                $baseQuery->orderBy('published_at')->orderBy('id');
-                break;
-            case 'newest':
-                $baseQuery->orderByDesc('published_at')->orderByDesc('id');
-                break;
-            default:
-                $sort = 'recommended';
-                $baseQuery->orderByDesc('published_at')->orderByDesc('id');
-                break;
+        $allowedSorts = ['recommended', 'newest', 'oldest', 'name_asc', 'name_desc', 'price_asc', 'price_desc'];
+        if (!in_array($sort, $allowedSorts, true)) {
+            $sort = 'recommended';
         }
 
-        /** @var LengthAwarePaginator $items */
-        $items = $baseQuery->paginate(9)->withQueryString();
+        $requiresPricePipeline = $priceMin !== null || $priceMax !== null || in_array($sort, ['price_asc', 'price_desc'], true);
+
+        if ($requiresPricePipeline) {
+            $rawRows = $baseQuery->orderByDesc('published_at')->orderByDesc('id')->get();
+            $sortedRows = $this->applyListingSortAndPriceFilter($rawRows, $sort, $priceMin, $priceMax);
+            $items = $this->paginateCollection($sortedRows, 9, $request);
+        } else {
+            switch ($sort) {
+                case 'name_asc':
+                    $baseQuery->orderBy('name');
+                    break;
+                case 'name_desc':
+                    $baseQuery->orderByDesc('name');
+                    break;
+                case 'oldest':
+                    $baseQuery->orderBy('published_at')->orderBy('id');
+                    break;
+                case 'newest':
+                    $baseQuery->orderByDesc('published_at')->orderByDesc('id');
+                    break;
+                default:
+                    $sort = 'recommended';
+                    $baseQuery->orderByDesc('published_at')->orderByDesc('id');
+                    break;
+            }
+
+            /** @var LengthAwarePaginator $items */
+            $items = $baseQuery->paginate(9)->withQueryString();
+        }
         $cardAttributesByListing = [];
         foreach ($items->items() as $listing) {
             if (!$listing instanceof Listing) {
@@ -316,6 +330,8 @@ class PublicController extends Controller
             'categorySlug',
             'search',
             'sort',
+            'priceMin',
+            'priceMax',
             'cities',
             'districts',
             'districtMap',
@@ -381,7 +397,9 @@ class PublicController extends Controller
             ->where('is_active', true)
             ->firstOrFail();
 
-        $items = Listing::query()
+        [$priceMin, $priceMax] = $this->readPriceRange($request);
+
+        $itemsQuery = Listing::query()
             ->with([
                 'category:id,name,slug',
                 'attributeValues.attribute:id,label,field_type,is_active,is_visible_in_card,is_visible_in_detail',
@@ -396,9 +414,15 @@ class PublicController extends Controller
                 (int) $request->query('district_id', 0)
             )
             ->orderByDesc('published_at')
-            ->orderByDesc('id')
-            ->paginate(12)
-            ->withQueryString();
+            ->orderByDesc('id');
+
+        if ($priceMin !== null || $priceMax !== null) {
+            $rows = $itemsQuery->get();
+            $filteredRows = $this->applyListingSortAndPriceFilter($rows, 'recommended', $priceMin, $priceMax);
+            $items = $this->paginateCollection($filteredRows, 12, $request);
+        } else {
+            $items = $itemsQuery->paginate(12)->withQueryString();
+        }
         $cardAttributesByListing = [];
         foreach ($items->items() as $listing) {
             if (!$listing instanceof Listing) {
@@ -420,7 +444,9 @@ class PublicController extends Controller
             'cardAttributesByListing',
             'canonicalUrl',
             'metaRobots',
-            'isEmpty'
+            'isEmpty',
+            'priceMin',
+            'priceMax'
         ));
     }
 
@@ -442,7 +468,9 @@ class PublicController extends Controller
             return redirect()->route('service-category.city', ['slug' => $category->slug, 'city' => $canonicalCitySlug], 301);
         }
 
-        $items = Listing::query()
+        [$priceMin, $priceMax] = $this->readPriceRange($request);
+
+        $itemsQuery = Listing::query()
             ->with([
                 'category:id,name,slug',
                 'attributeValues.attribute:id,label,field_type,is_active,is_visible_in_card,is_visible_in_detail',
@@ -452,9 +480,15 @@ class PublicController extends Controller
             ->where('category_id', $category->id)
             ->matchCoverage($resolvedCity, null, $resolvedCityId > 0 ? $resolvedCityId : null, null)
             ->orderByDesc('published_at')
-            ->orderByDesc('id')
-            ->paginate(12)
-            ->withQueryString();
+            ->orderByDesc('id');
+
+        if ($priceMin !== null || $priceMax !== null) {
+            $rows = $itemsQuery->get();
+            $filteredRows = $this->applyListingSortAndPriceFilter($rows, 'recommended', $priceMin, $priceMax);
+            $items = $this->paginateCollection($filteredRows, 12, $request);
+        } else {
+            $items = $itemsQuery->paginate(12)->withQueryString();
+        }
         $cardAttributesByListing = [];
         foreach ($items->items() as $listing) {
             if (!$listing instanceof Listing) {
@@ -476,7 +510,9 @@ class PublicController extends Controller
             'cardAttributesByListing',
             'canonicalUrl',
             'metaRobots',
-            'isEmpty'
+            'isEmpty',
+            'priceMin',
+            'priceMax'
         ));
     }
 
@@ -515,7 +551,9 @@ class PublicController extends Controller
             ], 301);
         }
 
-        $items = Listing::query()
+        [$priceMin, $priceMax] = $this->readPriceRange($request);
+
+        $itemsQuery = Listing::query()
             ->with([
                 'category:id,name,slug',
                 'attributeValues.attribute:id,label,field_type,is_active,is_visible_in_card,is_visible_in_detail',
@@ -530,9 +568,15 @@ class PublicController extends Controller
                 $resolvedDistrictId > 0 ? $resolvedDistrictId : null
             )
             ->orderByDesc('published_at')
-            ->orderByDesc('id')
-            ->paginate(12)
-            ->withQueryString();
+            ->orderByDesc('id');
+
+        if ($priceMin !== null || $priceMax !== null) {
+            $rows = $itemsQuery->get();
+            $filteredRows = $this->applyListingSortAndPriceFilter($rows, 'recommended', $priceMin, $priceMax);
+            $items = $this->paginateCollection($filteredRows, 12, $request);
+        } else {
+            $items = $itemsQuery->paginate(12)->withQueryString();
+        }
         $cardAttributesByListing = [];
         foreach ($items->items() as $listing) {
             if (!$listing instanceof Listing) {
@@ -554,7 +598,9 @@ class PublicController extends Controller
             'cardAttributesByListing',
             'canonicalUrl',
             'metaRobots',
-            'isEmpty'
+            'isEmpty',
+            'priceMin',
+            'priceMax'
         ));
     }
 
@@ -839,5 +885,121 @@ class PublicController extends Controller
         }
 
         return $map;
+    }
+
+    private function readPriceRange(Request $request): array
+    {
+        $parse = static function (string $key) use ($request): ?float {
+            $raw = trim((string) $request->query($key, ''));
+            if ($raw === '') {
+                return null;
+            }
+
+            $normalized = str_replace(',', '.', $raw);
+            if (!is_numeric($normalized)) {
+                return null;
+            }
+
+            return (float) $normalized;
+        };
+
+        $min = $parse('price_min');
+        $max = $parse('price_max');
+
+        if ($min !== null && $max !== null && $min > $max) {
+            [$min, $max] = [$max, $min];
+        }
+
+        return [$min, $max];
+    }
+
+    private function applyListingSortAndPriceFilter(
+        Collection $rows,
+        string $sort,
+        ?float $priceMin,
+        ?float $priceMax
+    ): Collection {
+        $metaRows = $rows->map(function (Listing $listing): array {
+            return [
+                'listing' => $listing,
+                'price' => $this->numericPriceFromLabel($listing->price_label),
+                'published_at' => optional($listing->published_at)->getTimestamp() ?? 0,
+                'name' => mb_strtolower((string) $listing->name),
+                'id' => (int) $listing->id,
+            ];
+        });
+
+        if ($priceMin !== null || $priceMax !== null) {
+            $metaRows = $metaRows->filter(function (array $row) use ($priceMin, $priceMax): bool {
+                $price = $row['price'];
+                if ($price === null) {
+                    return false;
+                }
+                if ($priceMin !== null && $price < $priceMin) {
+                    return false;
+                }
+                if ($priceMax !== null && $price > $priceMax) {
+                    return false;
+                }
+                return true;
+            })->values();
+        }
+
+        $sorted = match ($sort) {
+            'name_asc' => $metaRows->sortBy(fn(array $row): string => $row['name']),
+            'name_desc' => $metaRows->sortByDesc(fn(array $row): string => $row['name']),
+            'oldest' => $metaRows->sortBy(fn(array $row): string => sprintf('%020d-%020d', $row['published_at'], $row['id'])),
+            'newest', 'recommended' => $metaRows->sortByDesc(fn(array $row): string => sprintf('%020d-%020d', $row['published_at'], $row['id'])),
+            'price_asc' => $metaRows->sortBy(fn(array $row): string => sprintf(
+                '%d-%020.6f-%020d',
+                $row['price'] === null ? 1 : 0,
+                $row['price'] ?? 0.0,
+                $row['id']
+            )),
+            'price_desc' => $metaRows->sortBy(fn(array $row): string => sprintf(
+                '%d-%020.6f-%020d',
+                $row['price'] === null ? 1 : 0,
+                $row['price'] === null ? 0.0 : (999999999999.0 - $row['price']),
+                999999999999 - $row['id']
+            )),
+            default => $metaRows->sortByDesc(fn(array $row): string => sprintf('%020d-%020d', $row['published_at'], $row['id'])),
+        };
+
+        return $sorted->values()->map(fn(array $row): Listing => $row['listing']);
+    }
+
+    private function numericPriceFromLabel(?string $priceLabel): ?float
+    {
+        $label = trim((string) $priceLabel);
+        if ($label === '') {
+            return null;
+        }
+
+        if (!preg_match('/\d+(?:[.,]\d+)?/', $label, $matches)) {
+            return null;
+        }
+
+        $numeric = str_replace(',', '.', (string) $matches[0]);
+        return is_numeric($numeric) ? (float) $numeric : null;
+    }
+
+    private function paginateCollection(Collection $rows, int $perPage, Request $request): LengthAwarePaginator
+    {
+        $page = LengthAwarePaginator::resolveCurrentPage();
+        $total = $rows->count();
+        $items = $rows->slice(($page - 1) * $perPage, $perPage)->values();
+
+        $paginator = new LengthAwarePaginator(
+            $items,
+            $total,
+            $perPage,
+            $page,
+            [
+                'path' => $request->url(),
+                'query' => $request->query(),
+            ]
+        );
+
+        return $paginator->withQueryString();
     }
 }

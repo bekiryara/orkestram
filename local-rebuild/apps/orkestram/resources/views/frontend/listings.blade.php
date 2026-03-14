@@ -122,6 +122,16 @@
                     </label>
 
                     <label>
+                        <span>Fiyat Min</span>
+                        <input type="number" step="0.01" min="0" name="price_min" value="{{ $priceMin ?? '' }}" placeholder="Orn: 1000">
+                    </label>
+
+                    <label>
+                        <span>Fiyat Max</span>
+                        <input type="number" step="0.01" min="0" name="price_max" value="{{ $priceMax ?? '' }}" placeholder="Orn: 5000">
+                    </label>
+
+                    <label>
                         <span>Sirala</span>
                         <select name="sort">
                             <option value="recommended" @selected($sort === 'recommended')>Onerilen</option>
@@ -129,6 +139,8 @@
                             <option value="oldest" @selected($sort === 'oldest')>En Eski</option>
                             <option value="name_asc" @selected($sort === 'name_asc')>A-Z</option>
                             <option value="name_desc" @selected($sort === 'name_desc')>Z-A</option>
+                            <option value="price_asc" @selected($sort === 'price_asc')>Fiyat Artan</option>
+                            <option value="price_desc" @selected($sort === 'price_desc')>Fiyat Azalan</option>
                         </select>
                     </label>
                 </div>

@@ -23,22 +23,19 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 
 ---
 
-### [2026-03-14 13:10] TASK-025 Resmi Kapanis + Aktif Islerin Daraltilmasi
+### [2026-03-14 13:35] Category Workspace Export Notu (Noop)
 - Sorumlu: `codex`
 - Is Ozeti:
-  - TASK-025 lock kaydi resmi olarak `closed` yapildi.
-  - NEXT_TASK aktif listesi TASK-026 ve TASK-027 olarak daraltildi.
-  - TASK-026 notuna "gecici durdurma/temiz kapsamla devam" notu eklendi.
+  - `docs/category-workspace/exports/final_tree_manual_review_v1.csv` icin tespit edilen `decision=candidate` uyumsuzlugu runtime etkisi olmayan dokuman/export katmani olarak notlandi.
+  - Bu dosyanin canli kategori sistemi yerine harici kategori veri hazirlama akisi icin kullanildigi teyit edildi.
 - Degisen Dosyalar:
-  - `docs/TASK_LOCKS.md`
-  - `docs/NEXT_TASK.md`
   - `docs/WORKLOG.md`
 - Calistirilan Komutlar:
   - `dokuman guncelleme (patch)`
 - Sonuc:
   - `PASS`
 - Not:
-  - Kod agacindaki lock-disi degisiklikler korunmustur; bu kayit sadece koordinasyon dokumanidir.
+  - Uretim akisinda degisiklik yapilmadi; bug kaydi bilgi amaclidir.
 
 ---
 

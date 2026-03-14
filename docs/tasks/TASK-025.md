@@ -10,7 +10,7 @@ Baslangic: `2026-03-14 00:00`
 
 ## In Scope
 - [x] Iki appte DB/model katmanina yapisal fiyat alanlari eklendi.
-- [x] Admin ve owner form kurallari parity olacak sekilde guncellendi.
+- [x] Admin ve owner form validasyonlari parity olacak sekilde guncellendi.
 - [x] Kayit/guncelleme akisinda `price_label` + yapisal alanlar birlikte korundu.
 - [x] Temel feature test ile fiyat alanlarinin kaydi dogrulandi.
 - [x] `pre-pr -Mode quick` PASS.
@@ -32,8 +32,8 @@ Baslangic: `2026-03-14 00:00`
 - `local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-create.blade.php`
 - `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-edit.blade.php`
 - `local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-edit.blade.php`
-- `local-rebuild/apps/orkestram/tests/Feature/PriceModelParityTest.php`
-- `local-rebuild/apps/izmirorkestra/tests/Feature/PriceModelParityTest.php`
+- `local-rebuild/apps/orkestram/tests/Feature/**`
+- `local-rebuild/apps/izmirorkestra/tests/Feature/**`
 
 ## Kabul Kriteri
 - [x] Admin/owner panelinde fiyat alanlari ayni kuralla calisir.
@@ -49,5 +49,7 @@ powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode q
 ## Notlar
 - Risk: mevcut veriyi bozmamak icin migration nullable + geriye uyumlu olmalidir.
 - Kapanis kaniti:
-  - `git branch --show-current` => `agent/codex-a/task-025`
-  - `pre-pr -Mode quick` => `PASS`
+  - Branch: `agent/codex-a/task-025`
+  - Commit: `3ff02ff`
+  - PR: `https://github.com/bekiryara/orkestram/pull/new/agent/codex-a/task-025`
+  - `pre-pr -Mode quick` -> PASS
