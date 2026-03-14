@@ -30,6 +30,10 @@ class Listing extends Model
         'address_note',
         'service_type',
         'price_label',
+        'price_min',
+        'price_max',
+        'currency',
+        'price_type',
         'cover_image_path',
         'gallery_json',
         'whatsapp',
@@ -47,8 +51,50 @@ class Listing extends Model
         'meta_json' => 'array',
         'gallery_json' => 'array',
         'features_json' => 'array',
+        'price_min' => 'decimal:2',
+        'price_max' => 'decimal:2',
         'published_at' => 'datetime',
     ];
+
+    protected static function booted(): void
+    {
+        static::saving(function (self $listing): void {
+            $request = request();
+            if (!$request) {
+                return;
+            }
+
+            $hasStructuredInput = $request->hasAny(['price_min', 'price_max', 'currency', 'price_type']);
+            if (!$hasStructuredInput && !$request->has('price_label')) {
+                return;
+            }
+
+            if ($request->has('price_label')) {
+                $listing->price_label = self::normalizeText($request->input('price_label'));
+            }
+
+            if ($hasStructuredInput) {
+                $listing->price_min = self::normalizeMoney($request->input('price_min'));
+                $listing->price_max = self::normalizeMoney($request->input('price_max'));
+
+                $currency = self::normalizeCurrency($request->input('currency'));
+                if ($currency === null && ($listing->price_min !== null || $listing->price_max !== null)) {
+                    $currency = 'TRY';
+                }
+                $listing->currency = $currency;
+                $listing->price_type = self::normalizePriceType($request->input('price_type'));
+            }
+
+            if (self::normalizeText($listing->price_label) === null) {
+                $listing->price_label = self::buildPriceLabel(
+                    $listing->price_min !== null ? (float) $listing->price_min : null,
+                    $listing->price_max !== null ? (float) $listing->price_max : null,
+                    self::normalizeCurrency($listing->currency),
+                    self::normalizePriceType($listing->price_type)
+                );
+            }
+        });
+    }
 
     public function category(): BelongsTo
     {
@@ -194,5 +240,93 @@ class Listing extends Model
             })
             ->filter(fn(string $line) => $line !== '')
             ->implode("\n");
+    }
+
+    private static function normalizeText(mixed $value): ?string
+    {
+        $normalized = trim((string) ($value ?? ''));
+        return $normalized === '' ? null : $normalized;
+    }
+
+    private static function normalizeMoney(mixed $value): ?float
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        $raw = trim((string) $value);
+        if ($raw === '') {
+            return null;
+        }
+
+        $raw = str_replace([' ', ','], ['', '.'], $raw);
+        if (!is_numeric($raw)) {
+            return null;
+        }
+
+        $amount = (float) $raw;
+        if ($amount < 0) {
+            return null;
+        }
+
+        return round($amount, 2);
+    }
+
+    private static function normalizeCurrency(mixed $value): ?string
+    {
+        $raw = self::normalizeText($value);
+        if ($raw === null) {
+            return null;
+        }
+
+        $currency = strtoupper($raw);
+        if (!preg_match('/^[A-Z]{3}$/', $currency)) {
+            return null;
+        }
+
+        return $currency;
+    }
+
+    private static function normalizePriceType(mixed $value): ?string
+    {
+        $raw = self::normalizeText($value);
+        if ($raw === null) {
+            return null;
+        }
+
+        $allowed = ['fixed', 'starting_from', 'range', 'hourly', 'daily', 'label_only'];
+        return in_array($raw, $allowed, true) ? $raw : null;
+    }
+
+    private static function buildPriceLabel(?float $min, ?float $max, ?string $currency, ?string $priceType): ?string
+    {
+        if ($min === null && $max === null) {
+            return null;
+        }
+
+        $currency = $currency ?? 'TRY';
+        $minText = $min !== null ? self::formatMoney($min) : null;
+        $maxText = $max !== null ? self::formatMoney($max) : null;
+
+        if ($priceType === 'starting_from' && $minText !== null) {
+            return $minText . ' ' . $currency . " 'den baslar";
+        }
+
+        if ($minText !== null && $maxText !== null) {
+            return $minText . ' - ' . $maxText . ' ' . $currency;
+        }
+
+        if ($minText !== null) {
+            return $minText . ' ' . $currency;
+        }
+
+        return $maxText !== null ? ($maxText . ' ' . $currency) : null;
+    }
+
+    private static function formatMoney(float $value): string
+    {
+        $formatted = number_format($value, 2, '.', '');
+        $formatted = rtrim(rtrim($formatted, '0'), '.');
+        return $formatted;
     }
 }

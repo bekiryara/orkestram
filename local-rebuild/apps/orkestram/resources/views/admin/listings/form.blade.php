@@ -187,6 +187,37 @@
                         <label class="form-label">Fiyat Etiketi *</label>
                         <input name="price_label" class="form-control" value="{{ old('price_label', $item->price_label) }}" required>
                     </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Fiyat Min</label>
+                        <input name="price_min" type="number" step="0.01" min="0" class="form-control" value="{{ old('price_min', $item->price_min) }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Fiyat Max</label>
+                        <input name="price_max" type="number" step="0.01" min="0" class="form-control" value="{{ old('price_max', $item->price_max) }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Para Birimi</label>
+                        @php($currencyVal = strtoupper((string) old('currency', $item->currency ?: 'TRY')))
+                        <select name="currency" class="form-select">
+                            <option value="">Seciniz</option>
+                            <option value="TRY" @selected($currencyVal === 'TRY')>TRY</option>
+                            <option value="USD" @selected($currencyVal === 'USD')>USD</option>
+                            <option value="EUR" @selected($currencyVal === 'EUR')>EUR</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Fiyat Tipi</label>
+                        @php($priceTypeVal = old('price_type', $item->price_type))
+                        <select name="price_type" class="form-select">
+                            <option value="">Seciniz</option>
+                            <option value="fixed" @selected($priceTypeVal === 'fixed')>Sabit</option>
+                            <option value="starting_from" @selected($priceTypeVal === 'starting_from')>Baslangic Fiyati</option>
+                            <option value="range" @selected($priceTypeVal === 'range')>Aralik</option>
+                            <option value="hourly" @selected($priceTypeVal === 'hourly')>Saatlik</option>
+                            <option value="daily" @selected($priceTypeVal === 'daily')>Gunluk</option>
+                            <option value="label_only" @selected($priceTypeVal === 'label_only')>Sadece Etiket</option>
+                        </select>
+                    </div>
                     <div class="col-12">
                         <label class="form-label">Ozet * (30-500 karakter)</label>
                         <textarea name="summary" class="form-control" rows="3" required>{{ old('summary', $item->summary) }}</textarea>
