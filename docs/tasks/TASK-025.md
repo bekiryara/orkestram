@@ -1,0 +1,50 @@
+# TASK-025
+
+Durum: `TODO`  
+Ajan: `codex-a`  
+Branch: `agent/codex-a/task-025`  
+Baslangic: `2026-03-14 00:00`
+
+## Ozet
+- Fiyat alanini serbest metinden yapisal modele tasi (geri uyumlu): `price_label` korunurken `price_min`, `price_max`, `currency`, `price_type` eklensin.
+
+## In Scope
+- [ ] Iki appte DB/model katmanina yapisal fiyat alanlari eklenir.
+- [ ] Admin ve owner form validasyonlari parity olacak sekilde guncellenir.
+- [ ] Kayit/guncelleme akisinda `price_label` + yapisal alanlar birlikte korunur.
+- [ ] En az temel feature test ile fiyat alanlarinin kaydi dogrulanir.
+- [ ] `pre-pr -Mode quick` PASS.
+
+## Out of Scope
+- [ ] Public filtre/siralama davranisi (TASK-026).
+- [ ] SEO structured data (TASK-027).
+- [ ] Tarihsel toplu backfill komutu.
+
+## Lock Dosyalari
+- `docs/tasks/TASK-025.md`
+- `local-rebuild/apps/orkestram/database/migrations/**`
+- `local-rebuild/apps/izmirorkestra/database/migrations/**`
+- `local-rebuild/apps/orkestram/app/Models/Listing.php`
+- `local-rebuild/apps/izmirorkestra/app/Models/Listing.php`
+- `local-rebuild/apps/orkestram/resources/views/admin/listings/form.blade.php`
+- `local-rebuild/apps/izmirorkestra/resources/views/admin/listings/form.blade.php`
+- `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-create.blade.php`
+- `local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-create.blade.php`
+- `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-edit.blade.php`
+- `local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-edit.blade.php`
+- `local-rebuild/apps/orkestram/tests/Feature/**`
+- `local-rebuild/apps/izmirorkestra/tests/Feature/**`
+
+## Kabul Kriteri
+- [ ] Admin/owner panelinde fiyat alanlari ayni kuralla calisir.
+- [ ] `price_label` geriye uyumlu kalir.
+- [ ] Yeni yapisal alanlar DB'de kalici saklanir.
+- [ ] `pre-pr` PASS.
+
+## Komutlar
+```powershell
+powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick
+```
+
+## Notlar
+- Risk: mevcut veriyi bozmamak icin migration nullable + geriye uyumlu olmalidir.

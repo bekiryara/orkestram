@@ -23,6 +23,32 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 
 ---
 
+### [2026-03-14 12:10] TASK-024 Kapanisi + Fiyat Faz Task Plani (TASK-025/026/027)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - TASK-024 resmi olarak kapatildi (`DONE`, pre-pr PASS, kapanis kaniti eklendi).
+  - Fiyat alanini uctan uca guclendirmek icin 3 paralel gorev acildi:
+    - TASK-025: veri modeli + admin/owner parity
+    - TASK-026: public filtre/siralama
+    - TASK-027: listing detail structured data Offer
+  - Lock tablosu ve NEXT_TASK panosu yeni aktif gorevlerle senkronlandi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-024.md`
+  - `docs/tasks/TASK-025.md`
+  - `docs/tasks/TASK-026.md`
+  - `docs/tasks/TASK-027.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `dokuman guncelleme (patch)`
+- Sonuc:
+  - `PASS`
+- Not:
+  - TASK-025/026/027 lock cakismazligi planlandi; ortak test klasorleri icin merge sirasinda dikkat gereklidir.
+
+---
+
 ### [2026-03-13 18:40] TASK-020 Merge Tren Disiplin Kapanisi
 - Sorumlu: `codex`
 - Is Ozeti:
