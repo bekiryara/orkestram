@@ -123,3 +123,20 @@ Her yeni ajan ilk turda su sirayi uygular:
 4. Sadece `agent/<ajan>/<task-id>` branch'i ile ilerler.
 5. `docs/TASK_LOCKS.md` icinde lock almadan kod degisikligi yapmaz.
 6. `pre-pr` PASS olmadan commit/push yapmaz.
+
+## 11) WSL Tek Kaynak + 3 Ajan Klasoru Standardi
+
+Kural:
+1. Tek calisan kaynak `WSL: /home/bekir/orkestram` olmalidir.
+2. Ajanlar ayni klasorde paralel calismaz.
+3. Her ajan su klasorlerde calisir:
+   - `/home/bekir/orkestram-a`
+   - `/home/bekir/orkestram-b`
+   - `/home/bekir/orkestram-c`
+
+Kurulum komutu:
+1. `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\wsl-migrate-project.ps1 -LinuxUser bekir -SetupAgentWorkspaces`
+
+Dogrulama:
+1. Her klasorde `git branch --show-current` => `main`
+2. Her klasorde `git status --short` bos olmalidir.

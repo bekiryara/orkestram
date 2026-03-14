@@ -23,6 +23,25 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 
 ---
 
+### [2026-03-14 18:45] WSL Tek Kaynak Isletim Standardi Kalicilastirma
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `wsl-migrate-project.ps1` CRLF kaynakli WSL komut bozulmalarina karsi guclendirildi.
+  - Script'e `-SetupAgentWorkspaces` secenegi eklendi (a/b/c ajan klasorleri otomatik kurulum).
+  - Repo disiplini dokumanina WSL tek-kaynak + 3 ajan klasoru standardi eklendi.
+- Degisen Dosyalar:
+  - `scripts/wsl-migrate-project.ps1`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `patch/guncelleme`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Runtime operasyonunda D:\orkestram aktif gelistirme kaynagi olarak kullanilmayacak.
+
+---
+
 ### [2026-03-14 14:25] Stabilizasyon Penceresi (Task Acma Durdurma + Runtime Sabitleme)
 - Sorumlu: `codex`
 - Is Ozeti:
