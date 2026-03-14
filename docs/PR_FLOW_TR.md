@@ -6,14 +6,14 @@ Amac: Main branch'e sadece kontrollu, testli ve izlenebilir degisim gitsin.
 1. Gorev sec:
    - `docs/NEXT_TASK.md`
 2. Branch ac:
-   - `git checkout -b feat/<kisa-ad>`
+   - `git checkout -b agent/<ajan>/<task-id>`
 3. Degisiklik yap + commit
 4. PR oncesi zorunlu:
    - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
 5. Push:
-   - `git push -u origin feat/<kisa-ad>`
+   - `git push -u origin agent/<ajan>/<task-id>`
 6. GitHub PR ac:
-   - base: `main`, compare: `feat/<kisa-ad>`
+   - base: `main`, compare: `agent/<ajan>/<task-id>`
 7. `ci-gate` PASS olmadan merge yok
 8. Merge sonrasi:
    - `docs/WORKLOG.md` ve `docs/PROJECT_STATUS_TR.md` guncelle

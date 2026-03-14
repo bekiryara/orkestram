@@ -486,4 +486,42 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Sonuc:
   - PASS
 - Not:
-  - Branch gent/codex/task-028 uzerinde resmi task kapanisi tamamlandi.
+  - Branch gent/codex/task-028 uzerinde resmi task kapanisi tamamlandi.
+
+### [2026-03-15 00:49] TASK-029 Dokuman Drift Hizalama
+- Sorumlu: codex
+- Is Ozeti:
+  - PR akis dokumaninda branch kalibi multi-agent disipline hizalandi.
+  - NEXT_TASK son kapanis commit referansi TASK-028 kapanis commitine guncellendi.
+  - TASK-029 resmi lock kaydi acildi ve koordinasyon panosu active moda alindi.
+- Degisen Dosyalar:
+  - docs/PR_FLOW_TR.md
+  - docs/NEXT_TASK.md
+  - docs/TASK_LOCKS.md
+  - docs/tasks/TASK-029.md
+  - docs/WORKLOG.md
+- Calistirilan Komutlar:
+  - powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick
+- Sonuc:
+  - IN_PROGRESS
+- Not:
+  - Dokuman hizalama gorevidir; runtime koduna dokunulmamistir.
+
+### [2026-03-15 00:50] TASK-029 Resmi Kapanis
+- Sorumlu: codex
+- Is Ozeti:
+  - TASK-029 durumu DONE olarak guncellendi.
+  - Lock kaydi closed olarak kapatildi ve pano FROZEN moduna geri alindi.
+  - Zorunlu kapanis kaniti icin pre-pr -Mode quick PASS sonucu dogrulandi.
+- Degisen Dosyalar:
+  - docs/tasks/TASK-029.md
+  - docs/TASK_LOCKS.md
+  - docs/NEXT_TASK.md
+  - docs/WORKLOG.md
+  - docs/PR_FLOW_TR.md
+- Calistirilan Komutlar:
+  - powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick
+- Sonuc:
+  - PASS
+- Not:
+  - Dokuman drift'i kapatildi; branch kurali gent/<ajan>/<task-id> ile hizalandi.
