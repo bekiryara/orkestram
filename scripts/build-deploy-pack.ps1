@@ -6,7 +6,8 @@
     [ValidateSet("auto", "7z", "compressarchive")]
     [string]$Compressor = "auto",
     [switch]$SkipVendor,
-    [int]$CopyThreads = 32
+    [int]$CopyThreads = 32,
+    [string]$ReleaseContextToken = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -93,14 +94,22 @@ if (-not (Test-Path -LiteralPath $PolicyPath -PathType Leaf)) {
 }
 $policy = Get-Content -LiteralPath $PolicyPath -Raw | ConvertFrom-Json
 
-if ($env:ORKESTRAM_VALIDATE_GATE_PASSED -ne "1") {
+$releaseTrustedCaller = (
+    $env:ORKESTRAM_VALIDATE_GATE_PASSED -eq "1" -and
+    $env:ORKESTRAM_RELEASE_CONTEXT -eq "release.ps1" -and
+    $env:ORKESTRAM_RELEASE_APPROVED -eq "HAZIR-YAYIN" -and
+    -not [string]::IsNullOrWhiteSpace($ReleaseContextToken) -and
+    $env:ORKESTRAM_RELEASE_CONTEXT_TOKEN -eq $ReleaseContextToken
+)
+
+if (-not $releaseTrustedCaller) {
     Write-Host "[build-deploy] step=validate (gate)"
     & $validate -App $App -Mode quick
     if ($LASTEXITCODE -ne 0) {
         throw "validate gate FAIL"
     }
 } else {
-    Write-Host "[build-deploy] gate=trusted-caller (release zinciri)"
+    Write-Host "[build-deploy] gate=trusted-caller (release context verified)"
 }
 
 $targets = @()

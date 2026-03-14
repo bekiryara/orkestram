@@ -1,32 +1,18 @@
-# NEXT TASK (Tek Aktif Gorev)
+# NEXT TASK (Koordinasyon Panosu)
 
-Durum: `DONE`  
-Sorumlu: `ajan`  
-Baslangic: `2026-03-14 02:20`  
-Hedef Bitis: `2026-03-14 02:45`
+Durum: `ACTIVE`  
+Koordinator: `codex`  
+Kaynak Gercek: `docs/TASK_LOCKS.md`
 
-## Gorev Tanimi
-- Listing kartini tek partial standardina al ve home/listings/service-category ekranlarinda ayni karti kullan.
+## Aktif Gorevler (Tek Kaynak)
+1. `TASK-020` - `codex` - Merge tren koordinasyonu, lock hijyeni ve gate standardizasyonu.
+2. `TASK-021` - `codex-a` - Iki app acceptance/smoke toparlama ve regression temizligi.
+3. `TASK-022` - `codex-b` - Frontend son entegrasyon parity kapanisi.
 
-## Kapsam (In)
-- [x] `frontend/partials/listing-card.blade.php` ortak kart partiali (iki app)
-- [x] `home`, `listings`, `service-category` ekranlarinda ortak karta gecis (iki app)
-- [x] Home + category aksinda kart ozellikleri (`cardAttributesByListing`) parity hizasi (iki app)
-
-## Kapsam Disi (Out)
-- [x] Fiyat/icerik metin stratejisi degisikligi
-- [x] Yeni business logic veya yeni endpoint
-
-## Kabul Kriteri
-- [x] Ana sayfa, ilanlar ve kategori kartlari ayni markup ile render olur
-- [x] Kart ozellikleri (ornek: enstruman/sure) home + listings + kategori akislarda gorunur
-- [x] `scripts/smoke-test.ps1 -App both` PASS
-
-## Zorunlu Komutlar
-```powershell
-powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\smoke-test.ps1 -App both
-```
-
-## Tamamlandiginda Isaretlenecekler
-- [x] `docs/WORKLOG.md` kaydi eklendi
-- [x] `docs/PROJECT_STATUS_TR.md` guncellendi
+## Kapanis Kurali (Zorunlu)
+1. Kapanis kaniti olmadan task `closed` edilemez.
+2. Zorunlu kanit paketi:
+   - `git branch --show-current`
+   - `git status --short`
+   - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` sonucu `PASS`
+3. Kanit yoksa task durumu `active` kalir.

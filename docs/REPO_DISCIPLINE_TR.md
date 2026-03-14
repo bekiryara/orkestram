@@ -107,3 +107,19 @@ Bu kosullar olmadan deploy yok:
    - Potansiyel secret/key sizintilarini tarar.
    - Standart:
      - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\security-gate.ps1`
+8. `docs/TASK_LOCKS.md` + `docs/tasks/_TEMPLATE.md`
+   - Gorev lock ve task kaydi script bagimsiz (manual) acilir.
+   - Standart:
+     - `docs/tasks/TASK-001.md` olustur
+     - `docs/TASK_LOCKS.md` icine `active` satiri ekle
+     - `git checkout -b agent/codex-a/task-001` ile branch ac
+
+## 10) Yeni Gelen Ajan Onboarding (Zorunlu)
+
+Her yeni ajan ilk turda su sirayi uygular:
+1. `AGENTS.md` dosyasini okur.
+2. `docs/REPO_DISCIPLINE_TR.md` ve `docs/MULTI_AGENT_RULES_TR.md` okur.
+3. `git fetch --all --prune` yapar.
+4. Sadece `agent/<ajan>/<task-id>` branch'i ile ilerler.
+5. `docs/TASK_LOCKS.md` icinde lock almadan kod degisikligi yapmaz.
+6. `pre-pr` PASS olmadan commit/push yapmaz.

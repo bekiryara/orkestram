@@ -1,0 +1,25 @@
+# TASK LOCKS
+
+Durumlar:
+- `active`: gorev acik, lock var
+- `closed`: gorev kapandi, lock bosaldi
+
+Sabit Ajan Kimlikleri:
+- `codex-a` = A ajani (yalniz `agent/codex-a/...`)
+- `codex-b` = B ajani (yalniz `agent/codex-b/...`)
+- `codex-c` = C ajani (yalniz `agent/codex-c/...`)
+- `codex` = Koordinator ajani (yalniz `agent/codex/...`)
+
+| task_id | agent | branch | status | files | started_at | updated_at | note |
+|---|---|---|---|---|---|---|---|
+| TASK-001 | codex | agent/codex/task-001 | closed | docs/NEXT_TASK.md,docs/WORKLOG.md,docs/PROJECT_STATUS_TR.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/TASK_LOCKS.md,docs/tasks/_TEMPLATE.md,scripts/start-task.ps1 | 2026-03-13 08:41:51 | 2026-03-13 23:30:00 | Multi-agent disiplin seti finalize edildi |
+| TASK-009 | codex-b | agent/codex-b/task-009 | closed | docs/tasks/TASK-009.md,docs/SERVICE_AREA_FALLBACK_DARALTMA_PLANI_TR.md | 2026-03-13 10:40:00 | 2026-03-13 11:45:00 | Plan checkliste cevrildi, pre-pr PASS, push tamamlandi |
+| TASK-011 | codex-a | agent/codex-a/task-011 | closed | docs/tasks/TASK-011.md,scripts/dev-up.ps1,scripts/validate.ps1,docs/RUNTIME_PERMISSION_HARDENING_TR.md | 2026-03-13 11:30:00 | 2026-03-13 13:45:00 | Stale active temizligi; gorev Faz-2 ile TASK-016'ya devredildi |
+| TASK-012 | codex | agent/codex/task-001 | closed | docs/tasks/TASK-012.md,scripts/release.ps1,scripts/build-deploy-pack.ps1,docs/RELEASE_GATE_ENFORCEMENT_V2_TR.md | 2026-03-13 11:30:00 | 2026-03-13 12:40:00 | Release gate enforcement v2 tamamlandi, pre-pr PASS |
+| TASK-013 | codex-b | agent/codex-b/task-013 | closed | docs/tasks/TASK-013.md,local-rebuild/apps/orkestram/resources/views/portal/**,local-rebuild/apps/izmirorkestra/resources/views/portal/**,docs/HESABIM_OWNER_HIBRIT_UI_POLISH_TR.md | 2026-03-13 11:45:00 | 2026-03-13 13:45:00 | Stale active temizligi; UI Faz-3 TASK-017 olarak devam ediyor |
+| TASK-016 | codex-a | agent/codex-a/task-016 | closed | docs/tasks/TASK-016.md,local-rebuild/apps/orkestram/tests/Feature/**,local-rebuild/apps/izmirorkestra/tests/Feature/**,scripts/validate.ps1,docs/E2E_ACCEPTANCE_GATE_TR.md | 2026-03-13 13:20:00 | 2026-03-13 17:40:00 | DONE bildirimi alindi; pre-pr PASS ve push kaniti var |
+| TASK-017 | codex-b | agent/codex-b/task-017 | closed | docs/tasks/TASK-017.md,local-rebuild/apps/orkestram/resources/views/frontend/**,local-rebuild/apps/izmirorkestra/resources/views/frontend/**,local-rebuild/apps/orkestram/public/assets/v1.css,local-rebuild/apps/izmirorkestra/public/assets/v1.css,docs/UX_STANDARD_DUGUN_PARITY_TR.md | 2026-03-13 13:20:00 | 2026-03-13 17:54:34 | Push/PR kaniti alindi; task kapatildi |
+| TASK-019 | codex-c | agent/codex-c/task-019 | closed | docs/tasks/TASK-019.md,local-rebuild/apps/orkestram/resources/views/frontend/layout.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/layout.blade.php,local-rebuild/apps/orkestram/resources/views/frontend/partials/site-shell-*.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/partials/site-shell-*.blade.php,docs/UX_SHELL_MIGRATION_TR.md | 2026-03-13 13:45:00 | 2026-03-13 18:02:00 | Commit kaniti dogrulandi; duplicate calisma engeli icin kapatildi |
+| TASK-020 | codex | agent/codex/task-020 | active | docs/tasks/TASK-020.md,docs/NEXT_TASK.md,docs/TASK_LOCKS.md,docs/WORKLOG.md,docs/PR_FLOW_TR.md,scripts/pre-pr.ps1 | 2026-03-13 17:40:00 | 2026-03-13 18:40:00 | Merge tren + gate enforcement; teknik borc birikimini engelleme |
+| TASK-021 | codex-a | agent/codex-a/task-021 | active | docs/tasks/TASK-021.md,local-rebuild/apps/orkestram/tests/Feature/**,local-rebuild/apps/izmirorkestra/tests/Feature/**,scripts/validate.ps1,docs/E2E_ACCEPTANCE_GATE_TR.md | 2026-03-13 17:54:34 | 2026-03-13 17:54:34 | Iki app smoke+acceptance toparlama ve regressionsuz kapanis |
+| TASK-022 | codex-b | agent/codex-b/task-022 | active | docs/tasks/TASK-022.md,local-rebuild/apps/orkestram/resources/views/frontend/**,local-rebuild/apps/izmirorkestra/resources/views/frontend/**,local-rebuild/apps/orkestram/public/assets/v1.css,local-rebuild/apps/izmirorkestra/public/assets/v1.css | 2026-03-13 18:02:00 | 2026-03-13 18:02:00 | Son entegrasyon parity gorevi; TASK-019 kapandiktan sonra devralindi |

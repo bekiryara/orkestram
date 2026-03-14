@@ -12,9 +12,20 @@ function Run-Step {
     )
 
     Write-Host "[pre-pr] $Name"
-    & $Action
+    try {
+        & $Action
+    } catch {
+        $raw = $_.Exception.Message
+        Write-Host "[pre-pr] FAIL -> $Name"
+        if (-not [string]::IsNullOrWhiteSpace($raw)) {
+            Write-Host "[pre-pr] neden: $raw"
+        }
+        exit 1
+    }
+
     if ($LASTEXITCODE -ne 0) {
         Write-Host "[pre-pr] FAIL -> $Name"
+        Write-Host "[pre-pr] neden: Komut exit code=$LASTEXITCODE"
         exit $LASTEXITCODE
     }
     Write-Host "[pre-pr] OK -> $Name"
@@ -38,5 +49,5 @@ if ($Mode -eq "full") {
     }
 }
 
-Write-Host "[pre-pr] PASS"
+Write-Host "[pre-pr] PASS (mode=$Mode)"
 exit 0

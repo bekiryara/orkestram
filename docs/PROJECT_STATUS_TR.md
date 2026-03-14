@@ -21,6 +21,10 @@ Tarih: 2026-03-11
      - listing detayda `Yorumlar` icerik kontrolu
      - admin panelde `Feedbackler` icerik kontrolu
      - city-options duplicate kontrolu PASS
+7. 2026-03-13 Release gate enforcement v2 tamamlandi:
+   - `build-deploy-pack` trusted caller kontrolu context token + onay bilgisine baglandi.
+   - `release.ps1` context token uretip paketleme adimina guvenli sekilde aktarir.
+   - Dokuman: `docs/RELEASE_GATE_ENFORCEMENT_V2_TR.md`
 
 ## Master Plan Durumu
 1. Faz 0 (Plan/Hazirlik): Tamam
@@ -599,6 +603,22 @@ Tarih: 2026-03-11
    - Home + kategori akislarinda kart ozellikleri (`cardAttributesByListing`) controller tarafinda aktiflendi.
    - Dogrulama:
      - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\smoke-test.ps1 -App both` PASS
+20. Multi-agent task lock disiplini kalicilastirildi:
+   - Yeni dokumanlar:
+     - `docs/MULTI_AGENT_RULES_TR.md`
+     - `docs/TASK_LOCKS.md`
+     - `docs/tasks/_TEMPLATE.md`
+   - Repo disiplini baglantisi:
+     - `docs/REPO_DISCIPLINE_TR.md` icine task-lock + branch standardi eklendi
+   - Dogrulama:
+     - `Get-Content D:\orkestram\docs\MULTI_AGENT_RULES_TR.md` PASS
+     - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` PASS
+22. Disiplin tutarlilik turu tamamlandi:
+   - Kayip gorunen `scripts/start-task.ps1` dosyasi repo icine yeniden geri alindi.
+   - Script parse + pre-pr kapisi tekrarlandi.
+   - Dogrulama:
+     - `powershell -NoProfile -Command "[scriptblock]::Create((Get-Content 'D:\orkestram\scripts\start-task.ps1' -Raw)) | Out-Null; 'OK'"` PASS
+     - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` PASS
 
 ## Siradaki 5 Is
 1. Teklif formu Faz 2 (zengin alanlar, validasyon, owner tarafi takip paneli) planlamak.

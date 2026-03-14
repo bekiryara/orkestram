@@ -14,9 +14,26 @@ function Run-Step {
     )
 
     Write-Host "[validate] $Name"
-    & $Action
+    try {
+        & $Action
+    } catch {
+        $raw = $_.Exception.Message
+        if ($raw -match "permission denied while trying to connect to the docker API") {
+            Write-Host "[validate] FAIL -> $Name"
+            Write-Host "[validate] neden: Docker erisim izni yok. Cozum: komutu Docker erisimi olan yetkiyle tekrar calistir."
+            exit 1
+        }
+        if ($raw -match "storage\/framework\/views" -or $raw -match "bootstrap\/cache") {
+            Write-Host "[validate] FAIL -> $Name"
+            Write-Host "[validate] neden: Runtime izin sorunu (storage/bootstrap-cache yazma izni). Cozum: dev-up preflightini tekrar calistir."
+            exit 1
+        }
+        throw
+    }
+
     if ($LASTEXITCODE -ne 0) {
         Write-Host "[validate] FAIL -> $Name"
+        Write-Host "[validate] neden: Komut exit code=$LASTEXITCODE"
         exit $LASTEXITCODE
     }
     Write-Host "[validate] OK -> $Name"
