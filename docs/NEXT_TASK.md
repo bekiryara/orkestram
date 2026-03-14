@@ -1,19 +1,20 @@
 # NEXT TASK (Koordinasyon Panosu)
 
-Durum: `ACTIVE`  
+Durum: `FROZEN`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
-1. `TASK-028` - WSL tek-kaynak runtime stabilizasyonu (`agent/codex/task-028`).
+1. Aktif gorev yok.
 
 ## Hazir Tasklar (Atama Bekliyor)
-1. Yeni task acma yalnizca `TASK-028` kapanis kanitindan sonra degerlendirilecek.
+1. Yeni task acma gecici olarak durduruldu (stabilizasyon penceresi).
+2. Sonraki tasklar yalnizca koordinator onayi ile acilacak.
 
 ## Son Kapanis
-1. `TASK-027` - Listing detail Offer schema tamamlandi (commit `a8e818c`, pre-pr PASS).
-2. `TASK-026` - Public fiyat filtre/siralama tamamlandi (commit `06af8de`, pre-pr PASS).
-3. `TASK-025` - Fiyat veri modeli + admin/owner parity tamamlandi (commit `3ff02ff`, pre-pr PASS).
+1. `TASK-028` - WSL tek-kaynak runtime stabilizasyonu tamamlandi (commit `a9f9588`, pre-pr PASS).
+2. `TASK-027` - Listing detail Offer schema tamamlandi (commit `a8e818c`, pre-pr PASS).
+3. `TASK-026` - Public fiyat filtre/siralama tamamlandi (commit `06af8de`, pre-pr PASS).
 
 ## Kapanis Kurali (Zorunlu)
 1. Kapanis kaniti olmadan task `closed` edilemez.

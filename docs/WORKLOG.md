@@ -469,3 +469,21 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Not:
   - `git fetch --all --prune` ag erisimi nedeniyle bu turda fail.
   - `pre-pr -Mode quick` PASS kaniti alindi.
+
+### [2026-03-15 00:39] TASK-028 Resmi Kapanis
+- Sorumlu: codex
+- Is Ozeti:
+  - TASK-028 durumu DONE olarak guncellendi.
+  - Lock kaydi closed olarak kapatildi ve pano FROZEN moduna geri alindi.
+  - Zorunlu kapanis kaniti icin pre-pr -Mode quick PASS sonucu dogrulandi.
+- Degisen Dosyalar:
+  - docs/tasks/TASK-028.md
+  - docs/TASK_LOCKS.md
+  - docs/NEXT_TASK.md
+  - docs/WORKLOG.md
+- Calistirilan Komutlar:
+  - powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick
+- Sonuc:
+  - PASS
+- Not:
+  - Branch gent/codex/task-028 uzerinde resmi task kapanisi tamamlandi.

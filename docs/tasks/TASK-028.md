@@ -1,17 +1,22 @@
 # TASK-028
 
+Durum: `DONE`  
+Ajan: `codex`  
+Branch: `agent/codex/task-028`  
+Baslangic: `2026-03-15 00:06`
+
 ## Ozet
-WSL tek-kaynak runtime stabilizasyonu: `dev-up` varsayilan sync kapatma, runtime mount/izin/env/vendor toparlama ve gate dogrulamalari.
+- WSL tek-kaynak runtime stabilizasyonu: `dev-up` sync davranisinin guvenli varsayilana alinmasi, runtime mount/izin/env/vendor toparlama ve gate dogrulamalari.
 
 ## In Scope
-- `scripts/dev-up.ps1` sync davranisini guvenli varsayilana alma (`-SyncFromWindows` ile explicit sync)
-- Runtime WSL mount dogrulamasi (`/home/bekir/orkestram/...`)
-- `vendor` / `.env` / storage izin eksiklerinden kaynakli runtime 500 toparlama
-- `smoke-test` ve `pre-pr` quick PASS kaniti
+- [x] `scripts/dev-up.ps1` sync davranisini guvenli varsayilana alma (`-SyncFromWindows` ile explicit sync)
+- [x] Runtime WSL mount dogrulamasi (`/home/bekir/orkestram/...`)
+- [x] `vendor` / `.env` / storage izin eksiklerinden kaynakli runtime 500 toparlama
+- [x] `smoke-test` ve `pre-pr` quick PASS kaniti
 
 ## Out of Scope
-- `stack-hos-*` / diger compose projeleri
-- Uretim deploy islemleri
+- [x] `stack-hos-*` / diger compose projeleri
+- [x] Uretim deploy islemleri
 
 ## Lock Dosyalari
 - `scripts/dev-up.ps1`
@@ -21,14 +26,17 @@ WSL tek-kaynak runtime stabilizasyonu: `dev-up` varsayilan sync kapatma, runtime
 - `docs/WORKLOG.md`
 
 ## Kabul Kriteri
-1. Web container mount kaynaklari WSL yolunu gostermeli.
-2. `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\smoke-test.ps1 -App both` => PASS
-3. `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` => PASS
+- [x] Web container mount kaynaklari WSL yolunu gostermeli.
+- [x] `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\smoke-test.ps1 -App both` => PASS
+- [x] `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` => PASS
 
 ## Komutlar
-- `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\dev-up.ps1 -App both`
-- `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\smoke-test.ps1 -App both`
-- `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
+```powershell
+powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\dev-up.ps1 -App both
+powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\smoke-test.ps1 -App both
+powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick
+```
 
 ## Notlar
 - `git fetch --all --prune` ag erisimi nedeniyle bu turda fail olmustur.
+- Teknik kabul kriterleri tamamlandi; resmi kapanis adimlari tamamlandi ve lock `closed` guncellendi.
