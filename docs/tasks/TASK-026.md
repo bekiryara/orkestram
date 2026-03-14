@@ -43,3 +43,9 @@ powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode q
 
 ## Notlar
 - Geriye uyum icin mevcut `price_label` destegi bozulmamalidir.
+- Kapanis kaniti:
+  - Branch: `agent/codex-b/task-026`
+  - Commit: `06af8de`
+  - PR: `https://github.com/bekiryara/orkestram/pull/new/agent/codex-b/task-026`
+  - `git status --short` -> temiz
+  - `pre-pr -Mode quick` -> PASS
