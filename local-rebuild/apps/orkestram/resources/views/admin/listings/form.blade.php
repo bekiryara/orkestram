@@ -139,10 +139,42 @@
                             <option value="hybrid" @selected($coverageMode === 'hybrid')>Konum + Servis Alani</option>
                         </select>
                     </div>
+                    @php($serviceAreasText = old('service_areas_text', $item->serviceAreasText()))
+                    @php($selectedServiceAreaCityIds = old('service_area_city_ids', []))
+                    @php($selectedServiceAreaDistrictIds = old('service_area_district_ids', []))
+                    @php($selectedServiceAreaCityIds = is_array($selectedServiceAreaCityIds) ? array_values(array_filter($selectedServiceAreaCityIds, static fn($v) => (string)$v !== '')) : [])
+                    @php($selectedServiceAreaDistrictIds = is_array($selectedServiceAreaDistrictIds) ? array_values(array_filter($selectedServiceAreaDistrictIds, static fn($v) => (string)$v !== '')) : [])
                     <div class="col-md-6">
-                        <label class="form-label">Servis Alanlari (opsiyonel)</label>
-                        @php($serviceAreasText = old('service_areas_text', $item->serviceAreasText()))
-                        <textarea name="service_areas_text" class="form-control" rows="4" placeholder="Orn:&#10;Izmir&#10;Aydin / Kusadasi&#10;Manisa | Turgutlu">{{ $serviceAreasText }}</textarea>
+                        <label class="form-label">Servis Sehri (coklu)</label>
+                        <select
+                            name="service_area_city_ids[]"
+                            id="service_area_city_ids"
+                            class="form-select"
+                            multiple
+                            size="6"
+                            data-selected='@json($selectedServiceAreaCityIds)'
+                        >
+                            @foreach(($locationOptions['cities'] ?? []) as $cityRow)
+                                <option value="{{ $cityRow['id'] }}">{{ $cityRow['name'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Servis Ilcesi (coklu)</label>
+                        <select
+                            name="service_area_district_ids[]"
+                            id="service_area_district_ids"
+                            class="form-select"
+                            multiple
+                            size="6"
+                            data-selected='@json($selectedServiceAreaDistrictIds)'
+                        >
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Servis Alanlari (otomatik / geriye uyumlu)</label>
+                        <textarea id="service_areas_preview" class="form-control" rows="4" readonly></textarea>
+                        <textarea id="service_areas_text" name="service_areas_text" class="d-none">{{ $serviceAreasText }}</textarea>
                     </div>
                 </div>
 
@@ -326,9 +358,159 @@
         (function () {
             var districtMap = @json($locationOptions['district_map'] ?? []);
             var neighborhoodMap = @json($locationOptions['neighborhood_map'] ?? []);
+            var cityRows = @json($locationOptions['cities'] ?? []);
             var citySelect = document.getElementById('city_select');
             var districtSelect = document.getElementById('district_select');
             var neighborhoodSelect = document.getElementById('neighborhood_select');
+            var serviceAreaCitySelect = document.getElementById('service_area_city_ids');
+            var serviceAreaDistrictSelect = document.getElementById('service_area_district_ids');
+            var serviceAreasText = document.getElementById('service_areas_text');
+            var serviceAreasPreview = document.getElementById('service_areas_preview');
+
+            function normalizeText(value) {
+                return String(value || '').trim().toLocaleLowerCase('tr-TR');
+            }
+
+            var cityNameById = {};
+            var cityIdByName = {};
+            cityRows.forEach(function (row) {
+                var id = String(row.id);
+                var name = String(row.name || '');
+                cityNameById[id] = name;
+                cityIdByName[normalizeText(name)] = id;
+            });
+
+            var districtNameById = {};
+            var districtIdByName = {};
+            var districtCityIdById = {};
+            Object.keys(districtMap || {}).forEach(function (cityId) {
+                (districtMap[cityId] || []).forEach(function (row) {
+                    var districtId = String(row.id);
+                    var districtName = String(row.name || '');
+                    districtNameById[districtId] = districtName;
+                    districtCityIdById[districtId] = String(cityId);
+                    districtIdByName[String(cityId) + '|' + normalizeText(districtName)] = districtId;
+                });
+            });
+
+            function getSelectValues(select) {
+                if (!select) return [];
+                return Array.from(select.selectedOptions || []).map(function (opt) { return String(opt.value); });
+            }
+
+            function ensureSelected(select, values) {
+                if (!select) return;
+                var selectedSet = {};
+                (values || []).forEach(function (v) { selectedSet[String(v)] = true; });
+                Array.from(select.options || []).forEach(function (opt) {
+                    opt.selected = !!selectedSet[String(opt.value)];
+                });
+            }
+
+            function parseLegacyAreas(raw) {
+                var lines = String(raw || '').split(/\r\n|\r|\n/);
+                var cityIds = {};
+                var districtIds = {};
+
+                lines.forEach(function (line) {
+                    var normalized = String(line || '').trim().replace(/\s+/g, ' ');
+                    if (!normalized) return;
+
+                    var parts = null;
+                    ['|', '/', '>'].forEach(function (delimiter) {
+                        if (parts) return;
+                        if (normalized.indexOf(delimiter) !== -1) {
+                            parts = normalized.split(delimiter, 2);
+                        }
+                    });
+
+                    var cityName = normalized;
+                    var districtName = '';
+                    if (parts) {
+                        cityName = String(parts[0] || '').trim();
+                        districtName = String(parts[1] || '').trim();
+                    }
+
+                    var cityId = cityIdByName[normalizeText(cityName)] || '';
+                    if (!cityId) return;
+                    cityIds[cityId] = true;
+
+                    if (districtName) {
+                        var districtId = districtIdByName[String(cityId) + '|' + normalizeText(districtName)] || '';
+                        if (districtId) {
+                            districtIds[districtId] = true;
+                        }
+                    }
+                });
+
+                return {
+                    cityIds: Object.keys(cityIds),
+                    districtIds: Object.keys(districtIds)
+                };
+            }
+
+            function renderServiceAreaDistrictOptions() {
+                if (!serviceAreaCitySelect || !serviceAreaDistrictSelect) return;
+
+                var selectedCityIds = getSelectValues(serviceAreaCitySelect);
+                var selectedDistrictIds = getSelectValues(serviceAreaDistrictSelect);
+                var districtSelectedSet = {};
+                selectedDistrictIds.forEach(function (id) { districtSelectedSet[id] = true; });
+
+                serviceAreaDistrictSelect.innerHTML = '';
+                selectedCityIds.forEach(function (cityId) {
+                    var cityName = cityNameById[String(cityId)] || '';
+                    (districtMap[String(cityId)] || []).forEach(function (row) {
+                        var districtId = String(row.id);
+                        var option = document.createElement('option');
+                        option.value = districtId;
+                        option.textContent = cityName ? (cityName + ' / ' + row.name) : row.name;
+                        if (districtSelectedSet[districtId]) {
+                            option.selected = true;
+                        }
+                        serviceAreaDistrictSelect.appendChild(option);
+                    });
+                });
+            }
+
+            function syncServiceAreasText() {
+                if (!serviceAreaCitySelect || !serviceAreaDistrictSelect || !serviceAreasText || !serviceAreasPreview) return;
+
+                var selectedCityIds = getSelectValues(serviceAreaCitySelect);
+                var selectedDistrictIds = getSelectValues(serviceAreaDistrictSelect);
+                var lines = [];
+                var seen = {};
+
+                selectedCityIds.forEach(function (cityId) {
+                    var cityName = cityNameById[String(cityId)] || '';
+                    if (!cityName) return;
+
+                    var hasDistrict = false;
+                    selectedDistrictIds.forEach(function (districtId) {
+                        if (String(districtCityIdById[String(districtId)] || '') !== String(cityId)) return;
+                        var districtName = districtNameById[String(districtId)] || '';
+                        if (!districtName) return;
+                        hasDistrict = true;
+                        var line = cityName + ' | ' + districtName;
+                        var key = normalizeText(line);
+                        if (seen[key]) return;
+                        seen[key] = true;
+                        lines.push(line);
+                    });
+
+                    if (!hasDistrict) {
+                        var cityKey = normalizeText(cityName);
+                        if (!seen[cityKey]) {
+                            seen[cityKey] = true;
+                            lines.push(cityName);
+                        }
+                    }
+                });
+
+                var text = lines.join("\n");
+                serviceAreasText.value = text;
+                serviceAreasPreview.value = text;
+            }
 
             function syncNeighborhoodOptions(resetSelected) {
                 if (!districtSelect || !neighborhoodSelect) return;
@@ -391,6 +573,35 @@
                     syncNeighborhoodOptions(true);
                 });
                 syncDistrictOptions(false);
+            }
+
+            if (serviceAreaCitySelect && serviceAreaDistrictSelect && serviceAreasText && serviceAreasPreview) {
+                var selectedCityIdsRaw = [];
+                var selectedDistrictIdsRaw = [];
+                try { selectedCityIdsRaw = JSON.parse(serviceAreaCitySelect.getAttribute('data-selected') || '[]') || []; } catch (e) { selectedCityIdsRaw = []; }
+                try { selectedDistrictIdsRaw = JSON.parse(serviceAreaDistrictSelect.getAttribute('data-selected') || '[]') || []; } catch (e) { selectedDistrictIdsRaw = []; }
+
+                if ((!selectedCityIdsRaw || selectedCityIdsRaw.length === 0) && serviceAreasText.value.trim() !== '') {
+                    var parsed = parseLegacyAreas(serviceAreasText.value);
+                    selectedCityIdsRaw = parsed.cityIds;
+                    selectedDistrictIdsRaw = parsed.districtIds;
+                }
+
+                ensureSelected(serviceAreaCitySelect, selectedCityIdsRaw);
+                renderServiceAreaDistrictOptions();
+                ensureSelected(serviceAreaDistrictSelect, selectedDistrictIdsRaw);
+                syncServiceAreasText();
+
+                serviceAreaCitySelect.addEventListener('change', function () {
+                    renderServiceAreaDistrictOptions();
+                    syncServiceAreasText();
+                });
+                serviceAreaDistrictSelect.addEventListener('change', syncServiceAreasText);
+
+                var listingForm = serviceAreaCitySelect.closest('form');
+                if (listingForm) {
+                    listingForm.addEventListener('submit', syncServiceAreasText);
+                }
             }
 
             var container = document.getElementById('gallery-sortable');
