@@ -959,4 +959,165 @@ class CategorySystemFlowTest extends TestCase
             ->assertSee('value="Davul"', false)
             ->assertDontSee('value="Tuba"', false);
     }
+
+    public function test_listing_price_sort_and_range_filter_are_deterministic(): void
+    {
+        $main = MainCategory::create([
+            'name' => 'Muzik Ekipleri',
+            'slug' => 'muzik-ekipleri',
+            'is_active' => true,
+            'sort_order' => 10,
+        ]);
+
+        $category = Category::create([
+            'main_category_id' => $main->id,
+            'name' => 'Fiyat Siralama Kategori',
+            'slug' => 'fiyat-siralama-kategori',
+            'is_active' => true,
+            'is_indexable' => true,
+            'sort_order' => 10,
+        ]);
+
+        Listing::create([
+            'site' => 'orkestram.net',
+            'site_scope' => 'single',
+            'coverage_mode' => 'location_only',
+            'slug' => 'fiyat-a',
+            'name' => 'Fiyat A 1500',
+            'status' => 'published',
+            'category_id' => $category->id,
+            'city' => 'Izmir',
+            'district' => 'Konak',
+            'price_label' => '1500 TL',
+        ]);
+
+        Listing::create([
+            'site' => 'orkestram.net',
+            'site_scope' => 'single',
+            'coverage_mode' => 'location_only',
+            'slug' => 'fiyat-b',
+            'name' => 'Fiyat B 900',
+            'status' => 'published',
+            'category_id' => $category->id,
+            'city' => 'Izmir',
+            'district' => 'Konak',
+            'price_label' => '900 TL',
+        ]);
+
+        Listing::create([
+            'site' => 'orkestram.net',
+            'site_scope' => 'single',
+            'coverage_mode' => 'location_only',
+            'slug' => 'fiyat-c',
+            'name' => 'Fiyat C 3200',
+            'status' => 'published',
+            'category_id' => $category->id,
+            'city' => 'Izmir',
+            'district' => 'Konak',
+            'price_label' => '3200 TL',
+        ]);
+
+        Listing::create([
+            'site' => 'orkestram.net',
+            'site_scope' => 'single',
+            'coverage_mode' => 'location_only',
+            'slug' => 'fiyat-d',
+            'name' => 'Fiyat D Bos',
+            'status' => 'published',
+            'category_id' => $category->id,
+            'city' => 'Izmir',
+            'district' => 'Konak',
+            'price_label' => null,
+        ]);
+
+        $ascResponse = $this->get('/ilanlar?category=' . $category->slug . '&sort=price_asc')
+            ->assertOk()
+            ->assertSee('Fiyat B 900')
+            ->assertSee('Fiyat A 1500')
+            ->assertSee('Fiyat C 3200')
+            ->assertSee('Fiyat D Bos')
+            ->assertSee('option value="price_asc" selected', false);
+
+        $ascHtml = (string) $ascResponse->getContent();
+        $this->assertTrue(
+            strpos($ascHtml, 'Fiyat B 900') < strpos($ascHtml, 'Fiyat A 1500')
+            && strpos($ascHtml, 'Fiyat A 1500') < strpos($ascHtml, 'Fiyat C 3200')
+            && strpos($ascHtml, 'Fiyat C 3200') < strpos($ascHtml, 'Fiyat D Bos')
+        );
+
+        $descResponse = $this->get('/ilanlar?category=' . $category->slug . '&sort=price_desc')
+            ->assertOk()
+            ->assertSee('Fiyat C 3200')
+            ->assertSee('Fiyat A 1500')
+            ->assertSee('Fiyat B 900')
+            ->assertSee('Fiyat D Bos');
+
+        $descHtml = (string) $descResponse->getContent();
+        $this->assertTrue(
+            strpos($descHtml, 'Fiyat C 3200') < strpos($descHtml, 'Fiyat A 1500')
+            && strpos($descHtml, 'Fiyat A 1500') < strpos($descHtml, 'Fiyat B 900')
+            && strpos($descHtml, 'Fiyat B 900') < strpos($descHtml, 'Fiyat D Bos')
+        );
+
+        $this->get('/ilanlar?category=' . $category->slug . '&price_min=1000&price_max=2000')
+            ->assertOk()
+            ->assertSee('Fiyat A 1500')
+            ->assertDontSee('Fiyat B 900')
+            ->assertDontSee('Fiyat C 3200')
+            ->assertDontSee('Fiyat D Bos')
+            ->assertSee('name="price_min" value="1000"', false)
+            ->assertSee('name="price_max" value="2000"', false);
+    }
+
+    public function test_service_category_price_range_filter_keeps_query_values(): void
+    {
+        $main = MainCategory::create([
+            'name' => 'Muzik Ekipleri',
+            'slug' => 'muzik-ekipleri',
+            'is_active' => true,
+            'sort_order' => 10,
+        ]);
+
+        $category = Category::create([
+            'main_category_id' => $main->id,
+            'name' => 'Kategori Fiyat Filtre',
+            'slug' => 'kategori-fiyat-filtre',
+            'is_active' => true,
+            'is_indexable' => true,
+            'sort_order' => 10,
+        ]);
+
+        Listing::create([
+            'site' => 'orkestram.net',
+            'site_scope' => 'single',
+            'coverage_mode' => 'location_only',
+            'slug' => 'kategori-fiyat-a',
+            'name' => 'Kategori Fiyat A',
+            'status' => 'published',
+            'category_id' => $category->id,
+            'city' => 'Izmir',
+            'district' => 'Konak',
+            'price_label' => '1100 TL',
+        ]);
+
+        Listing::create([
+            'site' => 'orkestram.net',
+            'site_scope' => 'single',
+            'coverage_mode' => 'location_only',
+            'slug' => 'kategori-fiyat-b',
+            'name' => 'Kategori Fiyat B',
+            'status' => 'published',
+            'category_id' => $category->id,
+            'city' => 'Izmir',
+            'district' => 'Konak',
+            'price_label' => '3500 TL',
+        ]);
+
+        $this->get('/hizmet/' . $category->slug . '?price_min=1000&price_max=2000')
+            ->assertOk()
+            ->assertSee('Kategori Fiyat A')
+            ->assertDontSee('Kategori Fiyat B')
+            ->assertSee('name="price_min" value="1000"', false)
+            ->assertSee('name="price_max" value="2000"', false);
+    }
 }

@@ -34,6 +34,34 @@
             </article>
         </section>
     @else
+        <section class="section section-tight">
+            <form method="GET" action="{{ request()->url() }}" class="filters">
+                @foreach(request()->except(['price_min', 'price_max', 'page']) as $key => $value)
+                    @if(is_array($value))
+                        @foreach($value as $row)
+                            <input type="hidden" name="{{ $key }}[]" value="{{ $row }}">
+                        @endforeach
+                    @else
+                        <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                    @endif
+                @endforeach
+                <div class="filter-grid">
+                    <label>
+                        <span>Fiyat Min</span>
+                        <input type="number" step="0.01" min="0" name="price_min" value="{{ $priceMin ?? '' }}" placeholder="Orn: 1000">
+                    </label>
+                    <label>
+                        <span>Fiyat Max</span>
+                        <input type="number" step="0.01" min="0" name="price_max" value="{{ $priceMax ?? '' }}" placeholder="Orn: 5000">
+                    </label>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn btn-primary" type="submit">Filtrele</button>
+                    <a class="btn" href="{{ request()->url() }}">Temizle</a>
+                </div>
+            </form>
+        </section>
+
         <section class="section">
             <p class="lead"><strong>{{ $items->total() }}</strong> ilan bulundu.</p>
             <div class="grid">

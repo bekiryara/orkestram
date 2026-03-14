@@ -1,6 +1,6 @@
 # TASK-026
 
-Durum: `TODO`  
+Durum: `DONE`  
 Ajan: `codex-b`  
 Branch: `agent/codex-b/task-026`  
 Baslangic: `2026-03-14 00:00`
@@ -9,12 +9,12 @@ Baslangic: `2026-03-14 00:00`
 - Public listing akisi icin fiyat sort/filtreyi deterministik hale getir.
 
 ## In Scope
-- [ ] `/ilanlar` sayfasina fiyat siralama secenekleri eklenir (artan/azalan).
-- [ ] `/ilanlar` ve hizmet kategori sayfalarina fiyat filtreleme eklenir.
-- [ ] Filtre URL query param ile calisir; sayfa yenilenince secim korunur.
-- [ ] Iki app parity saglanir.
-- [ ] Fiyat yok kayitlar fallback kuraliyla yonetilir (liste sonu vb. sabit kural).
-- [ ] `pre-pr -Mode quick` PASS.
+- [x] `/ilanlar` sayfasina fiyat siralama secenekleri eklenir (artan/azalan).
+- [x] `/ilanlar` ve hizmet kategori sayfalarina fiyat filtreleme eklenir.
+- [x] Filtre URL query param ile calisir; sayfa yenilenince secim korunur.
+- [x] Iki app parity saglanir.
+- [x] Fiyat yok kayitlar fallback kuraliyla yonetilir (liste sonu vb. sabit kural).
+- [x] `pre-pr -Mode quick` PASS.
 
 ## Out of Scope
 - [ ] Admin/owner fiyat veri modeli degisikligi (TASK-025).
@@ -32,9 +32,9 @@ Baslangic: `2026-03-14 00:00`
 - `local-rebuild/apps/izmirorkestra/tests/Feature/**`
 
 ## Kabul Kriteri
-- [ ] Fiyat sort/filtre iki appte ayni davranir.
-- [ ] URL parametreleri kalicidir.
-- [ ] Smoke ve quick testler PASS.
+- [x] Fiyat sort/filtre iki appte ayni davranir.
+- [x] URL parametreleri kalicidir.
+- [x] Smoke ve quick testler PASS.
 
 ## Komutlar
 ```powershell
