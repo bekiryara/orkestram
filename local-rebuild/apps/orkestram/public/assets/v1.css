@@ -201,6 +201,72 @@ a { color: inherit; text-decoration: none; }
 }
 .meta { color: var(--muted); font-size: 14px; }
 .card-btn { margin-top: 8px; }
+.listing-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+}
+.listing-card-cover-link {
+  display: block;
+}
+.listing-card-cover {
+  height: 220px;
+  max-height: 220px;
+  margin-bottom: 0;
+}
+.listing-card-body {
+  display: grid;
+  gap: 8px;
+}
+.listing-card-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+.listing-card-title {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.35;
+}
+.listing-card-title a {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.listing-card-rating {
+  color: #d47b00;
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.listing-card-feature,
+.listing-card-comments {
+  color: var(--muted);
+  font-size: 14px;
+}
+.listing-card-feature {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.listing-card-comments {
+  white-space: nowrap;
+}
+.listing-card-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.listing-card-cta {
+  margin-top: 8px;
+  text-align: center;
+  width: 100%;
+}
 
 .content {
   margin-top: 22px;
