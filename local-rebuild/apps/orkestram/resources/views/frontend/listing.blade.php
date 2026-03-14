@@ -3,9 +3,37 @@
 @php
     $metaTitle = $item->seo_title ?: $item->name;
     $metaDescription = $item->seo_description ?: ($item->summary ?: 'Ilan detayi');
+    $priceLabelRaw = trim((string) ($item->price_label ?? ''));
+    $parsedPrice = null;
+    if (preg_match('/\d+(?:[.,]\d+)?/', $priceLabelRaw, $matches)) {
+        $numeric = str_replace(',', '.', (string) $matches[0]);
+        if (is_numeric($numeric)) {
+            $parsedPrice = (float) $numeric;
+        }
+    }
+    $offerPrice = number_format((float) ($parsedPrice ?? 0), 2, '.', '');
+    $offerCurrency = strtoupper((string) data_get($item, 'meta_json.price_currency', 'TRY'));
+    if ($offerCurrency === '') {
+        $offerCurrency = 'TRY';
+    }
+    $listingOfferJsonLd = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Service',
+        'name' => (string) $item->name,
+        'description' => (string) ($item->summary ?: 'Ilan detayi'),
+        'offers' => [
+            '@type' => 'Offer',
+            'price' => $offerPrice,
+            'priceCurrency' => $offerCurrency,
+            'availability' => 'https://schema.org/InStock',
+            'url' => route('listing.show', ['slug' => $item->slug]),
+        ],
+    ];
 @endphp
 
 @section('content')
+    <script type="application/ld+json">{!! json_encode($listingOfferJsonLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
+
     <nav class="breadcrumbs">
         <a href="{{ route('home') }}">Ana Sayfa</a>
         <span>/</span>
@@ -276,4 +304,3 @@
         })();
     </script>
 @endsection
-
