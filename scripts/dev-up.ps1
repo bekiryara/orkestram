@@ -3,6 +3,7 @@ param(
     [string]$App = "both",
     [switch]$Build,
     [switch]$SkipSync,
+    [switch]$SyncFromWindows,
     [string]$Distro = "Ubuntu",
     [string]$LinuxUser = "bekir",
     [string]$LinuxDockerUser = "root",
@@ -72,6 +73,7 @@ chmod -R ug+rwX /var/www/html/storage /var/www/html/bootstrap/cache
 test -w /var/www/html/storage/framework/views
 test -w /var/www/html/bootstrap/cache
 '@
+    $permissionCommand = $permissionCommand -replace "`r", ""
 
     & docker exec $Container sh -lc $permissionCommand
     if ($LASTEXITCODE -ne 0) {
@@ -93,7 +95,7 @@ if ($App -eq "both") {
     $targets = @(@{ Name = "izmirorkestra"; Domain = "izmirorkestra.net"; Path = "$repoRoot\local-rebuild\apps\izmirorkestra"; Container = "izmirorkestra-local-web" })
 }
 
-if (-not $SkipSync) {
+if ($SyncFromWindows) {
     $wslSourcePath = Convert-WindowsPathToWsl -Path $repoRoot
     Write-Host "[dev-up] sync windows -> wsl"
     $syncCommand = @"
@@ -107,6 +109,8 @@ rsync -a --delete \
   '$wslSourcePath/' '$LinuxProjectRoot/'
 "@
     Invoke-WslBash -User $LinuxDockerUser -Command $syncCommand
+} else {
+    Write-Host "[dev-up] sync skipped (WSL source of truth). Use -SyncFromWindows to force Windows -> WSL sync."
 }
 
 Write-Host "[dev-up] docker compose up from WSL path: $linuxComposeDir"
@@ -138,3 +142,4 @@ foreach ($t in $targets) {
 
 Write-Host "[dev-up] PASS"
 exit 0
+

@@ -447,3 +447,25 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
 - Sonuc:
   - `PASS`
+
+### [2026-03-15 00:06] TASK-028 Baslangic (WSL Tek-Kaynak Runtime Stabilizasyonu)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Koordinator branch disiplini icin `agent/codex/task-028` acildi.
+  - Task/lock/pano kayitlari resmi akisa gore guncellendi.
+  - Runtime mount WSL kaynaga alinip smoke/pre-pr gate dogrulama akisi tamamlandi.
+- Degisen Dosyalar:
+  - `scripts/dev-up.ps1`
+  - `docs/tasks/TASK-028.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git checkout -b agent/codex/task-028`
+  - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\smoke-test.ps1 -App both`
+  - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `git fetch --all --prune` ag erisimi nedeniyle bu turda fail.
+  - `pre-pr -Mode quick` PASS kaniti alindi.

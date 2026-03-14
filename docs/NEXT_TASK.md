@@ -1,15 +1,14 @@
 # NEXT TASK (Koordinasyon Panosu)
 
-Durum: `FROZEN`  
+Durum: `ACTIVE`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
-1. Aktif gorev yok.
+1. `TASK-028` - WSL tek-kaynak runtime stabilizasyonu (`agent/codex/task-028`).
 
 ## Hazir Tasklar (Atama Bekliyor)
-1. Yeni task acma gecici olarak durduruldu (stabilizasyon penceresi).
-2. Sonraki tasklar yalnizca stabilizasyon commitinden sonra acilacak.
+1. Yeni task acma yalnizca `TASK-028` kapanis kanitindan sonra degerlendirilecek.
 
 ## Son Kapanis
 1. `TASK-027` - Listing detail Offer schema tamamlandi (commit `a8e818c`, pre-pr PASS).
