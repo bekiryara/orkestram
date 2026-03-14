@@ -23,6 +23,25 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 
 ---
 
+### [2026-03-14 13:10] TASK-025 Resmi Kapanis + Aktif Islerin Daraltilmasi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - TASK-025 lock kaydi resmi olarak `closed` yapildi.
+  - NEXT_TASK aktif listesi TASK-026 ve TASK-027 olarak daraltildi.
+  - TASK-026 notuna "gecici durdurma/temiz kapsamla devam" notu eklendi.
+- Degisen Dosyalar:
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `dokuman guncelleme (patch)`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Kod agacindaki lock-disi degisiklikler korunmustur; bu kayit sadece koordinasyon dokumanidir.
+
+---
+
 ### [2026-03-14 12:10] TASK-024 Kapanisi + Fiyat Faz Task Plani (TASK-025/026/027)
 - Sorumlu: `codex`
 - Is Ozeti:
