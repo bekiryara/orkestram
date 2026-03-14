@@ -1120,4 +1120,52 @@ class CategorySystemFlowTest extends TestCase
             ->assertSee('name="price_min" value="1000"', false)
             ->assertSee('name="price_max" value="2000"', false);
     }
+
+    public function test_listing_detail_outputs_offer_json_ld_with_price_and_currency(): void
+    {
+        $listing = Listing::create([
+            'site' => 'orkestram.net',
+            'site_scope' => 'single',
+            'coverage_mode' => 'location_only',
+            'slug' => 'jsonld-offer-test',
+            'name' => 'JSONLD Offer Test',
+            'status' => 'published',
+            'city' => 'Izmir',
+            'district' => 'Konak',
+            'summary' => 'Schema test ozeti',
+            'content' => 'Schema test icerigi.',
+            'price_label' => '1500 TL',
+            'meta_json' => ['price_currency' => 'USD'],
+        ]);
+
+        $this->get('/ilan/' . $listing->slug)
+            ->assertOk()
+            ->assertSee('"@type":"Offer"', false)
+            ->assertSee('"price":"1500.00"', false)
+            ->assertSee('"priceCurrency":"USD"', false);
+    }
+
+    public function test_listing_detail_offer_json_ld_uses_safe_fallback_when_price_missing(): void
+    {
+        $listing = Listing::create([
+            'site' => 'orkestram.net',
+            'site_scope' => 'single',
+            'coverage_mode' => 'location_only',
+            'slug' => 'jsonld-offer-fallback-test',
+            'name' => 'JSONLD Offer Fallback',
+            'status' => 'published',
+            'city' => 'Izmir',
+            'district' => 'Konak',
+            'summary' => 'Fallback schema test',
+            'content' => 'Fallback schema test content.',
+            'price_label' => null,
+            'meta_json' => [],
+        ]);
+
+        $this->get('/ilan/' . $listing->slug)
+            ->assertOk()
+            ->assertSee('"@type":"Offer"', false)
+            ->assertSee('"price":"0.00"', false)
+            ->assertSee('"priceCurrency":"TRY"', false);
+    }
 }
