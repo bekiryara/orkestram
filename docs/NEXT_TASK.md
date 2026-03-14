@@ -5,9 +5,9 @@ Koordinator: `codex`
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Yuksek Etkili 3 Task
-1. `TASK-017` - `codex-b` - UI parity final: iki appte ayni frontend iskeleti + logo renk token standardi + responsive kirilim kapatma.
-2. `TASK-019` - `codex-c` - Frontend shell migration final: ortak header/footer partiallari ve layout standardi, business logic degistirmeden.
-3. `TASK-020` - `codex` - Merge tren ve gate enforcement: kapanis kaniti olmayan PR merge edilmez, pre-pr zorunlu, lock hijyeni.
+1. `TASK-020` - `codex` - Merge tren ve gate enforcement: kapanis kaniti olmayan PR merge edilmez, pre-pr zorunlu, lock hijyeni.
+2. `TASK-021` - `codex-a` - Uctan uca smoke+acceptance toparlama: iki app parity ve kritik akislarda regressionsuz kapanis.
+3. `TASK-022` - `codex-b` - Son entegrasyon paritesi: acik kalan UI/flow farklarini kapatip tek davranis standardi.
 
 ## Kapanis Kurali (Teknik Borc Sifir)
 1. Her task kapanisinda zorunlu kanit:
@@ -18,6 +18,6 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
 3. Ayni dosyada cakisacak iki aktif task acilmaz.
 
 ## Merge Sirasi
-1. `TASK-017`
-2. `TASK-019`
+1. `TASK-021`
+2. `TASK-022`
 3. `TASK-020` (en son, entegrasyon kapanisi)

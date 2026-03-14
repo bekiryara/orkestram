@@ -345,3 +345,41 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `docs/tasks/TASK-019.md`
 - Sonuc:
   - `PASS (cakisma engellendi)`
+
+### [2026-03-13 17:45] 3 Task Koordinasyon ve Lock Hijyeni
+- Sorumlu: `codex`
+- Is Ozeti:
+  - 3 yuksek etkili task koordinasyonu netlestirildi (`TASK-017`, `TASK-019`, `TASK-020`).
+  - Eksik task dosyasi teknik borcu kapatildi (`docs/tasks/TASK-017.md`).
+  - Lock tablosu aktif/kapali durumlari normalize edildi ve `TASK-020` merge-gate gorevi acildi.
+  - PR akisi dokumanina kapanis kaniti zorunlulugu eklendi.
+- Degisen Dosyalar:
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/tasks/TASK-017.md`
+  - `docs/tasks/TASK-020.md`
+  - `docs/PR_FLOW_TR.md`
+- Calistirilan Komutlar:
+  - `Get-Content docs/TASK_LOCKS.md`
+  - `Get-Content docs/NEXT_TASK.md`
+  - `Set-Content docs/tasks/TASK-017.md`
+  - `Set-Content docs/tasks/TASK-020.md`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Bu turda koordinasyon/dokuman lock hijyeni yapildi; uygulama testleri ilgili task kapanisinda zorunlu.
+
+### [2026-03-13 17:55] TASK-017 Kapanis + Yeni 3'lu Plan
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-017` push/PR kanitina gore lock tablosunda `closed` yapildi.
+  - Koordinasyon panosu kalan aktif islere gore guncellendi.
+  - Ucuncu yuksek etkili is olarak `TASK-021` (smoke+acceptance toparlama) acildi.
+- Degisen Dosyalar:
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/tasks/TASK-021.md`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Merge sirasi: TASK-019 -> TASK-021 -> TASK-020.
