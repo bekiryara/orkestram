@@ -23,6 +23,26 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 
 ---
 
+### [2026-03-14 14:05] TASK-027 Resmi Kapanis
+- Sorumlu: `codex`
+- Is Ozeti:
+  - TASK-027 kapanis kaniti lock panosuna islendi.
+  - NEXT_TASK aktif gorev listesi sifirlandi.
+  - Son kapanis listesi TASK-027/026/025 sirasiyla guncellendi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-027.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `dokuman guncelleme (patch)`
+- Sonuc:
+  - `PASS`
+- Not:
+  - TASK-027 PR linki kullanici raporunda eksik geldigi icin commit kaniti esas alindi.
+
+---
+
 ### [2026-03-14 13:35] Category Workspace Export Notu (Noop)
 - Sorumlu: `codex`
 - Is Ozeti:

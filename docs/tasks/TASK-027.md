@@ -38,3 +38,7 @@ powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode q
 
 ## Notlar
 - SEO etkisi icin field isimleri schema.org standardina uygun yazilmalidir.
+- Kapanis kaniti:
+  - Branch: `agent/codex-b/task-027`
+  - Commit: `a8e818c`
+  - `pre-pr -Mode quick` -> PASS
