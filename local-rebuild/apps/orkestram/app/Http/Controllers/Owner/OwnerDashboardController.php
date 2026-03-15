@@ -12,6 +12,7 @@ use App\Models\ListingLike;
 use App\Models\User;
 use App\Services\Locations\LocationDictionaryProvider;
 use App\Services\Listings\ListingAttributeService;
+use App\Services\Listings\ListingMediaService;
 use App\Services\Portal\OwnerResourceAccess;
 use App\Services\Portal\PortalContext;
 use Illuminate\Http\RedirectResponse;
@@ -96,7 +97,7 @@ class OwnerDashboardController extends Controller
         return view('portal.owner.listings-create', compact('locationOptions', 'categoriesByMain', 'dynamicAttributes'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, ListingMediaService $mediaService): RedirectResponse
     {
         $adminUserId = $this->context->adminUserId($request);
         if ($adminUserId <= 0) {
@@ -121,6 +122,9 @@ class OwnerDashboardController extends Controller
             'whatsapp' => ['nullable', 'string', 'max:64'],
             'summary' => ['nullable', 'string', 'max:5000'],
             'content' => ['nullable', 'string', 'max:20000'],
+            'cover_image' => ['nullable', 'image', 'max:5120'],
+            'gallery_images' => ['nullable', 'array'],
+            'gallery_images.*' => ['nullable', 'image', 'max:5120'],
         ]);
 
         [$cityName, $districtName] = $this->assertValidLocationSelection($data);
@@ -137,7 +141,7 @@ class OwnerDashboardController extends Controller
         $slug = $this->uniqueSlugForSite($site, $baseSlug);
         $this->attributeService->validateForCategory($request, isset($data['category_id']) ? (int) $data['category_id'] : 0);
 
-        $listing = Listing::query()->create([
+        $listingData = [
             'site' => $site,
             'owner_user_id' => $adminUserId,
             'slug' => $slug,
@@ -161,7 +165,10 @@ class OwnerDashboardController extends Controller
             'summary' => $data['summary'] ?? null,
             'content' => $data['content'] ?? null,
             'site_scope' => 'single',
-        ]);
+        ];
+        $listingData = $mediaService->apply($request, $listingData);
+
+        $listing = Listing::query()->create($listingData);
         $this->attributeService->syncForRequest($request, $listing, isset($data['category_id']) ? (int) $data['category_id'] : 0);
 
         return redirect()
@@ -199,7 +206,7 @@ class OwnerDashboardController extends Controller
         return view('portal.owner.listings-edit', compact('item', 'locationOptions', 'categoriesByMain', 'dynamicAttributes'));
     }
 
-    public function updateListing(Request $request, Listing $listing): RedirectResponse
+    public function updateListing(Request $request, Listing $listing, ListingMediaService $mediaService): RedirectResponse
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -218,12 +225,21 @@ class OwnerDashboardController extends Controller
             'whatsapp' => ['nullable', 'string', 'max:64'],
             'summary' => ['nullable', 'string', 'max:5000'],
             'content' => ['nullable', 'string', 'max:20000'],
+            'remove_cover_image' => ['nullable', 'in:1'],
+            'cover_image' => ['nullable', 'image', 'max:5120'],
+            'gallery_images' => ['nullable', 'array'],
+            'gallery_images.*' => ['nullable', 'image', 'max:5120'],
+            'remove_gallery' => ['nullable', 'array'],
+            'remove_gallery.*' => ['nullable', 'string', 'max:255'],
+            'gallery_order' => ['nullable', 'string', 'max:10000'],
+            'reset_gallery' => ['nullable', 'in:1'],
         ]);
 
         [$cityName, $districtName] = $this->assertValidLocationSelection($data);
         $this->attributeService->validateForCategory($request, isset($data['category_id']) ? (int) $data['category_id'] : 0);
 
-        $listing->update([
+        $listingData = [
+            'slug' => $listing->slug,
             'name' => $data['name'],
             'category_id' => isset($data['category_id']) ? (int) $data['category_id'] : null,
             'city_id' => $data['city_id'],
@@ -242,7 +258,10 @@ class OwnerDashboardController extends Controller
             'whatsapp' => $data['whatsapp'] ?? null,
             'summary' => $data['summary'] ?? null,
             'content' => $data['content'] ?? null,
-        ]);
+        ];
+        $listingData = $mediaService->apply($request, $listingData, $listing);
+
+        $listing->update($listingData);
         $this->attributeService->syncForRequest($request, $listing, isset($data['category_id']) ? (int) $data['category_id'] : 0);
 
         return redirect()->route('owner.listings.index')->with('ok', 'Ilan guncellendi.');
@@ -335,3 +354,4 @@ class OwnerDashboardController extends Controller
         return [(string) $city->name, (string) $district->name];
     }
 }
+

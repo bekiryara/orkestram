@@ -562,3 +562,91 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - PASS
 - Not:
   - Koordinator icin minimal degisim + satir bazli belge duzenleme kurali resmi hale getirildi.
+
+### [2026-03-15 02:53] TASK-031 Baslangic (Admin/Owner Listing Gorsel Hatti Stabilizasyonu)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Admin ve owner listing gorsel yukleme/silme/gosterim hatti icin resmi task kaydi acildi.
+  - Lock tablosu ve koordinasyon panosu tek aktif gorev modeline gore guncellendi.
+  - Kapsam, varolan davranisi bozmadan minimal duzeltme ilkesiyle sinirlandi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-031.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git checkout -b agent/codex/task-031`
+- Sonuc:
+  - `IN_PROGRESS`
+- Not:
+  - Bir sonraki adim kod analizi ve iki app parity duzeltme uygulamasi.
+
+### [2026-03-15 05:35] TASK-031 Resmi Kapanis (Admin/Owner Listing Gorsel Hatti)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Owner listing create/edit akisinda gorsel upload/remove alanlari ve controller media uygulama adimlari iki appte parity ile tamamlandi.
+  - Runtime dogrulamasini kiran yarim test dosyalari (WSL kaynak) temizlendi ve gate tekrar kosuldu.
+  - Task/lock/pano kayitlari resmi disipline gore DONE/closed/FROZEN durumuna alindi.
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/app/Http/Controllers/Owner/OwnerDashboardController.php`
+  - `local-rebuild/apps/izmirorkestra/app/Http/Controllers/Owner/OwnerDashboardController.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-create.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-create.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-edit.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-edit.blade.php`
+  - `docs/tasks/TASK-031.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `git fetch --all --prune` bu turda ag erisimi nedeniyle tamamlanamadi.
+
+### [2026-03-15 05:45] TASK-031 Runtime Upload Izin Duzeltmesi (500 Hotfix)
+- Sorumlu: codex
+- Is Ozeti:
+  - /owner/listings/{id} kaydetme akisindaki 500 hatasi, ListingMediaService icinde mkdir permission denied olarak tespit edildi.
+  - Iki app containerinda public/uploads/listings dizini olusturuldu.
+  - Dizin izinleri web kullanicisi icin duzeltildi (www-data:www-data, 775) ve yazma testi gecti.
+- Degisen Dosyalar:
+  - docs/tasks/TASK-031.md
+  - docs/WORKLOG.md
+- Calistirilan Komutlar:
+  - docker exec orkestram-local-web ... mkdir/chown/chmod
+  - docker exec izmirorkestra-local-web ... mkdir/chown/chmod
+  - docker exec -u www-data <app> ... touch/rm write-test
+- Sonuc:
+  - PASS
+- Not:
+  - Iki app tek DB kullandigi icin migration adimlari paralel degil sirali yurutulmelidir.
+
+### [2026-03-15 06:35] TASK-031 Final Kapanis (Admin500 Deterministic Fix Dahil)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Owner media hatti (create/edit upload-remove) iki app parity ile kalici hale getirildi.
+  - Admin listing editteki 500 hatasi, `Listing` modelindeki request `has/hasAny` bagimliligi nedeniyle olusan temp upload dosya akisina bagli hata olarak tespit edildi.
+  - Modelde input tabanli deterministic kontrol ile bagimlilik kaldirildi; iki appte ayni patch uygulandi.
+  - Task/lock/pano kayitlari resmi disipline gore `DONE/closed/FROZEN` senkronuna getirildi.
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/app/Http/Controllers/Owner/OwnerDashboardController.php`
+  - `local-rebuild/apps/izmirorkestra/app/Http/Controllers/Owner/OwnerDashboardController.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-create.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-create.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-edit.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-edit.blade.php`
+  - `local-rebuild/apps/orkestram/app/Models/Listing.php`
+  - `local-rebuild/apps/izmirorkestra/app/Models/Listing.php`
+  - `docs/tasks/TASK-031.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git fetch --all --prune` (ag erisimi nedeniyle FAIL)
+  - `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `pre-pr PASS`
+- Not:
+  - Dogrulama docker erisimi gerektirdigi icin gate elevated olarak kosuldu.

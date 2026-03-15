@@ -31,3 +31,9 @@ Sabit Ajan Kimlikleri:
 | TASK-028 | codex | agent/codex/task-028 | closed | scripts/dev-up.ps1,docs/tasks/TASK-028.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md | 2026-03-15 00:06:25 | 2026-03-15 00:18:00 | WSL tek-kaynak runtime stabilizasyonu tamamlandi; pre-pr PASS ile kapatildi |
 | TASK-029 | codex | agent/codex/task-028 | closed | docs/tasks/TASK-029.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/PR_FLOW_TR.md | 2026-03-15 00:49:10 | 2026-03-15 00:50:31 | Dokuman drift hizalama tamamlandi; pre-pr PASS ile kapatildi |
 | TASK-030 | codex | agent/codex/task-030 | closed | docs/tasks/TASK-030.md,docs/REPO_DISCIPLINE_TR.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md | 2026-03-15 01:07:56 | 2026-03-15 01:11:42 | Belge duzenleme disiplini resmi kurala baglandi; pre-pr PASS ile kapatildi |
+
+| TASK-031 | codex | agent/codex/task-031 | closed | docs/tasks/TASK-031.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,local-rebuild/apps/orkestram/app/Http/Controllers/**,local-rebuild/apps/izmirorkestra/app/Http/Controllers/**,local-rebuild/apps/orkestram/resources/views/admin/listings/**,local-rebuild/apps/izmirorkestra/resources/views/admin/listings/**,local-rebuild/apps/orkestram/resources/views/portal/owner/**,local-rebuild/apps/izmirorkestra/resources/views/portal/owner/**,local-rebuild/apps/orkestram/tests/Feature/**,local-rebuild/apps/izmirorkestra/tests/Feature/**,local-rebuild/apps/orkestram/app/Models/Listing.php,local-rebuild/apps/izmirorkestra/app/Models/Listing.php | 2026-03-15 02:53:26 | 2026-03-15 06:35:00 | Admin-owner listing hatti + admin500 deterministic model fix tamamlandi; pre-pr PASS ile kapatildi |
+
+
+
+

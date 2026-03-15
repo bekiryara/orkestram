@@ -35,7 +35,7 @@
                 </div>
             @endif
 
-            <form method="post" action="{{ route('owner.listings.update', ['listing' => $item->id]) }}" class="vstack gap-3">
+            <form method="post" enctype="multipart/form-data" action="{{ route('owner.listings.update', ['listing' => $item->id]) }}" class="vstack gap-3">
                 @csrf
                 @method('PUT')
 
@@ -186,6 +186,40 @@
                     <div class="col-12">
                         <label class="form-label">Icerik</label>
                         <textarea name="content" class="form-control" rows="6">{{ old('content', $item->content) }}</textarea>
+                    </div>
+                    <div class="col-12">
+                        <h3 class="h6 mb-2 mt-2">Gorseller</h3>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Kapak Gorseli</label>
+                        @if(!empty($item->cover_image_path))
+                            <div class="mb-2">
+                                <img src="/{{ $item->cover_image_path }}" alt="Kapak" class="img-preview mb-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remove_cover_image" value="1" id="owner_remove_cover_image">
+                                    <label class="form-check-label" for="owner_remove_cover_image">Kapak gorselini kaldir</label>
+                                </div>
+                            </div>
+                        @endif
+                        <input class="form-control" type="file" name="cover_image" accept="image/*">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Galeri Gorselleri</label>
+                        <input type="hidden" name="gallery_order" value="">
+                        @if(is_array($item->gallery_json) && count($item->gallery_json))
+                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                @foreach($item->gallery_json as $img)
+                                    <div class="gallery-item border rounded p-2">
+                                        <img src="/{{ $img }}" alt="Galeri" class="img-preview mb-2">
+                                        <label class="form-check-label d-flex align-items-center gap-2">
+                                            <input type="checkbox" name="remove_gallery[]" value="{{ $img }}">
+                                            <span>Kaldir</span>
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                        <input class="form-control" type="file" name="gallery_images[]" accept="image/*" multiple>
                     </div>
                     @php($dynamicAttributes = $dynamicAttributes ?? [])
                     @if(count($dynamicAttributes))
@@ -514,3 +548,4 @@
         })();
     </script>
 @endsection
+
