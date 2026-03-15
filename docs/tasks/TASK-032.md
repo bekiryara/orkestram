@@ -1,6 +1,6 @@
 # TASK-032
 
-Durum: `TODO`  
+Durum: `DOING`  
 Ajan: `codex`  
 Branch: `agent/codex/task-032`  
 Baslangic: `2026-03-15 06:50`
@@ -10,6 +10,7 @@ Baslangic: `2026-03-15 06:50`
 - D:\orkestram sadece edit/export noktasi olacak; calisan runtime ve resmi kanit WSL kopyalarindan alinacak.
 
 ## In Scope
+- [x] `D:\orkestram` acilisinda Hard Guard kuraliyla WSL'ye zorunlu hizalama protokolunu AGENTS + disiplin dokumanlarina eklemek.
 - [ ] Koordinator icin tek aktif koordinasyon lock'u acmak (`TASK-032`).
 - [ ] Ajanlar icin dosya cakismasiz lock parcalama plani cikarmak (A/B/C ayrik file set).
 - [ ] WSL calisma koklerini standartlamak ve kanitlamak:
@@ -35,6 +36,7 @@ Baslangic: `2026-03-15 06:50`
 - `docs/REPO_DISCIPLINE_TR.md`
 - `docs/MULTI_AGENT_RULES_TR.md`
 - `docs/PR_FLOW_TR.md`
+- `AGENTS.md`
 
 ## Kabul Kriteri
 - [ ] `TASK-032` lock kaydi `active` acilir ve koordinasyon bitisinde `closed` kapanir.

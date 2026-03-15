@@ -38,3 +38,10 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
 3. Lock almadan dosya degistirmek yasak.
 4. Is bitiminde lock `closed` yapilmadan gorev kapatilmaz.
 5. `pre-pr` PASS olmayan is commit/push edilmez.
+
+## Baslangic Guard (Zorunlu)
+1. Ajan D:\orkestram'da acilsa bile gelistirmeden once WSL hizalama kaniti verir:
+   - `wsl -e bash -lc "cd /home/bekir/orkestram-<slot> && pwd && git rev-parse --show-toplevel && git branch --show-current && git status --short"`
+2. Kanit `/home/bekir/orkestram-a|b|c` degilse `REALIGN_REQUIRED` raporlanir.
+3. `REALIGN_REQUIRED` halinde ajan yalniz hizalama adimini uygular; kod/doc degisikliklerine gecmez.
+4. Koordinator, lock acmadan once bu kaniti istemekle yukumludur.

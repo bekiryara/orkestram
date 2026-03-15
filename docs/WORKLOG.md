@@ -688,3 +688,24 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `IN_PROGRESS`
 - Not:
   - Alt gorevler aktif edilince her biri icin ayri lock satiri acilacak.
+
+### [2026-03-15 07:35] TASK-032 Hard Guard Kurali (D Baslangici -> WSL Hizalama)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Ajan D:\orkestram altinda acilsa bile gelistirmeden once WSL hizalama kanitini zorunlu kilan hard-guard kurali eklendi.
+  - Kural `AGENTS.md`, `REPO_DISCIPLINE_TR.md` ve `MULTI_AGENT_RULES_TR.md` icinde resmi hale getirildi.
+  - TASK-032 lock kapsamina `AGENTS.md` eklendi ve lock notu guncellendi.
+- Degisen Dosyalar:
+  - `AGENTS.md`
+  - `docs/tasks/TASK-032.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+- Calistirilan Komutlar:
+  - dokuman guncellemeleri (hard-guard)
+- Sonuc:
+  - `IN_PROGRESS`
+- Not:
+  - Amac: ajan yanlis workdir'de acilsa bile gorevden sapmadan once WSL'ye deterministik hizalama.

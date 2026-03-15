@@ -6,6 +6,7 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
 1. `TASK-032` - WSL bazli paralel ajan koordinasyon standardi (koordinator taski).
+   - Hard Guard: D baslangicinda zorunlu WSL hizalama kaniti aktif.
 
 ## Hazir Tasklar (Atama Bekliyor)
 1. `TASK-033` (`codex-a`) - WSL runtime kanit ve startup playbook standardi.

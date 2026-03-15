@@ -150,3 +150,13 @@ Kural:
 4. Task dosyalari `docs/tasks/_TEMPLATE.md` baslik sirasina birebir uyar.
 5. Belge guncellemelerinde `main` yerine `agent/<ajan>/<task-id>` branch disiplini zorunludur.
 6. Kapanis oncesi zorunlu kapi: `pre-pr -Mode quick` PASS.
+
+## 13) Ajan Baslangic Hard Guard (D:\orkestram -> WSL Hizalama)
+
+Kural:
+1. Ajan `D:\orkestram` altinda acilsa bile kod degisikligine gecmeden WSL hizalama kaniti zorunludur.
+2. Zorunlu kanit komutu:
+   - `wsl -e bash -lc "cd /home/bekir/orkestram-<slot> && pwd && git rev-parse --show-toplevel && git branch --show-current && git status --short"`
+3. Cikti `/home/bekir/orkestram-<slot>` degilse durum `REALIGN_REQUIRED` kabul edilir.
+4. `REALIGN_REQUIRED` durumunda ajan calismasi durdurulur; dogru WSL workdir ile yeniden baslatilmadan degisiklik yapilmaz.
+5. Hard Guard kaniti alinmadan lock acik olsa bile kod/dokuman degisikligi yapilmaz.
