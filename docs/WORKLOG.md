@@ -669,3 +669,22 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `IN_PROGRESS`
 - Not:
   - Uzak baglanti sorunu devam etse de lokal disiplin aktivasyonu tamamlandi.
+
+### [2026-03-15 07:12] TASK-032 Alt Gorev Hazirligi (A/B/C)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Paralel ajan yurutusunu hizlandirmak icin 3 alt gorev karti hazirlandi.
+  - Gorevler su anda `TODO` durumda ve lock acilmadan once koordinator atamasi bekliyor.
+  - Cakisma riskini azaltmak icin her alt goreve ayrik dokuman alanlari tanimlandi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-033.md`
+  - `docs/tasks/TASK-034.md`
+  - `docs/tasks/TASK-035.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - task kart olusturma/guncelleme (dokuman)
+- Sonuc:
+  - `IN_PROGRESS`
+- Not:
+  - Alt gorevler aktif edilince her biri icin ayri lock satiri acilacak.
