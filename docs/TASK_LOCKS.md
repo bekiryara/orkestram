@@ -37,3 +37,5 @@ Sabit Ajan Kimlikleri:
 
 
 
+
+| TASK-032 | codex | agent/codex/task-032 | active | docs/tasks/TASK-032.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/PR_FLOW_TR.md | 2026-03-15 06:55:00 | 2026-03-15 06:55:00 | WSL bazli paralel ajan koordinasyon standardi (in progress) |

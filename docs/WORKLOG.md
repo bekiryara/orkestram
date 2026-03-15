@@ -650,3 +650,22 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `pre-pr PASS`
 - Not:
   - Dogrulama docker erisimi gerektirdigi icin gate elevated olarak kosuldu.
+
+### [2026-03-15 06:55] TASK-032 Baslangic (WSL Bazli Paralel Ajan Koordinasyon Standardi)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - TASK-032 gorev karti resmi olarak aktive edildi.
+  - Koordinator lock kaydi acildi ve pano tek aktif gorev olarak TASK-032'ye cekildi.
+  - Hedef: WSL tek-kaynak + paralel ajan lock matrisi + kanit formatini deterministic hale getirmek.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-032.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git fetch --all --prune` (ag erisimi nedeniyle FAIL)
+  - `git checkout -b agent/codex/task-032`
+- Sonuc:
+  - `IN_PROGRESS`
+- Not:
+  - Uzak baglanti sorunu devam etse de lokal disiplin aktivasyonu tamamlandi.

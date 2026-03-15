@@ -1,15 +1,15 @@
 # NEXT TASK (Koordinasyon Panosu)
 
-Durum: `FROZEN`  
+Durum: `ACTIVE`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
-1. Aktif gorev yok.
+1. `TASK-032` - WSL bazli paralel ajan koordinasyon standardi (koordinator taski).
 
 ## Hazir Tasklar (Atama Bekliyor)
-1. Yeni task acma gecici olarak durduruldu (stabilizasyon penceresi).
-2. Sonraki tasklar yalnizca koordinator onayi ile acilacak.
+1. `TASK-032` altinda A/B/C alt gorevleri lock matrisi tamamlaninca acilacak.
+2. Yeni bagimsiz task acma gecici olarak durduruldu.
 
 ## Son Kapanis
 1. `TASK-031` - Admin/Owner listing gorsel hatti + admin500 deterministic model fix tamamlandi (pre-pr PASS).
