@@ -11,7 +11,7 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
    - `docs/TASK_LOCKS.md`
 5. Ayni dosya iki aktif gorevde locklanamaz.
 6. PR acmadan once zorunlu komut:
-   - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
+   - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 7. Merge kosulu:
    - required checks PASS (`ci-gate`, `security-gate`)
    - gorev owner onayi
@@ -45,3 +45,5 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
 2. Kanit `/home/bekir/orkestram-a|b|c` degilse `REALIGN_REQUIRED` raporlanir.
 3. `REALIGN_REQUIRED` halinde ajan yalniz hizalama adimini uygular; kod/doc degisikliklerine gecmez.
 4. Koordinator, lock acmadan once bu kaniti istemekle yukumludur.
+
+

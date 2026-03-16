@@ -709,3 +709,46 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `IN_PROGRESS`
 - Not:
   - Amac: ajan yanlis workdir'de acilsa bile gorevden sapmadan once WSL'ye deterministik hizalama.
+
+### [2026-03-16 07:00] TASK-032 Operasyon Scriptlerini WSL-First Hale Getirme
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `pre-pr` ve `validate` scriptleri repo-relative calisacak sekilde guncellendi.
+  - Operasyon scriptleri ile kopru/senkron scriptleri arasindaki rol ayrimi belgeye yazildi.
+  - Gunluk ajan calisma modelinde `D:\orkestram\scripts\...` hardcode cagri yerine `scripts/...` standardi sabitlendi.
+- Degisen Dosyalar:
+  - `scripts/pre-pr.ps1`
+  - `scripts/validate.ps1`
+  - `AGENTS.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/PR_FLOW_TR.md`
+  - `docs/tasks/TASK-032.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `duzenleme (repo-relative script standardi)`
+- Sonuc:
+  - `IN_PROGRESS`
+- Not:
+  - Kopru scriptleri kaldirilmadi; sadece operasyon scriptleri WSL-first role alinmistir.
+
+### [2026-03-16 08:10] TASK-032 WSL Canonical Gate Kaniti
+- Sorumlu: codex
+- Is Ozeti:
+  - NEXT_TASK ve REPO_DISCIPLINE_TR icindeki kalan absolute script cagri kalintilari repo-relative hale getirildi.
+  - pre-pr ve alidate scriptleri UNC/WSL canonical repo uzerinden de calisacak sekilde sibling path + repo root davranisina sabitlendi.
+  - Canonical WSL repo uzerinden pre-pr -Mode quick tekrar kosuldu ve PASS alindi.
+- Degisen Dosyalar:
+  - scripts/pre-pr.ps1
+  - scripts/validate.ps1
+  - docs/NEXT_TASK.md
+  - docs/REPO_DISCIPLINE_TR.md
+  - docs/TASK_LOCKS.md
+  - docs/tasks/TASK-032.md
+  - docs/WORKLOG.md
+- Calistirilan Komutlar:
+  - powershell -ExecutionPolicy Bypass -File \\wsl$\Ubuntu\home\bekir\orkestram\scripts\pre-pr.ps1 -Mode quick
+- Sonuc:
+  - PASS
+- Not:
+  - Windows<->WSL kopru scriptleri korunurken gunluk operasyon kapisi canonical WSL repo uzerinden dogrulandi.

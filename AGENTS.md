@@ -24,7 +24,7 @@ Ajan terminali `D:\orkestram` altinda acilsa bile kod degisikligine gecmeden onc
 ## Zorunlu Dogrulama
 Commit/push oncesi zorunlu:
 ```powershell
-powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick
+powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ```
 PASS olmadan commit/push yasak.
 
@@ -40,3 +40,4 @@ Kural ihlalinde calisma durdurulur, once su duzeltilir:
 2. lock
 3. dogrulama
 4. WSL hizalama kaniti
+

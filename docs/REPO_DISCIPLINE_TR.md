@@ -1,4 +1,4 @@
-# Repo Disiplini ve Teknik Borc Kurallari (TR)
+﻿# Repo Disiplini ve Teknik Borc Kurallari (TR)
 
 Tarih: 2026-03-09
 
@@ -19,7 +19,7 @@ Windows dizini:
 Kural:
 1. "Kod degisti ama calismiyor" durumunda ilk kontrol mount kaynagi olmalidir.
 2. WSL disinda calistirilan kod referans alinmaz.
-3. Stack ayaÄŸa kaldirma komutu standarttir:
+3. Stack ayaÃ„Å¸a kaldirma komutu standarttir:
    - `powershell -ExecutionPolicy Bypass -File scripts/dev-up.ps1 -App both`
 4. Dogrudan `docker compose up` ile manuel calistirma yapilmaz (yanlis mount riski).
 
@@ -96,17 +96,17 @@ Bu kosullar olmadan deploy yok:
 4. `scripts/validate.ps1`
    - "Bitti" demeden once zorunlu dogrulama komutu.
    - Standart:
-     - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\validate.ps1 -App both`
+     - `powershell -ExecutionPolicy Bypass -File scripts/validate.ps1 -App both`
 5. `scripts/pre-pr.ps1`
    - PR acmadan once zorunlu hizli kapidir.
    - Standart:
-     - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick`
+     - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 6. `.github/pull_request_template.md`
    - PR acilisinda ozet + test + dosya listesi zorunlu format.
 7. `scripts/security-gate.ps1`
    - Potansiyel secret/key sizintilarini tarar.
    - Standart:
-     - `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\security-gate.ps1`
+     - `powershell -ExecutionPolicy Bypass -File scripts/security-gate.ps1`
 8. `docs/TASK_LOCKS.md` + `docs/tasks/_TEMPLATE.md`
    - Gorev lock ve task kaydi script bagimsiz (manual) acilir.
    - Standart:
@@ -160,3 +160,6 @@ Kural:
 3. Cikti `/home/bekir/orkestram-<slot>` degilse durum `REALIGN_REQUIRED` kabul edilir.
 4. `REALIGN_REQUIRED` durumunda ajan calismasi durdurulur; dogru WSL workdir ile yeniden baslatilmadan degisiklik yapilmaz.
 5. Hard Guard kaniti alinmadan lock acik olsa bile kod/dokuman degisikligi yapilmaz.
+
+
+

@@ -1,4 +1,4 @@
-# TASK-032
+﻿# TASK-032
 
 Durum: `DOING`  
 Ajan: `codex`  
@@ -18,7 +18,7 @@ Baslangic: `2026-03-15 06:50`
   - `/home/bekir/orkestram-b`
   - `/home/bekir/orkestram-c`
 - [ ] Her ajan icin branch naming + kanit paketi sozlesmesini netlestirmek.
-- [ ] Komut standartlarini netlestirmek (`dev-up`, `validate`, `pre-pr`) ve sadece WSL kaynakli calistirma zorunlulugunu yazmak.
+- [x] Komut standartlarini netlestirmek (`dev-up`, `validate`, `pre-pr`) ve sadece WSL kaynakli calistirma zorunlulugunu yazmak.
 - [ ] Ajan hizlandirma adimlari icin deterministic check-list hazirlamak (komut kisaltmalari, once-kanit sonra-kod akisi, stop/continue kurali).
 - [ ] Koordinator kapanis protokolunu tanimlamak (lock closure, kanit, devir notu).
 
@@ -47,18 +47,18 @@ Baslangic: `2026-03-15 06:50`
   - `git status --short`
   - `pre-pr PASS/FAIL`
 - [ ] Koordinator devir/teslim adimi dokumanlarda net olur (kimin neyi ne zaman kapatacagi belirsiz kalmaz).
-- [ ] `powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick` => PASS
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` => PASS
 
 ## Komutlar
 ```powershell
 # 1) Stack standart kaldirma
-powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\dev-up.ps1 -App both
+powershell -ExecutionPolicy Bypass -File scripts/dev-up.ps1 -App both
 
 # 2) Hizli dogrulama
-powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\validate.ps1 -App both
+powershell -ExecutionPolicy Bypass -File scripts/validate.ps1 -App both
 
 # 3) PR oncesi zorunlu kapi
-powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick
+powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ```
 
 ## Notlar
@@ -81,3 +81,5 @@ powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode q
    - `TASK_LOCKS` kaydi `closed`, `NEXT_TASK` uygun duruma cekilir, `WORKLOG` final kaydi dusulur.
 5. Kanit:
    - Branch/status/pre-pr ciktilari tek mesajda raporlanir.
+
+

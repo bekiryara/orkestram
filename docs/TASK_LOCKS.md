@@ -1,4 +1,4 @@
-# TASK LOCKS
+﻿# TASK LOCKS
 
 Durumlar:
 - `active`: gorev acik, lock var
@@ -38,5 +38,6 @@ Sabit Ajan Kimlikleri:
 
 
 
-| TASK-032 | codex | agent/codex/task-032 | active | docs/tasks/TASK-032.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/PR_FLOW_TR.md,AGENTS.md | 2026-03-15 06:55:00 | 2026-03-15 07:35:00 | WSL bazli paralel ajan koordinasyon standardi + D drive hard-guard (in progress) |
+| TASK-032 | codex | agent/codex/task-032 | active | docs/tasks/TASK-032.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/PR_FLOW_TR.md,AGENTS.md,scripts/pre-pr.ps1,scripts/validate.ps1 | 2026-03-15 06:55:00 | 2026-03-16 08:10:00 | WSL-first operasyon scriptleri + belge hizasi tamamlandi; pre-pr PASS, lock parcasi devam ediyor |
 | TASK-033 | codex-a | agent/codex-a/task-033 | active | docs/tasks/TASK-033.md,docs/REPO_DISCIPLINE_TR.md,docs/WSL_RUNTIME_PLAYBOOK_TR.md | 2026-03-15 07:10:00 | 2026-03-15 07:10:00 | WSL tek-kaynak kanit protokolu ve baslangic checklisti (in progress) |
+
