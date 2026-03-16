@@ -1,6 +1,6 @@
 # TASK-056
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex-a`  
 Branch: `agent/codex-a/task-056`  
 Baslangic: `2026-03-17 00:37`
@@ -9,13 +9,13 @@ Baslangic: `2026-03-17 00:37`
 - Bozuk local git remote path temizligi ve fetch disiplini hizalamasi
 
 ## In Scope
-- [ ] `.git/config` icindeki bozuk local remote path kayitlarini duzeltmek veya kaldirmak
-- [ ] `git fetch --all --prune` komutunu temiz sonuc verecek hale getirmek
-- [ ] Kapanista `docs/WORKLOG.md` icine kanit eklemek
+- [x] `.git/config` icindeki bozuk local remote path kayitlarini duzeltmek veya kaldirmak
+- [x] `git fetch --all --prune` komutunu temiz sonuc verecek hale getirmek
+- [x] Kapanista `docs/WORKLOG.md` icine kanit eklemek
 
 ## Out of Scope
-- [ ] GitHub origin ayarlarini degistirmek
-- [ ] Runtime/media koduna yeniden mudahale etmek
+- [x] GitHub origin ayarlarini degistirmemek
+- [x] Runtime/media koduna yeniden mudahale etmemek
 
 ## Lock Dosyalari
 - `docs/tasks/TASK-056.md`
@@ -25,16 +25,19 @@ Baslangic: `2026-03-17 00:37`
 - `docs/WORKLOG.md`
 
 ## Kabul Kriteri
-- [ ] `git fetch --all --prune` bozuk local remote path hatasi vermeden tamamlanir
-- [ ] `git remote -v` ve `git branch -vv` ciktilari branch/upstream disiplinine uyar
-- [ ] `pre-pr` PASS
+- [x] `git fetch --all --prune` bozuk local remote path hatasi vermeden tamamlanir
+- [x] `git remote -v` ve `git branch -vv` ciktilari branch/upstream disiplinine uyar
+- [x] `pre-pr` PASS
 
 ## Komutlar
 ```powershell
+git fetch --all --prune
+git remote -v
+git branch -vv
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ```
 
 ## Notlar
-- Bu gorev lokal git config temizligidir; repo kodu kapsami disinda operasyonel hijyen isidir
-- Gerekirse eski local remote adlari silinip yeniden tanimlanabilir
-
+- `origin` remote'u korunarak sadece stale local branch upstream kaydi temizlendi.
+- Aktif branch `agent/codex-a/task-056` icin upstream `origin/agent/codex-a/task-056` olarak dogrulandi.
+- `git fetch --all --prune` ve `pre-pr -Mode quick` PASS ile kapanis kaniti alindi.
