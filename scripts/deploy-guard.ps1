@@ -92,15 +92,24 @@ foreach ($rel in @($policy.deploy.required_paths)) {
 
 foreach ($rel in @($policy.deploy.writable_dirs)) {
     $full = Join-Path $DeployPackPath $rel
-    if (-not (Test-WriteableDir -FullPath $full)) { Add-Fail "Yazilabilir degil: $rel" }
+    if (-not (Test-WriteableDir -FullPath $full)) {
+        if ($Profile -eq 'local-check') { Add-Warn "Yazilabilir degil (local WARN): $rel" }
+        else { Add-Fail "Yazilabilir degil: $rel" }
+    }
 }
 
 $ignorePatterns = @($profilePolicy.ignore_forbidden_patterns)
 $forbiddenPatterns = @($policy.deploy.forbidden_path_patterns)
-$allItems = Get-ChildItem -LiteralPath $DeployPackPath -Recurse -Force
+$allItems = Get-ChildItem -LiteralPath $DeployPackPath -Recurse -Force -ErrorAction SilentlyContinue
 
 foreach ($item in $allItems) {
-    $relative = $item.FullName.Substring($DeployPackPath.Length).TrimStart('\\').Replace('\\', '/')
+    $fullName = [string]$item.FullName
+    if ([string]::IsNullOrWhiteSpace($fullName)) { continue }
+    if (-not $fullName.StartsWith($DeployPackPath, [System.StringComparison]::OrdinalIgnoreCase)) { continue }
+    if ($fullName.Length -lt $DeployPackPath.Length) { continue }
+
+    $relative = $fullName.Substring($DeployPackPath.Length).TrimStart('\\').Replace('\\', '/')
+    if ([string]::IsNullOrWhiteSpace($relative)) { continue }
 
     $ignored = $false
     foreach ($ig in $ignorePatterns) {

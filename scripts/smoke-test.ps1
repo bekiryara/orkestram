@@ -42,6 +42,37 @@ function Resolve-ContainerName {
     return ""
 }
 
+function Test-DockerPath {
+    param(
+        [string]$ContainerName,
+        [string]$Path,
+        [string]$Kind = 'exists'
+    )
+
+    if ([string]::IsNullOrWhiteSpace($ContainerName)) {
+        return $false
+    }
+
+    $probe = if ($Kind -eq 'symlink') { "[ -L '$Path' ]" } else { "[ -e '$Path' ]" }
+    & docker exec $ContainerName sh -lc $probe *> $null
+    return ($LASTEXITCODE -eq 0)
+}
+
+function Assert-StorageSymlink {
+    param(
+        [string]$Name,
+        [string]$ContainerName
+    )
+
+    if (-not (Test-DockerPath -ContainerName $ContainerName -Path '/var/www/html/public/storage' -Kind 'symlink')) {
+        $failures.Add("$Name public/storage symlink eksik") | Out-Null
+        return $false
+    }
+
+    Write-Host "[smoke] OK storage-symlink ($Name)"
+    return $true
+}
+
 function Resolve-AdminCred {
     param([string]$User, [string]$Pass)
 
@@ -163,6 +194,45 @@ function Assert-BodyContains {
 
     Write-Host "[smoke] OK body $url -> '$Needle'"
     return $true
+}
+
+function Resolve-AdminListingThumbUrl {
+    param(
+        [string]$BaseUrl,
+        [string]$SiteHost,
+        [hashtable]$Headers = @{}
+    )
+
+    $listUrl = $BaseUrl + "/admin/listings"
+    if (-not [string]::IsNullOrWhiteSpace($SiteHost)) {
+        $listUrl += "?site=$SiteHost"
+    }
+
+    $result = Get-ResultWithRetry -Url $listUrl -Headers $Headers
+    if ($result.Code -ne 200 -or [string]::IsNullOrWhiteSpace($result.Body)) {
+        return $null
+    }
+
+    $regex = [regex]'(?is)<img[^>]*src=["'']([^"'']+)["''][^>]*class=["''][^"'']*thumb-80[^"'']*["'']'
+    $match = $regex.Match($result.Body)
+    if (-not $match.Success) {
+        return $null
+    }
+
+    $src = [string]$match.Groups[1].Value
+    if ([string]::IsNullOrWhiteSpace($src)) {
+        return $null
+    }
+
+    if ($src.StartsWith('http://') -or $src.StartsWith('https://')) {
+        return $src
+    }
+
+    if ($src.StartsWith('/')) {
+        return $BaseUrl + $src
+    }
+
+    return $BaseUrl + "/" + $src.TrimStart('/')
 }
 
 function Get-SelectOptionValues {
@@ -534,6 +604,7 @@ foreach ($t in $targets) {
         $fixturesReady = $false
     }
     else {
+        Assert-StorageSymlink -Name $t.Name -ContainerName $containerName | Out-Null
         $siteArg = if ($t.Name -eq "izmirorkestra") { "izmirorkestra.net" } else { "orkestram.net" }
         $rangeResult = Invoke-DockerFixtureCommand -ContainerName $containerName -CommandName "smoke:prepare-range-fixture" -SiteArg $siteArg
         if ($rangeResult.ExitCode -ne 0) {
@@ -635,6 +706,14 @@ foreach ($t in $targets) {
     Assert-BodyContains -Name $t.Name -Url ($t.Base + "/admin/pages") -Needle "Geri Bildirimler" -Headers $authHeaders | Out-Null
     Assert-Status -Name $t.Name -Url ($t.Base + "/admin/categories") -Expect 200 -Headers $authHeaders | Out-Null
     Assert-Status -Name $t.Name -Url ($t.Base + "/admin/listings") -Expect 200 -Headers $authHeaders | Out-Null
+    $siteHost = if ($t.Name -eq 'izmirorkestra') { 'izmirorkestra.net' } else { 'orkestram.net' }
+    $adminThumbUrl = Resolve-AdminListingThumbUrl -BaseUrl $t.Base -SiteHost $siteHost -Headers $authHeaders
+    if ([string]::IsNullOrWhiteSpace($adminThumbUrl)) {
+        $failures.Add("$($t.Name) admin listing thumb URL'i bulunamadi") | Out-Null
+    }
+    else {
+        Assert-Status -Name $t.Name -Url $adminThumbUrl -Expect 200 | Out-Null
+    }
     Assert-Status -Name $t.Name -Url ($t.Base + "/admin/city-pages") -Expect 200 -Headers $authHeaders | Out-Null
 }
 

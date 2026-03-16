@@ -66,10 +66,17 @@ function Ensure-RuntimePermissions {
 set -e
 mkdir -p /var/www/html/storage/framework/views
 mkdir -p /var/www/html/storage/framework/cache
+mkdir -p /var/www/html/storage/framework/sessions
 mkdir -p /var/www/html/storage/logs
 mkdir -p /var/www/html/bootstrap/cache
+mkdir -p /var/www/html/storage/app/public
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 chmod -R ug+rwX /var/www/html/storage /var/www/html/bootstrap/cache
+if [ ! -L /var/www/html/public/storage ]; then
+  rm -rf /var/www/html/public/storage
+  php artisan storage:link >/dev/null 2>&1 || ln -s /var/www/html/storage/app/public /var/www/html/public/storage
+fi
+test -L /var/www/html/public/storage
 test -w /var/www/html/storage/framework/views
 test -w /var/www/html/bootstrap/cache
 '@
@@ -121,7 +128,7 @@ $composeCommand = if ($Build) {
 }
 Invoke-WslBash -User $LinuxDockerUser -Command $composeCommand
 
-$expectedPrefix = "/home/$LinuxUser/orkestram/local-rebuild/apps/"
+$expectedPrefix = "$LinuxProjectRoot/local-rebuild/apps/"
 foreach ($t in $targets) {
     Assert-MountSource -Container $t.Container -ExpectedPrefix $expectedPrefix
     Ensure-RuntimePermissions -Container $t.Container

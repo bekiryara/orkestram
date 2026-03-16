@@ -1242,3 +1242,29 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `scripts/dev-up.ps1` icindeki mount prefix dogrulamasi hala `/home/bekir/orkestram`e sabit; `orkestram-k` mount'unda false negative veriyor. Ayrica gorev gerekirse acilabilir.
+
+## TASK-055 - Media Runtime Restore Kaliciligi ve Smoke Gate Sertlestirmesi
+- Tarih: `2026-03-17 00:29`
+- Ajan: `codex`
+- Branch: `agent/codex/task-055`
+- Ozet:
+  - `scripts/dev-up.ps1` mount prefix kontrolu worktree-kokune baglandi; runtime permission adimina `public/storage` link ve gerekli dizin preflight'i eklendi.
+  - `scripts/deploy-guard.ps1` icinde deploy-pack taramasindaki `Substring` patlamasi kapatildi; `local-check` profili host-owned runtime dizinlerini WARN seviyesinde raporlayacak sekilde yumusatildi.
+  - `scripts/smoke-test.ps1` icine storage symlink ve site-filtreli admin listing thumb URL `200` kontrolu eklendi; izmir legacy media restore'u sonrasi regressions gate'e alindi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-055.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `scripts/dev-up.ps1`
+  - `scripts/deploy-guard.ps1`
+  - `scripts/smoke-test.ps1`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/dev-up.ps1 -App both -LinuxProjectRoot /home/bekir/orkestram-k`
+  - `powershell -ExecutionPolicy Bypass -File scripts/smoke-test.ps1 -App both`
+  - `git push -u origin agent/codex/task-055`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `git fetch --all --prune` bozuk local remote yollarindan dolayi fail veriyor; runtime/media sertlestirmesi disinda ayri temizlik gorevi olarak kaldi.
