@@ -920,3 +920,25 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `origin/agent/codex-b/task-038` ve `origin/agent/codex-c/task-039` branchleri `main` ile ayni oldugu icin kapsamlar koordinator entegrasyon turunda tamamlandi.
+
+### [2026-03-16 13:28] TASK-041 Resmi Kapanis (Task-040 Main Hizasi)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-041` acilarak `TASK-040` kapanisinin ana hat gercegiyle hizasi alindi.
+  - Canonical repo uzerinde `agent/codex/task-040` -> `main` merge edildi.
+  - `pre-pr -Mode quick` PASS sonrasi `origin/main` pushlandi.
+  - Koordinator panosu tekrar `IDLE`, `TASK-041` lock kaydi `closed` yapildi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-041.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git checkout main`
+  - `git merge --no-ff agent/codex/task-040 -m "merge: task-040 hero and listing cta polish"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+  - `git push origin main`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `orkestram-c` worktree'deki stale lokal degisiklikler bilerek bu gorevin disinda birakildi.
