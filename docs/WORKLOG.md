@@ -1043,3 +1043,21 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listings.blade.php`
 - Sonuc:
   - `PASS`
+
+### [2026-03-16 17:10] TASK-047 Gate Fail (Listing Sonuc Ozeti Sadelestirme)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - UX polish ve kayit temizligi tamamlandi, branch commitlenip upstream'e pushlandi.
+  - `pre-pr` yeniden kosuldu ancak gorevle ilgisiz mevcut test hatasi nedeniyle PASS alinamadi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-047.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `FAIL`
+- Not:
+  - Hata: `izmirorkestra-local-web FeedbackModerationAccessTest` icinde `Admin panel yorum kaydi` beklentisi saglanmadi.
+  - Disiplin geregi `TASK-047` kapatilmayip `active` birakildi.
