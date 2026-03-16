@@ -1,4 +1,4 @@
-﻿# TASK LOCKS
+# TASK LOCKS
 
 Durumlar:
 - `active`: gorev acik, lock var
@@ -54,6 +54,7 @@ Sabit Ajan Kimlikleri:
 | TASK-039 | codex-c | agent/codex-c/task-039 | closed | local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php,docs/tasks/TASK-039.md | 2026-03-16 11:00:00 | 2026-03-16 12:16:47 | Listing CTA hiyerarsisi task-040 entegrasyonunda tamamlandi (pre-pr PASS) |
 
 | TASK-042 | codex | agent/codex/task-042 | closed | AGENTS.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,scripts/start-task.ps1,docs/tasks/TASK-042.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md | 2026-03-16 14:05:00 | 2026-03-16 14:24:00 | Koordinator cevap/teslim/task-acma standardi ve runtime hijyen checklisti sabitlendi (pre-pr PASS) |
-| TASK-043 | codex | agent/codex/task-043 | active | docs/tasks/TASK-043.md,docs/tasks/TASK-044.md,docs/tasks/TASK-045.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md | 2026-03-16 15:05:00 | 2026-03-16 15:05:00 | Listing filtre UX toparlama koordinasyonu acildi |
-| TASK-044 | codex-a | agent/codex-a/task-044 | active | local-rebuild/apps/orkestram/resources/views/frontend/listings.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listings.blade.php,docs/tasks/TASK-044.md | 2026-03-16 15:05:00 | 2026-03-16 15:05:00 | Blade filtre paneli ve aktif filtre okunurlugu gorevi acildi |
-| TASK-045 | codex-b | agent/codex-b/task-045 | active | local-rebuild/apps/orkestram/public/assets/v1.css,local-rebuild/apps/izmirorkestra/public/assets/v1.css,docs/tasks/TASK-045.md | 2026-03-16 15:05:00 | 2026-03-16 15:05:00 | CSS mobil filtre akisi ve aksiyon hiyerarsisi gorevi acildi |
+| TASK-043 | codex | agent/codex/task-043 | closed | docs/tasks/TASK-043.md,docs/tasks/TASK-044.md,docs/tasks/TASK-045.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,local-rebuild/apps/orkestram/resources/views/frontend/listings.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listings.blade.php,local-rebuild/apps/orkestram/public/assets/v1.css,local-rebuild/apps/izmirorkestra/public/assets/v1.css | 2026-03-16 15:05:00 | 2026-03-16 16:05:00 | Listing filtre UX toparlamasi ajan teslimleri normalize edilerek tamamlandi (pre-pr PASS) |
+| TASK-044 | codex-a | agent/codex-a/task-044 | closed | local-rebuild/apps/orkestram/resources/views/frontend/listings.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listings.blade.php,docs/tasks/TASK-044.md | 2026-03-16 15:05:00 | 2026-03-16 16:05:00 | Blade filtre paneli ve aktif filtre okunurlugu koordinator entegrasyonunda tamamlandi |
+| TASK-045 | codex-b | agent/codex-b/task-045 | closed | local-rebuild/apps/orkestram/public/assets/v1.css,local-rebuild/apps/izmirorkestra/public/assets/v1.css,docs/tasks/TASK-045.md | 2026-03-16 15:05:00 | 2026-03-16 16:05:00 | CSS mobil filtre akisi ve aksiyon hiyerarsisi koordinator entegrasyonunda tamamlandi |
+

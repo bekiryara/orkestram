@@ -964,3 +964,28 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `IN_PROGRESS`
 - Not:
   - `codex-c` bu turda bos tutuldu; entegrasyon sonrasi gerekirse ikinci dalga gorev acilacak.
+
+### [2026-03-16 16:05] TASK-043 Resmi Kapanis (Listing Filtre UX Toparlama)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-044` blade teslimi `orkestram-a` worktree'den parity ile entegre edildi.
+  - `TASK-045` CSS tesliminden listing filtre yuzeyine ait guvenli stiller secilerek iki appte uygulandi.
+  - Ajan worktree'lerindeki lock/worklog kapatma girisleri normalize edildi; resmi kapanis koordinator branch'inde verildi.
+  - Listing filtre paneli, aktif filtre okunurlugu, temizle/uygula akisi ve mobil filtre aksiyon hiyerarsisi toparlandi.
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/resources/views/frontend/listings.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listings.blade.php`
+  - `local-rebuild/apps/orkestram/public/assets/v1.css`
+  - `local-rebuild/apps/izmirorkestra/public/assets/v1.css`
+  - `docs/tasks/TASK-043.md`
+  - `docs/tasks/TASK-044.md`
+  - `docs/tasks/TASK-045.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `codex-c` icin ikinci dalga goreve ihtiyac kalmadi; entegrasyon ilk turda tamamlandi.
