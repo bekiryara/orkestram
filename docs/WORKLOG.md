@@ -989,3 +989,23 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `codex-c` icin ikinci dalga goreve ihtiyac kalmadi; entegrasyon ilk turda tamamlandi.
+
+### [2026-03-16 16:30] TASK-046 Resmi Kapanis (Task-043 Main + Runtime Hizasi)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `agent/codex/task-043` kapsamindaki listing filtre UX iyilestirmeleri `task-046` merge adayina alindi.
+  - `pre-pr -Mode quick` ve smoke dogrulamalariyla runtime hizasi kontrol edildi.
+  - Gorev resmi olarak `main`e tasinip kayitlar guncellendi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-046.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git checkout -b agent/codex/task-046`
+  - `git merge --no-ff agent/codex/task-043`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Runtime tek kaynak olarak canonical WSL repo uzerinden dogrulandi.

@@ -58,3 +58,5 @@ Sabit Ajan Kimlikleri:
 | TASK-044 | codex-a | agent/codex-a/task-044 | closed | local-rebuild/apps/orkestram/resources/views/frontend/listings.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listings.blade.php,docs/tasks/TASK-044.md | 2026-03-16 15:05:00 | 2026-03-16 16:05:00 | Blade filtre paneli ve aktif filtre okunurlugu koordinator entegrasyonunda tamamlandi |
 | TASK-045 | codex-b | agent/codex-b/task-045 | closed | local-rebuild/apps/orkestram/public/assets/v1.css,local-rebuild/apps/izmirorkestra/public/assets/v1.css,docs/tasks/TASK-045.md | 2026-03-16 15:05:00 | 2026-03-16 16:05:00 | CSS mobil filtre akisi ve aksiyon hiyerarsisi koordinator entegrasyonunda tamamlandi |
 
+
+| TASK-046 | codex | agent/codex/task-046 | closed | docs/tasks/TASK-046.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md | 2026-03-16 16:20:00 | 2026-03-16 16:30:00 | TASK-043 main'e merge edilip runtime hizasi dogrulandi (pre-pr PASS) |
