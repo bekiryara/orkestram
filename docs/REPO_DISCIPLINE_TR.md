@@ -19,7 +19,7 @@ Windows dizini:
 Kural:
 1. "Kod degisti ama calismiyor" durumunda ilk kontrol mount kaynagi olmalidir.
 2. WSL disinda calistirilan kod referans alinmaz.
-3. Stack ayaÄŸa kaldirma komutu standarttir:
+3. Stack ayaga kaldirma komutu standarttir:
    - `powershell -ExecutionPolicy Bypass -File scripts/dev-up.ps1 -App both`
 4. Dogrudan `docker compose up` ile manuel calistirma yapilmaz (yanlis mount riski).
 
@@ -48,7 +48,7 @@ Degisim alanlari:
 Kural:
 1. Her kod degisimi icin ilgili dokumana en az bir satir guncelleme notu dusulur.
 2. Dokuman degisimi kodu etkiliyorsa ilgili dosya referansi eklenir.
-3. Gececi/hack kod canliya tasinmaz.
+3. Gecici/hack kod canliya tasinmaz.
 4. Controller'da is kurali birikirse service/refactor sprinti zorunlu acilir.
 
 ## 3) Definition of Done (DoD)
@@ -92,7 +92,19 @@ Bu kosullar olmadan deploy yok:
 2. Kullanici acik onayi: `tamam, deploy et`.
 3. Son smoke test PASS.
 
-## 8) Calisma Protokolu (Her Gorevde)
+## 8) Runtime Kisa Hijyen Checklisti
+
+Her gorevde dogrulama oncesi su 4 kontrol yapilir:
+1. Container up:
+   - uygulama stack'i ayakta olmalidir.
+2. Mount source dogru:
+   - aktif kaynak `WSL: /home/bekir/orkestram*` altindan gelmelidir.
+3. Portlar cevap veriyor:
+   - `8180`, `8181`, `8188`
+4. Smoke PASS:
+   - hizli smoke veya `validate/pre-pr` icindeki smoke adimi basarili olmalidir.
+
+## 9) Calisma Protokolu (Her Gorevde)
 
 1. Degisiklik oncesi: hedef dosya ve etki alani netlestir.
 2. Degisiklik sonrasi: cache temizle + hizli smoke.
@@ -103,7 +115,7 @@ Bu kosullar olmadan deploy yok:
    - gerekirse `git pull --ff-only origin <branch>`
    - gorev bitince `git push -u origin agent/<ajan>/<task-id>`
 
-## 9) Operasyonel Disiplin Dosyalari (Zorunlu)
+## 10) Operasyonel Disiplin Dosyalari (Zorunlu)
 
 1. `docs/NEXT_TASK.md`
    - Tek aktif gorev buraya yazilir.
@@ -128,12 +140,15 @@ Bu kosullar olmadan deploy yok:
      - `powershell -ExecutionPolicy Bypass -File scripts/security-gate.ps1`
 8. `docs/TASK_LOCKS.md` + `docs/tasks/_TEMPLATE.md`
    - Gorev lock ve task kaydi script bagimsiz (manual) acilir.
-   - Standart:
-     - `docs/tasks/TASK-001.md` olustur
-     - `docs/TASK_LOCKS.md` icine `active` satiri ekle
-     - `git checkout -b agent/codex-a/task-001` ile branch ac
+   - Standart task acma sirasi:
+     1. `docs/tasks/TASK-0xx.md`
+     2. `docs/TASK_LOCKS.md`
+     3. `docs/NEXT_TASK.md`
+     4. branch acilisi
+   - Mekanik komut:
+     - `powershell -ExecutionPolicy Bypass -File scripts/start-task.ps1 -TaskId TASK-0xx -Agent codex -Files "path/one,path/two" -Note "kisa ozet"`
 
-## 10) Yeni Gelen Ajan Onboarding (Zorunlu)
+## 11) Yeni Gelen Ajan Onboarding (Zorunlu)
 
 Her yeni ajan ilk turda su sirayi uygular:
 1. `AGENTS.md` dosyasini okur.
@@ -144,7 +159,7 @@ Her yeni ajan ilk turda su sirayi uygular:
 6. `pre-pr` PASS olmadan commit/push yapmaz.
 7. `git remote -v` ile `origin`in GitHub oldugunu dogrular.
 
-## 11) WSL Tek Kaynak + 3 Ajan Klasoru Standardi
+## 12) WSL Tek Kaynak + 3 Ajan Klasoru Standardi
 
 Kural:
 1. Tek calisan kaynak `WSL: /home/bekir/orkestram` olmalidir.
@@ -161,7 +176,7 @@ Dogrulama:
 1. Her klasorde `git branch --show-current` => `main`
 2. Her klasorde `git status --short` bos olmalidir.
 
-## 12) Dokuman Duzenleme Disiplini (Koordinator)
+## 13) Dokuman Duzenleme Disiplini (Koordinator)
 
 Kural:
 1. Dokumanlarda toplu regex/replace ile coklu alan degisimi yapilmaz.
@@ -171,7 +186,7 @@ Kural:
 5. Belge guncellemelerinde `main` yerine `agent/<ajan>/<task-id>` branch disiplini zorunludur.
 6. Kapanis oncesi zorunlu kapi: `pre-pr -Mode quick` PASS.
 
-## 13) Ajan Baslangic Hard Guard (D:\orkestram -> WSL Hizalama)
+## 14) Ajan Baslangic Hard Guard (D:\orkestram -> WSL Hizalama)
 
 Kural:
 1. Ajan `D:\orkestram` altinda acilsa bile kod degisikligine gecmeden WSL hizalama kaniti zorunludur.
@@ -181,17 +196,14 @@ Kural:
 4. `REALIGN_REQUIRED` durumunda ajan calismasi durdurulur; dogru WSL workdir ile yeniden baslatilmadan degisiklik yapilmaz.
 5. Hard Guard kaniti alinmadan lock acik olsa bile kod/dokuman degisikligi yapilmaz.
 
-
-
-
-## 14) Task ID Tekrar Yasaki + Koordinator Cevap Sablonu + Remote/Upstream Zorunlulugu
+## 15) Task ID Tekrar Yasaki + Koordinator Cevap Sablonu + Remote/Upstream Zorunlulugu
 
 Kural:
 1. `TASK-XXX` kimligi tekrar kullanilamaz; her yeni is benzersiz task id ile acilir.
 2. Koordinator ilk karar cevabini su sabit formatla verir:
-   1. aktif branch
-   2. aktif task durumu
-   3. karar
-   4. sonraki adim
+   1. `aktif branch: ...`
+   2. `aktif task durumu: ...`
+   3. `karar: mevcut task devam | yeni task ac`
+   4. `sonraki adim: ...`
 3. `git remote -v` ve `git branch -vv` dogrulamasi gorev baslangici ve `pre-pr` oncesi zorunludur.
 4. `origin` GitHub degilse veya aktif branch upstream'i `origin/<branch>` degilse commit/push akisi durdurulur.

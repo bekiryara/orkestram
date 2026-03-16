@@ -920,3 +920,27 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `origin/agent/codex-b/task-038` ve `origin/agent/codex-c/task-039` branchleri `main` ile ayni oldugu icin kapsamlar koordinator entegrasyon turunda tamamlandi.
+
+### [2026-03-16 14:24] TASK-042 Resmi Kapanis (Koordinator Disiplin Standardizasyonu)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Koordinator yeni is kararlama cevabi sabit 4 satir formatina baglandi.
+  - Ajan teslim kanit paketi `git branch --show-current`, `git branch -vv`, `git status --short`, `pre-pr PASS` olarak tek formatta standardize edildi.
+  - `scripts/start-task.ps1` task dosyasi -> `TASK_LOCKS` -> `NEXT_TASK` -> branch acilisi sirasini mekaniklestirecek sekilde genisletildi.
+  - Runtime kisa hijyen checklisti (`container up`, `mount source`, `8180/8181/8188`, `smoke PASS`) ilgili disiplin belgelerine eklendi.
+- Degisen Dosyalar:
+  - `AGENTS.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `scripts/start-task.ps1`
+  - `docs/tasks/TASK-042.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `start-task.ps1` aktif lock varken yeni task acmaz; koordinasyon sirasi belge ve scriptte ayni hale getirildi.

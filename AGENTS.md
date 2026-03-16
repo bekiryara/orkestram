@@ -1,4 +1,4 @@
-﻿# AGENTS.md
+# AGENTS.md
 
 Bu repo'ya gelen her ajan bu dosyayi ve asagidaki iki dokumani okumadan ise baslamaz:
 - `docs/REPO_DISCIPLINE_TR.md`
@@ -29,10 +29,11 @@ powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 PASS olmadan commit/push yasak.
 
 ## Kanit Zorunlulugu
-Her gorev sonunda su 3 ciktinin paylasilmasi zorunlu:
+Her gorev sonunda su 4 kanit ayni formatta paylasilir:
 1. `git branch --show-current`
-2. `git status --short`
-3. `pre-pr` sonucu (PASS/FAIL)
+2. `git branch -vv`
+3. `git status --short`
+4. `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` -> `PASS`
 
 ## Ihlal Durumu
 Kural ihlalinde calisma durdurulur, once su duzeltilir:
@@ -41,23 +42,22 @@ Kural ihlalinde calisma durdurulur, once su duzeltilir:
 3. dogrulama
 4. WSL hizalama kaniti
 
-
 ## Koordinator Ilk Cevap Protokolu
-Yeni gelen `codex` koordinatoru ilk cevapta su 4 maddeyi tek mesajda ozetler:
-1. aktif branch
-2. aktif task
-3. lock durumu
-4. bu is mevcut task'a mi girer, yeni task mi ister
+Yeni gelen `codex` koordinatoru ilk cevapta yalniz su 4 satirlik sabit formati kullanir:
+1. `aktif branch: ...`
+2. `aktif task durumu: ...`
+3. `karar: mevcut task devam | yeni task ac`
+4. `sonraki adim: ...`
 
 Kural:
 1. Koordinator once mevcut `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md` ve aktif task kaydini okur.
-2. Uygun aktif task varsa onu devam ettirir.
-3. Uygun task yoksa yeni task/lock acilmasi gerektigini net yazar.
-4. Gereksiz plan cikarmadan bir sonraki dogru adimi ister.
+2. `aktif task durumu` satiri lock durumunu ve aktif task olup olmadigini birlikte ozetler.
+3. Uygun aktif task varsa `karar` satiri yalniz `mevcut task devam` olur.
+4. Uygun task yoksa `karar` satiri yalniz `yeni task ac` olur.
+5. Format disina cikilmaz; ek plan veya aciklama `sonraki adim` satirina sigar.
 
 ## Koordinator Senden Ne Ister
 Koordinator, sistem okumasindan sonra senden tek net karar ister:
 1. mevcut task devam edecek
 2. yeni task acilacak
 3. is ajanlara dagitilacak
-
