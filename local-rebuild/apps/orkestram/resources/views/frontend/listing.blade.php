@@ -1,4 +1,4 @@
-@extends('frontend.layout')
+﻿@extends('frontend.layout')
 
 @php
     $metaTitle = $item->seo_title ?: $item->name;
@@ -66,7 +66,7 @@
                 @php($likeLoginUrl = route('auth.login', ['next' => '/ilan/' . $item->slug]))
                 <h3>{{ $siteMeta['contact_heading'] ?? 'Hemen Iletisime Gec' }}</h3>
                 <p class="meta">{{ $siteMeta['contact_lead'] ?? 'Etkinlik detaylarini paylas, hizli geri donus al.' }}</p>
-                <div class="sticky-cta">
+                <div class="sticky-cta listing-primary-actions">
                     @if($item->whatsapp)
                         <a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/{{ ltrim(preg_replace('/[^0-9]/', '', $item->whatsapp), '0') }}">WhatsApp ile Ulas</a>
                     @endif
@@ -80,19 +80,19 @@
                 <hr>
                 <h3 class="mt-8">Iletisim ve Geri Bildirim</h3>
                 <p class="meta">Bu ilan icin mesaj gonderebilir, yorum yazabilir ve begeni birakabilirsin.</p>
-                <div class="sticky-cta">
+                <div class="sticky-cta listing-secondary-actions">
                     @if($shellAuthenticated ?? false)
                         <a class="btn btn-primary" href="{{ $messageUrl }}">Mesaj Gonder</a>
-                        <a class="btn btn-outline-secondary" href="#yorum-formu">Yorum Yaz</a>
+                        <a class="btn btn-ghost" href="#yorum-formu">Yorum Yaz</a>
                         <form method="post" action="{{ route('customer.feedback.like') }}">
                             @csrf
                             <input type="hidden" name="listing_slug" value="{{ $item->slug }}">
-                            <button type="submit" class="btn btn-outline-secondary">Begeni Birak</button>
+                            <button type="submit" class="btn btn-ghost">Begeni Birak</button>
                         </form>
                     @else
                         <a class="btn btn-primary" href="{{ $messageLoginUrl }}">Mesaj Gonder</a>
-                        <a class="btn btn-outline-secondary" href="{{ $commentLoginUrl }}">Yorum Yaz</a>
-                        <a class="btn btn-outline-secondary" href="{{ $likeLoginUrl }}">Begeni Birak</a>
+                        <a class="btn btn-ghost" href="{{ $commentLoginUrl }}">Yorum Yaz</a>
+                        <a class="btn btn-ghost" href="{{ $likeLoginUrl }}">Begeni Birak</a>
                     @endif
                 </div>
                 @if(session('ok'))
@@ -304,3 +304,7 @@
         })();
     </script>
 @endsection
+
+
+
+

@@ -1,4 +1,4 @@
-# TASK LOCKS
+﻿# TASK LOCKS
 
 Durumlar:
 - `active`: gorev acik, lock var
@@ -28,3 +28,28 @@ Sabit Ajan Kimlikleri:
 | TASK-025 | codex-a | agent/codex-a/task-025 | closed | docs/tasks/TASK-025.md,local-rebuild/apps/orkestram/database/migrations/**,local-rebuild/apps/izmirorkestra/database/migrations/**,local-rebuild/apps/orkestram/app/Models/Listing.php,local-rebuild/apps/izmirorkestra/app/Models/Listing.php,local-rebuild/apps/orkestram/resources/views/admin/listings/form.blade.php,local-rebuild/apps/izmirorkestra/resources/views/admin/listings/form.blade.php,local-rebuild/apps/orkestram/resources/views/portal/owner/listings-create.blade.php,local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-create.blade.php,local-rebuild/apps/orkestram/resources/views/portal/owner/listings-edit.blade.php,local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-edit.blade.php,local-rebuild/apps/orkestram/tests/Feature/**,local-rebuild/apps/izmirorkestra/tests/Feature/** | 2026-03-14 12:10:00 | 2026-03-14 13:45:00 | Tamamlandi (commit 3ff02ff), pre-pr PASS |
 | TASK-026 | codex-b | agent/codex-b/task-026 | closed | docs/tasks/TASK-026.md,local-rebuild/apps/orkestram/app/Http/Controllers/PublicController.php,local-rebuild/apps/izmirorkestra/app/Http/Controllers/PublicController.php,local-rebuild/apps/orkestram/resources/views/frontend/listings.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listings.blade.php,local-rebuild/apps/orkestram/resources/views/frontend/service-category.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/service-category.blade.php,local-rebuild/apps/orkestram/tests/Feature/**,local-rebuild/apps/izmirorkestra/tests/Feature/** | 2026-03-14 12:10:00 | 2026-03-14 13:45:00 | Tamamlandi (commit 06af8de), pre-pr PASS |
 | TASK-027 | codex-b | agent/codex-b/task-027 | closed | docs/tasks/TASK-027.md,local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php,local-rebuild/apps/orkestram/tests/Feature/**,local-rebuild/apps/izmirorkestra/tests/Feature/** | 2026-03-14 12:10:00 | 2026-03-14 14:05:00 | Tamamlandi (commit a8e818c), pre-pr PASS |
+| TASK-028 | codex | agent/codex/task-028 | closed | scripts/dev-up.ps1,docs/tasks/TASK-028.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md | 2026-03-15 00:06:25 | 2026-03-15 00:18:00 | WSL tek-kaynak runtime stabilizasyonu tamamlandi; pre-pr PASS ile kapatildi |
+| TASK-029 | codex | agent/codex/task-028 | closed | docs/tasks/TASK-029.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/PR_FLOW_TR.md | 2026-03-15 00:49:10 | 2026-03-15 00:50:31 | Dokuman drift hizalama tamamlandi; pre-pr PASS ile kapatildi |
+| TASK-030 | codex | agent/codex/task-030 | closed | docs/tasks/TASK-030.md,docs/REPO_DISCIPLINE_TR.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md | 2026-03-15 01:07:56 | 2026-03-15 01:11:42 | Belge duzenleme disiplini resmi kurala baglandi; pre-pr PASS ile kapatildi |
+
+| TASK-031 | codex | agent/codex/task-031 | closed | docs/tasks/TASK-031.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,local-rebuild/apps/orkestram/app/Http/Controllers/**,local-rebuild/apps/izmirorkestra/app/Http/Controllers/**,local-rebuild/apps/orkestram/resources/views/admin/listings/**,local-rebuild/apps/izmirorkestra/resources/views/admin/listings/**,local-rebuild/apps/orkestram/resources/views/portal/owner/**,local-rebuild/apps/izmirorkestra/resources/views/portal/owner/**,local-rebuild/apps/orkestram/tests/Feature/**,local-rebuild/apps/izmirorkestra/tests/Feature/**,local-rebuild/apps/orkestram/app/Models/Listing.php,local-rebuild/apps/izmirorkestra/app/Models/Listing.php | 2026-03-15 02:53:26 | 2026-03-15 06:35:00 | Admin-owner listing hatti + admin500 deterministic model fix tamamlandi; pre-pr PASS ile kapatildi |
+
+
+
+
+
+| TASK-032 | codex | agent/codex/task-032 | closed | docs/tasks/TASK-032.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/REPO_DISCIPLINE_TR.md,docs/PR_FLOW_TR.md,docs/WSL_RUNTIME_PLAYBOOK_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md | 2026-03-15 06:55:00 | 2026-03-16 10:05:00 | Canonical WSL repo icin `origin=GitHub` modeli kuruldu; koordinator workdir'e `canonical` remote eklendi, windows-mirror export-only olarak sinirlandi ve agent/codex/task-032 GitHub upstream'ine pushlandi |
+
+
+
+| TASK-036 | codex | agent/codex/task-036 | closed | docs/tasks/TASK-036.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,scripts/pre-pr.ps1,scripts/start-task.ps1 | 2026-03-16 09:51:00 | 2026-03-16 10:12:44 | Task ID tekrar kullanimi yasagi + koordinator cevap sablonu + remote/upstream zorunlulugu tamamlandi (pre-pr PASS) |
+
+
+
+| TASK-040 | codex | agent/codex/task-040 | closed | docs/tasks/TASK-040.md,docs/tasks/TASK-037.md,docs/tasks/TASK-038.md,docs/tasks/TASK-039.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md | 2026-03-16 11:00:00 | 2026-03-16 12:16:47 | Hero + CTA toparlama entegrasyonu tamamlandi (pre-pr PASS) |
+
+
+| TASK-037 | codex-a | agent/codex-a/task-037 | closed | local-rebuild/apps/orkestram/resources/views/frontend/home.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/home.blade.php,docs/tasks/TASK-037.md | 2026-03-16 11:00:00 | 2026-03-16 12:16:47 | Home hero CTA sadeleme tamamlandi (commit 4099e57, pre-pr PASS) |
+| TASK-038 | codex-b | agent/codex-b/task-038 | closed | local-rebuild/apps/orkestram/public/assets/v1.css,local-rebuild/apps/izmirorkestra/public/assets/v1.css,docs/tasks/TASK-038.md | 2026-03-16 11:00:00 | 2026-03-16 12:16:47 | CTA tasarim sistemi task-040 entegrasyonunda tamamlandi (pre-pr PASS) |
+| TASK-039 | codex-c | agent/codex-c/task-039 | closed | local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php,docs/tasks/TASK-039.md | 2026-03-16 11:00:00 | 2026-03-16 12:16:47 | Listing CTA hiyerarsisi task-040 entegrasyonunda tamamlandi (pre-pr PASS) |
+

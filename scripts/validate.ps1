@@ -1,4 +1,4 @@
-param(
+﻿param(
     [ValidateSet("orkestram", "izmirorkestra", "both")]
     [string]$App = "both",
     [ValidateSet("quick", "full")]
@@ -6,6 +6,12 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+
+$scriptDir = Convert-Path $PSScriptRoot
+$repoRoot = Convert-Path (Join-Path $scriptDir '..')
+Set-Location $repoRoot
+$devUpScript = Convert-Path (Join-Path $scriptDir 'dev-up.ps1')
+$smokeTestScript = Convert-Path (Join-Path $scriptDir 'smoke-test.ps1')
 
 function Run-Step {
     param(
@@ -23,7 +29,7 @@ function Run-Step {
             Write-Host "[validate] neden: Docker erisim izni yok. Cozum: komutu Docker erisimi olan yetkiyle tekrar calistir."
             exit 1
         }
-        if ($raw -match "storage\/framework\/views" -or $raw -match "bootstrap\/cache") {
+        if ($raw -match "storage/framework/views" -or $raw -match "bootstrap/cache") {
             Write-Host "[validate] FAIL -> $Name"
             Write-Host "[validate] neden: Runtime izin sorunu (storage/bootstrap-cache yazma izni). Cozum: dev-up preflightini tekrar calistir."
             exit 1
@@ -53,7 +59,7 @@ function Run-FeatureTestsFor {
 
 if ($Mode -eq "full") {
     Run-Step -Name "dev-up ($App)" -Action {
-        powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\dev-up.ps1 -App $App
+        powershell -ExecutionPolicy Bypass -File $devUpScript -App $App
     }
 }
 
@@ -66,7 +72,7 @@ if ($App -in @("izmirorkestra", "both")) {
 }
 
 Run-Step -Name "smoke-test ($App)" -Action {
-    powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\smoke-test.ps1 -App $App
+    powershell -ExecutionPolicy Bypass -File $smokeTestScript -App $App
 }
 
 Write-Host "[validate] PASS"

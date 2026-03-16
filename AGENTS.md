@@ -1,8 +1,16 @@
-# AGENTS.md
+﻿# AGENTS.md
 
 Bu repo'ya gelen her ajan bu dosyayi ve asagidaki iki dokumani okumadan ise baslamaz:
 - `docs/REPO_DISCIPLINE_TR.md`
 - `docs/MULTI_AGENT_RULES_TR.md`
+
+## Zorunlu WSL Hizalama (Hard Guard)
+Ajan terminali `D:\orkestram` altinda acilsa bile kod degisikligine gecmeden once su adimlar zorunludur:
+1. `git branch --show-current` ile kendi gorev branch'i dogrulanir (`agent/<ajan>/<task-id>`).
+2. `docs/TASK_LOCKS.md` icinde gorev lock'u `active` ve dosya listesi dogrulanir.
+3. WSL kaynak kaniti alinmadan kod/doc degisikligine gecilmez:
+   - `wsl -e bash -lc "cd /home/bekir/orkestram-<slot> && pwd && git rev-parse --show-toplevel && git branch --show-current && git status --short"`
+4. Kanit sonucu `/home/bekir/orkestram-<slot>` degilse durum `REALIGN_REQUIRED` kabul edilir; calisma durdurulur ve WSL workdir ile yeniden baslatilir.
 
 ## Zorunlu Baslangic Protokolu
 1. `git fetch --all --prune`
@@ -16,7 +24,7 @@ Bu repo'ya gelen her ajan bu dosyayi ve asagidaki iki dokumani okumadan ise basl
 ## Zorunlu Dogrulama
 Commit/push oncesi zorunlu:
 ```powershell
-powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick
+powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ```
 PASS olmadan commit/push yasak.
 
@@ -31,3 +39,25 @@ Kural ihlalinde calisma durdurulur, once su duzeltilir:
 1. branch
 2. lock
 3. dogrulama
+4. WSL hizalama kaniti
+
+
+## Koordinator Ilk Cevap Protokolu
+Yeni gelen `codex` koordinatoru ilk cevapta su 4 maddeyi tek mesajda ozetler:
+1. aktif branch
+2. aktif task
+3. lock durumu
+4. bu is mevcut task'a mi girer, yeni task mi ister
+
+Kural:
+1. Koordinator once mevcut `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md` ve aktif task kaydini okur.
+2. Uygun aktif task varsa onu devam ettirir.
+3. Uygun task yoksa yeni task/lock acilmasi gerektigini net yazar.
+4. Gereksiz plan cikarmadan bir sonraki dogru adimi ister.
+
+## Koordinator Senden Ne Ister
+Koordinator, sistem okumasindan sonra senden tek net karar ister:
+1. mevcut task devam edecek
+2. yeni task acilacak
+3. is ajanlara dagitilacak
+

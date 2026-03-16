@@ -25,7 +25,7 @@
                 </div>
             @endif
 
-            <form method="post" action="{{ route('owner.listings.store') }}" class="vstack gap-3">
+            <form method="post" enctype="multipart/form-data" action="{{ route('owner.listings.store') }}" class="vstack gap-3">
                 @csrf
                 @php($locationOptions = $locationOptions ?? ['cities' => [], 'district_map' => [], 'neighborhood_map' => []])
                 @php($selectedCityId = (int) old('city_id'))
@@ -188,6 +188,17 @@
                     <div class="col-12">
                         <label class="form-label">Icerik</label>
                         <textarea name="content" class="form-control" rows="6">{{ old('content') }}</textarea>
+                    </div>
+                    <div class="col-12">
+                        <h3 class="h6 mb-2 mt-2">Gorseller</h3>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Kapak Gorseli</label>
+                        <input class="form-control" type="file" name="cover_image" accept="image/*">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Galeri Gorselleri</label>
+                        <input class="form-control" type="file" name="gallery_images[]" accept="image/*" multiple>
                     </div>
                     @php($dynamicAttributes = $dynamicAttributes ?? [])
                     @if(count($dynamicAttributes))
@@ -516,3 +527,4 @@
         })();
     </script>
 @endsection
+
