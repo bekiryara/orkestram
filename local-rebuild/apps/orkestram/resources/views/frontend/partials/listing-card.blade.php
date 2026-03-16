@@ -19,7 +19,7 @@
 
 <article class="card listing-card">
     <a href="{{ route('listing.show', ['slug' => $item->slug]) }}" class="listing-card-cover-link" aria-label="{{ $item->name }}">
-        <img class="card-cover listing-card-cover" src="/{{ $item->cover_image_path ?: 'assets/listing-fallback.svg' }}" alt="{{ $item->name }}">
+        <img class="card-cover listing-card-cover" src="{{ \App\Support\MediaPath::listingUrl($item->cover_image_path) }}" alt="{{ $item->name }}">
     </a>
 
     <div class="listing-card-body">
@@ -43,3 +43,4 @@
         <a class="btn card-btn listing-card-cta" href="{{ route('listing.show', ['slug' => $item->slug]) }}">{{ $ctaText }}</a>
     </div>
 </article>
+

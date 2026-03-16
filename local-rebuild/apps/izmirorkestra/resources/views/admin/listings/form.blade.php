@@ -323,7 +323,7 @@
                 @if(!empty($item->cover_image_path))
                     <div class="card p-3 mb-3">
                         <div class="fw-semibold mb-2">Mevcut Kapak</div>
-                        <img src="/{{ $item->cover_image_path }}" alt="Kapak" class="img-preview mt-2 mb-2">
+                        <img src="{{ \App\Support\MediaPath::listingUrl($item->cover_image_path) }}" alt="Kapak" class="img-preview mt-2 mb-2">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="remove_cover_image" value="1" id="remove_cover_image">
                             <label class="form-check-label" for="remove_cover_image">Kapak gorselini kaldir</label>
@@ -343,7 +343,7 @@
                         <div id="gallery-sortable" class="gallery-grid">
                             @foreach($item->gallery_json as $img)
                                 <div draggable="true" data-img="{{ $img }}" class="gallery-item">
-                                    <img src="/{{ $img }}" alt="Galeri">
+                                    <img src="{{ \App\Support\MediaPath::listingUrl($img) }}" alt="Galeri">
                                     <label class="gallery-item-note">
                                         <input type="checkbox" name="remove_gallery[]" value="{{ $img }}">
                                         Bu gorseli sil
@@ -663,3 +663,4 @@
         })();
     </script>
 @endsection
+

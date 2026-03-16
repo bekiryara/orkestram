@@ -32,14 +32,14 @@ class FeedbackModerationAccessTest extends TestCase
         [$customer, $support, $admin] = $this->seedActors();
 
         $listing = Listing::query()->create([
-            'site' => 'orkestram.net',
+            'site' => 'izmirorkestra.net',
             'slug' => 'mod-listing',
             'name' => 'Moderation Listing',
             'status' => 'published',
         ]);
 
         $feedback = ListingFeedback::query()->create([
-            'site' => 'orkestram.net',
+            'site' => 'izmirorkestra.net',
             'listing_id' => $listing->id,
             'user_id' => $customer->id,
             'kind' => 'comment',
@@ -86,14 +86,14 @@ class FeedbackModerationAccessTest extends TestCase
         [$customer, $support, $admin] = $this->seedActors();
 
         $listing = Listing::query()->create([
-            'site' => 'orkestram.net',
+            'site' => 'izmirorkestra.net',
             'slug' => 'admin-feedback-listing',
             'name' => 'Admin Feedback Listing',
             'status' => 'published',
         ]);
 
         $feedback = ListingFeedback::query()->create([
-            'site' => 'orkestram.net',
+            'site' => 'izmirorkestra.net',
             'listing_id' => $listing->id,
             'user_id' => $customer->id,
             'kind' => 'comment',

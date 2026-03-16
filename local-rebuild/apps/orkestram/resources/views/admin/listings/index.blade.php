@@ -38,7 +38,7 @@
                             <td>{{ $r->id }}</td>
                             <td>
                                 @if($r->cover_image_path)
-                                    <img src="/{{ $r->cover_image_path }}" alt="Kapak" class="thumb-80">
+                                    <img src="{{ \App\Support\MediaPath::listingUrl($r->cover_image_path) }}" alt="Kapak" class="thumb-80">
                                 @else
                                     <span class="muted">Yok</span>
                                 @endif
@@ -70,3 +70,4 @@
         @include('admin.partials.pagination', ['paginator' => $rows])
     </div>
 @endsection
+

@@ -12,6 +12,7 @@ use App\Services\Auth\AdminIdentityResolver;
 use App\Services\Portal\MessageCenterService;
 use App\Services\Portal\OwnerResourceAccess;
 use App\Services\Portal\PortalContext;
+use App\Support\MediaPath;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -230,7 +231,20 @@ class PortalAuthController extends Controller
         ]);
 
         if ($request->hasFile('profile_photo')) {
-            $data['profile_photo_path'] = (string) $request->file('profile_photo')->store('profile-photos', 'public');
+            if (!empty($user->profile_photo_path)) {
+                MediaPath::delete((string) $user->profile_photo_path);
+            }
+
+            $relativeDir = 'uploads/profile-photos/user-' . $user->id;
+            $filename = now()->format('YmdHis') . '-' . bin2hex(random_bytes(4)) . '.' . strtolower($request->file('profile_photo')->getClientOriginalExtension());
+            $storedPath = $request->file('profile_photo')->storeAs($relativeDir, $filename, 'public');
+            if ($storedPath === false) {
+                throw \Illuminate\Validation\ValidationException::withMessages([
+                    'profile_photo' => 'Profil gorseli yuklenemedi. Storage/public izinlerini kontrol edin.',
+                ]);
+            }
+
+            $data['profile_photo_path'] = 'storage/' . ltrim($storedPath, '/');
         }
 
         if ($activeRole !== 'listing_owner') {
@@ -409,3 +423,4 @@ class PortalAuthController extends Controller
     }
 
 }
+

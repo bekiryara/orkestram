@@ -1,8 +1,80 @@
 @extends('frontend.layout')
 
 @php
+    use Illuminate\Support\Str;
+
     $metaTitle = 'Ilanlar | ' . ($siteMeta['name'] ?? 'Orkestram');
     $metaDescription = 'Sehir, ilce ve kategoriye gore filtrelenebilir ilan listesi.';
+    $activeFilters = [];
+    $selectedCategoryName = '';
+
+    if ($city !== '') {
+        $activeFilters[] = ['label' => 'Sehir', 'value' => $city];
+    }
+    if ($district !== '') {
+        $activeFilters[] = ['label' => 'Ilce', 'value' => $district];
+    }
+    if ($categorySlug !== '') {
+        foreach ($categoryGroups as $group) {
+            foreach ($group as $option) {
+                if ($categorySlug === $option->slug) {
+                    $selectedCategoryName = (string) $option->name;
+                    $activeFilters[] = ['label' => 'Kategori', 'value' => $option->name];
+                    break 2;
+                }
+            }
+        }
+    }
+    if ($search !== '') {
+        $activeFilters[] = ['label' => 'Arama', 'value' => $search];
+    }
+    if ($priceMin !== null && $priceMin !== '') {
+        $activeFilters[] = ['label' => 'Fiyat Min', 'value' => $priceMin];
+    }
+    if ($priceMax !== null && $priceMax !== '') {
+        $activeFilters[] = ['label' => 'Fiyat Max', 'value' => $priceMax];
+    }
+    if ($sort !== '' && $sort !== 'recommended') {
+        $sortLabels = [
+            'newest' => 'En Yeni',
+            'oldest' => 'En Eski',
+            'name_asc' => 'A-Z',
+            'name_desc' => 'Z-A',
+            'price_asc' => 'Fiyat Artan',
+            'price_desc' => 'Fiyat Azalan',
+        ];
+        $activeFilters[] = ['label' => 'Sirala', 'value' => $sortLabels[$sort] ?? $sort];
+    }
+
+    foreach (($dynamicFilters ?? []) as $filter) {
+        $filterLabel = (string) ($filter['label'] ?? 'Filtre');
+        $fieldType = (string) ($filter['field_type'] ?? '');
+        $filterMode = (string) ($filter['filter_mode'] ?? 'exact');
+        $filterValue = trim((string) ($filter['value'] ?? ''));
+        $filterValues = is_array($filter['values'] ?? null) ? array_values(array_filter($filter['values'], static fn ($value) => trim((string) $value) !== '')) : [];
+        $filterMin = trim((string) ($filter['min'] ?? ''));
+        $filterMax = trim((string) ($filter['max'] ?? ''));
+
+        if ($filterMode === 'range' && $fieldType === 'number' && ($filterMin !== '' || $filterMax !== '')) {
+            $rangeText = trim(($filterMin !== '' ? 'Min ' . $filterMin : '') . ($filterMin !== '' && $filterMax !== '' ? ' - ' : '') . ($filterMax !== '' ? 'Max ' . $filterMax : ''));
+            $activeFilters[] = ['label' => $filterLabel, 'value' => $rangeText];
+            continue;
+        }
+
+        if ($fieldType === 'multiselect' && $filterValues !== []) {
+            $activeFilters[] = ['label' => $filterLabel, 'value' => implode(', ', array_map(static fn ($value) => (string) $value, $filterValues))];
+            continue;
+        }
+
+        if ($filterValue !== '') {
+            if ($fieldType === 'boolean') {
+                $filterValue = $filterValue === '1' ? 'Evet' : ($filterValue === '0' ? 'Hayir' : $filterValue);
+            }
+            $activeFilters[] = ['label' => $filterLabel, 'value' => $filterValue];
+        }
+    }
+
+    $resultLabel = $selectedCategoryName !== '' ? Str::lower($selectedCategoryName) : 'ilan';
 @endphp
 
 @section('content')
@@ -20,6 +92,25 @@
     <section class="listing-layout section">
         <aside class="listing-sidebar">
             <form method="GET" action="{{ route('listing.index') }}" class="filters filters-panel">
+                <div class="filter-summary">
+                    <h2>Filtreler</h2>
+                    <p class="meta">
+                        @if($activeFilters !== [])
+                            {{ count($activeFilters) }} aktif filtre ile sonucu daraltiyorsun.
+                        @else
+                            Sonucu sehir, kategori, fiyat ve ozelliklere gore daraltabilirsin.
+                        @endif
+                    </p>
+                </div>
+
+                @if($activeFilters !== [])
+                    <div class="pill-row">
+                        @foreach($activeFilters as $filter)
+                            <span class="pill">{{ $filter['label'] }}: {{ $filter['value'] }}</span>
+                        @endforeach
+                    </div>
+                @endif
+
                 <div class="filter-grid sidebar-grid">
                     <label>
                         <span>Sehir</span>
@@ -146,14 +237,22 @@
                 </div>
 
                 <div class="filter-actions sidebar-actions">
-                    <button class="btn btn-primary" type="submit">Filtrele</button>
-                    <a class="btn" href="{{ route('listing.index') }}">Temizle</a>
+                    <button class="btn btn-primary" type="submit">Filtreleri Uygula</button>
+                    <a class="btn" href="{{ route('listing.index') }}">Tum Filtreleri Temizle</a>
                 </div>
             </form>
         </aside>
 
         <div class="listing-results">
-            <p class="lead listing-count"><strong>{{ $items->total() }}</strong> ilan bulundu.</p>
+            <p class="lead listing-count">
+                <strong>{{ number_format($items->total(), 0, ',', '.') }}</strong> {{ $resultLabel }} bulundu.
+                @if($activeFilters !== [])
+                    Sonuclar secili filtrelere gore gosteriliyor.
+                @endif
+            </p>
+
+
+
             <div class="grid listing-grid">
             @forelse($items as $item)
                 @include('frontend.partials.listing-card', [

@@ -136,17 +136,17 @@
         @if($item->cover_image_path || (is_array($item->gallery_json) && count($item->gallery_json)))
             <section class="listing-gallery">
                 @php($mainImage = $item->cover_image_path ?: $item->gallery_json[0])
-                <button type="button" id="listing-open-lightbox" class="listing-main-button" data-img="/{{ $mainImage }}">
-                    <img id="listing-main-image" class="listing-main-image" src="/{{ $mainImage }}" alt="{{ $item->name }}">
+                <button type="button" id="listing-open-lightbox" class="listing-main-button" data-img="{{ \App\Support\MediaPath::listingUrl($mainImage) }}">
+                    <img id="listing-main-image" class="listing-main-image" src="{{ \App\Support\MediaPath::listingUrl($mainImage) }}" alt="{{ $item->name }}">
                 </button>
                 @if(is_array($item->gallery_json) && count($item->gallery_json))
                     <div class="listing-thumbs">
-                        <button type="button" class="thumb-btn is-active" data-img="/{{ $mainImage }}">
-                            <img src="/{{ $mainImage }}" alt="{{ $item->name }} ana gorsel">
+                        <button type="button" class="thumb-btn is-active" data-img="{{ \App\Support\MediaPath::listingUrl($mainImage) }}">
+                            <img src="{{ \App\Support\MediaPath::listingUrl($mainImage) }}" alt="{{ $item->name }} ana gorsel">
                         </button>
                         @foreach($item->gallery_json as $img)
-                            <button type="button" class="thumb-btn" data-img="/{{ $img }}">
-                                <img src="/{{ $img }}" alt="{{ $item->name }} galeri">
+                            <button type="button" class="thumb-btn" data-img="{{ \App\Support\MediaPath::listingUrl($img) }}">
+                                <img src="{{ \App\Support\MediaPath::listingUrl($img) }}" alt="{{ $item->name }} galeri">
                             </button>
                         @endforeach
                     </div>
@@ -187,7 +187,7 @@
         <div class="grid">
             @forelse($relatedListings as $related)
                 <article class="card">
-                    <img class="card-cover" src="/{{ $related->cover_image_path ?: 'assets/listing-fallback.svg' }}" alt="{{ $related->name }}">
+                    <img class="card-cover" src="{{ \App\Support\MediaPath::listingUrl($related->cover_image_path) }}" alt="{{ $related->name }}">
                     <h3><a href="{{ route('listing.show', ['slug' => $related->slug]) }}">{{ $related->name }}</a></h3>
                     <div class="meta">{{ $related->city }}{{ $related->district ? ' / ' . $related->district : '' }}</div>
                     <p>{{ $related->summary ?: 'Kisa tanitim metni girilmemis.' }}</p>
@@ -304,3 +304,4 @@
         })();
     </script>
 @endsection
+

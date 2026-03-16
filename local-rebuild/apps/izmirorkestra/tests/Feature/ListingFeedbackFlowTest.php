@@ -31,7 +31,7 @@ class ListingFeedbackFlowTest extends TestCase
     {
         [$customer] = $this->createUsersAndRoles();
         $listing = Listing::query()->create([
-            'site' => 'orkestram.net',
+            'site' => 'izmirorkestra.net',
             'slug' => 'grup-moda',
             'name' => 'Grup Moda',
             'status' => 'published',
@@ -71,7 +71,7 @@ class ListingFeedbackFlowTest extends TestCase
     {
         [$customer, $owner] = $this->createUsersAndRoles();
         $listing = Listing::query()->create([
-            'site' => 'orkestram.net',
+            'site' => 'izmirorkestra.net',
             'owner_user_id' => $owner->id,
             'slug' => 'owner-servis',
             'name' => 'Owner Servis',
@@ -126,7 +126,7 @@ class ListingFeedbackFlowTest extends TestCase
     {
         [$customer, $owner] = $this->createUsersAndRoles();
         Listing::query()->create([
-            'site' => 'orkestram.net',
+            'site' => 'izmirorkestra.net',
             'owner_user_id' => $owner->id,
             'slug' => 'form-ilan',
             'name' => 'Form Ilan',
@@ -156,7 +156,7 @@ class ListingFeedbackFlowTest extends TestCase
     {
         [$customer, $owner] = $this->createUsersAndRoles();
         $listing = Listing::query()->create([
-            'site' => 'orkestram.net',
+            'site' => 'izmirorkestra.net',
             'owner_user_id' => $owner->id,
             'slug' => 'owner-form-ilan',
             'name' => 'Owner Form Ilan',
@@ -164,7 +164,7 @@ class ListingFeedbackFlowTest extends TestCase
         ]);
 
         $feedback = ListingFeedback::query()->create([
-            'site' => 'orkestram.net',
+            'site' => 'izmirorkestra.net',
             'listing_id' => $listing->id,
             'user_id' => $customer->id,
             'kind' => 'comment',
@@ -194,7 +194,7 @@ class ListingFeedbackFlowTest extends TestCase
     {
         [$customer, $owner] = $this->createUsersAndRoles();
         $listing = Listing::query()->create([
-            'site' => 'orkestram.net',
+            'site' => 'izmirorkestra.net',
             'owner_user_id' => $owner->id,
             'slug' => 'yorum-gorunurluk-ilan',
             'name' => 'Yorum Gorunurluk Ilan',
@@ -202,7 +202,7 @@ class ListingFeedbackFlowTest extends TestCase
         ]);
 
         ListingFeedback::query()->create([
-            'site' => 'orkestram.net',
+            'site' => 'izmirorkestra.net',
             'listing_id' => $listing->id,
             'user_id' => $customer->id,
             'kind' => 'comment',
@@ -212,7 +212,7 @@ class ListingFeedbackFlowTest extends TestCase
         ]);
 
         ListingFeedback::query()->create([
-            'site' => 'orkestram.net',
+            'site' => 'izmirorkestra.net',
             'listing_id' => $listing->id,
             'user_id' => $customer->id,
             'kind' => 'comment',
@@ -232,7 +232,7 @@ class ListingFeedbackFlowTest extends TestCase
     {
         [$customer, $owner] = $this->createUsersAndRoles();
         $listing = Listing::query()->create([
-            'site' => 'orkestram.net',
+            'site' => 'izmirorkestra.net',
             'owner_user_id' => $owner->id,
             'slug' => 'owner-yorum-listesi',
             'name' => 'Owner Yorum Listesi',
@@ -240,7 +240,7 @@ class ListingFeedbackFlowTest extends TestCase
         ]);
 
         ListingFeedback::query()->create([
-            'site' => 'orkestram.net',
+            'site' => 'izmirorkestra.net',
             'listing_id' => $listing->id,
             'user_id' => $customer->id,
             'kind' => 'comment',

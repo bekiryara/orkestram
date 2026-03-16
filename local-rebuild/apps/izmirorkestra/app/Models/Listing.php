@@ -64,25 +64,35 @@ class Listing extends Model
                 return;
             }
 
-            $hasStructuredInput = $request->hasAny(['price_min', 'price_max', 'currency', 'price_type']);
-            if (!$hasStructuredInput && !$request->has('price_label')) {
+            $priceLabelInput = $request->input('price_label');
+            $priceMinInput = $request->input('price_min');
+            $priceMaxInput = $request->input('price_max');
+            $currencyInput = $request->input('currency');
+            $priceTypeInput = $request->input('price_type');
+
+            $hasStructuredInput = self::normalizeText($priceMinInput) !== null
+                || self::normalizeText($priceMaxInput) !== null
+                || self::normalizeText($currencyInput) !== null
+                || self::normalizeText($priceTypeInput) !== null;
+            $hasPriceLabelInput = self::normalizeText($priceLabelInput) !== null;
+            if (!$hasStructuredInput && !$hasPriceLabelInput) {
                 return;
             }
 
-            if ($request->has('price_label')) {
-                $listing->price_label = self::normalizeText($request->input('price_label'));
+            if ($hasPriceLabelInput) {
+                $listing->price_label = self::normalizeText($priceLabelInput);
             }
 
             if ($hasStructuredInput) {
-                $listing->price_min = self::normalizeMoney($request->input('price_min'));
-                $listing->price_max = self::normalizeMoney($request->input('price_max'));
+                $listing->price_min = self::normalizeMoney($priceMinInput);
+                $listing->price_max = self::normalizeMoney($priceMaxInput);
 
-                $currency = self::normalizeCurrency($request->input('currency'));
+                $currency = self::normalizeCurrency($currencyInput);
                 if ($currency === null && ($listing->price_min !== null || $listing->price_max !== null)) {
                     $currency = 'TRY';
                 }
                 $listing->currency = $currency;
-                $listing->price_type = self::normalizePriceType($request->input('price_type'));
+                $listing->price_type = self::normalizePriceType($priceTypeInput);
             }
 
             if (self::normalizeText($listing->price_label) === null) {
