@@ -1,25 +1,21 @@
 ﻿# NEXT TASK (Koordinasyon Panosu)
 
-Durum: `ACTIVE`  
+Durum: `IDLE`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
-1. `TASK-040` - Ana sayfa + ilan detay CTA/dugme hiyerarsisi paralel ajan koordinasyonu.
-
-## Paralel Alt Gorevler (Hazir)
-1. `TASK-037` (`codex-a`) - Home hero CTA sadeleme
-2. `TASK-038` (`codex-b`) - CTA tasarim sistemi (CSS)
-3. `TASK-039` (`codex-c`) - Listing detay CTA hiyerarsisi
+1. Aktif koordinator gorevi yok.
 
 ## Son Koordinator Kapanisi
-1. `TASK-036` - Task-id tekrar yasagi + koordinator cevap sablonu + remote/upstream zorunlulugu tamamlandi.
-2. `TASK-032` - Remote/upstream hizasi tamamlandi.
+1. `TASK-040` - Hero + listing CTA hiyerarsisi paralel koordinasyon ile tamamlandi.
+2. `TASK-036` - Task-id tekrar yasagi + koordinator cevap sablonu + remote/upstream zorunlulugu tamamlandi.
+3. `TASK-032` - Remote/upstream hizasi tamamlandi.
 
 ## Son Kapanis
-1. `TASK-036` - Disiplin sertlestirme tamamlandi (pre-pr PASS).
-2. `TASK-032` - Canonical WSL repo + GitHub remote/upstream modeli tamamlandi (pre-pr PASS).
-3. `TASK-031` - Admin/Owner listing hatti + admin500 deterministic model fix tamamlandi (pre-pr PASS).
+1. `TASK-040` - Hero/CTA toparlama + listing detay CTA sadeleme tamamlandi (pre-pr PASS).
+2. `TASK-036` - Disiplin sertlestirme tamamlandi (pre-pr PASS).
+3. `TASK-032` - Canonical WSL repo + GitHub remote/upstream modeli tamamlandi (pre-pr PASS).
 
 ## Kapanis Kurali (Zorunlu)
 1. Kapanis kaniti olmadan task `closed` edilemez.

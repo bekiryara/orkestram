@@ -46,5 +46,10 @@ Sabit Ajan Kimlikleri:
 
 
 
-| TASK-040 | codex | agent/codex/task-040 | active | docs/tasks/TASK-040.md,docs/tasks/TASK-037.md,docs/tasks/TASK-038.md,docs/tasks/TASK-039.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md | 2026-03-16 11:00:00 | 2026-03-16 11:00:00 | Hero + CTA toparlama icin paralel ajan koordinasyonu baslatildi |
+| TASK-040 | codex | agent/codex/task-040 | closed | docs/tasks/TASK-040.md,docs/tasks/TASK-037.md,docs/tasks/TASK-038.md,docs/tasks/TASK-039.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md | 2026-03-16 11:00:00 | 2026-03-16 12:16:47 | Hero + CTA toparlama entegrasyonu tamamlandi (pre-pr PASS) |
+
+
+| TASK-037 | codex-a | agent/codex-a/task-037 | closed | local-rebuild/apps/orkestram/resources/views/frontend/home.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/home.blade.php,docs/tasks/TASK-037.md | 2026-03-16 11:00:00 | 2026-03-16 12:16:47 | Home hero CTA sadeleme tamamlandi (commit 4099e57, pre-pr PASS) |
+| TASK-038 | codex-b | agent/codex-b/task-038 | closed | local-rebuild/apps/orkestram/public/assets/v1.css,local-rebuild/apps/izmirorkestra/public/assets/v1.css,docs/tasks/TASK-038.md | 2026-03-16 11:00:00 | 2026-03-16 12:16:47 | CTA tasarim sistemi task-040 entegrasyonunda tamamlandi (pre-pr PASS) |
+| TASK-039 | codex-c | agent/codex-c/task-039 | closed | local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php,docs/tasks/TASK-039.md | 2026-03-16 11:00:00 | 2026-03-16 12:16:47 | Listing CTA hiyerarsisi task-040 entegrasyonunda tamamlandi (pre-pr PASS) |
 

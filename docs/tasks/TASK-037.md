@@ -1,17 +1,18 @@
 ﻿# TASK-037
 
-Durum: `TODO`  
+Durum: `DONE`  
 Ajan: `codex-a`  
 Branch: `agent/codex-a/task-037`  
 Baslangic: `2026-03-16 11:00`
+Kapanis: `2026-03-16 12:16`
 
 ## Ozet
-- Ana sayfa hero bolumundeki CTA karmaşasını temizlemek ve public aksiyonlari tek hiyerarside toplamak.
+- Ana sayfa hero bolumundeki CTA karmasasi temizlendi ve public aksiyonlar sade hiyerarsiye cekildi.
 
 ## In Scope
-- [ ] Hero bolumunde tek `primary` + tek `secondary` CTA duzeni.
-- [ ] Public alanda yonetim tipi butonlari link/hidden duzenine cekmek.
-- [ ] Iki appte parity (orkestram + izmirorkestra).
+- [x] Hero bolumunde tek `primary` + tek `secondary` CTA duzeni.
+- [x] Public alanda yonetim tipi butonlari link/hidden duzenine cekmek.
+- [x] Iki appte parity (orkestram + izmirorkestra).
 
 ## Out of Scope
 - [ ] CSS tasarim sistemi refactoru
@@ -23,11 +24,14 @@ Baslangic: `2026-03-16 11:00`
 - `docs/tasks/TASK-037.md`
 
 ## Kabul Kriteri
-- [ ] Hero CTA hiyerarsisi net (1 primary, 1 secondary).
-- [ ] Buton metinleri ve sirasi iki appte ayni.
-- [ ] `pre-pr` PASS.
+- [x] Hero CTA hiyerarsisi net (1 primary, 1 secondary).
+- [x] Buton metinleri ve sirasi iki appte ayni.
+- [x] `pre-pr` PASS.
 
 ## Komutlar
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ```
+
+## Notlar
+- Ajan teslim commiti: `4099e57`.

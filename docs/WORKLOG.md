@@ -891,3 +891,32 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `IN_PROGRESS`
 - Not:
   - `git fetch --all --prune` local WSL remote path eslesmesi nedeniyle bu ortamda fail verdi; gorev `origin` upstream ile surduruldu.
+
+### [2026-03-16 12:16] TASK-040 Resmi Kapanis (Hero + CTA Toparlama)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-037` teslimi (`4099e57`) koordinator branch'ine merge edildi ve home hero CTA sadeleme tamamlandi.
+  - `TASK-038` kapsaminda CTA stil sistemi (`primary/secondary/ghost`, hover/focus) iki appte parity ile uygulandi.
+  - `TASK-039` kapsaminda listing detayda primary/secondary aksiyon hiyerarsisi ve ghost ikincil aksiyonlar uygulandi.
+  - `TASK-040` lock kaydi `closed`, pano `IDLE` olarak guncellendi.
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/resources/views/frontend/home.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/home.blade.php`
+  - `local-rebuild/apps/orkestram/public/assets/v1.css`
+  - `local-rebuild/apps/izmirorkestra/public/assets/v1.css`
+  - `local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php`
+  - `docs/tasks/TASK-037.md`
+  - `docs/tasks/TASK-038.md`
+  - `docs/tasks/TASK-039.md`
+  - `docs/tasks/TASK-040.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git merge --no-ff origin/agent/codex-a/task-037`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `origin/agent/codex-b/task-038` ve `origin/agent/codex-c/task-039` branchleri `main` ile ayni oldugu icin kapsamlar koordinator entegrasyon turunda tamamlandi.
