@@ -1179,3 +1179,66 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - Sonuc:
   - `PASS`
+
+### [2026-03-16 22:25] TASK-053 Baslangic (Media Hardening Implementasyonu + Canonical Recovery)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-052` planinin kod implementasyonu icin resmi gorev acildi.
+  - Canonical repo `/home/bekir/orkestram` icindeki commitlenmemis media WIP'nin kapsam dosyalari cikarildi.
+  - Runtime'i sahipsiz canonical WIP yerine resmi worktree'ye tasimak hedefiyle lock acildi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-053.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git fetch --all --prune`
+  - `git checkout -b agent/codex/task-053 origin/main`
+- Sonuc:
+  - `IN_PROGRESS`
+
+
+### [2026-03-16 23:05] TASK-053 Resmi Kapanis (Media Hardening Implementasyonu + Canonical Recovery)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Canonical repo `/home/bekir/orkestram` icinde commitlenmeden kalan media WIP resmi `agent/codex/task-053` worktree'sine tasindi.
+  - `MediaPath` helper, listing media servisi, profil/listing render fallback'lari ve medya feature testleri iki appte parity ile aktife alindi.
+  - Runtime mount'u `orkestram-k` worktree'ye cekildi; vendor/.env/runtime cache hazirligi tamamlanip media testleri ve `pre-pr` tekrar PASS verdi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-053.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `local-rebuild/apps/orkestram/app/Http/Controllers/Auth/PortalAuthController.php`
+  - `local-rebuild/apps/orkestram/app/Services/Listings/ListingMediaService.php`
+  - `local-rebuild/apps/orkestram/app/Support/MediaPath.php`
+  - `local-rebuild/apps/orkestram/resources/views/admin/listings/form.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/admin/listings/index.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/frontend/city-page.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/frontend/partials/listing-card.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/messages/center-content.blade.php`
+  - `local-rebuild/apps/orkestram/tests/Feature/AdminListingMediaFlowTest.php`
+  - `local-rebuild/apps/orkestram/tests/Feature/ListingMediaRenderingTest.php`
+  - `local-rebuild/apps/orkestram/tests/Feature/PortalProfileMediaTest.php`
+  - `local-rebuild/apps/izmirorkestra/app/Http/Controllers/Auth/PortalAuthController.php`
+  - `local-rebuild/apps/izmirorkestra/app/Services/Listings/ListingMediaService.php`
+  - `local-rebuild/apps/izmirorkestra/app/Support/MediaPath.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/admin/listings/form.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/admin/listings/index.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/city-page.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/partials/listing-card.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/portal/messages/center-content.blade.php`
+  - `local-rebuild/apps/izmirorkestra/tests/Feature/AdminListingMediaFlowTest.php`
+  - `local-rebuild/apps/izmirorkestra/tests/Feature/ListingMediaRenderingTest.php`
+  - `local-rebuild/apps/izmirorkestra/tests/Feature/PortalProfileMediaTest.php`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/dev-up.ps1 -App both -LinuxProjectRoot /home/bekir/orkestram-k`
+  - `docker exec orkestram-local-web php artisan test --filter=AdminListingMediaFlowTest`
+  - `docker exec izmirorkestra-local-web php artisan test --filter=AdminListingMediaFlowTest`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `scripts/dev-up.ps1` icindeki mount prefix dogrulamasi hala `/home/bekir/orkestram`e sabit; `orkestram-k` mount'unda false negative veriyor. Ayrica gorev gerekirse acilabilir.

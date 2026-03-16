@@ -91,7 +91,7 @@
             @php($rowQuery = array_merge($centerRouteBase, $listQueryParams ?? [], ['conversation_id' => $row->id]))
             @php($senderName = $isOwnerView ? ((string) ($row->customer?->name ?: 'Musteri')) : ((string) ($row->owner?->name ?: 'Firma')))
             @php($avatarPath = $isOwnerView ? (string) ($row->customer?->profile_photo_path ?? '') : (string) ($row->owner?->profile_photo_path ?? ''))
-            @php($avatarUrl = $avatarPath !== '' ? asset('storage/' . ltrim($avatarPath, '/')) : '')
+            @php($avatarUrl = \App\Support\MediaPath::avatarUrl($avatarPath))
             @php($messageSummary = \Illuminate\Support\Str::words((string) ($row->last_message_preview ?? ''), 5, '...'))
             @include('portal.partials.message-list-item', [
                 'itemTitle' => $senderName,
@@ -234,3 +234,4 @@
         }
     })();
 </script>
+

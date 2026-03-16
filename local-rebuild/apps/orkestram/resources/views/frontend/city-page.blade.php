@@ -28,7 +28,7 @@
         <div class="grid">
             @forelse($cityListings as $listing)
                 <article class="card">
-                    <img class="card-cover" src="/{{ $listing->cover_image_path ?: 'assets/listing-fallback.svg' }}" alt="{{ $listing->name }}">
+                    <img class="card-cover" src="{{ \App\Support\MediaPath::listingUrl($listing->cover_image_path) }}" alt="{{ $listing->name }}">
                     <h3><a href="{{ route('listing.show', ['slug' => $listing->slug]) }}">{{ $listing->name }}</a></h3>
                     <div class="meta">{{ $listing->city }}{{ $listing->district ? ' / ' . $listing->district : '' }}</div>
                     <p>{{ $listing->summary ?: 'Kisa tanitim metni girilmemis.' }}</p>
@@ -44,4 +44,5 @@
         </div>
     </section>
 @endsection
+
 
