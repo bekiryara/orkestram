@@ -1,18 +1,20 @@
 ﻿# NEXT TASK (Koordinasyon Panosu)
 
-Durum: `IDLE`  
+Durum: `ACTIVE`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
-1. Aktif koordinator gorevi yok.
+1. `TASK-040` - Ana sayfa + ilan detay CTA/dugme hiyerarsisi paralel ajan koordinasyonu.
+
+## Paralel Alt Gorevler (Hazir)
+1. `TASK-037` (`codex-a`) - Home hero CTA sadeleme
+2. `TASK-038` (`codex-b`) - CTA tasarim sistemi (CSS)
+3. `TASK-039` (`codex-c`) - Listing detay CTA hiyerarsisi
 
 ## Son Koordinator Kapanisi
 1. `TASK-036` - Task-id tekrar yasagi + koordinator cevap sablonu + remote/upstream zorunlulugu tamamlandi.
 2. `TASK-032` - Remote/upstream hizasi tamamlandi.
-   - `origin` artik canonical WSL repo ve koordinator workdir icin GitHub remote.
-   - `windows-mirror` operasyonel push/pull akisindan cikarilip export-only roluyle sinirlandi.
-   - Koordinator workdir icinde `canonical = /home/bekir/orkestram` remote modeli dokumante edildi.
 
 ## Son Kapanis
 1. `TASK-036` - Disiplin sertlestirme tamamlandi (pre-pr PASS).

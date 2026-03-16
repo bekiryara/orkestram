@@ -45,3 +45,6 @@ Sabit Ajan Kimlikleri:
 | TASK-036 | codex | agent/codex/task-036 | closed | docs/tasks/TASK-036.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,scripts/pre-pr.ps1,scripts/start-task.ps1 | 2026-03-16 09:51:00 | 2026-03-16 10:12:44 | Task ID tekrar kullanimi yasagi + koordinator cevap sablonu + remote/upstream zorunlulugu tamamlandi (pre-pr PASS) |
 
 
+
+| TASK-040 | codex | agent/codex/task-040 | active | docs/tasks/TASK-040.md,docs/tasks/TASK-037.md,docs/tasks/TASK-038.md,docs/tasks/TASK-039.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md | 2026-03-16 11:00:00 | 2026-03-16 11:00:00 | Hero + CTA toparlama icin paralel ajan koordinasyonu baslatildi |
+

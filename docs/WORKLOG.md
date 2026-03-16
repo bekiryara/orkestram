@@ -869,3 +869,25 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `git fetch --all --prune` bu ortamda local remote tanimlari nedeniyle fail notu korundu.
+
+### [2026-03-16 11:00] TASK-040 Baslangic (Hero/CTA Paralel Koordinasyon)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-040` koordinator gorevi acildi ve lock tablosuna `active` kaydi eklendi.
+  - Paralel ajanlar icin `TASK-037/038/039` kartlari cakismaz dosya alanlariyla hazirlandi.
+  - Koordinasyon panosu `ACTIVE` duruma cekildi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-040.md`
+  - `docs/tasks/TASK-037.md`
+  - `docs/tasks/TASK-038.md`
+  - `docs/tasks/TASK-039.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git fetch --all --prune`
+  - `git checkout -b agent/codex/task-040`
+- Sonuc:
+  - `IN_PROGRESS`
+- Not:
+  - `git fetch --all --prune` local WSL remote path eslesmesi nedeniyle bu ortamda fail verdi; gorev `origin` upstream ile surduruldu.
