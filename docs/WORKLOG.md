@@ -1,4 +1,4 @@
-# WORKLOG (Gunluk Is Kaydi)
+﻿# WORKLOG (Gunluk Is Kaydi)
 
 Bu dosyada her ajan turu icin tek kayit acilir.  
 Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
@@ -752,3 +752,26 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - PASS
 - Not:
   - Windows<->WSL kopru scriptleri korunurken gunluk operasyon kapisi canonical WSL repo uzerinden dogrulandi.
+
+### [2026-03-16 08:45] TASK-032 Ajan Playbook ve Lock Matrisi
+- Sorumlu: codex
+- Is Ozeti:
+  - WSL baslangic kaniti, stop/recover ve slot bazli workdir kurallari WSL_RUNTIME_PLAYBOOK_TR.md icinde toplandi.
+  - Paralel ajan file-set dagitimi ve lock closure kararlari AGENT_LOCK_MATRIX_TR.md ile netlestirildi.
+  - Teslim formati, alidate/pre-pr sirasi ve resume protokolu AGENT_DELIVERY_CHECKLIST_TR.md icinde standartlandi.
+  - TASK-032 kabul kriterlerinin belge/disiplin kismi tamamlandi; aktif kalan adim lock closure ve alt task aktivasyonudur.
+- Degisen Dosyalar:
+  - docs/WSL_RUNTIME_PLAYBOOK_TR.md
+  - docs/AGENT_LOCK_MATRIX_TR.md
+  - docs/AGENT_DELIVERY_CHECKLIST_TR.md
+  - docs/tasks/TASK-032.md
+  - docs/NEXT_TASK.md
+  - docs/TASK_LOCKS.md
+  - docs/WORKLOG.md
+- Calistirilan Komutlar:
+  - dokuman guncelleme (task-032 kalan disiplin maddeleri)
+- Sonuc:
+  - IN_PROGRESS
+- Not:
+  - TASK-033/034/035 kartlari korunuyor; hedef dokumanlar hazir ve ajan aktivasyonu icin bekliyor.
+

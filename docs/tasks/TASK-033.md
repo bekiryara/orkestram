@@ -1,4 +1,4 @@
-# TASK-033
+﻿# TASK-033
 
 Durum: `TODO`  
 Ajan: `codex-a`  
@@ -32,8 +32,9 @@ Baslangic: `2026-03-15 07:10`
 
 ## Komutlar
 ```powershell
-powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick
+powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ```
 
 ## Notlar
 - Hedef: yeni ajan geldiginde ilk 2 dakikada dogru klasor/branch/lock durumunu kanitlayabilmek.
+

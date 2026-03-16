@@ -10,8 +10,11 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Hazir Tasklar (Atama Bekliyor)
 1. `TASK-033` (`codex-a`) - WSL runtime kanit ve startup playbook standardi.
+   - Hedef dokuman: `docs/WSL_RUNTIME_PLAYBOOK_TR.md`
 2. `TASK-034` (`codex-b`) - Cakismaz lock matrisi ve paralel dagitim standardi.
+   - Hedef dokuman: `docs/AGENT_LOCK_MATRIX_TR.md`
 3. `TASK-035` (`codex-c`) - Dogrulama pipeline + teslim check-list standardi.
+   - Hedef dokuman: `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
 
 ## Son Kapanis
 1. `TASK-031` - Admin/Owner listing gorsel hatti + admin500 deterministic model fix tamamlandi (pre-pr PASS).
@@ -25,4 +28,3 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
    - `git status --short`
    - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` sonucu `PASS`
 3. Kanit yoksa task durumu `active` kalir.
-
