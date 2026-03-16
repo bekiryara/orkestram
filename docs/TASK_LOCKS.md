@@ -41,3 +41,7 @@ Sabit Ajan Kimlikleri:
 | TASK-032 | codex | agent/codex/task-032 | closed | docs/tasks/TASK-032.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/REPO_DISCIPLINE_TR.md,docs/PR_FLOW_TR.md,docs/WSL_RUNTIME_PLAYBOOK_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md | 2026-03-15 06:55:00 | 2026-03-16 10:05:00 | Canonical WSL repo icin `origin=GitHub` modeli kuruldu; koordinator workdir'e `canonical` remote eklendi, windows-mirror export-only olarak sinirlandi ve agent/codex/task-032 GitHub upstream'ine pushlandi |
 
 
+
+| TASK-036 | codex | agent/codex/task-036 | closed | docs/tasks/TASK-036.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,scripts/pre-pr.ps1,scripts/start-task.ps1 | 2026-03-16 09:51:00 | 2026-03-16 10:12:44 | Task ID tekrar kullanimi yasagi + koordinator cevap sablonu + remote/upstream zorunlulugu tamamlandi (pre-pr PASS) |
+
+

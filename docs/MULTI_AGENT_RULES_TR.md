@@ -1,4 +1,4 @@
-﻿# Multi-Agent Kurallari (TR)
+# Multi-Agent Kurallari (TR)
 
 Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve deterministic akis.
 
@@ -89,3 +89,20 @@ Koordinator is bitince tek mesajda su 3 seyi verir:
 2. siradaki uygun adim
 3. senden gereken tek karar veya yeni gorev
 
+
+## Task ID Tekrar Yasaki (Zorunlu)
+1. Ayni `TASK-XXX` kimligi ikinci kez acilamaz.
+2. Yeni is her zaman yeni task id ile acilir.
+3. Koordinator lock tablosu ve task dosyalarinda tekrar id gorurse isi durdurur.
+
+## Koordinator Cevap Sablonu (Sabit)
+Koordinator karar cevabi yalniz su 4 satirla verilir:
+1. aktif branch
+2. aktif task durumu
+3. karar
+4. sonraki adim
+
+## Remote/Upstream Dogrulamasi (Zorunlu)
+1. Gorev basinda `git remote -v` ve `git branch -vv` zorunludur.
+2. `origin` GitHub degilse is baslatilmaz.
+3. Aktif branch upstream'i `origin/<branch>` degilse push/PR adimina gecilmez.

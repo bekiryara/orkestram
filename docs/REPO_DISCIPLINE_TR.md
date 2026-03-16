@@ -1,4 +1,4 @@
-﻿# Repo Disiplini ve Teknik Borc Kurallari (TR)
+# Repo Disiplini ve Teknik Borc Kurallari (TR)
 
 Tarih: 2026-03-09
 
@@ -19,7 +19,7 @@ Windows dizini:
 Kural:
 1. "Kod degisti ama calismiyor" durumunda ilk kontrol mount kaynagi olmalidir.
 2. WSL disinda calistirilan kod referans alinmaz.
-3. Stack ayaÃ„Å¸a kaldirma komutu standarttir:
+3. Stack ayaÄŸa kaldirma komutu standarttir:
    - `powershell -ExecutionPolicy Bypass -File scripts/dev-up.ps1 -App both`
 4. Dogrudan `docker compose up` ile manuel calistirma yapilmaz (yanlis mount riski).
 
@@ -183,3 +183,15 @@ Kural:
 
 
 
+
+## 14) Task ID Tekrar Yasaki + Koordinator Cevap Sablonu + Remote/Upstream Zorunlulugu
+
+Kural:
+1. `TASK-XXX` kimligi tekrar kullanilamaz; her yeni is benzersiz task id ile acilir.
+2. Koordinator ilk karar cevabini su sabit formatla verir:
+   1. aktif branch
+   2. aktif task durumu
+   3. karar
+   4. sonraki adim
+3. `git remote -v` ve `git branch -vv` dogrulamasi gorev baslangici ve `pre-pr` oncesi zorunludur.
+4. `origin` GitHub degilse veya aktif branch upstream'i `origin/<branch>` degilse commit/push akisi durdurulur.

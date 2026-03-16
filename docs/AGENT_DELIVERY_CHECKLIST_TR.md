@@ -78,3 +78,14 @@ Koordinator veya baska ajan devralacaksa son mesajda su net olur:
 4. Branch ve lock durumu
 
 Bu bilgi yoksa is resume icin hazir sayilmaz.
+
+## 6. Koordinator Ilk Karar Mesaji (Sabit Sablon)
+Koordinator yeni iste ilk karar mesajini su sabit formatla verir:
+1. aktif branch
+2. aktif task durumu
+3. karar
+4. sonraki adim
+
+Not:
+- Bu format disina cikilmaz.
+- Karar satiri yalniz `mevcut task devam` veya `yeni task ac` olarak yazilir.

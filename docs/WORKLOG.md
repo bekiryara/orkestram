@@ -819,3 +819,53 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - Ilk yerel `git ls-remote` denemesi sandbox DNS kisiti nedeniyle fail verdi; ag erisimiyle tekrar kosulup GitHub `HEAD` dogrulamasi alindi.
   - WSL icinde SSH anahtari yoktu; push icin Windows Git Credential Manager symlink'i `/tmp/git-credential-manager.exe` uzerinden helper olarak baglandi ve `git push -u origin agent/codex/task-032` PASS verdi.
 
+
+### [2026-03-16 10:15] TASK-036 Baslangic + Disiplin Sertlestirme
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-036` resmi olarak acildi ve lock tablosuna `active` kaydi eklendi.
+  - Task ID tekrar kullanimi yasagi, koordinator sabit cevap sablonu ve remote/upstream zorunlulugu dokumanlara eklendi.
+  - `scripts/pre-pr.ps1` icine remote/upstream fail-fast kontrolu, `scripts/start-task.ps1` icine task id tekrar engeli eklendi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-036.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `scripts/pre-pr.ps1`
+  - `scripts/start-task.ps1`
+- Calistirilan Komutlar:
+  - `git branch --show-current`
+  - `git status --short`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `IN_PROGRESS`
+- Not:
+  - Ilk pre-pr denemesinde script parse bozulmasi goruldu; dosya temizlenip tekrarlandi.
+
+### [2026-03-16 10:22] TASK-036 Resmi Kapanis (Disiplin Sertlestirme)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Task ID tekrar kullanimi yasagi repo disiplinine ve multi-agent kurallarina eklendi.
+  - Koordinator karar cevabi 4 maddelik sabit sablona baglandi.
+  - Remote/upstream dogrulamasi `pre-pr` icinde fail-fast zorunlu kontrol haline getirildi.
+  - `start-task` scriptine tekrar task-id ve var olan branch engeli eklendi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-036.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `scripts/pre-pr.ps1`
+  - `scripts/start-task.ps1`
+- Calistirilan Komutlar:
+  - `git push -u origin agent/codex/task-036`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `git fetch --all --prune` bu ortamda local remote tanimlari nedeniyle fail notu korundu.
