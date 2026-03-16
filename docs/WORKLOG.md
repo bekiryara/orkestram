@@ -1121,3 +1121,30 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - Beklenen `listing-card.blade.php` ve `v1.css` degisiklikleri upstream'de bulunmadigi icin koordinator entegrasyonu bilerek durduruldu.
 - Sonuc:
   - `BLOCKED`
+
+### [2026-03-16 20:20] TASK-050 Entegrasyon (Listing Card Hierarchy)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `origin/agent/codex-b/task-050` upstream branch'i kabul edilen `fe261c7` commit'iyle dogrulandi.
+  - Branch eski baz tarihce tasidigi icin koordinator entegrasyonu merge yerine yalniz kabul edilen commit cherry-pick edilerek tamamlandi.
+  - Listing card partial'lari ve `v1.css` iki appte karar modelini destekleyecek sekilde parity ile koordinator branch'ine alindi.
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/resources/views/frontend/partials/listing-card.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/partials/listing-card.blade.php`
+  - `local-rebuild/apps/orkestram/public/assets/v1.css`
+  - `local-rebuild/apps/izmirorkestra/public/assets/v1.css`
+- Sonuc:
+  - `PASS`
+
+### [2026-03-16 20:25] TASK-048 Resmi Kapanis (Media + Detail + Card Parity)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-051` media/runtime dosya hatti fix'i, `TASK-049` detail karar hiyerarsisi ve `TASK-050` listing card parity calismasi koordinator branch'inde birlestirildi.
+  - Runtime medya akis testleri, tam validate quick ve `pre-pr` quick tekrar PASS verdi.
+  - Koordinator pano/lock/task kayitlari gercek kapanis durumuna hizalandi.
+- Calistirilan Komutlar:
+  - `docker exec orkestram-local-web php artisan test --filter=AdminListingMediaFlowTest`
+  - `docker exec izmirorkestra-local-web php artisan test --filter=AdminListingMediaFlowTest`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`

@@ -1,18 +1,18 @@
 # TASK-050
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex-b`  
 Branch: `agent/codex-b/task-050`  
 Baslangic: `2026-03-16 17:45`
-Kapanis: `-`
+Kapanis: `2026-03-16 20:20`
 
 ## Ozet
 - Listing detail ve listing card sunumunu yeni hiyerarsiyi destekleyecek sekilde parity ile polish etmek.
 
 ## In Scope
-- [ ] Gerekirse `listing-card.blade.php` iki appte karar hizini destekleyecek presentation ayarlarini yapmak.
-- [ ] Gerekirse ilgili `v1.css` katmaninda detail hiyerarsi, spacing ve CTA sunumunu desteklemek.
-- [ ] `codex-a` detail duzenine gorsel parity vermek.
+- [x] Gerekirse `listing-card.blade.php` iki appte karar hizini destekleyecek presentation ayarlarini yapmak.
+- [x] Gerekirse ilgili `v1.css` katmaninda detail hiyerarsi, spacing ve CTA sunumunu desteklemek.
+- [x] `codex-a` detail duzenine gorsel parity vermek.
 
 ## Out of Scope
 - [ ] Runtime media path veya upload storage fix'i
@@ -26,16 +26,16 @@ Kapanis: `-`
 - `docs/tasks/TASK-050.md`
 
 ## Kabul Kriteri
-- [ ] Detail hiyerarsisini destekleyen stil/sunum parity ile gelir.
-- [ ] Listing card ve detail presentation ayni karar modelini destekler.
-- [ ] Iki app parity korur.
+- [x] Detail hiyerarsisini destekleyen stil/sunum parity ile gelir.
+- [x] Listing card ve detail presentation ayni karar modelini destekler.
+- [x] Iki app parity korur.
 
 ## Komutlar
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ```
 
-## Blokaj Notu
-- Teslim notu kabul seviyesine gelmis olsa da `origin/agent/codex-b/task-050` remote branch'i halen baz commit `7e0ceac` uzerinde gorunuyor.
-- Beklenen `listing-card.blade.php` ve `v1.css` degisikliklerini iceren upstream commit olmadigi icin koordinator entegrasyonu durduruldu.
-- Gorev, dogru branch push'u gelene kadar aktif bloke durumda tutulur.
+## Kapanis Notu
+- Ajan teslimi `fe261c7` (`feat(task-050): refine listing card hierarchy`) commit'i ile upstream'e pushlandi.
+- Koordinator entegrasyonu stale branch tarihcesini almamak icin merge yerine cherry-pick ile `8ccb02d` commit'i olarak `agent/codex/task-048` branch'ine alindi.
+- Kanit paketi: `git status --short` temiz, `pre-pr` PASS (mode=quick).

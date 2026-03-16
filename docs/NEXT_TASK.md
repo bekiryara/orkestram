@@ -1,19 +1,19 @@
 # NEXT TASK (Koordinasyon Panosu)
 
-Durum: `ACTIVE`  
+Durum: `IDLE`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
-1. `TASK-048` - `TASK-049` ve `TASK-051` entegre edildi; `TASK-050` stale upstream nedeniyle blokeli.
+1. Aktif koordinator gorevi yok.
 
 ## Son Koordinator Kapanisi
-1. `TASK-047` - Listing sonuc ozeti sadelestirme + izmir test parity duzeltmesi tamamlandi.
+1. `TASK-048` - Listing media/runtime hatti + detail karar hiyerarsisi + listing card parity entegrasyonu tamamlandi (pre-pr PASS).
 2. `TASK-046` - `TASK-043` ana hatta merge edilip runtime hizasi dogrulandi.
 3. `TASK-043` - Listing filtre UX toparlamasi paralel ajan teslimleriyle tamamlandi.
 
 ## Son Kapanis
-1. `TASK-047` - Listing sonuc ozeti sadelestirme + izmir test parity duzeltmesi tamamlandi (pre-pr PASS).
+1. `TASK-048` - Listing media/runtime hatti + detail karar hiyerarsisi + listing card parity entegrasyonu tamamlandi (pre-pr PASS).
 2. `TASK-046` - Listing filtre UX ana hata tasindi (pre-pr PASS).
 3. `TASK-043` - Listing filtre UX toparlamasi tamamlandi (pre-pr PASS).
 
