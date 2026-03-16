@@ -1,4 +1,4 @@
-# AGENTS.md
+﻿# AGENTS.md
 
 Bu repo'ya gelen her ajan bu dosyayi ve asagidaki iki dokumani okumadan ise baslamaz:
 - `docs/REPO_DISCIPLINE_TR.md`
@@ -40,4 +40,24 @@ Kural ihlalinde calisma durdurulur, once su duzeltilir:
 2. lock
 3. dogrulama
 4. WSL hizalama kaniti
+
+
+## Koordinator Ilk Cevap Protokolu
+Yeni gelen `codex` koordinatoru ilk cevapta su 4 maddeyi tek mesajda ozetler:
+1. aktif branch
+2. aktif task
+3. lock durumu
+4. bu is mevcut task'a mi girer, yeni task mi ister
+
+Kural:
+1. Koordinator once mevcut `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md` ve aktif task kaydini okur.
+2. Uygun aktif task varsa onu devam ettirir.
+3. Uygun task yoksa yeni task/lock acilmasi gerektigini net yazar.
+4. Gereksiz plan cikarmadan bir sonraki dogru adimi ister.
+
+## Koordinator Senden Ne Ister
+Koordinator, sistem okumasindan sonra senden tek net karar ister:
+1. mevcut task devam edecek
+2. yeni task acilacak
+3. is ajanlara dagitilacak
 

@@ -1,4 +1,4 @@
-# Multi-Agent Kurallari (TR)
+﻿# Multi-Agent Kurallari (TR)
 
 Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve deterministic akis.
 
@@ -46,4 +46,46 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
 3. `REALIGN_REQUIRED` halinde ajan yalniz hizalama adimini uygular; kod/doc degisikliklerine gecmez.
 4. Koordinator, lock acmadan once bu kaniti istemekle yukumludur.
 
+
+
+## Koordinator Karar Agaci
+Koordinator yeni is geldiginde su sirayla karar verir:
+1. `docs/NEXT_TASK.md` ve `docs/TASK_LOCKS.md` aktif isi kapsiyor mu?
+   - Evet: mevcut task devam eder.
+   - Hayir: yeni task acilmasi gerekir.
+2. Dosya/alan cakismasi var mi?
+   - Evet: ajan dagitimi durur, once lock cozulur.
+   - Hayir: dagitim yapilabilir.
+3. Is ortak belge veya ortak entegrasyon alani mi?
+   - Evet: koordinator lock'u kendi elinde tutar.
+   - Hayir: ayrik ajan lock'larina boler.
+
+## Koordinator Dagitim Formati
+Koordinator ajan gorevi verirken su formati kullanir:
+1. ajan
+2. branch
+3. hedef dosyalar
+4. yapacagi is
+5. kapanis kaniti
+
+Ornek alanlar:
+- gent/codex-a/<task-id>
+- hedef dosyalar
+- kabul/kapanis kaniti:
+  - git branch --show-current
+  - git status --short
+  - powershell.exe -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
+
+## Koordinator Stop Kurallari
+Asagidaki durumlardan biri varsa koordinator isi durdurur:
+1. active lock cakismasi
+2. yanlis branch
+3. WSL hizalama kaniti yok
+4. aktif task kapanmadan yeni kapsam acilmaya calisiliyor
+
+## Koordinator Kapanis Sonrasi Davranisi
+Koordinator is bitince tek mesajda su 3 seyi verir:
+1. is kapandi mi, kaldi mi
+2. siradaki uygun adim
+3. senden gereken tek karar veya yeni gorev
 
