@@ -8,6 +8,7 @@ use App\Models\Listing;
 use App\Models\Neighborhood;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class AdminListingMediaFlowTest extends TestCase
@@ -16,6 +17,8 @@ class AdminListingMediaFlowTest extends TestCase
 
     public function test_admin_can_create_listing_with_cover_and_gallery(): void
     {
+        Storage::fake('public');
+
         $city = City::create(['name' => 'Izmir', 'slug' => 'izmir', 'sort_order' => 1]);
         $district = District::create(['city_id' => $city->id, 'name' => 'Konak', 'slug' => 'konak', 'sort_order' => 1]);
         $neighborhood = Neighborhood::create([
@@ -73,8 +76,10 @@ class AdminListingMediaFlowTest extends TestCase
 
         $this->assertNotNull($listing);
         $this->assertNotNull($listing->cover_image_path);
+        $this->assertStringStartsWith('storage/uploads/listings/test-medya-ilan/', $listing->cover_image_path);
         $this->assertIsArray($listing->gallery_json);
         $this->assertCount(2, $listing->gallery_json);
+        $this->assertStringStartsWith('storage/uploads/listings/test-medya-ilan/', $listing->gallery_json[0]);
         $this->assertSame('+905321112233', $listing->whatsapp);
         $this->assertSame('+902323334455', $listing->phone);
         $this->assertSame(['Canli muzik', '6 kisilik ekip'], $listing->features_json);
@@ -82,7 +87,8 @@ class AdminListingMediaFlowTest extends TestCase
         $this->assertSame('18000.00', (string) $listing->price_max);
         $this->assertSame('TRY', (string) $listing->currency);
         $this->assertSame('range', (string) $listing->price_type);
-        $this->assertTrue(file_exists(public_path($listing->cover_image_path)));
+        Storage::disk('public')->assertExists(str_replace('storage/', '', $listing->cover_image_path));
+        Storage::disk('public')->assertExists(str_replace('storage/', '', $listing->gallery_json[0]));
     }
 
     public function test_admin_can_update_gallery_order_and_remove_single_item(): void

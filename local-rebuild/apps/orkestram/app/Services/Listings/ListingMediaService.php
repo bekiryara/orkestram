@@ -5,6 +5,7 @@ namespace App\Services\Listings;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
@@ -63,17 +64,24 @@ class ListingMediaService
     private function moveUpload(UploadedFile $file, string $slug): string
     {
         $safeSlug = Str::slug($slug ?: 'listing');
-        $dir = public_path('uploads/listings/' . $safeSlug);
-        if (!is_dir($dir) && !mkdir($dir, 0775, true) && !is_dir($dir)) {
+        $relativeDir = 'uploads/listings/' . $safeSlug;
+        $disk = Storage::disk('public');
+
+        if (!$disk->exists($relativeDir) && !$disk->makeDirectory($relativeDir)) {
             throw ValidationException::withMessages([
                 'cover_image' => 'Gorsel klasoru olusturulamadi. Dizin izinlerini kontrol edin.',
             ]);
         }
 
         $filename = now()->format('YmdHis') . '-' . Str::random(8) . '.' . strtolower($file->getClientOriginalExtension());
-        $file->move($dir, $filename);
+        $storedPath = $file->storeAs($relativeDir, $filename, 'public');
+        if ($storedPath === false) {
+            throw ValidationException::withMessages([
+                'cover_image' => 'Gorsel yuklenemedi. Storage/public izinlerini kontrol edin.',
+            ]);
+        }
 
-        return 'uploads/listings/' . $safeSlug . '/' . $filename;
+        return 'storage/' . ltrim($storedPath, '/');
     }
 
     private function parseGalleryOrder(?string $raw): array
@@ -93,3 +101,4 @@ class ListingMediaService
         )));
     }
 }
+
