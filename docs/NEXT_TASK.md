@@ -1,11 +1,11 @@
 # NEXT TASK (Koordinasyon Panosu)
 
-Durum: `IDLE`  
+Durum: `ACTIVE`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
-1. Aktif koordinator gorevi yok.
+1. `TASK-058` - Listing detail sayfasini standartlara uygun wow hero, benzer ilan ve yorum hiyerarsisi ile yeniden duzenleme
 
 ## Son Koordinator Kapanisi
 1. `TASK-057` - Ajan teslim disiplini ve task sablonu zorunlu checklist sertlestirmesi tamamlandi (pre-pr PASS).
@@ -25,6 +25,7 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
    - `git status --short`
    - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` sonucu `PASS`
 3. Kanit yoksa task durumu `active` kalir.
+
 
 
 
