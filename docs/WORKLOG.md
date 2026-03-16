@@ -1063,3 +1063,23 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - Sonuc:
   - `PASS`
+
+### [2026-03-16 17:45] TASK-048 Baslangic (Listing Media Runtime + Detail Hierarchy)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Yeni resmi is acildi; once listing gorsel/runtime dosya hatti, sonra listing detail karar hiyerarsisi cozulacak.
+  - Is `codex-a`, `codex-b` ve `codex-c` ajanlarina cakismasiz lock alanlariyla dagitildi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-048.md`
+  - `docs/tasks/TASK-049.md`
+  - `docs/tasks/TASK-050.md`
+  - `docs/tasks/TASK-051.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git checkout -b agent/codex/task-048`
+- Sonuc:
+  - `IN_PROGRESS`
+- Not:
+  - Teknik medya/runtime sorunu urun polish oncesi cozulmesi gereken bir blokaj olarak ayri gorevlendirildi.
