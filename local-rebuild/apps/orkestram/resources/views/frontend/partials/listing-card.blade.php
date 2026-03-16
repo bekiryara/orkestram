@@ -23,21 +23,26 @@
     </a>
 
     <div class="listing-card-body">
-        <div class="listing-card-row listing-card-row-title">
-            <h3 class="listing-card-title">
-                <a href="{{ route('listing.show', ['slug' => $item->slug]) }}">{{ $item->name }}</a>
-            </h3>
-            <span class="listing-card-rating" aria-label="Puan">★ {{ $ratingText }}</span>
+        <div class="listing-card-header">
+            <div class="listing-card-row listing-card-row-title">
+                <h3 class="listing-card-title">
+                    <a href="{{ route('listing.show', ['slug' => $item->slug]) }}">{{ $item->name }}</a>
+                </h3>
+                <span class="listing-card-rating" aria-label="Puan">★ {{ $ratingText }}</span>
+            </div>
+
+            <div class="listing-card-meta" aria-label="Kart ozet bilgileri">
+                <span class="listing-card-feature-chip">{{ $featureOne }}</span>
+                <span class="listing-card-comments">{{ $commentCount }} Yorum</span>
+            </div>
         </div>
 
-        <div class="listing-card-row">
-            <span class="listing-card-feature">{{ $featureOne }}</span>
-            <span class="listing-card-comments">{{ $commentCount }} Yorum</span>
-        </div>
-
-        <div class="listing-card-row listing-card-row-price">
-            <span class="listing-card-feature">{{ $featureTwo }}</span>
-            <span class="listing-card-price">{{ $priceText }}</span>
+        <div class="listing-card-footer">
+            <div class="listing-card-price-block">
+                <span class="listing-card-price-label">Baslangic</span>
+                <span class="listing-card-price">{{ $priceText }}</span>
+            </div>
+            <span class="listing-card-feature listing-card-feature-secondary">{{ $featureTwo }}</span>
         </div>
 
         <a class="btn card-btn listing-card-cta" href="{{ route('listing.show', ['slug' => $item->slug]) }}">{{ $ctaText }}</a>
