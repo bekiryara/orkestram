@@ -1,11 +1,11 @@
 # NEXT TASK (Koordinasyon Panosu)
 
-Durum: `IDLE`  
+Durum: `ACTIVE`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
-1. Aktif koordinator gorevi yok.
+1. `TASK-056` - Bozuk local git remote path temizligi ve fetch disiplini hizalamasi
 
 ## Son Koordinator Kapanisi
 1. `TASK-055` - Media runtime restore kaliciligi + runtime gate sertlestirmesi tamamlandi (dev-up/smoke/pre-pr PASS).
@@ -25,5 +25,6 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
    - `git status --short`
    - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` sonucu `PASS`
 3. Kanit yoksa task durumu `active` kalir.
+
 
 
