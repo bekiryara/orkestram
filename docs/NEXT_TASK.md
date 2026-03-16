@@ -1,4 +1,4 @@
-﻿# NEXT TASK (Koordinasyon Panosu)
+# NEXT TASK (Koordinasyon Panosu)
 
 Durum: `IDLE`  
 Koordinator: `codex`  
@@ -8,19 +8,20 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
 1. Aktif koordinator gorevi yok.
 
 ## Son Koordinator Kapanisi
-1. `TASK-040` - Hero + listing CTA hiyerarsisi paralel koordinasyon ile tamamlandi.
-2. `TASK-036` - Task-id tekrar yasagi + koordinator cevap sablonu + remote/upstream zorunlulugu tamamlandi.
-3. `TASK-032` - Remote/upstream hizasi tamamlandi.
+1. `TASK-046` - `TASK-043` ana hatta merge edilip runtime hizasi dogrulandi.
+2. `TASK-043` - Listing filtre UX toparlamasi paralel ajan teslimleriyle tamamlandi.
+3. `TASK-042` - Koordinator cevap/teslim/task-acma standardi ve runtime hijyen checklisti sabitlendi.
 
 ## Son Kapanis
-1. `TASK-040` - Hero/CTA toparlama + listing detay CTA sadeleme tamamlandi (pre-pr PASS).
-2. `TASK-036` - Disiplin sertlestirme tamamlandi (pre-pr PASS).
-3. `TASK-032` - Canonical WSL repo + GitHub remote/upstream modeli tamamlandi (pre-pr PASS).
+1. `TASK-046` - Listing filtre UX ana hata tasindi (pre-pr PASS).
+2. `TASK-043` - Listing filtre UX toparlamasi tamamlandi (pre-pr PASS).
+3. `TASK-042` - Koordinator disiplin standardizasyonu tamamlandi (pre-pr PASS).
 
 ## Kapanis Kurali (Zorunlu)
 1. Kapanis kaniti olmadan task `closed` edilemez.
 2. Zorunlu kanit paketi:
    - `git branch --show-current`
+   - `git branch -vv`
    - `git status --short`
    - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` sonucu `PASS`
 3. Kanit yoksa task durumu `active` kalir.

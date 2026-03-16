@@ -920,3 +920,92 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `origin/agent/codex-b/task-038` ve `origin/agent/codex-c/task-039` branchleri `main` ile ayni oldugu icin kapsamlar koordinator entegrasyon turunda tamamlandi.
+
+### [2026-03-16 14:24] TASK-042 Resmi Kapanis (Koordinator Disiplin Standardizasyonu)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Koordinator yeni is kararlama cevabi sabit 4 satir formatina baglandi.
+  - Ajan teslim kanit paketi `git branch --show-current`, `git branch -vv`, `git status --short`, `pre-pr PASS` olarak tek formatta standardize edildi.
+  - `scripts/start-task.ps1` task dosyasi -> `TASK_LOCKS` -> `NEXT_TASK` -> branch acilisi sirasini mekaniklestirecek sekilde genisletildi.
+  - Runtime kisa hijyen checklisti (`container up`, `mount source`, `8180/8181/8188`, `smoke PASS`) ilgili disiplin belgelerine eklendi.
+- Degisen Dosyalar:
+  - `AGENTS.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `scripts/start-task.ps1`
+  - `docs/tasks/TASK-042.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `start-task.ps1` aktif lock varken yeni task acmaz; koordinasyon sirasi belge ve scriptte ayni hale getirildi.
+
+### [2026-03-16 15:05] TASK-043 Baslangic (Listing Filtre UX Koordinasyonu)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Listing arama/filtre UX toparlamasi icin yeni koordinasyon gorevi acildi.
+  - Is iki paralel ajana cakismasiz dosya alanlariyla dagitildi.
+  - `codex-a` blade filtre paneli + aktif filtre okunurlugu, `codex-b` CSS mobil filtre akisi + aksiyon hiyerarsisi kapsamini aldi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-043.md`
+  - `docs/tasks/TASK-044.md`
+  - `docs/tasks/TASK-045.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git checkout -b agent/codex/task-043`
+- Sonuc:
+  - `IN_PROGRESS`
+- Not:
+  - `codex-c` bu turda bos tutuldu; entegrasyon sonrasi gerekirse ikinci dalga gorev acilacak.
+
+### [2026-03-16 16:05] TASK-043 Resmi Kapanis (Listing Filtre UX Toparlama)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-044` blade teslimi `orkestram-a` worktree'den parity ile entegre edildi.
+  - `TASK-045` CSS tesliminden listing filtre yuzeyine ait guvenli stiller secilerek iki appte uygulandi.
+  - Ajan worktree'lerindeki lock/worklog kapatma girisleri normalize edildi; resmi kapanis koordinator branch'inde verildi.
+  - Listing filtre paneli, aktif filtre okunurlugu, temizle/uygula akisi ve mobil filtre aksiyon hiyerarsisi toparlandi.
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/resources/views/frontend/listings.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listings.blade.php`
+  - `local-rebuild/apps/orkestram/public/assets/v1.css`
+  - `local-rebuild/apps/izmirorkestra/public/assets/v1.css`
+  - `docs/tasks/TASK-043.md`
+  - `docs/tasks/TASK-044.md`
+  - `docs/tasks/TASK-045.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `codex-c` icin ikinci dalga goreve ihtiyac kalmadi; entegrasyon ilk turda tamamlandi.
+
+### [2026-03-16 16:30] TASK-046 Resmi Kapanis (Task-043 Main + Runtime Hizasi)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `agent/codex/task-043` kapsamindaki listing filtre UX iyilestirmeleri `task-046` merge adayina alindi.
+  - `pre-pr -Mode quick` ve smoke dogrulamalariyla runtime hizasi kontrol edildi.
+  - Gorev resmi olarak `main`e tasinip kayitlar guncellendi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-046.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git checkout -b agent/codex/task-046`
+  - `git merge --no-ff agent/codex/task-043`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Runtime tek kaynak olarak canonical WSL repo uzerinden dogrulandi.
