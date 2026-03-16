@@ -1148,3 +1148,16 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - Sonuc:
   - `PASS`
+
+### [2026-03-16 21:05] TASK-052 Baslangic (Media Hardening Plan)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Profil, listing-card, listing-detail ve galeri gorselleri icin tek medya standardi belirlemek uzere yeni resmi gorev acildi.
+  - Legacy `uploads/...` ve yeni `storage/uploads/...` karisikligini migration, fallback ve delete akislariyla kokten ele alacak teknik plan kayda baglandi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-052.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Sonuc:
+  - `IN_PROGRESS`

@@ -43,6 +43,27 @@
     </nav>
 
     <article class="content">
+        @if($item->cover_image_path || (is_array($item->gallery_json) && count($item->gallery_json)))
+            <section class="listing-gallery">
+                @php($mainImage = $item->cover_image_path ?: $item->gallery_json[0])
+                <button type="button" id="listing-open-lightbox" class="listing-main-button" data-img="/{{ $mainImage }}">
+                    <img id="listing-main-image" class="listing-main-image" src="/{{ $mainImage }}" alt="{{ $item->name }}">
+                </button>
+                @if(is_array($item->gallery_json) && count($item->gallery_json))
+                    <div class="listing-thumbs">
+                        <button type="button" class="thumb-btn is-active" data-img="/{{ $mainImage }}">
+                            <img src="/{{ $mainImage }}" alt="{{ $item->name }} ana gorsel">
+                        </button>
+                        @foreach($item->gallery_json as $img)
+                            <button type="button" class="thumb-btn" data-img="/{{ $img }}">
+                                <img src="/{{ $img }}" alt="{{ $item->name }} galeri">
+                            </button>
+                        @endforeach
+                    </div>
+                @endif
+            </section>
+        @endif
+
         <section class="listing-hero">
             <div>
                 <h1>{{ $item->name }}</h1>
@@ -51,12 +72,6 @@
                 @if($item->summary)
                     <p class="listing-summary">{{ $item->summary }}</p>
                 @endif
-
-                <div class="pill-row">
-                    @if($item->city)<span class="pill">{{ $item->city }}</span>@endif
-                    @if($item->district)<span class="pill">{{ $item->district }}</span>@endif
-                    @if($item->service_type)<span class="pill">{{ $item->service_type }}</span>@endif
-                </div>
             </div>
 
             <aside class="listing-cta-panel">
@@ -75,14 +90,6 @@
                     @if($item->phone)
                         <a class="btn btn-secondary" href="tel:{{ $item->phone }}">Telefon Et</a>
                     @endif
-                </div>
-                <hr>
-                <h3 class="mt-8">Hizli Bilgiler</h3>
-                <p class="meta">Ekip ozeti ve hizmet kapsamýný asagidaki bloklardan inceleyebilirsin.</p>
-                <div class="pill-row">
-                    @if($item->service_type)<span class="pill">{{ $item->service_type }}</span>@endif
-                    @if($item->city)<span class="pill">{{ $item->city }}</span>@endif
-                    @if($item->district)<span class="pill">{{ $item->district }}</span>@endif
                 </div>
                 @if(session('ok'))
                     <p class="meta mt-8">{{ session('ok') }}</p>
@@ -111,48 +118,8 @@
                 </div>
             </section>
         @endif
-
-        @if($item->cover_image_path || (is_array($item->gallery_json) && count($item->gallery_json)))
-            <section class="listing-gallery">
-                @php($mainImage = $item->cover_image_path ?: $item->gallery_json[0])
-                <button type="button" id="listing-open-lightbox" class="listing-main-button" data-img="/{{ $mainImage }}">
-                    <img id="listing-main-image" class="listing-main-image" src="/{{ $mainImage }}" alt="{{ $item->name }}">
-                </button>
-                @if(is_array($item->gallery_json) && count($item->gallery_json))
-                    <div class="listing-thumbs">
-                        <button type="button" class="thumb-btn is-active" data-img="/{{ $mainImage }}">
-                            <img src="/{{ $mainImage }}" alt="{{ $item->name }} ana gorsel">
-                        </button>
-                        @foreach($item->gallery_json as $img)
-                            <button type="button" class="thumb-btn" data-img="/{{ $img }}">
-                                <img src="/{{ $img }}" alt="{{ $item->name }} galeri">
-                            </button>
-                        @endforeach
-                    </div>
-                @endif
-            </section>
-        @endif
     </article>
 
-    <section class="section">
-        <h2>Benzer Ilanlar</h2>
-        <div class="grid">
-            @forelse($relatedListings as $related)
-                <article class="card">
-                    <img class="card-cover" src="/{{ $related->cover_image_path ?: 'assets/listing-fallback.svg' }}" alt="{{ $related->name }}">
-                    <h3><a href="{{ route('listing.show', ['slug' => $related->slug]) }}">{{ $related->name }}</a></h3>
-                    <div class="meta">{{ $related->city }}{{ $related->district ? ' / ' . $related->district : '' }}</div>
-                    <p>{{ $related->summary ?: 'Kisa tanitim metni girilmemis.' }}</p>
-                    <a class="btn card-btn" href="{{ route('listing.show', ['slug' => $related->slug]) }}">{{ $siteMeta['listing_cta'] ?? 'Detaylari Incele' }}</a>
-                </article>
-            @empty
-                <article class="empty-state">
-                    <h3>Benzer ilan bulunamadi</h3>
-                    <p>Yeni ilan eklendikce burada oneriler listelenecek.</p>
-                </article>
-            @endforelse
-        </div>
-    </section>
 
     <article class="content">
         <section class="listing-block">
@@ -212,6 +179,26 @@
             <div>{!! nl2br(e($item->content ?: 'Icerik girilmemis.')) !!}</div>
         </section>
     </article>
+
+    <section class="section">
+        <h2>Benzer Ilanlar</h2>
+        <div class="grid">
+            @forelse($relatedListings as $related)
+                <article class="card">
+                    <img class="card-cover" src="/{{ $related->cover_image_path ?: 'assets/listing-fallback.svg' }}" alt="{{ $related->name }}">
+                    <h3><a href="{{ route('listing.show', ['slug' => $related->slug]) }}">{{ $related->name }}</a></h3>
+                    <div class="meta">{{ $related->city }}{{ $related->district ? ' / ' . $related->district : '' }}</div>
+                    <p>{{ $related->summary ?: 'Kisa tanitim metni girilmemis.' }}</p>
+                    <a class="btn card-btn" href="{{ route('listing.show', ['slug' => $related->slug]) }}">{{ $siteMeta['listing_cta'] ?? 'Detaylari Incele' }}</a>
+                </article>
+            @empty
+                <article class="empty-state">
+                    <h3>Benzer ilan bulunamadi</h3>
+                    <p>Yeni ilan eklendikce burada oneriler listelenecek.</p>
+                </article>
+            @endforelse
+        </div>
+    </section>
 
     <div id="listing-lightbox" class="lightbox" aria-hidden="true">
         <button type="button" id="listing-lightbox-prev" class="lightbox-nav prev" aria-label="Onceki gorsel">&lt;</button>

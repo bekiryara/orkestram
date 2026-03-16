@@ -1,11 +1,11 @@
-# NEXT TASK (Koordinasyon Panosu)
+﻿# NEXT TASK (Koordinasyon Panosu)
 
-Durum: `IDLE`  
+Durum: `ACTIVE`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
-1. Aktif koordinator gorevi yok.
+1. `TASK-052` - Profil/listing-card/listing-detail/galeri medya hattini kokten standardize etme gorevi aktif.
 
 ## Son Koordinator Kapanisi
 1. `TASK-048` - Listing media/runtime hatti + detail karar hiyerarsisi + listing card parity entegrasyonu tamamlandi (pre-pr PASS).
