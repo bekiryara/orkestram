@@ -1,6 +1,6 @@
 ﻿# TASK-032
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex`  
 Branch: `agent/codex/task-032`  
 Baslangic: `2026-03-15 06:50`
@@ -11,7 +11,7 @@ Baslangic: `2026-03-15 06:50`
 
 ## In Scope
 - [x] `D:\orkestram` acilisinda Hard Guard kuraliyla WSL'ye zorunlu hizalama protokolunu AGENTS + disiplin dokumanlarina eklemek.
-- [ ] Koordinator icin tek aktif koordinasyon lock'u acmak (`TASK-032`).
+- [x] Koordinator icin tek aktif koordinasyon lock'u acmak (`TASK-032`).
 - [x] Ajanlar icin dosya cakismasiz lock parcalama plani cikarmak (A/B/C ayrik file set).
 - [x] WSL calisma koklerini standartlamak ve kanitlamak:
   - `/home/bekir/orkestram-a`
@@ -44,7 +44,7 @@ Baslangic: `2026-03-15 06:50`
 - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
 
 ## Kabul Kriteri
-- [ ] `TASK-032` lock kaydi `active` acilir ve koordinasyon bitisinde `closed` kapanir.
+- [x] `TASK-032` lock kaydi `active` acilir ve koordinasyon bitisinde `closed` kapanir.
 - [x] A/B/C ajanlari icin cakismaz lock matrisi yazilir (dosya/desen bazli).
 - [x] WSL tek-kaynak kurali acik, test edilebilir ve kanitlanabilir sekilde dokumante edilir.
 - [x] Her ajan icin zorunlu kanit paketi tek formatta yazilir:
@@ -71,10 +71,11 @@ powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 - Paralel ajanlarda ayni dosyaya lock verilmez; koordinator lock dagitimindan sorumludur.
 - Ajan calismasi kesilirse veya terminal kapanirsa once branch/lock/kanit dogrulama yapilir, sonra devam edilir.
 - Risk: Yanlis mount veya yanlis klasorde calisma. Azaltim: her ajan turu basinda `pwd + git rev-parse --show-toplevel + git branch --show-current` kaniti.
-- Uygulama dokumanlari:
-  - `docs/WSL_RUNTIME_PLAYBOOK_TR.md`
-  - `docs/AGENT_LOCK_MATRIX_TR.md`
-  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+- Koordinator entegrasyon ozeti:
+  - `TASK-033` ciktilari `docs/WSL_RUNTIME_PLAYBOOK_TR.md` icinde toplandi.
+  - `TASK-034` ciktilari `docs/AGENT_LOCK_MATRIX_TR.md` icinde toplandi.
+  - `TASK-035` ciktilari `docs/AGENT_DELIVERY_CHECKLIST_TR.md` icinde toplandi.
+- Bu ortamda `wsl -e bash -lc ...` komutu kullanilamadi; ayni hizalama kaniti yerel WSL bash uzerinden `pwd`, `git rev-parse --show-toplevel`, `git branch --show-current`, `git status --short` ile alindi.
 
 ## Koordinator Yurutme Plani (Detay)
 1. Baslatma:

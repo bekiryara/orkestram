@@ -38,6 +38,6 @@ Sabit Ajan Kimlikleri:
 
 
 
-| TASK-032 | codex | agent/codex/task-032 | active | docs/tasks/TASK-032.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/PR_FLOW_TR.md,AGENTS.md,scripts/pre-pr.ps1,scripts/validate.ps1,docs/WSL_RUNTIME_PLAYBOOK_TR.md,docs/AGENT_LOCK_MATRIX_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md | 2026-03-15 06:55:00 | 2026-03-16 08:45:00 | WSL-first operasyon scriptleri + ajan playbook/matrix/checklist dokumanlari tamamlandi; alt tasklar hazir, lock closure bekliyor |
+| TASK-032 | codex | agent/codex/task-032 | closed | docs/tasks/TASK-032.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/PR_FLOW_TR.md,AGENTS.md,scripts/pre-pr.ps1,scripts/validate.ps1,docs/WSL_RUNTIME_PLAYBOOK_TR.md,docs/AGENT_LOCK_MATRIX_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md | 2026-03-15 06:55:00 | 2026-03-16 09:00:00 | Koordinator kapanisi tamamlandi; TASK-033/034/035 ciktilari workdir'e alinip playbook/matrix/checklist dokumanlarina islenerek closure kayitlari hazirlandi |
 
 

@@ -775,3 +775,26 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Not:
   - TASK-033/034/035 kartlari korunuyor; hedef dokumanlar hazir ve ajan aktivasyonu icin bekliyor.
 
+### [2026-03-16 09:00] TASK-032 Koordinator Kapanisi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-032` koordinator kayitlari kapatildi; pano, lock ve task karti closure durumuna cekildi.
+  - Koordinator bakisiyla `TASK-033` ciktisinin `docs/WSL_RUNTIME_PLAYBOOK_TR.md`, `TASK-034` ciktisinin `docs/AGENT_LOCK_MATRIX_TR.md` ve `TASK-035` ciktisinin `docs/AGENT_DELIVERY_CHECKLIST_TR.md` icinde toplandigi netlestirildi.
+  - WSL hizalama kaniti bu ortamda `wsl` binary olmadigi icin yerel bash uzerinden `pwd`, `git rev-parse --show-toplevel`, `git branch --show-current`, `git status --short` ile esdeger sekilde dogrulandi.
+- Degisen Dosyalar:
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `docs/tasks/TASK-032.md`
+- Calistirilan Komutlar:
+  - `git fetch --all --prune`
+  - `pwd`
+  - `git rev-parse --show-toplevel`
+  - `git branch --show-current`
+  - `git status --short`
+  - `powershell.exe -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Ilk `pre-pr` denemesi Windows Git `safe.directory` eksigi nedeniyle fail verdi; UNC WSL repo yolu guvenli dizine eklendikten sonra ayni komut PASS verdi.
+
