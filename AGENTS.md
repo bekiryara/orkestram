@@ -35,6 +35,19 @@ Her gorev sonunda su 4 kanit ayni formatta paylasilir:
 3. `git status --short`
 4. `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` -> `PASS`
 
+## Task Karti Doldurma Zorunlulugu
+Her ajan task'i bitirirken task kartinda su alanlari gercek sonuca gore doldurur:
+1. `Uygulama Adimlari`
+2. `Kabul Kriterleri`
+3. `Teslimde Zorunlu Kanit`
+4. `Kapanis Adimlari`
+
+Kural:
+1. Placeholder checklist birakmak yasak.
+2. Yapilmayan madde isaretlenmez.
+3. `docs/WORKLOG.md`, `docs/TASK_LOCKS.md`, `docs/NEXT_TASK.md` kapanis adimlari tamamlanmadan is teslim edilmis sayilmaz.
+4. Koordinator eksik checklist veya eksik kanitla teslim kabul etmez.
+
 ## Ihlal Durumu
 Kural ihlalinde calisma durdurulur, once su duzeltilir:
 1. branch

@@ -1268,3 +1268,27 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `git fetch --all --prune` bozuk local remote yollarindan dolayi fail veriyor; runtime/media sertlestirmesi disinda ayri temizlik gorevi olarak kaldi.
+
+## TASK-057 - Ajan Teslim Disiplini ve Task Sablonu Zorunlu Checklist Sertlestirmesi
+- Tarih: `2026-03-17 01:19`
+- Ajan: `codex`
+- Branch: `agent/codex/task-057`
+- Ozet:
+  - `docs/tasks/_TEMPLATE.md` zorunlu `Uygulama Adimlari`, `Kabul Kriterleri`, `Teslimde Zorunlu Kanit` ve `Kapanis Adimlari` bolumleri ile sertlestirildi.
+  - `scripts/start-task.ps1` yeni task acilisinda owner'in checklist, worklog, lock ve pano kapanisi sorumlulugunu acik not olarak yazar hale getirildi.
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`, `docs/MULTI_AGENT_RULES_TR.md` ve `AGENTS.md` eksik checklist/kanitla teslimin reddedilecegini acikca zorunlu kural olarak tanimladi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-057.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `docs/tasks/_TEMPLATE.md`
+  - `scripts/start-task.ps1`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `AGENTS.md`
+- Calistirilan Komutlar:
+  - `git push -u origin agent/codex/task-057`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
