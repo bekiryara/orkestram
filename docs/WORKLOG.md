@@ -1161,3 +1161,21 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `docs/WORKLOG.md`
 - Sonuc:
   - `IN_PROGRESS`
+
+### [2026-03-16 21:25] TASK-052 Resmi Kapanis (Media Hardening Plan + Listing Order)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Profil/listing-card/listing-detail/galeri medya hattini kokten toparlayacak resmi teknik plan `TASK-052` altinda sabitlendi.
+  - Tek standart `storage/app/public/uploads/...` + `/storage/uploads/...` + `storage/uploads/...` DB path modeli olarak kayda baglandi.
+  - Canli ihtiyac uzerine listing detail sayfasinda kapak/galeri en uste, bilgi/CTA blogu galerinin altina ve `Benzer Ilanlar` en alta tasindi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-052.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`

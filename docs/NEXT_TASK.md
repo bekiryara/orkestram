@@ -1,19 +1,19 @@
-﻿# NEXT TASK (Koordinasyon Panosu)
+# NEXT TASK (Koordinasyon Panosu)
 
-Durum: `ACTIVE`  
+Durum: `IDLE`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
-1. `TASK-052` - Profil/listing-card/listing-detail/galeri medya hattini kokten standardize etme gorevi aktif.
+1. Aktif koordinator gorevi yok.
 
 ## Son Koordinator Kapanisi
-1. `TASK-048` - Listing media/runtime hatti + detail karar hiyerarsisi + listing card parity entegrasyonu tamamlandi (pre-pr PASS).
+1. `TASK-052` - Medya hardening plani + listing detail ust akisi guncellemesi tamamlandi (pre-pr PASS).
 2. `TASK-046` - `TASK-043` ana hatta merge edilip runtime hizasi dogrulandi.
 3. `TASK-043` - Listing filtre UX toparlamasi paralel ajan teslimleriyle tamamlandi.
 
 ## Son Kapanis
-1. `TASK-048` - Listing media/runtime hatti + detail karar hiyerarsisi + listing card parity entegrasyonu tamamlandi (pre-pr PASS).
+1. `TASK-052` - Medya hardening plani + listing detail ust akisi guncellemesi tamamlandi (pre-pr PASS).
 2. `TASK-046` - Listing filtre UX ana hata tasindi (pre-pr PASS).
 3. `TASK-043` - Listing filtre UX toparlamasi tamamlandi (pre-pr PASS).
 
