@@ -1083,3 +1083,41 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `IN_PROGRESS`
 - Not:
   - Teknik medya/runtime sorunu urun polish oncesi cozulmesi gereken bir blokaj olarak ayri gorevlendirildi.
+
+### [2026-03-16 18:30] TASK-051 Entegrasyon (Media Runtime Path)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `origin/agent/codex-c/task-051` branch'indeki medya/runtime fix'i koordinator branch'ine merge edildi.
+  - `ListingMediaService` iki appte `Storage::disk('public')` hattina alindi ve DB path formatinin `storage/uploads/listings/...` olmasi korundu.
+  - `AdminListingMediaFlowTest` iki appte tekrar calistirilip PASS alindi.
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/app/Services/Listings/ListingMediaService.php`
+  - `local-rebuild/apps/izmirorkestra/app/Services/Listings/ListingMediaService.php`
+  - `local-rebuild/apps/orkestram/tests/Feature/AdminListingMediaFlowTest.php`
+  - `local-rebuild/apps/izmirorkestra/tests/Feature/AdminListingMediaFlowTest.php`
+- Calistirilan Komutlar:
+  - `docker exec orkestram-local-web php artisan test --filter=AdminListingMediaFlowTest`
+  - `docker exec izmirorkestra-local-web php artisan test --filter=AdminListingMediaFlowTest`
+- Sonuc:
+  - `PASS`
+
+### [2026-03-16 18:35] TASK-049 Entegrasyon (Listing Detail Hierarchy)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `origin/agent/codex-a/task-049` branch'indeki detail hiyerarsisi degisikligi koordinator branch'ine merge edildi.
+  - Hero sag panelindeki eski sosyal aksiyon blogu cikarildi; kabul edilen teslimdeki `Hizli Bilgiler` varyanti conflict cozumunde tutuldu.
+  - Yorumlar, yorum formu, mesaj-etkilesim ve uzun aciklama alt seviyeye indirilen blok sirasiyla entegre edildi.
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php`
+- Sonuc:
+  - `PASS`
+
+### [2026-03-16 18:40] TASK-048 Durum Guncelleme (TASK-050 Upstream Blokaji)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-049` ve `TASK-051` entegrasyonlari tamamlandi.
+  - `TASK-050` teslim notu kabul edilmis olsa da `origin/agent/codex-b/task-050` remote branch'i halen baz commit `7e0ceac` uzerinde gorunuyor.
+  - Beklenen `listing-card.blade.php` ve `v1.css` degisiklikleri upstream'de bulunmadigi icin koordinator entegrasyonu bilerek durduruldu.
+- Sonuc:
+  - `BLOCKED`

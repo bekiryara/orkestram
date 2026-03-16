@@ -5,10 +5,10 @@ Koordinator: `codex`
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
-1. `TASK-048` - Listing media/runtime hattini netlestirme ve detail karar hiyerarsisi koordinasyonu aktif.
+1. `TASK-048` - `TASK-049` ve `TASK-051` entegre edildi; `TASK-050` stale upstream nedeniyle blokeli.
 
 ## Son Koordinator Kapanisi
-1. `TASK-048` - Listing media/runtime hattini ve detail karar hiyerarsisini koordine et.
+1. `TASK-047` - Listing sonuc ozeti sadelestirme + izmir test parity duzeltmesi tamamlandi.
 2. `TASK-046` - `TASK-043` ana hatta merge edilip runtime hizasi dogrulandi.
 3. `TASK-043` - Listing filtre UX toparlamasi paralel ajan teslimleriyle tamamlandi.
 

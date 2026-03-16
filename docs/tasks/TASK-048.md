@@ -12,7 +12,7 @@ Kapanis: `-`
 ## In Scope
 - [x] Teknik gorev ve urun gorevi icin koordinator taskini acmak.
 - [x] Isi cakismasiz alt gorevlere dagitmak.
-- [ ] Ajan teslimlerini entegre etmek.
+- [~] Ajan teslimlerini entegre etmek.
 - [ ] `pre-pr` PASS ile resmi kapanis vermek.
 
 ## Out of Scope
@@ -31,7 +31,7 @@ Kapanis: `-`
 ## Kabul Kriteri
 - [x] Teknik dosya hatti gorevi ayri lock ile acilir.
 - [x] Listing detail UX gorevi ayri lock alanlariyla dagitilir.
-- [ ] Runtime kaniti + detail hiyerarsi entegrasyonu tamamlanir.
+- [~] Runtime kaniti + detail hiyerarsi entegrasyonu tamamlanir.
 - [ ] `pre-pr` PASS
 
 ## Komutlar
@@ -42,3 +42,5 @@ powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ## Notlar
 - Teknik problem urun polish oncesi cozulmelidir.
 - `codex-c` bu turda runtime medya hatti ve admin upload akislarini tarayan teknik ajan olarak kullanilacaktir.
+- `TASK-051` (media/runtime) ve `TASK-049` (detail hierarchy) koordinator branch'ine entegre edildi.
+- `TASK-050` teslim notu kabul edilmis olsa da `origin/agent/codex-b/task-050` beklenen kart/CSS commitini icermiyor; remote stale oldugu icin entegrasyon bloke edildi.

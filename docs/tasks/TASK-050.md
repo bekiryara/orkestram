@@ -34,3 +34,8 @@ Kapanis: `-`
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ```
+
+## Blokaj Notu
+- Teslim notu kabul seviyesine gelmis olsa da `origin/agent/codex-b/task-050` remote branch'i halen baz commit `7e0ceac` uzerinde gorunuyor.
+- Beklenen `listing-card.blade.php` ve `v1.css` degisikliklerini iceren upstream commit olmadigi icin koordinator entegrasyonu durduruldu.
+- Gorev, dogru branch push'u gelene kadar aktif bloke durumda tutulur.

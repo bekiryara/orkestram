@@ -1,10 +1,10 @@
 # TASK-049
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex-a`  
 Branch: `agent/codex-a/task-049`  
 Baslangic: `2026-03-16 17:45`
-Kapanis: `-`
+Kapanis: `2026-03-16 18:35`
 
 ## Ozet
 - Listing detail sayfasini karar odakli bilgi ve aksiyon hiyerarsisine cekmek.
@@ -24,11 +24,16 @@ Kapanis: `-`
 - `docs/tasks/TASK-049.md`
 
 ## Kabul Kriteri
-- [ ] Ana gorsel, ilan adi, fiyat, sehir/ilce/hizmet tipi ve ozellikler yorumlardan once gelir.
-- [ ] Ust karar panelinde gereksiz aksiyonlar azalir.
-- [ ] Iki app parity korur.
+- [x] Ana gorsel, ilan adi, fiyat, sehir/ilce/hizmet tipi ve ozellikler yorumlardan once gelir.
+- [x] Ust karar panelinde gereksiz aksiyonlar azalir.
+- [x] Iki app parity korur.
 
 ## Komutlar
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ```
+
+## Kapanis Notu
+- Ajan teslimi `275c862` (`feat(task-049): reorder listing detail blocks`) commit'i ile upstream'e pushlandi.
+- Koordinator entegrasyonu `9b928a8` merge commit'i ile `agent/codex/task-048` branch'ine alindi.
+- Kanit paketi: `git status --short` temiz, `pre-pr` PASS (mode=quick).
