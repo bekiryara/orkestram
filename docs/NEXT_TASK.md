@@ -1,11 +1,13 @@
 # NEXT TASK (Koordinasyon Panosu)
 
-Durum: `IDLE`  
+Durum: `ACTIVE`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
-1. Aktif koordinator gorevi yok.
+1. `TASK-043` - Listing filtre UX toparlama koordinasyonu aktif.
+2. `TASK-044` - Blade filtre paneli ve aktif filtre okunurlugu (`codex-a`).
+3. `TASK-045` - CSS mobil filtre akisi ve aksiyon hiyerarsisi (`codex-b`).
 
 ## Son Koordinator Kapanisi
 1. `TASK-042` - Koordinator cevap/teslim/task-acma standardi ve runtime hijyen checklisti sabitlendi.

@@ -944,3 +944,23 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `start-task.ps1` aktif lock varken yeni task acmaz; koordinasyon sirasi belge ve scriptte ayni hale getirildi.
+
+### [2026-03-16 15:05] TASK-043 Baslangic (Listing Filtre UX Koordinasyonu)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Listing arama/filtre UX toparlamasi icin yeni koordinasyon gorevi acildi.
+  - Is iki paralel ajana cakismasiz dosya alanlariyla dagitildi.
+  - `codex-a` blade filtre paneli + aktif filtre okunurlugu, `codex-b` CSS mobil filtre akisi + aksiyon hiyerarsisi kapsamini aldi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-043.md`
+  - `docs/tasks/TASK-044.md`
+  - `docs/tasks/TASK-045.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git checkout -b agent/codex/task-043`
+- Sonuc:
+  - `IN_PROGRESS`
+- Not:
+  - `codex-c` bu turda bos tutuldu; entegrasyon sonrasi gerekirse ikinci dalga gorev acilacak.
