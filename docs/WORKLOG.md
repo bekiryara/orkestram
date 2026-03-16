@@ -1314,3 +1314,28 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PENDING`
 - Not:
   - Final teslim kanitlari commit/push sonrasi ayni task kartina islenecek.
+
+### [2026-03-17 02:28] TASK-060 Listing Detail Layout Contract Reset
+- Sorumlu: `codex-b`
+- Is Ozeti:
+  - Listing detail sayfasi iki appte buyuk tek hero medya, muted kimlik satiri ve tek H1 etrafinda yeniden kuruldu.
+  - Ust bolumde fiyat ve ana CTA ayni hiyerarside toplandi; kisa ozet, detay icerigi, teknik bilgiler, yorumlar ve en sonda benzer ilanlar akisi sabitlendi.
+  - TASK-058'deki tekrar eden kart/baslik hissi azaltildi; mobil ve desktop parity CSS override'i yeni contract'a gore yenilendi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-060.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/orkestram/public/assets/v1.css`
+  - `local-rebuild/apps/izmirorkestra/public/assets/v1.css`
+- Calistirilan Komutlar:
+  - `git fetch --all --prune`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+  - `git push -u origin agent/codex-b/task-060`
+- Sonuc:
+  - `PASS`
+- Manuel Inceleme Ozeti:
+  - Hero en ustte tek baskin medya olarak kaldi; muted kimlik satiri hero altinda tek satirlik duzende toplandi.
+  - Fiyat ve ana CTA ust bolumde ayni asideda net cozuldu; yorumlar benzer ilanlardan once, benzer ilanlar en sonda kaldi.
