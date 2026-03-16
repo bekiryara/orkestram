@@ -204,26 +204,41 @@ a { color: inherit; text-decoration: none; }
 .listing-card {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   padding: 14px;
+  border-color: #d9e4f2;
+  box-shadow: 0 14px 30px rgba(14, 31, 53, 0.07);
 }
 .listing-card-cover-link {
   display: block;
+  overflow: hidden;
+  border-radius: 14px;
 }
 .listing-card-cover {
   height: 220px;
   max-height: 220px;
   margin-bottom: 0;
+  transition: transform 0.25s ease;
+}
+.listing-card-cover-link:hover .listing-card-cover {
+  transform: scale(1.03);
 }
 .listing-card-body {
   display: grid;
-  gap: 8px;
+  gap: 12px;
+}
+.listing-card-header {
+  display: grid;
+  gap: 10px;
 }
 .listing-card-row {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 10px;
+}
+.listing-card-row-title {
+  align-items: flex-start;
 }
 .listing-card-title {
   margin: 0;
@@ -237,35 +252,98 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
 }
 .listing-card-rating {
-  color: #d47b00;
-  font-weight: 700;
-  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 5px 10px;
+  border: 1px solid #f3d39d;
+  border-radius: 999px;
+  background: #fff5df;
+  color: #b76a00;
+  font-weight: 800;
+  font-size: 13px;
   white-space: nowrap;
 }
+.listing-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
 .listing-card-feature,
-.listing-card-comments {
+.listing-card-comments,
+.listing-card-feature-chip {
   color: var(--muted);
   font-size: 14px;
 }
-.listing-card-feature {
+.listing-card-feature,
+.listing-card-feature-chip {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.listing-card-feature-chip,
+.listing-card-comments {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  border: 1px solid #d8e5f6;
+  border-radius: 999px;
+  background: #f5f9ff;
+  padding: 5px 10px;
+}
 .listing-card-comments {
   white-space: nowrap;
 }
+.listing-card-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid #e4ebf5;
+  padding-top: 12px;
+}
+.listing-card-price-block {
+  display: grid;
+  gap: 2px;
+}
+.listing-card-price-label {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
 .listing-card-price {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 800;
   color: var(--ink);
   white-space: nowrap;
 }
+.listing-card-feature-secondary {
+  text-align: right;
+}
 .listing-card-cta {
-  margin-top: 8px;
+  margin-top: 0;
   text-align: center;
   width: 100%;
+}
+@media (max-width: 640px) {
+  .listing-card-row-title,
+  .listing-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .listing-card-rating,
+  .listing-card-feature-secondary {
+    text-align: left;
+  }
+  .listing-card-price,
+  .listing-card-comments,
+  .listing-card-feature-chip {
+    white-space: normal;
+  }
 }
 
 .content {
