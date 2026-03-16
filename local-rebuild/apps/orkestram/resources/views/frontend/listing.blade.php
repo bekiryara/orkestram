@@ -21,18 +21,15 @@
     if ($locationLabel === '') {
         $locationLabel = 'Konum bilgisi yakinda guncellenecek';
     }
-    $heroIdentity = array_values(array_filter([
-        $categoryLabel,
-        trim((string) ($item->city ?? '')),
-        trim((string) ($item->district ?? '')),
-    ]));
-    if (count($heroIdentity) < 3) {
-        $heroIdentity[] = 'Profesyonel etkinlik hizmeti';
-    }
+    $identityItems = [
+        ['label' => 'Kategori', 'value' => $categoryLabel],
+        ['label' => 'Sehir', 'value' => trim((string) ($item->city ?: 'Konum bekleniyor'))],
+        ['label' => 'Bolge', 'value' => trim((string) ($item->district ?: 'Tum bolgeler'))],
+    ];
     $heroHighlights = array_values(array_filter([
-        trim((string) ($item->summary ?? '')),
         trim((string) ($item->price_label ?? '')),
         trim((string) ($item->city ?? '')),
+        $item->whatsapp ? 'WhatsApp hizli iletisim' : 'Mesaj ile hizli donus',
     ]));
     $mainImage = null;
     if (!empty($item->cover_image_path)) {
@@ -72,66 +69,54 @@
     </nav>
 
     <article class="content listing-detail-page">
-        <section class="listing-showcase">
-            <div class="listing-showcase-media">
-                <div class="listing-showcase-frame">
-                    <span class="listing-showcase-kicker">{{ $categoryLabel }}</span>
-                    <button type="button" id="listing-open-lightbox" class="listing-main-button" data-img="{{ $mainImageUrl }}">
-                        <img id="listing-main-image" class="listing-main-image" src="{{ $mainImageUrl }}" alt="{{ $item->name }}">
+        <section class="listing-hero-stage">
+            <div class="listing-showcase-frame">
+                <span class="listing-showcase-kicker">{{ $categoryLabel }}</span>
+                <button type="button" id="listing-open-lightbox" class="listing-main-button" data-img="{{ $mainImageUrl }}">
+                    <img id="listing-main-image" class="listing-main-image" src="{{ $mainImageUrl }}" alt="{{ $item->name }}">
+                </button>
+            </div>
+            @if(is_array($item->gallery_json) && count($item->gallery_json))
+                <div class="listing-thumbs">
+                    <button type="button" class="thumb-btn is-active" data-img="{{ $mainImageUrl }}">
+                        <img src="{{ $mainImageUrl }}" alt="{{ $item->name }} ana gorsel">
                     </button>
-                </div>
-                @if(is_array($item->gallery_json) && count($item->gallery_json))
-                    <div class="listing-thumbs">
-                        <button type="button" class="thumb-btn is-active" data-img="{{ $mainImageUrl }}">
-                            <img src="{{ $mainImageUrl }}" alt="{{ $item->name }} ana gorsel">
+                    @foreach($item->gallery_json as $img)
+                        @php($galleryImageUrl = \App\Support\MediaPath::listingUrl($img))
+                        <button type="button" class="thumb-btn" data-img="{{ $galleryImageUrl }}">
+                            <img src="{{ $galleryImageUrl }}" alt="{{ $item->name }} galeri">
                         </button>
-                        @foreach($item->gallery_json as $img)
-                            @php($galleryImageUrl = \App\Support\MediaPath::listingUrl($img))
-                            <button type="button" class="thumb-btn" data-img="{{ $galleryImageUrl }}">
-                                <img src="{{ $galleryImageUrl }}" alt="{{ $item->name }} galeri">
-                            </button>
-                        @endforeach
-                    </div>
-                @endif
-                <div class="listing-identity-bar">
-                    @foreach($heroIdentity as $identity)
-                        <span>{{ $identity }}</span>
                     @endforeach
                 </div>
+            @endif
+        </section>
+
+        <div class="listing-identity-bar" aria-label="Ilan kimligi">
+            @foreach($identityItems as $identity)
+                <span class="listing-identity-item">
+                    <small>{{ $identity['label'] }}</small>
+                    <strong>{{ $identity['value'] }}</strong>
+                </span>
+            @endforeach
+        </div>
+
+        <section class="listing-topbar">
+            <div class="listing-topbar-main">
+                <p class="listing-eyebrow">Etkinliginiz icin secili profil</p>
+                <h1>{{ $item->name }}</h1>
+                <p class="listing-location">{{ $locationLabel }}</p>
             </div>
 
-            <aside class="listing-showcase-panel">
-                <div class="listing-hero-copy">
-                    <p class="listing-eyebrow">Etkinliginiz icin secili profil</p>
-                    <h1>{{ $item->name }}</h1>
-                    <p class="listing-location">{{ $locationLabel }}</p>
-                    <div class="listing-price-band">
-                        <span class="listing-price-label">Baslangic fiyati</span>
-                        <strong class="listing-price-value">{{ $item->price_label ?: 'Bilgi icin iletisime gecin' }}</strong>
-                    </div>
-                    @if($item->summary)
-                        <p class="listing-summary">{{ $item->summary }}</p>
-                    @endif
+            <aside class="listing-topbar-aside">
+                <div class="listing-price-band">
+                    <span class="listing-price-label">Baslangic fiyati</span>
+                    <strong class="listing-price-value">{{ $item->price_label ?: 'Bilgi icin iletisime gecin' }}</strong>
+                    <p class="listing-price-note">Takvim ve ihtiyaca gore net teklif icin dogrudan iletisime gecin.</p>
                 </div>
 
-                <div class="listing-highlight-grid">
-                    <div class="listing-highlight-card">
-                        <span>Hizmet tipi</span>
-                        <strong>{{ $categoryLabel }}</strong>
-                    </div>
-                    <div class="listing-highlight-card">
-                        <span>Bolge</span>
-                        <strong>{{ $locationLabel }}</strong>
-                    </div>
-                    <div class="listing-highlight-card">
-                        <span>Karar hizi</span>
-                        <strong>{{ $item->whatsapp ? 'WhatsApp hazir' : 'Mesaj ile hizli donus' }}</strong>
-                    </div>
-                </div>
-
-                <div class="listing-cta-panel listing-cta-panel-premium">
-                    <p class="listing-cta-kicker">{{ $siteMeta['contact_heading'] ?? 'Hemen Iletisime Gec' }}</p>
-                    <h2>Teklif almadan karar vermeyin.</h2>
+                <div class="listing-cta-panel-premium">
+                    <p class="listing-cta-kicker">{{ $siteMeta['contact_heading'] ?? 'Hemen iletisime gec' }}</p>
+                    <p class="listing-cta-title">Uygunluk ve teklif bilgisini ust bolumden netlestirin.</p>
                     <p class="meta">{{ $siteMeta['contact_lead'] ?? 'Etkinlik detaylarini paylas, hizli geri donus al.' }}</p>
                     <div class="listing-cta-primary">
                         @if($item->whatsapp)
@@ -144,13 +129,13 @@
 
                         @if($item->phone)
                             <a class="btn btn-secondary" href="tel:{{ $item->phone }}">Telefon Et</a>
-                        @elseif(!$item->whatsapp)
+                        @else
                             <a class="btn btn-secondary" href="#detaylar">Detaylari Incele</a>
                         @endif
                     </div>
                     <div class="listing-cta-secondary">
                         @if($shellAuthenticated ?? false)
-                            <a class="btn btn-outline-secondary" href="#yorumlar">Yorumlar</a>
+                            <a class="btn btn-outline-secondary" href="#yorumlar">Yorumlara Git</a>
                             <form method="post" action="{{ route('customer.feedback.like') }}">
                                 @csrf
                                 <input type="hidden" name="listing_slug" value="{{ $item->slug }}">
@@ -161,11 +146,13 @@
                             <a class="btn btn-outline-secondary" href="{{ $likeLoginUrl }}">Begeni Birak</a>
                         @endif
                     </div>
-                    <div class="listing-assurance">
-                        @foreach(array_slice($heroHighlights, 0, 3) as $highlight)
-                            <span>{{ $highlight }}</span>
-                        @endforeach
-                    </div>
+                    @if($heroHighlights)
+                        <div class="listing-assurance">
+                            @foreach(array_slice($heroHighlights, 0, 3) as $highlight)
+                                <span>{{ $highlight }}</span>
+                            @endforeach
+                        </div>
+                    @endif
                     @if(session('ok'))
                         <p class="meta mt-8">{{ session('ok') }}</p>
                     @endif
@@ -173,52 +160,67 @@
             </aside>
         </section>
 
-        <section id="detaylar" class="listing-block listing-block-featured">
+        @if($item->summary)
+            <section class="listing-block listing-summary-block">
+                <div class="listing-section-head">
+                    <div>
+                        <p class="listing-section-kicker">Kisa ozet</p>
+                        <h2>Tek bakista ilan ozeti</h2>
+                    </div>
+                </div>
+                <p class="listing-summary-lead">{{ $item->summary }}</p>
+            </section>
+        @endif
+
+        <section id="detaylar" class="listing-block listing-detail-block">
             <div class="listing-section-head">
                 <div>
-                    <p class="listing-section-kicker">Detaylar</p>
-                    <h2>Bu ilani neden one cikarabilirsiniz?</h2>
+                    <p class="listing-section-kicker">Detay icerigi</p>
+                    <h2>Hizmet kapsami</h2>
                 </div>
             </div>
             <div class="listing-richtext">{!! nl2br(e($item->content ?: 'Icerik girilmemis.')) !!}</div>
         </section>
 
-        @if(is_array($detailAttributes ?? null) && count($detailAttributes))
-            <section class="listing-block">
+        @if((is_array($detailAttributes ?? null) && count($detailAttributes)) || (is_array($item->features_json) && count($item->features_json)))
+            <section class="listing-block listing-tech-block">
                 <div class="listing-section-head">
                     <div>
-                        <p class="listing-section-kicker">Kategori ozellikleri</p>
-                        <h2>Karari hizlandiran bilgiler</h2>
+                        <p class="listing-section-kicker">Teknik bilgiler</p>
+                        <h2>Kategori ve hizmet ozellikleri</h2>
                     </div>
                 </div>
-                <div class="feature-grid">
-                    @foreach($detailAttributes as $row)
-                        <div class="feature-card"><strong>{{ $row['label'] }}:</strong> {{ $row['value'] }}</div>
-                    @endforeach
+                <div class="listing-tech-grid">
+                    @if(is_array($detailAttributes ?? null) && count($detailAttributes))
+                        <div class="listing-tech-panel">
+                            <h3>Kategori detaylari</h3>
+                            <div class="feature-grid listing-feature-grid">
+                                @foreach($detailAttributes as $row)
+                                    <div class="feature-card"><strong>{{ $row['label'] }}:</strong> {{ $row['value'] }}</div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
+                    @if(is_array($item->features_json) && count($item->features_json))
+                        <div class="listing-tech-panel">
+                            <h3>Ek avantajlar</h3>
+                            <div class="listing-feature-list">
+                                @foreach($item->features_json as $feature)
+                                    <span>{{ $feature }}</span>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </section>
         @endif
 
-        @if(is_array($item->features_json) && count($item->features_json))
-            <section class="listing-block">
-                <div class="listing-section-head">
-                    <div>
-                        <p class="listing-section-kicker">Ek avantajlar</p>
-                        <h2>Deneyimi guclendiren ozellikler</h2>
-                    </div>
-                </div>
-                <div class="feature-grid">
-                    @foreach($item->features_json as $feature)
-                        <div class="feature-card">{{ $feature }}</div>
-                    @endforeach
-                </div>
-            </section>
-        @endif
         <section id="yorumlar" class="listing-block listing-comments-block">
             <div class="listing-section-head">
                 <div>
-                    <p class="listing-section-kicker">Guven sinyalleri</p>
-                    <h2>Yorumlar</h2>
+                    <p class="listing-section-kicker">Yorumlar</p>
+                    <h2>Musteri deneyimleri</h2>
                 </div>
                 <p class="meta">Bu alanda yalnizca onayli yorumlar gosterilir.</p>
             </div>
@@ -253,13 +255,14 @@
                 @endforelse
             </div>
         </section>
+
         <section class="section listing-related-section">
             <div class="listing-section-head">
                 <div>
-                    <p class="listing-section-kicker">Alternatifler</p>
-                    <h2>Benzer Ilanlar</h2>
+                    <p class="listing-section-kicker">Benzer ilanlar</p>
+                    <h2>Sonraki alternatifler</h2>
                 </div>
-                <p class="meta">Ayni dilde ama farkli enerji ariyorsan once bunlara bak.</p>
+                <p class="meta">Yorumlardan sonra karsilastirma yapabilmeniz icin en sonda listelenir.</p>
             </div>
             <div class="grid">
                 @forelse($relatedListings as $related)
@@ -279,7 +282,7 @@
                 @endforelse
             </div>
         </section>
-    </article
+    </article>
 
     <div id="listing-lightbox" class="lightbox" aria-hidden="true">
         <button type="button" id="listing-lightbox-prev" class="lightbox-nav prev" aria-label="Onceki gorsel">&lt;</button>
@@ -383,3 +386,4 @@
         })();
     </script>
 @endsection
+
