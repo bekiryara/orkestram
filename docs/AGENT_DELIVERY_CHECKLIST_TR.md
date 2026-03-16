@@ -44,6 +44,8 @@ Teslim mesaji kisa ve kanit odakli olur. Asgari format:
 2. Etkilenen dosya(lar)
 3. Dogrulama sonucu
 4. Zorunlu 4 kanit
+5. Task kartindaki checklistlerin gercek sonuca gore guncellendigi notu
+6. Kapanis adimlarinin tamamlandigi notu
 
 Zorunlu 4 kanit aynen paylasilir:
 
@@ -61,6 +63,19 @@ Beklenen yorumlama:
 - Dorduncu cikti `PASS` vermeli; `powershell` veya `pwsh` yoksa "calistirilamadi" notu dusulmeli.
 
 Koordinator kapanisi yapacaksa ajan lock'u kendi basina `closed` yapmaz; once kaniti verir ve devir notunu birakir.
+
+## 4A. Task Karti Doldurma Zorunlulugu
+Task sahibi teslimden once task kartinda su 4 bolumu gercek sonuca gore gunceller:
+1. `Uygulama Adimlari`
+2. `Kabul Kriterleri`
+3. `Teslimde Zorunlu Kanit`
+4. `Kapanis Adimlari`
+
+Kural:
+1. Yapilmayan madde isaretlenmez.
+2. Kanitsiz madde isaretlenmez.
+3. Task karti placeholder birakilmaz.
+4. Bu alanlar doldurulmadan gorev teslim edilmis sayilmaz.
 
 ## 5. Resume Protokolu
 Bir is yarida kaldiysa veya ajan yeniden baglandiysa:
@@ -89,6 +104,15 @@ Koordinator veya baska ajan devralacaksa son mesajda su net olur:
 4. Branch ve lock durumu
 
 Bu bilgi yoksa is resume icin hazir sayilmaz.
+
+## 6A. Koordinator Kabul Kurali
+Koordinator asagidaki eksiklerden biri varsa teslimi reddeder:
+1. Task karti checklistleri doldurulmamis
+2. `docs/WORKLOG.md` guncellenmemis
+3. `docs/TASK_LOCKS.md` kapanis durumu islenmemis
+4. `docs/NEXT_TASK.md` guncellenmemis
+5. Zorunlu kanit paketi eksik
+6. `pre-pr` PASS yok
 
 ## 7. Koordinator Ilk Karar Mesaji (Sabit Sablon)
 Koordinator yeni iste ilk karar mesajini su sabit formatla verir:

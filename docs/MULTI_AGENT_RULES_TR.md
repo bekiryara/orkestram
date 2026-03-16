@@ -28,6 +28,8 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
    - `agent/<ajan>/<task-id>` -> `main`
 4. Merge sonrasi lock kapat:
    - `docs/TASK_LOCKS.md` kaydinda durumu `closed` yap.
+5. Task karti doldur:
+   - `Uygulama Adimlari`, `Kabul Kriterleri`, `Teslimde Zorunlu Kanit`, `Kapanis Adimlari` placeholder kalmaz.
 
 ## Not
 1. Ayni makinede 3 ajan calisacaksa farkli klasor/worktree onerilir.
@@ -39,6 +41,7 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
 3. Lock almadan dosya degistirmek yasak.
 4. Is bitiminde lock `closed` yapilmadan gorev kapatilmaz.
 5. `pre-pr` PASS olmayan is commit/push edilmez.
+6. Task karti checklistleri doldurulmadan teslim kabul edilmez.
 
 ## Baslangic Guard (Zorunlu)
 1. Ajan D:\orkestram'da acilsa bile gelistirmeden once WSL hizalama kaniti verir:
@@ -75,6 +78,7 @@ Ornek alanlar:
   - `git branch -vv`
   - `git status --short`
   - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` -> `PASS`
+  - task karti checklistleri ve `WORKLOG` kapanisi
 
 ## Koordinator Stop Kurallari
 Asagidaki durumlardan biri varsa koordinator isi durdurur:
@@ -82,6 +86,7 @@ Asagidaki durumlardan biri varsa koordinator isi durdurur:
 2. yanlis branch
 3. WSL hizalama kaniti yok
 4. aktif task kapanmadan yeni kapsam acilmaya calisiliyor
+5. task karti checklistleri veya kapanis kaniti eksik
 
 ## Koordinator Kapanis Sonrasi Davranisi
 Koordinator is bitince tek mesajda su 3 seyi verir:

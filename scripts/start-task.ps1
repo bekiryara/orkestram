@@ -89,6 +89,7 @@ $taskContent = [regex]::Replace($taskContent, '(?s)## Lock Dosyalari\r?\n- `path
 $taskContent = $taskContent.Replace('powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick', 'powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick')
 Set-Content -Path $taskFile -Value $taskContent
 Write-Host "[start-task] step-1 task file -> $taskFile"
+Write-Host "[start-task] note: task owner checklistleri gercek sonuca gore doldurmak, WORKLOG/TASK_LOCKS/NEXT_TASK kapanisini yapmak ve teslim kanitini sunmak zorundadir"
 
 $lockFilesValue = ($lockFiles -join ',')
 $lockLine = "| $TaskId | $Agent | $Branch | active | $lockFilesValue | $nowStamp | $nowStamp | $taskSummary |"
