@@ -38,6 +38,6 @@ Sabit Ajan Kimlikleri:
 
 
 
-| TASK-032 | codex | agent/codex/task-032 | closed | docs/tasks/TASK-032.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/PR_FLOW_TR.md,AGENTS.md,scripts/pre-pr.ps1,scripts/validate.ps1,docs/WSL_RUNTIME_PLAYBOOK_TR.md,docs/AGENT_LOCK_MATRIX_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md | 2026-03-15 06:55:00 | 2026-03-16 09:00:00 | Koordinator kapanisi tamamlandi; TASK-033/034/035 ciktilari workdir'e alinip playbook/matrix/checklist dokumanlarina islenerek closure kayitlari hazirlandi |
+| TASK-032 | codex | agent/codex/task-032 | closed | docs/tasks/TASK-032.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/REPO_DISCIPLINE_TR.md,docs/PR_FLOW_TR.md,docs/WSL_RUNTIME_PLAYBOOK_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md | 2026-03-15 06:55:00 | 2026-03-16 10:05:00 | Canonical WSL repo icin `origin=GitHub` modeli kuruldu; koordinator workdir'e `canonical` remote eklendi, windows-mirror export-only olarak sinirlandi ve agent/codex/task-032 GitHub upstream'ine pushlandi |
 
 

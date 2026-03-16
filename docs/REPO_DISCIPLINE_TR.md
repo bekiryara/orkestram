@@ -23,6 +23,21 @@ Kural:
    - `powershell -ExecutionPolicy Bypass -File scripts/dev-up.ps1 -App both`
 4. Dogrudan `docker compose up` ile manuel calistirma yapilmaz (yanlis mount riski).
 
+## 1.1) Git Remote Kaynak Modeli
+
+Kural:
+1. Operasyonel `origin` her zaman GitHub reposudur:
+   - `https://github.com/bekiryara/orkestram.git`
+2. Canonical WSL repo:
+   - `/home/bekir/orkestram`
+3. Koordinator/ajan workdir'lerinde local WSL referansi gerekiyorsa ayri remote adi kullanilir:
+   - `canonical` -> `/home/bekir/orkestram`
+4. `windows-mirror` varsa sadece export/aynalama veya gecis yardimcisi roldedir; gunluk `fetch/pull/push` akisinin parcasi degildir.
+
+Kontrol:
+1. `git remote -v` icinde `origin` GitHub degilse ise baslanmaz.
+2. `git branch -vv` icinde aktif branch `origin/<branch>` takip etmiyorsa push/pull oncesi hizalanir.
+
 ## 2) Dizin ve Dosya Disiplini
 
 Degisim alanlari:
@@ -83,6 +98,10 @@ Bu kosullar olmadan deploy yok:
 2. Degisiklik sonrasi: cache temizle + hizli smoke.
 3. Sonra: dokuman/status satiri guncelle.
 4. En son: sonraki adim net yaz.
+5. Git akisi:
+   - `git fetch origin --prune`
+   - gerekirse `git pull --ff-only origin <branch>`
+   - gorev bitince `git push -u origin agent/<ajan>/<task-id>`
 
 ## 9) Operasyonel Disiplin Dosyalari (Zorunlu)
 
@@ -119,10 +138,11 @@ Bu kosullar olmadan deploy yok:
 Her yeni ajan ilk turda su sirayi uygular:
 1. `AGENTS.md` dosyasini okur.
 2. `docs/REPO_DISCIPLINE_TR.md` ve `docs/MULTI_AGENT_RULES_TR.md` okur.
-3. `git fetch --all --prune` yapar.
+3. `git fetch origin --prune` yapar.
 4. Sadece `agent/<ajan>/<task-id>` branch'i ile ilerler.
 5. `docs/TASK_LOCKS.md` icinde lock almadan kod degisikligi yapmaz.
 6. `pre-pr` PASS olmadan commit/push yapmaz.
+7. `git remote -v` ile `origin`in GitHub oldugunu dogrular.
 
 ## 11) WSL Tek Kaynak + 3 Ajan Klasoru Standardi
 

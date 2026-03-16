@@ -798,3 +798,24 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Not:
   - Ilk `pre-pr` denemesi Windows Git `safe.directory` eksigi nedeniyle fail verdi; UNC WSL repo yolu guvenli dizine eklendikten sonra ayni komut PASS verdi.
 
+### [2026-03-16 09:20] TASK-032 Remote/Upstream Hizasi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-032` koordinator lock'u canonical WSL repo ile GitHub remote modelini netlestirmek icin yeniden aktive edildi.
+  - `/home/bekir/orkestram` ve `/home/bekir/orkestram-k` icindeki mevcut remote/upstream yapisi inceleniyor.
+  - Hedef durum `origin = GitHub`, `windows-mirror = export-only`, koordinator workdir icin gerekirse ayri `canonical` remote olarak sabitlendi.
+- Degisen Dosyalar:
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `docs/tasks/TASK-032.md`
+- Calistirilan Komutlar:
+  - `git remote -v`
+  - `git branch -vv`
+  - `git ls-remote https://github.com/bekiryara/orkestram.git HEAD`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Ilk yerel `git ls-remote` denemesi sandbox DNS kisiti nedeniyle fail verdi; ag erisimiyle tekrar kosulup GitHub `HEAD` dogrulamasi alindi.
+  - WSL icinde SSH anahtari yoktu; push icin Windows Git Credential Manager symlink'i `/tmp/git-credential-manager.exe` uzerinden helper olarak baglandi ve `git push -u origin agent/codex/task-032` PASS verdi.
+

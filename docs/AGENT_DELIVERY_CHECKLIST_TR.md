@@ -9,6 +9,7 @@ Amac: Ajan tesliminde dogrulama sirasi, paylasilacak kanit formati ve yari kesil
    - `agent/<ajan>/<task-id>`
 4. `docs/TASK_LOCKS.md` icine tek bir `active` kayit ac.
 5. Lock'a yazilmayan dosyalara dokunma.
+6. `git remote -v` ile `origin`in GitHub oldugunu, local WSL referansi varsa `canonical` olarak ayrildigini dogrula.
 
 ## 2. Validate ve Pre-PR Sirasi
 Bu sira bozulmaz:
@@ -37,14 +38,16 @@ Zorunlu 3 kanit aynen paylasilir:
 
 ```text
 git branch --show-current
+git branch -vv
 git status --short
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ```
 
 Beklenen yorumlama:
 - Ilk cikti aktif branch'in `agent/<ajan>/<task-id>` oldugunu gostermeli.
-- Ikinci cikti sadece gorev kapsamindaki degisiklikleri gostermeli.
-- Ucuncu cikti `PASS` vermeli; `powershell` veya `pwsh` yoksa "calistirilamadi" notu dusulmeli.
+- Ikinci cikti upstream'in `origin/<branch>` oldugunu gostermeli; `[gone]` gorunuyorsa `git push -u origin <branch>` ile GitHub branch'i olusturulmalidir.
+- Ucuncu cikti sadece gorev kapsamindaki degisiklikleri gostermeli.
+- Dorduncu cikti `PASS` vermeli; `powershell` veya `pwsh` yoksa "calistirilamadi" notu dusulmeli.
 
 Koordinator kapanisi yapacaksa ajan lock'u kendi basina `closed` yapmaz; once kaniti verir ve devir notunu birakir.
 

@@ -21,6 +21,8 @@ Baslangic: `2026-03-15 06:50`
 - [x] Komut standartlarini netlestirmek (`dev-up`, `validate`, `pre-pr`) ve sadece WSL kaynakli calistirma zorunlulugunu yazmak.
 - [x] Ajan hizlandirma adimlari icin deterministic check-list hazirlamak (komut kisaltmalari, once-kanit sonra-kod akisi, stop/continue kurali).
 - [x] Koordinator kapanis protokolunu tanimlamak (lock closure, kanit, devir notu).
+- [x] Canonical WSL repo icin GitHub remote/upstream modelini netlestirmek.
+- [x] Koordinator ve A/B/C ajanlari icin GitHub uyumlu push/pull sozlesmesini dokumante etmek.
 
 ## Out of Scope
 - [ ] Uygulama is kurali degisikligi (controller/model/refactor).
@@ -53,6 +55,8 @@ Baslangic: `2026-03-15 06:50`
   - `pre-pr PASS/FAIL`
 - [x] Koordinator devir/teslim adimi dokumanlarda net olur (kimin neyi ne zaman kapatacagi belirsiz kalmaz).
 - [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` => PASS
+- [x] Canonical repo ve koordinator workdir icin `origin`/upstream iliskisi GitHub uyumlu hale gelir.
+- [x] `windows-mirror` operasyonel push/pull akisinin disinda, export-only rolunde belgelenir.
 
 ## Komutlar
 ```powershell
@@ -76,6 +80,11 @@ powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
   - `TASK-034` ciktilari `docs/AGENT_LOCK_MATRIX_TR.md` icinde toplandi.
   - `TASK-035` ciktilari `docs/AGENT_DELIVERY_CHECKLIST_TR.md` icinde toplandi.
 - Bu ortamda `wsl -e bash -lc ...` komutu kullanilamadi; ayni hizalama kaniti yerel WSL bash uzerinden `pwd`, `git rev-parse --show-toplevel`, `git branch --show-current`, `git status --short` ile alindi.
+- Bu turde ek hedef: operasyonel `origin` tanimini GitHub repo ile hizalamak ve Windows mirror'u runtime/export yan roluyle sinirlamak.
+- Son durum:
+  - `/home/bekir/orkestram` -> `origin = https://github.com/bekiryara/orkestram.git`, `windows-mirror = /mnt/d/Orkestram`
+  - `/home/bekir/orkestram-k` -> `origin = https://github.com/bekiryara/orkestram.git`, `canonical = /home/bekir/orkestram`
+  - `agent/codex/task-032` GitHub'da olusturuldu ve `origin/agent/codex/task-032` upstream'ine baglandi.
 
 ## Koordinator Yurutme Plani (Detay)
 1. Baslatma:

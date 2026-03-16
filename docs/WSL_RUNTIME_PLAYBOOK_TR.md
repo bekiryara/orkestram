@@ -28,11 +28,13 @@ Her gorev veya runtime oturumu basinda su 3 kanit alinmadan ise girilmez:
 1. `pwd`
 2. `git branch --show-current`
 3. `git status --short`
+4. `git remote -v`
 
 Beklenen yorum:
 1. `pwd` aktif worktree'yi gostermelidir.
 2. `git branch --show-current` `agent/<ajan>/<task-id>` veya hazirlik asamasinda `main` sonucunu vermelidir.
 3. `git status --short` beklenmeyen degisiklik veya baska ajana ait kirli alan gostermemelidir.
+4. `origin` GitHub reposunu gostermelidir; local WSL repo varsa ayri `canonical` remote adiyla gorunmelidir.
 
 Ek runtime kaniti:
 1. `docker ps --format "table {{.Names}}\t{{.Status}}"` ile container durumu gorulur.
@@ -42,14 +44,16 @@ Ek runtime kaniti:
 
 Oturum acilis sirasi:
 1. `pwd` ile dogru workdir'i dogrula.
-2. `git fetch --all --prune` calistir.
+2. `git fetch origin --prune` calistir.
 3. `git branch --show-current` ile kendi branch'inde oldugunu dogrula.
-4. `docs/TASK_LOCKS.md` icinde hedef dosya icin aktif cakisma olmadigini kontrol et.
-5. Gerekiyorsa `docs/tasks/TASK-XXX.md` ve lock kaydini ac.
-6. `git status --short` ile worktree temizligini dogrula.
-7. Runtime gerekiyorsa standart komutla ayağa kaldir:
+4. `git remote -v` ile `origin` ve varsa `canonical` rollerini kontrol et.
+5. `git branch -vv` ile aktif branch upstream'inin `origin/<branch>` oldugunu dogrula.
+6. `docs/TASK_LOCKS.md` icinde hedef dosya icin aktif cakisma olmadigini kontrol et.
+7. Gerekiyorsa `docs/tasks/TASK-XXX.md` ve lock kaydini ac.
+8. `git status --short` ile worktree temizligini dogrula.
+9. Runtime gerekiyorsa standart komutla ayağa kaldir:
    - `powershell -ExecutionPolicy Bypass -File scripts/dev-up.ps1 -App both`
-8. Runtime ayaga kalkinca temel durum kanitlarini kaydet:
+10. Runtime ayaga kalkinca temel durum kanitlarini kaydet:
    - `docker ps`
    - ilgili uygulama smoke sonucu
 
@@ -90,5 +94,6 @@ Container stale ise:
 Oturum sonunda:
 1. `git branch --show-current`
 2. `git status --short`
-3. Gorev dokumani ve lock durumunu guncelle.
-4. Gerekliyse `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` calistir ve sonucu kaydet.
+3. `git branch -vv`
+4. Gorev dokumani ve lock durumunu guncelle.
+5. Gerekliyse `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` calistir ve sonucu kaydet.

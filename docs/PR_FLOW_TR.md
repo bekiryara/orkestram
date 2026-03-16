@@ -7,6 +7,11 @@ Amac: Main branch'e sadece kontrollu, testli ve izlenebilir degisim gitsin.
    - `docs/NEXT_TASK.md`
 2. Branch ac:
    - `git checkout -b agent/<ajan>/<task-id>`
+3. Remote hizasini dogrula:
+   - `git remote -v`
+   - `git branch -vv`
+   - Beklenen: `origin = https://github.com/bekiryara/orkestram.git`
+   - Worktree'de local WSL repo gerekiyorsa `canonical = /home/bekir/orkestram`
 3. Degisiklik yap + commit
 4. PR oncesi zorunlu:
    - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
@@ -17,6 +22,16 @@ Amac: Main branch'e sadece kontrollu, testli ve izlenebilir degisim gitsin.
 7. `ci-gate` PASS olmadan merge yok
 8. Merge sonrasi:
    - `docs/WORKLOG.md` ve `docs/PROJECT_STATUS_TR.md` guncelle
+
+## Pull/Fetch Kurali
+1. Gunluk senkron:
+   - `git fetch origin --prune`
+2. Kendi branch'in guncellenecekse:
+   - `git pull --ff-only origin agent/<ajan>/<task-id>`
+3. `main` ile hizalama gerekiyorsa:
+   - `git fetch origin --prune`
+   - `git merge --ff-only origin/main` veya ekip kararina uygun kontrollu rebase
+4. `windows-mirror` remote'u ile pull/push yapilmaz.
 
 ## Kapanis Kaniti Zorunlu (Yeni)
 1. Task `closed` isaretlemeden once su 3 kanit zorunludur:
