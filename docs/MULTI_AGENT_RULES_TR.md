@@ -18,11 +18,12 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
 
 ## Is Akisi
 1. Gorev baslat:
-   - `docs/tasks/TASK-001.md` dosyasini `_TEMPLATE.md` uzerinden olustur.
+   - `docs/tasks/TASK-0xx.md` dosyasini `_TEMPLATE.md` uzerinden olustur.
    - `docs/TASK_LOCKS.md` tablosuna `active` kaydi ekle.
-   - `git checkout -b agent/codex-a/task-001` ile branch ac.
+   - `docs/NEXT_TASK.md` panosunu aktif goreve cek.
+   - branch acilisini en son yap: `git checkout -b agent/<ajan>/task-0xx`
 2. Kodla + commit:
-   - `feat(task-001): ...` veya `fix(task-001): ...`
+   - `feat(task-0xx): ...` veya `fix(task-0xx): ...`
 3. PR ac:
    - `agent/<ajan>/<task-id>` -> `main`
 4. Merge sonrasi lock kapat:
@@ -46,8 +47,6 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
 3. `REALIGN_REQUIRED` halinde ajan yalniz hizalama adimini uygular; kod/doc degisikliklerine gecmez.
 4. Koordinator, lock acmadan once bu kaniti istemekle yukumludur.
 
-
-
 ## Koordinator Karar Agaci
 Koordinator yeni is geldiginde su sirayla karar verir:
 1. `docs/NEXT_TASK.md` ve `docs/TASK_LOCKS.md` aktif isi kapsiyor mu?
@@ -69,12 +68,13 @@ Koordinator ajan gorevi verirken su formati kullanir:
 5. kapanis kaniti
 
 Ornek alanlar:
-- gent/codex-a/<task-id>
+- `agent/codex-a/<task-id>`
 - hedef dosyalar
 - kabul/kapanis kaniti:
-  - git branch --show-current
-  - git status --short
-  - powershell.exe -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
+  - `git branch --show-current`
+  - `git branch -vv`
+  - `git status --short`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` -> `PASS`
 
 ## Koordinator Stop Kurallari
 Asagidaki durumlardan biri varsa koordinator isi durdurur:
@@ -89,7 +89,6 @@ Koordinator is bitince tek mesajda su 3 seyi verir:
 2. siradaki uygun adim
 3. senden gereken tek karar veya yeni gorev
 
-
 ## Task ID Tekrar Yasaki (Zorunlu)
 1. Ayni `TASK-XXX` kimligi ikinci kez acilamaz.
 2. Yeni is her zaman yeni task id ile acilir.
@@ -97,10 +96,10 @@ Koordinator is bitince tek mesajda su 3 seyi verir:
 
 ## Koordinator Cevap Sablonu (Sabit)
 Koordinator karar cevabi yalniz su 4 satirla verilir:
-1. aktif branch
-2. aktif task durumu
-3. karar
-4. sonraki adim
+1. `aktif branch: ...`
+2. `aktif task durumu: ...`
+3. `karar: mevcut task devam | yeni task ac`
+4. `sonraki adim: ...`
 
 ## Remote/Upstream Dogrulamasi (Zorunlu)
 1. Gorev basinda `git remote -v` ve `git branch -vv` zorunludur.

@@ -11,7 +11,18 @@ Amac: Ajan tesliminde dogrulama sirasi, paylasilacak kanit formati ve yari kesil
 5. Lock'a yazilmayan dosyalara dokunma.
 6. `git remote -v` ile `origin`in GitHub oldugunu, local WSL referansi varsa `canonical` olarak ayrildigini dogrula.
 
-## 2. Validate ve Pre-PR Sirasi
+## 2. Runtime Kisa Hijyen Checklisti
+Her teslim ve smoke turundan once su 4 kontrol yapilir:
+1. Container up:
+   - uygulama stack'i calisiyor olmalidir.
+2. Mount source dogru:
+   - aktif kaynak `WSL: /home/bekir/orkestram*` altindan gelmelidir.
+3. Portlar cevap veriyor:
+   - `8180`, `8181`, `8188`
+4. Smoke PASS:
+   - gorev kapsamindaki hizli smoke veya `validate/pre-pr` icindeki smoke adimi basarili olmalidir.
+
+## 3. Validate ve Pre-PR Sirasi
 Bu sira bozulmaz:
 
 1. Gorev kapsamindaki degisiklikleri tamamla.
@@ -26,15 +37,15 @@ Not:
 - `pre-pr`, `validate` yerine gecmez; `validate` once gelir.
 - Ortamda `powershell` veya `pwsh` yoksa bu durum teslim notunda acikca yazilir.
 
-## 3. Teslim Formati
+## 4. Teslim Formati
 Teslim mesaji kisa ve kanit odakli olur. Asgari format:
 
 1. Yapilan degisiklik ozeti
 2. Etkilenen dosya(lar)
 3. Dogrulama sonucu
-4. Zorunlu 3 kanit
+4. Zorunlu 4 kanit
 
-Zorunlu 3 kanit aynen paylasilir:
+Zorunlu 4 kanit aynen paylasilir:
 
 ```text
 git branch --show-current
@@ -51,7 +62,7 @@ Beklenen yorumlama:
 
 Koordinator kapanisi yapacaksa ajan lock'u kendi basina `closed` yapmaz; once kaniti verir ve devir notunu birakir.
 
-## 4. Resume Protokolu
+## 5. Resume Protokolu
 Bir is yarida kaldiysa veya ajan yeniden baglandiysa:
 
 1. Zorunlu dokumanlari tekrar oku:
@@ -69,7 +80,7 @@ Bir is yarida kaldiysa veya ajan yeniden baglandiysa:
    - blocker varsa blocker
 5. Sonra yalniz lock'taki dosyalarda devam et.
 
-## 5. Handoff Notu
+## 6. Handoff Notu
 Koordinator veya baska ajan devralacaksa son mesajda su net olur:
 
 1. Tamamlanan kisim
@@ -79,13 +90,13 @@ Koordinator veya baska ajan devralacaksa son mesajda su net olur:
 
 Bu bilgi yoksa is resume icin hazir sayilmaz.
 
-## 6. Koordinator Ilk Karar Mesaji (Sabit Sablon)
+## 7. Koordinator Ilk Karar Mesaji (Sabit Sablon)
 Koordinator yeni iste ilk karar mesajini su sabit formatla verir:
-1. aktif branch
-2. aktif task durumu
-3. karar
-4. sonraki adim
+1. `aktif branch: ...`
+2. `aktif task durumu: ...`
+3. `karar: mevcut task devam | yeni task ac`
+4. `sonraki adim: ...`
 
 Not:
 - Bu format disina cikilmaz.
-- Karar satiri yalniz `mevcut task devam` veya `yeni task ac` olarak yazilir.
+- `aktif task durumu` satiri lock durumunu da icerir.
