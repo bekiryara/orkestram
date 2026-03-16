@@ -1009,3 +1009,37 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - Runtime tek kaynak olarak canonical WSL repo uzerinden dogrulandi.
+
+### [2026-03-16 16:45] TASK-047 Baslangic (Listing Sonuc Ozeti Sadelestirme)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Listing sonuc kolonundaki tekrar eden aktif filtre blogunu kaldirip ozet metnini karar hizini artiracak sekilde sadelestirmek.
+  - Bu polish'i kapanmis TASK-043/044/046 anlatilarindan ayirip ayri follow-up kaydi olarak tutmak.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-047.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `local-rebuild/apps/orkestram/resources/views/frontend/listings.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listings.blade.php`
+- Sonuc:
+  - `IN_PROGRESS`
+
+### [2026-03-16 16:55] TASK-047 Resmi Kapanis (Listing Sonuc Ozeti Sadelestirme)
+- Sorumlu: `codex`
+- Is Ozeti:
+  - Sonuc kolonundaki tekrar eden `Aktif Filtreler / Filtreleri Sifirla` blogu kaldirildi.
+  - Ust sonuc ozeti kategori odakli sayi metniyle sadele?tirildi ve iki app parity korundu.
+  - Kapanmis task kayitlarindaki geriye donuk polish notlari temizlenip degisiklik ayri follow-up task olarak kayda alindi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-047.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `docs/tasks/TASK-043.md`
+  - `docs/tasks/TASK-044.md`
+  - `docs/tasks/TASK-046.md`
+  - `local-rebuild/apps/orkestram/resources/views/frontend/listings.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listings.blade.php`
+- Sonuc:
+  - `PASS`

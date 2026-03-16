@@ -60,3 +60,4 @@ Sabit Ajan Kimlikleri:
 
 
 | TASK-046 | codex | agent/codex/task-046 | closed | docs/tasks/TASK-046.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md | 2026-03-16 16:20:00 | 2026-03-16 16:30:00 | TASK-043 main'e merge edilip runtime hizasi dogrulandi (pre-pr PASS) |
+| TASK-047 | codex | agent/codex/task-047 | closed | docs/tasks/TASK-047.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,local-rebuild/apps/orkestram/resources/views/frontend/listings.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listings.blade.php | 2026-03-16 16:45:00 | 2026-03-16 16:55:00 | Listing sonuc ozeti sadele?tirilip kapanmis task anlatilari ayri follow-up goreviyle temizlendi |

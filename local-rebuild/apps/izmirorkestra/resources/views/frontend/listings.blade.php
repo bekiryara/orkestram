@@ -1,9 +1,12 @@
 @extends('frontend.layout')
 
 @php
+    use Illuminate\Support\Str;
+
     $metaTitle = 'Ilanlar | ' . ($siteMeta['name'] ?? 'Orkestram');
     $metaDescription = 'Sehir, ilce ve kategoriye gore filtrelenebilir ilan listesi.';
     $activeFilters = [];
+    $selectedCategoryName = '';
 
     if ($city !== '') {
         $activeFilters[] = ['label' => 'Sehir', 'value' => $city];
@@ -15,6 +18,7 @@
         foreach ($categoryGroups as $group) {
             foreach ($group as $option) {
                 if ($categorySlug === $option->slug) {
+                    $selectedCategoryName = (string) $option->name;
                     $activeFilters[] = ['label' => 'Kategori', 'value' => $option->name];
                     break 2;
                 }
@@ -69,6 +73,8 @@
             $activeFilters[] = ['label' => $filterLabel, 'value' => $filterValue];
         }
     }
+
+    $resultLabel = $selectedCategoryName !== '' ? Str::lower($selectedCategoryName) : 'ilan';
 @endphp
 
 @section('content')
@@ -239,25 +245,13 @@
 
         <div class="listing-results">
             <p class="lead listing-count">
-                <strong>{{ $items->total() }}</strong> ilan bulundu.
+                <strong>{{ number_format($items->total(), 0, ',', '.') }}</strong> {{ $resultLabel }} bulundu.
                 @if($activeFilters !== [])
                     Sonuclar secili filtrelere gore gosteriliyor.
                 @endif
             </p>
 
-            @if($activeFilters !== [])
-                <section class="listing-block section-tight">
-                    <h2>Aktif Filtreler</h2>
-                    <div class="pill-row">
-                        @foreach($activeFilters as $filter)
-                            <span class="pill">{{ $filter['label'] }}: {{ $filter['value'] }}</span>
-                        @endforeach
-                    </div>
-                    <div class="filter-actions">
-                        <a class="btn" href="{{ route('listing.index') }}">Filtreleri Sifirla</a>
-                    </div>
-                </section>
-            @endif
+
 
             <div class="grid listing-grid">
             @forelse($items as $item)
