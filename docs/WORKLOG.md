@@ -1,4 +1,4 @@
-﻿# WORKLOG (Gunluk Is Kaydi)
+# WORKLOG (Gunluk Is Kaydi)
 
 Bu dosyada her ajan turu icin tek kayit acilir.  
 Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
@@ -1292,3 +1292,25 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - Sonuc:
   - `PASS`
+
+### [2026-03-17 02:35] TASK-058 Premium Listing Detail Hiyerarsisi
+- Sorumlu: `codex-b`
+- Is Ozeti:
+  - Listing detail sayfasi iki appte premium gorsel hero, muted kimlik satiri, fiyat bandi ve daha net CTA hiyerarsisi ile yeniden kuruldu.
+  - Yorumlar bolumu alt bolume tasindi; `Benzer Ilanlar` en sona alinip parity korunarak section akisi netlestirildi.
+  - Listing detail icin yeni premium CSS override blogu eklendi; mobil ve desktop akislari birlikte ele alindi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-058.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/orkestram/public/assets/v1.css`
+  - `local-rebuild/apps/izmirorkestra/public/assets/v1.css`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PENDING`
+- Not:
+  - Final teslim kanitlari commit/push sonrasi ayni task kartina islenecek.
