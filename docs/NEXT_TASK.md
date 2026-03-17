@@ -1,11 +1,11 @@
-# NEXT TASK (Koordinasyon Panosu)
+﻿# NEXT TASK (Koordinasyon Panosu)
 
 Durum: `ACTIVE`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Tek Kaynak)
-1. `TASK-065` - Listing detail sayfasini referans yone gore uctan uca bitirme ve design-preview review ile kapatma
+1. `TASK-065` - Listing detail sayfasini referans yone gore bitirme + design-preview icin deterministic demo fixture seti kurma
 
 ## Son Koordinator Kapanisi
 1. `TASK-063` - `:8281` design preview incident'i kapatildi; port eslesmesi iki appte duzeltildi ve `Edit Source == Mount Source` guard'i resmi kurala baglandi.
@@ -25,3 +25,4 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
    - `git status --short`
    - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` sonucu `PASS`
 3. Kanit yoksa task durumu `active` kalir.
+
