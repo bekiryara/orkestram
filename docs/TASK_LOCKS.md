@@ -81,6 +81,5 @@ Sabit Ajan Kimlikleri:
 | TASK-063 | codex | agent/codex/task-063 | closed | docs/tasks/TASK-063.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,local-rebuild/apps/orkestram/app/Http/Controllers/PublicController.php,local-rebuild/apps/izmirorkestra/app/Http/Controllers/PublicController.php,AGENTS.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/tasks/_TEMPLATE.md,docs/WORKLOG.md | 2026-03-17 14:43:08 | 2026-03-17 15:20:00 | 8281 design preview incident'i kapatildi; iki appte port eslesmesi duzeltildi ve edit-source=preview-source guard kalici kurala baglandi |
 
 | TASK-064 | codex | agent/codex/task-064 | closed | docs/tasks/TASK-064.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,AGENTS.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/tasks/_TEMPLATE.md,docs/WORKLOG.md | 2026-03-17 14:52:28 | 2026-03-17 14:58:00 | TASK-063'e superseded edildi |
-
-
+| TASK-065 | codex-b | agent/codex-b/task-065 | active | docs/tasks/TASK-065.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php,local-rebuild/apps/orkestram/public/assets/v1.css,local-rebuild/apps/izmirorkestra/public/assets/v1.css,docs/WORKLOG.md | 2026-03-17 15:40:00 | 2026-03-17 15:40:00 | Listing detail uctan uca UI bitisi; design-preview review zorunlu |
 
