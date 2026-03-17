@@ -1339,3 +1339,26 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Manuel Inceleme Ozeti:
   - Hero en ustte tek baskin medya olarak kaldi; muted kimlik satiri hero altinda tek satirlik duzende toplandi.
   - Fiyat ve ana CTA ust bolumde ayni asideda net cozuldu; yorumlar benzer ilanlardan once, benzer ilanlar en sonda kaldi.
+
+### [2026-03-17 03:02] TASK-060 Referans Yerlesim Revizyonu
+- Sorumlu: `codex-b`
+- Is Ozeti:
+  - Listing detail hero yerlesimi referans ekrana yaklastirildi; solda profil/kimlik, sagda buyuk ana gorsel olacak sekilde yeniden kurgulandi.
+  - Galeri ana hero altina tasindi; yorum yaz ve begeni gibi ikincil aksiyonlar ust CTA bloðunda ama ikincil hizada tutuldu.
+  - Tekrar eden sehir/bolge/hizmet metinleri azaltildi; fallback gorsel icin daha kontrollu yukseklik tanimlandi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-060.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/orkestram/public/assets/v1.css`
+  - `local-rebuild/apps/izmirorkestra/public/assets/v1.css`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PENDING`
+- Manuel Inceleme Ozeti:
+  - Sol panelde kimlik/profil tek kaynakli, sag panelde buyuk ana gorsel baskin, galeri hemen altta.
+  - Aciklama yorumlardan once, benzer ilanlar en sonda; Ara ve WhatsApp ustte guclu, Mesaj/Begeni/Yorumlar ikincil kaldi.

@@ -70,7 +70,5 @@ powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 
 ## Risk / Not
 - TASK-058 sonucu tasarimdan reddedildi; bu gorev mevcut ciktiyi yamalamak degil, standart layout contract'ina gore yeniden kurmaktir
-- Safe/ortalama UI istemiyoruz; ama daginik section/coklu baslik hissi kesinlikle istemiyoruz
-- Yasaklar: birden fazla ana baslik hissi, tekrar eden kutular, daginik CTA, benzer ilanlari yorumlardan once almak, hero'yu kucultmek
-
-
+- Referans ekran yonu sonraki revizyonda daha da sertlestirildi: solda kimlik/profil, sagda buyuk ana gorsel, altta galeri, sonra aciklama, sonra yorumlar, en sonda benzer ilanlar
+- Ayni kimlik bilgisini iki kez tekrar etmek, ust alani kutu kutu portale cevirmek ve fallback gorseli hero'yu oldurecek kadar buyutmek yasaktir
