@@ -26,11 +26,6 @@
         ['label' => 'Sehir', 'value' => trim((string) ($item->city ?: 'Konum bekleniyor'))],
         ['label' => 'Bolge', 'value' => trim((string) ($item->district ?: 'Tum bolgeler'))],
     ], fn ($item) => trim((string) ($item['value'] ?? '')) !== ''));
-    $profileFacts = array_values(array_filter([
-        ['label' => 'Hizmet', 'value' => $categoryLabel],
-        ['label' => 'Konum', 'value' => $locationLabel],
-        ['label' => 'Durum', 'value' => $item->whatsapp ? 'WhatsApp aktif' : 'Mesaj ile hizli donus'],
-    ], fn ($item) => trim((string) ($item['value'] ?? '')) !== ''));
     $mainImage = null;
     if (!empty($item->cover_image_path)) {
         $mainImage = (string) $item->cover_image_path;
@@ -161,47 +156,10 @@
         @endif
 
         <section id="detaylar" class="listing-block listing-story-block">
-            <div class="listing-story-grid">
-                <div class="listing-story-main">
-                    @if($item->summary)
-                        <p class="listing-summary-lead">{{ $item->summary }}</p>
-                    @endif
-                    <div class="listing-richtext">{!! nl2br(e($item->content ?: 'Icerik girilmemis.')) !!}</div>
-                </div>
-
-                @if((is_array($detailAttributes ?? null) && count($detailAttributes)) || (is_array($item->features_json) && count($item->features_json)))
-                    <aside class="listing-story-side">
-                        @if(count($profileFacts))
-                            <div class="listing-profile-facts">
-                                @foreach($profileFacts as $fact)
-                                    <div class="listing-profile-fact">
-                                        <span>{{ $fact['label'] }}</span>
-                                        <strong>{{ $fact['value'] }}</strong>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
-
-                        @if(is_array($detailAttributes ?? null) && count($detailAttributes))
-                            <div class="listing-tech-panel">
-                                <div class="feature-grid listing-feature-grid">
-                                    @foreach($detailAttributes as $row)
-                                        <div class="feature-card"><strong>{{ $row['label'] }}:</strong> {{ $row['value'] }}</div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endif
-
-                        @if(is_array($item->features_json) && count($item->features_json))
-                            <div class="listing-feature-list">
-                                @foreach($item->features_json as $feature)
-                                    <span>{{ $feature }}</span>
-                                @endforeach
-                            </div>
-                        @endif
-                    </aside>
-                @endif
-            </div>
+            @if($item->summary)
+                <p class="listing-summary-lead">{{ $item->summary }}</p>
+            @endif
+            <div class="listing-richtext">{!! nl2br(e($item->content ?: 'Icerik girilmemis.')) !!}</div>
         </section>
 
         <section id="yorumlar" class="listing-block listing-comments-block">
