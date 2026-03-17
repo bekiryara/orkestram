@@ -19,7 +19,7 @@
     $categoryLabel = trim((string) ($item->service_type ?: 'Muzik Hizmeti'));
     $identityLine = collect([$categoryLabel, trim((string) $item->city), trim((string) $item->district)])->filter()->implode(' / ');
     $commentCount = count($publicComments ?? []);
-    $likeCount = (int) (($item->like_count ?? 0) ?: 0);
+    $likeCount = isset($item->like_count) ? (int) ($item->like_count ?? 0) : (int) $item->likes()->count();
     $ratingLabel = '4.9';
     $mainImage = null;
     if (!empty($item->cover_image_path)) {
@@ -59,6 +59,8 @@
     @php($messageLoginUrl = route('auth.login', ['next' => '/messages?'.http_build_query(['box' => 'personal', 'listing' => $item->slug, 'kind' => 'message'])]))
     @php($commentLoginUrl = route('auth.login', ['next' => '/ilan/' . $item->slug . '#yorumlar']))
     @php($likeLoginUrl = route('auth.login', ['next' => '/ilan/' . $item->slug]))
+    @php($quoteRequestUrl = route('customer.dashboard', ['listing' => $item->slug]))
+    @php($quoteRequestLoginUrl = route('auth.login', ['next' => '/customer?'.http_build_query(['listing' => $item->slug])]))
 
     <nav class="breadcrumbs">
         <a href="{{ route('home') }}">Ana Sayfa</a>
@@ -98,8 +100,10 @@
                             <a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/{{ ltrim(preg_replace('/[^0-9]/', '', $item->whatsapp), '0') }}">WhatsApp Yaz</a>
                         @endif
                     </div>
-                    @if(session('ok'))
-                        <p class="meta mt-8">{{ session('ok') }}</p>
+                    @if($shellAuthenticated ?? false)
+                        <a class="listing-cta-link" href="{{ $quoteRequestUrl }}">Teklif Al</a>
+                    @else
+                        <a class="listing-cta-link" href="{{ $quoteRequestLoginUrl }}">Teklif Al</a>
                     @endif
                 </div>
             </aside>
@@ -188,6 +192,10 @@
                 </div>
                 <p class="meta">Bu alanda yalnizca onayli yorumlar gosterilir.</p>
             </div>
+
+            @if(session('ok'))
+                <div class="listing-status-note" role="status">{{ session('ok') }}</div>
+            @endif
 
             <div class="listing-comment-actions" aria-label="Musteri deneyimleri aksiyonlari">
                 @if($shellAuthenticated ?? false)
