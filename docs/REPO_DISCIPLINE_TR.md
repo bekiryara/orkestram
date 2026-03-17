@@ -211,11 +211,24 @@ Kural:
 ## 16) Preview Lane Standardi
 
 Kural:
-1. main preview merge edilmis dunya icindir ve koordinator worktree'sinden servis verir.
-2. design preview tasarim gorevleri icindir ve sabit tasarim ajaninin worktree'sinden servis verir.
-3. Tasarim review icin merge yapilmaz; once design preview gorulur, sonra onayli is merge edilir.
-4. design preview URL'leri sabittir:
-   - http://127.0.0.1:8280 -> orkestram design
-   - http://127.0.0.1:8281 -> izmirorkestra design
+1. `main preview` merge edilmis dunya icindir ve koordinator worktree'sinden servis verir.
+2. `design preview` tasarim gorevleri icindir ve sabit tasarim ajaninin worktree'sinden servis verir.
+3. Tasarim review icin merge yapilmaz; once `design preview` gorulur, sonra onayli is merge edilir.
+4. `design preview` URL'leri sabittir:
+   - `http://127.0.0.1:8280` -> orkestram design
+   - `http://127.0.0.1:8281` -> izmirorkestra design
 5. Runtime komutu mount source kaniti vermeden UI gorevi review'e cikmaz.
 
+## 17) UI Review ve Merge Sirasi
+
+Kural:
+1. UI tasklarda begenilmeyen duzeltmeler, kapsam ayni kaldigi surece ayni taskta revize edilir.
+2. Yeni task ancak yeni ozellik, yeni lock dosyalari veya yeni ekran kapsami aciliyorsa olusur.
+3. Koordinator UI islerinde merge'i su sirayla ilerletir:
+   - `design-preview`da goster
+   - kullanici onayi al
+   - `pre-pr` PASS al
+   - push/teslim kanitini topla
+   - merge et
+4. Kullanici onayi olmadan UI isleri `main`e alinmaz.
+5. `main`e bakmak review degil, onayli sonucu gormektir.

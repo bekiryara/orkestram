@@ -25,3 +25,4 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
    - `git status --short`
    - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` sonucu `PASS`
 3. Kanit yoksa task durumu `active` kalir.
+

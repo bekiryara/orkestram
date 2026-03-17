@@ -25,6 +25,8 @@ Baslangic: `YYYY-MM-DD HH:mm`
 - Preview URL: `n/a`
 - Mount Source: `n/a`
 - UI review gerekir mi?: `yes | no`
+- UI Review Durumu: `pending | revize | approved | n/a`
+- Revize Notu: `n/a`
 
 ## Uygulama Adimlari
 - [ ] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`

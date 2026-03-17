@@ -48,6 +48,12 @@ Kural:
 3. `docs/WORKLOG.md`, `docs/TASK_LOCKS.md`, `docs/NEXT_TASK.md` kapanis adimlari tamamlanmadan is teslim edilmis sayilmaz.
 4. Koordinator eksik checklist veya eksik kanitla teslim kabul etmez.
 
+## UI Gorev Ozel Kurali
+1. UI/tasarim gorevleri `design-preview` lane'inde gosterilir.
+2. Kapsam ayni kaldigi surece begenilmeyen UI duzeltmeleri ayni taskta revize edilir.
+3. Kullanici preview onayi vermeden UI gorevi merge'e gitmez.
+4. `main` preview review araci degil, onayli sonucun goruldugu yerdir.
+
 ## Ihlal Durumu
 Kural ihlalinde calisma durdurulur, once su duzeltilir:
 1. branch

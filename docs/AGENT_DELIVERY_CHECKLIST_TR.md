@@ -77,6 +77,22 @@ Kural:
 3. Task karti placeholder birakilmaz.
 4. Bu alanlar doldurulmadan gorev teslim edilmis sayilmaz.
 
+## 4B. UI / Tasarim Teslim Ek Kaniti
+UI gorevlerinde zorunlu ek teslim paketi:
+1. `Lane`
+2. `Preview URL`
+3. `Mount Source`
+4. `worktree path`
+5. manuel UI review ozeti
+6. `UI Review Durumu` (`pending`, `revize`, `approved`)
+
+Kural:
+1. UI gorevi `design-preview` gorulmeden merge'e gitmez.
+2. `main` preview tasarim review araci olarak kullanilmaz.
+3. Preview URL gorev kartinda yazmiyorsa teslim eksik sayilir.
+4. Kapsam ayni ise revize ayni taskta devam eder; yeni task acilmaz.
+5. Kullanici `approved` demeden UI gorevinin merge teslimi tamamlanmis sayilmaz.
+
 ## 5. Resume Protokolu
 Bir is yarida kaldiysa veya ajan yeniden baglandiysa:
 
@@ -124,17 +140,3 @@ Koordinator yeni iste ilk karar mesajini su sabit formatla verir:
 Not:
 - Bu format disina cikilmaz.
 - `aktif task durumu` satiri lock durumunu da icerir.
-
-## 4B. UI / Tasarim Teslim Ek Kaniti
-UI gorevlerinde zorunlu ek teslim paketi:
-1. Lane`r
-2. Preview URL`r
-3. Mount Source`r
-4. worktree path`r
-5. manuel UI review ozeti
-
-Kural:
-1. UI gorevi design-preview gorulmeden merge'e gitmez.
-2. main preview tasarim review araci olarak kullanilmaz.
-3. Preview URL gorev kartinda yazmiyorsa teslim eksik sayilir.
-
