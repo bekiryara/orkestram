@@ -1344,7 +1344,7 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Sorumlu: `codex-b`
 - Is Ozeti:
   - Listing detail hero yerlesimi referans ekrana yaklastirildi; solda profil/kimlik, sagda buyuk ana gorsel olacak sekilde yeniden kurgulandi.
-  - Galeri ana hero altina tasindi; yorum yaz ve begeni gibi ikincil aksiyonlar ust CTA bloðunda ama ikincil hizada tutuldu.
+  - Galeri ana hero altina tasindi; yorum yaz ve begeni gibi ikincil aksiyonlar ust CTA blounda ama ikincil hizada tutuldu.
   - Tekrar eden sehir/bolge/hizmet metinleri azaltildi; fallback gorsel icin daha kontrollu yukseklik tanimlandi.
 - Degisen Dosyalar:
   - `docs/tasks/TASK-060.md`
@@ -1455,3 +1455,31 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Operasyonel Ozet:
   - Bundan sonra design-preview review'lari `Edit Source == Mount Source` kaniti olmadan gecerli sayilmayacak; yanlis worktree'de patch atip baska preview'da kontrol etme akisi resmi olarak yasaklandi.
+
+- Tarih: 2026-03-17
+- Task: `TASK-065`
+- Is Ozeti:
+  - Listing detail sayfasi iki appte de referans yone gore `Listing Detail V1` milestone'una getirildi: solda editorial kimlik/fiyat/guven, sagda buyuk hero medya, hero disinda ayri galeri, `Hakkinda`, yorumlar ve en sonda benzer ilanlar akisi kuruldu.
+  - `Mesaj`, `Begeni` ve `Yorum Yap` aksiyonlari `Musteri deneyimleri` bolumune ikonlu, ikincil ve durum gosteren pill satiri olarak tasindi; `Yorum Yap` popup form ile cozuldu.
+  - Design preview review'i iki hedef URL uzerinden tamamlandi: `http://127.0.0.1:8280/ilan/demo-bando-sahil-seremonisi` ve `http://127.0.0.1:8281/ilan/demo-bando-kordon-alayi`.
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/orkestram/public/assets/v1.css`
+  - `local-rebuild/apps/izmirorkestra/public/assets/v1.css`
+  - `docs/tasks/TASK-065.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Manuel UI Ozet:
+  - Hero solda sade kimlik satiri + fiyat/guven, sagda buyuk medya olarak korundu.
+  - Galeri hero?dan ayrildi; desktop 3-up, mobil 1-up kayan blok ve ok kontrollu gezinme ile cozuldu.
+  - `Hakkinda` galerinin altinda veriden beslenecek sekilde yerlestirildi.
+  - `Mesaj`, `Begeni` ve `Yorum Yap` aksiyonlari `Musteri deneyimleri` blogunda ayni satira tasindi.
+
+- Not:
+  - Deterministic demo fixture kapsami ayni taskta acik kaldigi icin TASK-065 kapanmadi; sonraki adim whitelist demo veri/media kurulumudur.
