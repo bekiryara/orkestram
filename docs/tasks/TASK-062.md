@@ -1,25 +1,25 @@
 # TASK-062
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex`  
 Branch: `agent/codex/task-062`  
 Baslangic: `2026-03-17 14:22`
 
 ## Gorev Ozeti
-- UI tasarim review akisini preview-onayi, revize ve merge sirasi ile kurala baglamak
+- UI tasarim review akisi preview-onayi, revize ve merge sirasi ile resmi kurala baglandi.
 
 ## In Scope
-- [ ] UI gorevlerinde `design-preview` zorunlulugunu ve `main`in review araci olmayacagini netlestirmek
-- [ ] Kapsam degismiyorsa ayni UI taskta revize donecegi kuralini sabitlemek
-- [ ] `begenildi -> pre-pr PASS -> merge` akis sirasini dokumanlara eklemek
-- [ ] Task template'e UI review durumu ve revize notu alanlarini eklemek
-- [ ] Ajan teslim checklistine preview onayi ve ayni-task revize davranisini eklemek
+- [x] UI gorevlerinde `design-preview` zorunlulugu ve `main`in review araci olmayacagi netlestirildi
+- [x] Kapsam degismiyorsa ayni UI taskta revize donecegi kurali sabitlendi
+- [x] `begenildi -> pre-pr PASS -> merge` akis sirasý dokumanlara eklendi
+- [x] Task template'e UI review durumu ve revize notu alanlari eklendi
+- [x] Ajan teslim checklistine preview onayi ve ayni-task revize davranisi eklendi
 
 ## Out of Scope
-- [ ] Yeni runtime/script kodu yazmak
-- [ ] Tasarim tasklarinin kendisini uygulamak
-- [ ] Ayrik preview lane sayisini arttirmak
-- [ ] Kod/backend task akislarini degistirmek
+- [x] Yeni runtime/script kodu yazmak
+- [x] Tasarim tasklarinin kendisini uygulamak
+- [x] Ayrik preview lane sayisini arttirmak
+- [x] Kod/backend task akislarini degistirmek
 
 ## Lock Dosyalari
 - `docs/tasks/TASK-062.md`
@@ -39,35 +39,35 @@ Baslangic: `2026-03-17 14:22`
 - UI review gerekir mi?: `yes`
 
 ## Uygulama Adimlari
-- [ ] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
-- [ ] Branch dogrulandi: `agent/<ajan>/<task-id>`
-- [ ] Lock kapsam disina cikilmadi
-- [ ] UI review / revize / merge akis kurallari yazili hale getirildi
-- [ ] Task template UI review alanlariyla guncellendi
-- [ ] Gorev kapsamindaki degisiklikler tamamlandi
-- [ ] Goreve ozel test/dogrulama calistirildi
+- [x] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
+- [x] Branch dogrulandi: `agent/<ajan>/<task-id>`
+- [x] Lock kapsam disina cikilmadi
+- [x] UI review / revize / merge akis kurallari yazili hale getirildi
+- [x] Task template UI review alanlariyla guncellendi
+- [x] Gorev kapsamindaki degisiklikler tamamlandi
+- [x] Goreve ozel test/dogrulama calistirildi
 
 ## Kabul Kriterleri
-- [ ] UI gorevleri icin `design-preview` review zorunlulugu acik yazilidir
-- [ ] Kapsam degismiyorsa begenilmeyen UI duzeltmeleri ayni taskta donecek sekilde netlestirilmistir
-- [ ] Merge sirasi `preview onayi -> pre-pr PASS -> merge` olarak belgelenmistir
-- [ ] Task template `UI Review Durumu` ve revize notu alanlarini tasir
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
+- [x] UI gorevleri icin `design-preview` review zorunlulugu acik yazilidir
+- [x] Kapsam degismiyorsa begenilmeyen UI duzeltmeleri ayni taskta donecek sekilde netlestirilmistir
+- [x] Merge sirasi `preview onayi -> pre-pr PASS -> merge` olarak belgelenmistir
+- [x] Task template `UI Review Durumu` ve revize notu alanlarini tasir
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
-- [ ] `git branch --show-current`
-- [ ] `git branch -vv`
-- [ ] `git status --short`
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
-- [ ] Goreve ozel test/komut sonucu
-- [ ] Commit hash
+- [x] `git branch --show-current`
+- [x] `git branch -vv`
+- [x] `git status --short`
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- [x] Goreve ozel test/komut sonucu
+- [x] Commit hash
 
 ## Kapanis Adimlari
-- [ ] Task kartindaki checklistler gercek sonuca gore guncellendi
-- [ ] `docs/WORKLOG.md` guncellendi
-- [ ] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
-- [ ] `docs/NEXT_TASK.md` panosu guncellendi
-- [ ] Branch pushlandi
+- [x] Task kartindaki checklistler gercek sonuca gore guncellendi
+- [x] `docs/WORKLOG.md` guncellendi
+- [x] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
+- [x] `docs/NEXT_TASK.md` panosu guncellendi
+- [x] Branch pushlandi
 
 ## Komutlar
 ```powershell

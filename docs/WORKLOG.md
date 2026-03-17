@@ -1389,3 +1389,25 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Manuel / Operasyonel Ozet:
   - Design preview lane su an orkestram-b worktree'sinden servis veriyor; ana merge preview'i orkestram-k olarak ayri kaldi.
   - Tasarim review artik merge etmeden http://127.0.0.1:8280 ve http://127.0.0.1:8281 uzerinden yapilabilecek.
+- Tarih: 2026-03-17
+- Task: TASK-062
+- Is Ozeti:
+  - UI tasklarda design-preview gorulmeden merge edilmeyecegi, main preview'in review araci olmadigi kural olarak sabitlendi.
+  - Kapsam ayni kaldigi surece begenilmeyen UI duzeltmelerinin ayni taskta revize edilecegi ve yeni task acilmayacagi netlestirildi.
+  - Task template, AGENTS ve teslim/disiplin belgeleri UI Review Durumu, Revize Notu ve preview onayi -> pre-pr PASS -> merge sirasina gore guncellendi.
+- Degisen Dosyalar:
+  - AGENTS.md
+  - docs/AGENT_DELIVERY_CHECKLIST_TR.md
+  - docs/MULTI_AGENT_RULES_TR.md
+  - docs/REPO_DISCIPLINE_TR.md
+  - docs/tasks/_TEMPLATE.md
+  - docs/tasks/TASK-062.md
+  - docs/TASK_LOCKS.md
+  - docs/NEXT_TASK.md
+  - docs/WORKLOG.md
+- Calistirilan Komutlar:
+  - powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
+- Sonuc:
+  - PASS
+- Operasyonel Ozet:
+  - UI revizeleri artik ayni task icinde donebilir; merge ancak kullanici preview onayi ve pre-pr PASS sonrasi ilerler.

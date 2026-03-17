@@ -76,4 +76,5 @@ Sabit Ajan Kimlikleri:
 
 | TASK-061 | codex | agent/codex/task-061 | closed | docs/tasks/TASK-061.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,local-rebuild/docker-compose.yml,scripts/dev-up.ps1,scripts/smoke-test.ps1,docs/tasks/_TEMPLATE.md,docs/MULTI_AGENT_RULES_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/REPO_DISCIPLINE_TR.md,docs/WORKLOG.md | 2026-03-17 13:35:55 | 2026-03-17 14:08:47 | Design-preview runtime standardizasyonu tamamlandi; 8280/8281 design lane ve mount-source kontrati dogrulandi |
 
-| TASK-062 | codex | agent/codex/task-062 | active | docs/tasks/TASK-062.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/tasks/_TEMPLATE.md,AGENTS.md,docs/WORKLOG.md | 2026-03-17 14:22:13 | 2026-03-17 14:22:13 | UI tasarim review akisini preview-onayi, revize ve merge sirasi ile kurala baglamak |
+| TASK-062 | codex | agent/codex/task-062 | closed | docs/tasks/TASK-062.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/tasks/_TEMPLATE.md,AGENTS.md,docs/WORKLOG.md | 2026-03-17 14:22:13 | 2026-03-17 14:33:02 | UI tasklarda preview onayi, ayni-task revize ve merge sirasi resmi kurala baglandi |
+
