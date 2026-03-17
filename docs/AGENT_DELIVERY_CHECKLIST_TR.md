@@ -140,3 +140,7 @@ Koordinator yeni iste ilk karar mesajini su sabit formatla verir:
 Not:
 - Bu format disina cikilmaz.
 - `aktif task durumu` satiri lock durumunu da icerir.
+
+Kural (Edit Source Esitligi):
+1. UI tesliminde `Edit Source` ile `Mount Source` ayni worktree/path degilse teslim reddedilir.
+2. Ajan farkli source'ta kod degistirip baska source preview'u veremez.

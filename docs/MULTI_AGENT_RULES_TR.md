@@ -137,3 +137,13 @@ Koordinator karar cevabi yalniz su 4 satirla verilir:
    - merge et
 4. Kullanici preview onayi vermeden koordinator merge adimina gecmez.
 5. `main`e merge, UI review araci degil sadece onaylanmis sonucu entegre etme adimidir.
+
+## Edit Source = Preview Source Kurali (Zorunlu)
+1. UI gorevlerinde `Edit Source` ile `Mount Source` ayni worktree/path olmak zorundadir.
+2. `Edit Source != Mount Source` ise preview review gecersiz sayilir ve is durdurulur.
+3. Koordinator UI review baslatmadan once su 3 kaniti birlikte ister:
+   - `Edit Source`
+   - `Mount Source`
+   - `Preview URL`
+4. Farkli worktree'de patch yazip baska worktree preview'u gostermek yasaktir.
+5. UI merge karari yalniz `Edit Source == Mount Source` dogrulandiysa verilir.

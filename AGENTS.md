@@ -53,6 +53,7 @@ Kural:
 2. Kapsam ayni kaldigi surece begenilmeyen UI duzeltmeleri ayni taskta revize edilir.
 3. Kullanici preview onayi vermeden UI gorevi merge'e gitmez.
 4. `main` preview review araci degil, onayli sonucun goruldugu yerdir.
+5. UI gorevinde `Edit Source` ile `Mount Source` esit degilse calisma durdurulur.
 
 ## Ihlal Durumu
 Kural ihlalinde calisma durdurulur, once su duzeltilir:

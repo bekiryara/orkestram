@@ -232,3 +232,12 @@ Kural:
    - merge et
 4. Kullanici onayi olmadan UI isleri `main`e alinmaz.
 5. `main`e bakmak review degil, onayli sonucu gormektir.
+
+## 18) Edit Source = Preview Source Standardi
+
+Kural:
+1. UI gorevlerinde kodun degistirildigi worktree/path ile preview'un mount ettigi worktree/path ayni olmak zorundadir.
+2. `Edit Source != Mount Source` ise review gecersizdir; merge karari verilmez.
+3. Koordinator UI review oncesi `Edit Source`, `Mount Source` ve `Preview URL` ucunu birlikte dogrular.
+4. Farkli worktree'de patch yazip baska worktree preview'u gostermek operasyonel ihlaldir.
+5. Bu esitlik saglanmiyorsa once kaynak hizasi duzeltilir, sonra UI review baslar.

@@ -1411,3 +1411,47 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - PASS
 - Operasyonel Ozet:
   - UI revizeleri artik ayni task icinde donebilir; merge ancak kullanici preview onayi ve pre-pr PASS sonrasi ilerler.
+- Tarih: 2026-03-17
+- Task: `TASK-063`
+- Is Ozeti:
+  - `PublicController::siteFromRequest()` iki appte de `:8281` portunu `izmirorkestra.net` olarak cozecek sekilde guncellendi.
+  - `powershell -ExecutionPolicy Bypass -File scripts/smoke-test.ps1 -App izmirorkestra -Lane design` PASS aldi; design lane temel davranisi bozulmadi.
+  - `http://127.0.0.1:8281/ilan/izmir-bandosu` 404 kaldigi icin kok sorun `edit source != preview source` olarak ayrildi; design lane `orkestram-b` worktree'sini gosterdigi icin kaynak esitleme ayri goreve cikartildi.
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/app/Http/Controllers/PublicController.php`
+  - `local-rebuild/apps/izmirorkestra/app/Http/Controllers/PublicController.php`
+  - `docs/tasks/TASK-063.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/smoke-test.ps1 -App izmirorkestra -Lane design`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS WITH FOLLOW-UP`
+- Tarih: 2026-03-17
+- Task: `TASK-063`
+- Is Ozeti:
+  - `PublicController::siteFromRequest()` iki appte de `:8281` portunu `izmirorkestra.net` olarak cozecek sekilde kalici hale getirildi.
+  - `Edit Source`, `Mount Source` ve `Preview URL` ucunun birlikte verilmesi; `Edit Source != Mount Source` ise UI review ve merge'in durmasi AGENTS, disiplin, checklist ve task template seviyesinde resmi kurala baglandi.
+  - Ayrik `TASK-064` superseded edilerek ayni incident tek task altinda kapatildi.
+- Degisen Dosyalar:
+  - `AGENTS.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/tasks/_TEMPLATE.md`
+  - `docs/tasks/TASK-063.md`
+  - `docs/tasks/TASK-064.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `local-rebuild/apps/orkestram/app/Http/Controllers/PublicController.php`
+  - `local-rebuild/apps/izmirorkestra/app/Http/Controllers/PublicController.php`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/smoke-test.ps1 -App izmirorkestra -Lane design`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Operasyonel Ozet:
+  - Bundan sonra design-preview review'lari `Edit Source == Mount Source` kaniti olmadan gecerli sayilmayacak; yanlis worktree'de patch atip baska preview'da kontrol etme akisi resmi olarak yasaklandi.
