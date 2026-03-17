@@ -8,6 +8,8 @@ services:
   # This project uses:
   # - 8180 (orkestram local)
   # - 8181 (izmirorkestra local)
+  # - 8280 (orkestram design preview)
+  # - 8281 (izmirorkestra design preview)
   # - 8188 (adminer)
   # - 3307 (mysql host port)
 
@@ -43,6 +45,50 @@ services:
       - "8181:80"
     volumes:
       - ./apps/izmirorkestra:/var/www/html:delegated
+    depends_on:
+      - mysql
+    restart: unless-stopped
+
+  orkestram-design-web:
+    build:
+      context: .
+      dockerfile: docker/php-apache/Dockerfile
+    container_name: orkestram-design-web
+    command: >
+      bash -lc "a2enmod rewrite
+      && sed -ri -e 's!^[[:space:]]*DocumentRoot[[:space:]]+.*$!DocumentRoot /var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
+      && sed -ri -e 's!AllowOverride None!AllowOverride All!g' /etc/apache2/apache2.conf
+      && apache2-foreground"
+    ports:
+      - "${DESIGN_ORKESTRAM_PORT:-8280}:80"
+    volumes:
+      - ${DESIGN_ORKESTRAM_SOURCE:-./apps/orkestram}:/var/www/html:delegated
+      - ${DESIGN_SHARED_ORKESTRAM_VENDOR:-./apps/orkestram/vendor}:/var/www/html/vendor:delegated
+      - ${DESIGN_SHARED_ORKESTRAM_STORAGE:-./apps/orkestram/storage}:/var/www/html/storage:delegated
+      - ${DESIGN_SHARED_ORKESTRAM_UPLOADS:-./apps/orkestram/public/uploads}:/var/www/html/public/uploads:delegated
+      - ${DESIGN_SHARED_ORKESTRAM_ENV:-./apps/orkestram/.env}:/var/www/html/.env:ro
+    depends_on:
+      - mysql
+    restart: unless-stopped
+
+  izmirorkestra-design-web:
+    build:
+      context: .
+      dockerfile: docker/php-apache/Dockerfile
+    container_name: izmirorkestra-design-web
+    command: >
+      bash -lc "a2enmod rewrite
+      && sed -ri -e 's!^[[:space:]]*DocumentRoot[[:space:]]+.*$!DocumentRoot /var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
+      && sed -ri -e 's!AllowOverride None!AllowOverride All!g' /etc/apache2/apache2.conf
+      && apache2-foreground"
+    ports:
+      - "${DESIGN_IZMIRORKESTRA_PORT:-8281}:80"
+    volumes:
+      - ${DESIGN_IZMIRORKESTRA_SOURCE:-./apps/izmirorkestra}:/var/www/html:delegated
+      - ${DESIGN_SHARED_IZMIRORKESTRA_VENDOR:-./apps/izmirorkestra/vendor}:/var/www/html/vendor:delegated
+      - ${DESIGN_SHARED_IZMIRORKESTRA_STORAGE:-./apps/izmirorkestra/storage}:/var/www/html/storage:delegated
+      - ${DESIGN_SHARED_IZMIRORKESTRA_UPLOADS:-./apps/izmirorkestra/public/uploads}:/var/www/html/public/uploads:delegated
+      - ${DESIGN_SHARED_IZMIRORKESTRA_ENV:-./apps/izmirorkestra/.env}:/var/www/html/.env:ro
     depends_on:
       - mysql
     restart: unless-stopped

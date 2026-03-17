@@ -207,3 +207,15 @@ Kural:
    4. `sonraki adim: ...`
 3. `git remote -v` ve `git branch -vv` dogrulamasi gorev baslangici ve `pre-pr` oncesi zorunludur.
 4. `origin` GitHub degilse veya aktif branch upstream'i `origin/<branch>` degilse commit/push akisi durdurulur.
+
+## 16) Preview Lane Standardi
+
+Kural:
+1. main preview merge edilmis dunya icindir ve koordinator worktree'sinden servis verir.
+2. design preview tasarim gorevleri icindir ve sabit tasarim ajaninin worktree'sinden servis verir.
+3. Tasarim review icin merge yapilmaz; once design preview gorulur, sonra onayli is merge edilir.
+4. design preview URL'leri sabittir:
+   - http://127.0.0.1:8280 -> orkestram design
+   - http://127.0.0.1:8281 -> izmirorkestra design
+5. Runtime komutu mount source kaniti vermeden UI gorevi review'e cikmaz.
+

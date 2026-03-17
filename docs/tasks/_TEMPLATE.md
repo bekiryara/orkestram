@@ -20,6 +20,12 @@ Baslangic: `YYYY-MM-DD HH:mm`
 - `path/one`
 - `path/two`
 
+## Preview Kontrati
+- Lane: `main | design | n/a`
+- Preview URL: `n/a`
+- Mount Source: `n/a`
+- UI review gerekir mi?: `yes | no`
+
 ## Uygulama Adimlari
 - [ ] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
 - [ ] Branch dogrulandi: `agent/<ajan>/<task-id>`

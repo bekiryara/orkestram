@@ -110,3 +110,18 @@ Koordinator karar cevabi yalniz su 4 satirla verilir:
 1. Gorev basinda `git remote -v` ve `git branch -vv` zorunludur.
 2. `origin` GitHub degilse is baslatilmaz.
 3. Aktif branch upstream'i `origin/<branch>` degilse push/PR adimina gecilmez.
+
+## Design Preview Lane (Zorunlu UI Review Kurali)
+1. UI/tasarim gorevleri merge oncesi design-preview lane'inde gorulmeden kapatilmaz.
+2. design-preview tek sabit lane'dir; ayni anda yalniz bir UI gorevi review edilir.
+3. Task kartinda su alanlar zorunludur:
+   - Preview URL`r
+   - Mount Source`r
+   - Lane`r
+4. main preview yalniz merge edilmis dunyadir; tasarim review araci olarak kullanilmaz.
+5. UI gorev tesliminde ajan su kaniti verir:
+   - worktree path
+   - mount source
+   - preview URL
+   - manuel UI kontrol ozeti
+

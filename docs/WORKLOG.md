@@ -1362,3 +1362,30 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Manuel Inceleme Ozeti:
   - Sol panelde kimlik/profil tek kaynakli, sag panelde buyuk ana gorsel baskin, galeri hemen altta.
   - Aciklama yorumlardan once, benzer ilanlar en sonda; Ara ve WhatsApp ustte guclu, Mesaj/Begeni/Yorumlar ikincil kaldi.
+- Tarih: 2026-03-17
+- Task: TASK-061
+- Is Ozeti:
+  - design-preview lane'i eklendi; orkestram ve izmirorkestra icin sabit preview URL'leri 8280/8281 olarak tanimlandi.
+  - scripts/dev-up.ps1 main/design lane ayrimi, mount-source kaniti ve design lane icin shared runtime artifact (.env, endor, storage, public/uploads) modeliyle sertlestirildi.
+  - scripts/smoke-test.ps1 lane bazli container/base URL secimiyle guncellendi; task template ve disiplin dokumanlarina Preview URL + Mount Source kontrati eklendi.
+- Degisen Dosyalar:
+  - local-rebuild/docker-compose.yml
+  - scripts/dev-up.ps1
+  - scripts/smoke-test.ps1
+  - docs/tasks/_TEMPLATE.md
+  - docs/MULTI_AGENT_RULES_TR.md
+  - docs/AGENT_DELIVERY_CHECKLIST_TR.md
+  - docs/REPO_DISCIPLINE_TR.md
+  - docs/tasks/TASK-061.md
+  - docs/TASK_LOCKS.md
+  - docs/NEXT_TASK.md
+  - docs/WORKLOG.md
+- Calistirilan Komutlar:
+  - powershell -ExecutionPolicy Bypass -File scripts/dev-up.ps1 -App both -Lane design
+  - powershell -ExecutionPolicy Bypass -File scripts/smoke-test.ps1 -App both -Lane design
+  - powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick (upstream verilmeden once FAIL; push sonrasi tekrar kosulacak)
+- Sonuc:
+  - PENDING PUSH
+- Manuel / Operasyonel Ozet:
+  - Design preview lane su an orkestram-b worktree'sinden servis veriyor; ana merge preview'i orkestram-k olarak ayri kaldi.
+  - Tasarim review artik merge etmeden http://127.0.0.1:8280 ve http://127.0.0.1:8281 uzerinden yapilabilecek.

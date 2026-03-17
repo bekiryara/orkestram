@@ -1,6 +1,8 @@
 param(
     [ValidateSet("orkestram", "izmirorkestra", "both")]
     [string]$App = "both",
+    [ValidateSet("main", "design")]
+    [string]$Lane = "main",
     [string]$AdminUser = "",
     [string]$AdminPass = ""
 )
@@ -35,7 +37,12 @@ function Invoke-DockerFixtureCommand {
 }
 
 function Resolve-ContainerName {
-    param([string]$TargetName)
+    param([string]$TargetName, [string]$LaneName)
+
+    if ($LaneName -eq "design") {
+        if ($TargetName -eq "orkestram") { return "orkestram-design-web" }
+        if ($TargetName -eq "izmirorkestra") { return "izmirorkestra-design-web" }
+    }
 
     if ($TargetName -eq "orkestram") { return "orkestram-local-web" }
     if ($TargetName -eq "izmirorkestra") { return "izmirorkestra-local-web" }
@@ -578,27 +585,29 @@ function Resolve-CategoryCityDistrictPath {
 }
 
 $targets = @()
+$orkestramBase = if ($Lane -eq "design") { "http://127.0.0.1:8280" } else { "http://127.0.0.1:8180" }
+$izmirBase = if ($Lane -eq "design") { "http://127.0.0.1:8281" } else { "http://127.0.0.1:8181" }
 if ($App -eq "both") {
     $targets = @(
-        @{ Name = "orkestram"; Base = "http://127.0.0.1:8180" },
-        @{ Name = "izmirorkestra"; Base = "http://127.0.0.1:8181" }
+        @{ Name = "orkestram"; Base = $orkestramBase },
+        @{ Name = "izmirorkestra"; Base = $izmirBase }
     )
 }
 elseif ($App -eq "orkestram") {
-    $targets = @(@{ Name = "orkestram"; Base = "http://127.0.0.1:8180" })
+    $targets = @(@{ Name = "orkestram"; Base = $orkestramBase })
 }
 else {
-    $targets = @(@{ Name = "izmirorkestra"; Base = "http://127.0.0.1:8181" })
+    $targets = @(@{ Name = "izmirorkestra"; Base = $izmirBase })
 }
 
 $creds = Resolve-AdminCred -User $AdminUser -Pass $AdminPass
 $authHeaders = Get-AuthHeader -User $creds.User -Pass $creds.Pass
 
 foreach ($t in $targets) {
-    Write-Host "[smoke] target=$($t.Name)"
+    Write-Host "[smoke] target=$($t.Name) lane=$Lane base=$($t.Base)"
     $fixturesReady = $true
 
-    $containerName = Resolve-ContainerName -TargetName $t.Name
+    $containerName = Resolve-ContainerName -TargetName $t.Name -LaneName $Lane
     if ([string]::IsNullOrWhiteSpace($containerName)) {
         $failures.Add("$($t.Name) icin container adi cozulemedi") | Out-Null
         $fixturesReady = $false
@@ -727,3 +736,4 @@ if ($failures.Count -gt 0) {
 
 Write-Host "[smoke] PASS"
 exit 0
+

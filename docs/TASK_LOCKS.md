@@ -74,3 +74,5 @@ Sabit Ajan Kimlikleri:
 | TASK-060 | codex-b | agent/codex-b/task-060 | closed | docs/tasks/TASK-060.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php,local-rebuild/apps/orkestram/public/assets/v1.css,local-rebuild/apps/izmirorkestra/public/assets/v1.css,docs/WORKLOG.md | 2026-03-17 02:13:22 | 2026-03-17 03:02:00 | Listing detail referans ekran yonune tekrar hizalandi; solda profil, sagda buyuk medya, altta galeri ve sade ikincil aksiyonlar parity ile guncellendi |
 
 
+| TASK-061 | codex | agent/codex/task-061 | closed | docs/tasks/TASK-061.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,local-rebuild/docker-compose.yml,scripts/dev-up.ps1,scripts/smoke-test.ps1,docs/tasks/_TEMPLATE.md,docs/MULTI_AGENT_RULES_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/REPO_DISCIPLINE_TR.md,docs/WORKLOG.md | 2026-03-17 13:35:55 | 2026-03-17 14:08:47 | Design-preview runtime standardizasyonu tamamlandi; 8280/8281 design lane ve mount-source kontrati dogrulandi |
+
