@@ -1,4 +1,4 @@
-# Repo Disiplini ve Teknik Borc Kurallari (TR)
+﻿# Repo Disiplini ve Teknik Borc Kurallari (TR)
 
 Tarih: 2026-03-09
 
@@ -118,8 +118,9 @@ Her gorevde dogrulama oncesi su 4 kontrol yapilir:
 ## 10) Operasyonel Disiplin Dosyalari (Zorunlu)
 
 1. `docs/NEXT_TASK.md`
-   - Tek aktif gorev buraya yazilir.
-   - Ayni anda birden fazla aktif gorev acilmaz.
+   - En fazla 3 aktif gorev buraya yazilir.
+   - docs/TASK_LOCKS.md ile birebir senkron tutulur.
+   - YOK yalniz hic aktif task yoksa kullanilir.
 2. `docs/WORKLOG.md`
    - Her ajan turu sonunda degisen dosya + komut + PASS/FAIL kaydi zorunlu.
 3. `docs/ROLLBACK_POINTS.md`
@@ -148,6 +149,13 @@ Her gorevde dogrulama oncesi su 4 kontrol yapilir:
    - Mekanik komut:
      - `powershell -ExecutionPolicy Bypass -File scripts/start-task.ps1 -TaskId TASK-0xx -Agent codex -Files "path/one,path/two" -Note "kisa ozet"`
 
+
+Kurallar:
+1. Repo genelinde ayni anda en fazla 3 `active` task olabilir.
+2. Ayni kapsamda revize, polish veya kapanis eksigi icin yeni task acilmaz; mevcut task devam eder.
+3. Hedef ayni kalip yeni dosya gerekiyorsa task genisletilir; lock listesi ve task karti guncellenir.
+4. Yeni task ancak yeni kabul kriteri, yeni risk sinifi, yeni lock alani veya ayrik owner gerektiriyorsa acilir.
+5. `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md` ve `docs/WORKLOG.md` merkezi koordinasyon alanidir; bu dosyalarda paralel kapanis gerekiyorsa koordinatör kontrollu entegrasyon uygulanir.
 ## 11) Yeni Gelen Ajan Onboarding (Zorunlu)
 
 Her yeni ajan ilk turda su sirayi uygular:
@@ -241,3 +249,5 @@ Kural:
 3. Koordinator UI review oncesi `Edit Source`, `Mount Source` ve `Preview URL` ucunu birlikte dogrular.
 4. Farkli worktree'de patch yazip baska worktree preview'u gostermek operasyonel ihlaldir.
 5. Bu esitlik saglanmiyorsa once kaynak hizasi duzeltilir, sonra UI review baslar.
+
+

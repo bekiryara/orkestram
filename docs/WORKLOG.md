@@ -1513,3 +1513,28 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - Demo preview listinglerinde bos alan birakan veri eksigi gorulmedi; acik kalan konu UI degil resmi fixture otomasyonu oldu.
 - Not:
   - TASK-065 kapatildi; whitelist/idempotent fixture otomasyonu ayri task olarak acilacak.
+
+- Tarih: 2026-03-19
+- Task: `TASK-066`
+- Is Ozeti:
+  - Repo genelinde tek active task modeli kaldirildi; ayni anda en fazla 3 active task, her ajan icin ayni anda yalniz 1 active task ve ayni kapsam revizesinde mevcut taskta kalma kurali resmi disipline baglandi.
+  - `task genisletme` karari AGENTS, `REPO_DISCIPLINE`, `MULTI_AGENT_RULES`, teslim checklisti ve task template seviyesinde standardize edildi; `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md` ve `docs/WORKLOG.md` merkezi koordinasyon alani olarak netlestirildi.
+  - `scripts/start-task.ps1` tek active task blokaji yerine repo-geneli 3 active task siniri ve ajan-basi tek active task kurali ile guncellendi; `NEXT_TASK` panosu coklu aktif gorev modeline hizalandi.
+- Degisen Dosyalar:
+  - `AGENTS.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `docs/tasks/_TEMPLATE.md`
+  - `scripts/start-task.ps1`
+  - `docs/tasks/TASK-066.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git push -u origin agent/codex/task-066`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Kapanis sonrasi aktif task yok; koordinasyon panosu `READY` durumuna cekildi.

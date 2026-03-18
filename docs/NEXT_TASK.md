@@ -1,21 +1,21 @@
-# NEXT TASK (Koordinasyon Panosu)
+﻿# NEXT TASK (Koordinasyon Panosu)
 
 Durum: `READY`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
-## Aktif Gorevler (Tek Kaynak)
-1. `YOK` - `TASK-065` listing detail UI v1 ve mevcut demo veri audit'i ile kapatildi; whitelist/idempotent fixture otomasyonu icin yeni task acilacak.
+## Aktif Gorevler (Merkezi Koordinasyon)
+1. `YOK` - `TASK-066` kontrollu paralel task ve task-genisletme kurallari pre-pr PASS ile kapatildi.
 
 ## Son Koordinator Kapanisi
-1. `TASK-065` - Listing detail UI v1 iki appte parity ile tamamlandi; design-preview demo verisi read-only audit ile dogrulandi ve ayri fixture otomasyon task'i gerektigi netlesti.
-2. `TASK-063` - `:8281` design preview incident'i kapatildi; port eslesmesi iki appte duzeltildi ve `Edit Source == Mount Source` guard'i resmi kurala baglandi.
-3. `TASK-062` - UI tasklarda preview onayi, ayni-task revize ve merge sirasi resmi kurala baglandi.
+1. `TASK-066` - Repo genelinde en fazla 3 aktif task, ayni-task revize, task genisletme ve merkezi koordinasyon dosyasi kurallari AGENTS, disiplin, multi-agent, checklist, task template ve start-task akisi seviyesinde resmi hale getirildi.
+2. `TASK-065` - Listing detail UI v1 iki appte parity ile tamamlandi; design-preview demo verisi read-only audit ile dogrulandi ve ayri fixture otomasyon task'i gerektigi netlesti.
+3. `TASK-063` - `:8281` design preview incident'i kapatildi; port eslesmesi iki appte duzeltildi ve `Edit Source == Mount Source` guard'i resmi kurala baglandi.
 
 ## Son Kapanis
-1. `TASK-065` - UI v1 onayli sonuc korundu; mevcut demo listingler db uzerinden read-only audit ile dogrulandi ve whitelist/idempotent fixture otomasyonu yeni taska ayrildi.
-2. `TASK-063` - `siteFromRequest()` iki appte `:8281` cozumler hale getirildi; preview/source mismatch root-cause'u belge ve template guard'lari ile kalici kurala baglandi.
-3. `TASK-062` - UI review onayi gelmeden merge yok; kapsam ayniysa revize ayni taskta donecek sekilde sabitlendi.
+1. `TASK-066` - Tek active task siniri kaldirildi; repo-geneli 3 aktif task siniri, tek-ajan tek-task, task genisletme ve merkezi koordinasyon kurali pre-pr PASS ile sabitlendi.
+2. `TASK-065` - UI v1 onayli sonuc korundu; mevcut demo listingler db uzerinden read-only audit ile dogrulandi ve whitelist/idempotent fixture otomasyonu yeni taska ayrildi.
+3. `TASK-063` - `siteFromRequest()` iki appte `:8281` cozumler hale getirildi; preview/source mismatch root-cause'u belge ve template guard'lari ile kalici kurala baglandi.
 
 ## Kapanis Kurali (Zorunlu)
 1. Kapanis kaniti olmadan task `closed` edilemez.
@@ -25,3 +25,4 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
    - `git status --short`
    - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` sonucu `PASS`
 3. Kanit yoksa task durumu `active` kalir.
+4. Bu pano ile `docs/TASK_LOCKS.md` birebir senkron tutulur; paralel kapanis ve sira degisikligi yalniz koordinator tarafindan islenir.

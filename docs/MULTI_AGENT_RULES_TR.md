@@ -1,4 +1,4 @@
-# Multi-Agent Kurallari (TR)
+﻿# Multi-Agent Kurallari (TR)
 
 Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve deterministic akis.
 
@@ -6,13 +6,14 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
 1. `main` branch'e direkt push yasak.
 2. Her ajan sadece kendi branch'inde calisir:
    - `agent/<ajan>/<task-id>`
-3. Her ajan tek aktif gorev alir.
-4. Gorev almadan once lock acilir:
+3. Her ajan ayni anda yalniz 1 aktif gorev alir.
+4. Repo genelinde ayni anda en fazla 3 aktif gorev acik olabilir.
+5. Gorev almadan once lock acilir:
    - `docs/TASK_LOCKS.md`
-5. Ayni dosya iki aktif gorevde locklanamaz.
-6. PR acmadan once zorunlu komut:
+6. Ayni dosya iki aktif gorevde locklanamaz.
+7. PR acmadan once zorunlu komut:
    - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
-7. Merge kosulu:
+8. Merge kosulu:
    - required checks PASS (`ci-gate`, `security-gate`)
    - gorev owner onayi
 
@@ -20,20 +21,29 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
 1. Gorev baslat:
    - `docs/tasks/TASK-0xx.md` dosyasini `_TEMPLATE.md` uzerinden olustur.
    - `docs/TASK_LOCKS.md` tablosuna `active` kaydi ekle.
-   - `docs/NEXT_TASK.md` panosunu aktif goreve cek.
+   - `docs/NEXT_TASK.md` panosunu aktif gorev listesine ekle.
    - branch acilisini en son yap: `git checkout -b agent/<ajan>/task-0xx`
-2. Kodla + commit:
+2. Ayni kapsam revizesi:
+   - kabul kriteri, hedef ve risk sinifi ayniysa yeni task acilmaz; mevcut taskta devam edilir.
+3. Task genislet:
+   - hedef ayni kalip yeni dosya veya lock alani gerekiyorsa task karti ve lock listesi genisletilir.
+   - yeni risk veya ayrik owner gerekmiyorsa ayni taskta kalinir.
+4. Yeni task ac:
+   - yeni kabul kriteri, yeni risk sinifi, yeni lock alani veya ayrik owner varsa yeni task gerekir.
+   - repo genelindeki aktif task sayisi 3'e ulasmissa yeni task acilmaz; once koordinasyon yeniden dagitilir veya bir task kapatilir.
+5. Kodla + commit:
    - `feat(task-0xx): ...` veya `fix(task-0xx): ...`
-3. PR ac:
+6. PR ac:
    - `agent/<ajan>/<task-id>` -> `main`
-4. Merge sonrasi lock kapat:
+7. Merge sonrasi lock kapat:
    - `docs/TASK_LOCKS.md` kaydinda durumu `closed` yap.
-5. Task karti doldur:
+8. Task karti doldur:
    - `Uygulama Adimlari`, `Kabul Kriterleri`, `Teslimde Zorunlu Kanit`, `Kapanis Adimlari` placeholder kalmaz.
 
 ## Not
 1. Ayni makinede 3 ajan calisacaksa farkli klasor/worktree onerilir.
 2. Lock/Task kaydi olmayan is "resmi is" sayilmaz.
+3. `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md` ve `docs/WORKLOG.md` merkezi koordinasyon alanidir; paralel kapanis ve entegrasyon yalniz koordinatör kontrollu yapilir.
 
 ## Yeni Gelen Ajan Kurali (Zorunlu)
 1. Ilk adimda `AGENTS.md` okunur.
@@ -44,7 +54,7 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
 6. Task karti checklistleri doldurulmadan teslim kabul edilmez.
 
 ## Baslangic Guard (Zorunlu)
-1. Ajan D:\orkestram'da acilsa bile gelistirmeden once WSL hizalama kaniti verir:
+1. Ajan `D:\orkestram`'da acilsa bile gelistirmeden once WSL hizalama kaniti verir:
    - `wsl -e bash -lc "cd /home/bekir/orkestram-<slot> && pwd && git rev-parse --show-toplevel && git branch --show-current && git status --short"`
 2. Kanit `/home/bekir/orkestram-a|b|c` degilse `REALIGN_REQUIRED` raporlanir.
 3. `REALIGN_REQUIRED` halinde ajan yalniz hizalama adimini uygular; kod/doc degisikliklerine gecmez.
@@ -52,14 +62,23 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
 
 ## Koordinator Karar Agaci
 Koordinator yeni is geldiginde su sirayla karar verir:
-1. `docs/NEXT_TASK.md` ve `docs/TASK_LOCKS.md` aktif isi kapsiyor mu?
+1. Is mevcut kabul kriteri ve hedef kapsaminda mi?
    - Evet: mevcut task devam eder.
-   - Hayir: yeni task acilmasi gerekir.
-2. Dosya/alan cakismasi var mi?
+   - Hayir: 2. adima gecilir.
+2. Hedef ayni kalip yalniz yeni dosya veya lock alani mi gerekiyor?
+   - Evet: task genisletilir.
+   - Hayir: 3. adima gecilir.
+3. Yeni kabul kriteri, yeni risk sinifi, ayrik owner veya bagimsiz teslim ihtiyaci var mi?
+   - Evet: yeni task gerekir.
+   - Hayir: mevcut taskta kalinir.
+4. Repo genelinde aktif task sayisi 3'e ulasmis mi?
+   - Evet: yeni task acilmaz; aktif tasklardan biri kapanana kadar beklenir veya koordinatör yeniden dagitir.
+   - Hayir: 5. adima gecilir.
+5. Dosya/alan cakismasi var mi?
    - Evet: ajan dagitimi durur, once lock cozulur.
-   - Hayir: dagitim yapilabilir.
-3. Is ortak belge veya ortak entegrasyon alani mi?
-   - Evet: koordinator lock'u kendi elinde tutar.
+   - Hayir: 6. adima gecilir.
+6. Is ortak belge veya ortak entegrasyon alani mi?
+   - Evet: koordinatör lock'u kendi elinde tutar.
    - Hayir: ayrik ajan lock'larina boler.
 
 ## Koordinator Dagitim Formati
@@ -85,8 +104,9 @@ Asagidaki durumlardan biri varsa koordinator isi durdurur:
 1. active lock cakismasi
 2. yanlis branch
 3. WSL hizalama kaniti yok
-4. aktif task kapanmadan yeni kapsam acilmaya calisiliyor
+4. ayni kapsam icin gereksiz yeni task acilmaya calisiliyor
 5. task karti checklistleri veya kapanis kaniti eksik
+6. repo genelindeki aktif task sayisi 3'u asiyor
 
 ## Koordinator Kapanis Sonrasi Davranisi
 Koordinator is bitince tek mesajda su 3 seyi verir:
@@ -147,3 +167,4 @@ Koordinator karar cevabi yalniz su 4 satirla verilir:
    - `Preview URL`
 4. Farkli worktree'de patch yazip baska worktree preview'u gostermek yasaktir.
 5. UI merge karari yalniz `Edit Source == Mount Source` dogrulandiysa verilir.
+

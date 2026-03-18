@@ -1,4 +1,4 @@
-# TASK-XXX
+﻿# TASK-XXX
 
 Durum: `TODO | DOING | DONE`  
 Ajan: `agent-name`  
@@ -7,6 +7,11 @@ Baslangic: `YYYY-MM-DD HH:mm`
 
 ## Gorev Ozeti
 - Bu gorevin amaci
+
+## Task Karari
+- [ ] mevcut task devam
+- [ ] task genisletme
+- [ ] yeni task
 
 ## In Scope
 - [ ] Degisiklik 1
@@ -21,7 +26,7 @@ Baslangic: `YYYY-MM-DD HH:mm`
 - `path/two`
 
 ## Preview Kontrati
-- Lane: `main | design | n/a`
+- Lane: `main | design-preview | n/a`
 - Preview URL: `n/a`
 - Mount Source: `n/a`
 - Edit Source: `n/a`
@@ -64,4 +69,3 @@ powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 
 ## Risk / Not
 - Riskler ve geri donus notu
-

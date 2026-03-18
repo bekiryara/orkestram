@@ -1,4 +1,4 @@
-# AGENTS.md
+﻿# AGENTS.md
 
 Bu repo'ya gelen her ajan bu dosyayi ve asagidaki iki dokumani okumadan ise baslamaz:
 - `docs/REPO_DISCIPLINE_TR.md`
@@ -17,9 +17,17 @@ Ajan terminali `D:\orkestram` altinda acilsa bile kod degisikligine gecmeden onc
 2. Sadece kendi branch'inde calis:
    - `agent/<ajan>/<task-id>`
 3. Gorev almadan lock ac:
-   - `docs/TASK_LOCKS.md` icine tek `active` kayit
+   - `docs/TASK_LOCKS.md` icine kendi gorevi icin `active` kayit
 4. Sadece lock'ta yazan dosyalara dokun.
 5. Is bitince lock'u `closed` yap.
+
+Kural:
+1. Repo genelinde ayni anda en fazla 3 `active` task olabilir.
+2. Her ajan ayni anda yalniz 1 `active` task tasir.
+3. Ayni kapsamda revize veya kapanis eksigi varsa yeni task acilmaz; mevcut task devam eder.
+4. Hedef ayni kalip yeni dosya gerekiyorsa task koordinatör onayi ile genisletilir.
+5. Yeni task ancak yeni kabul kriteri, yeni risk sinifi, yeni lock alani veya ayrik owner gerektiriyorsa acilir.
+6. `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md` ve `docs/WORKLOG.md` merkezi koordinasyon alanidir; paralel kapanis gerekiyorsa koordinatör kontrollu ilerlenir.
 
 ## Zorunlu Dogrulama
 Commit/push oncesi zorunlu:
@@ -81,3 +89,4 @@ Koordinator, sistem okumasindan sonra senden tek net karar ister:
 1. mevcut task devam edecek
 2. yeni task acilacak
 3. is ajanlara dagitilacak
+

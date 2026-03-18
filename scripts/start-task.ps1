@@ -1,4 +1,4 @@
-param(
+﻿param(
     [Parameter(Mandatory = $true)]
     [string]$TaskId,
 
@@ -31,6 +31,7 @@ $taskFile = "docs/tasks/$TaskId.md"
 $templatePath = "docs/tasks/_TEMPLATE.md"
 $locksPath = "docs/TASK_LOCKS.md"
 $nextTaskPath = "docs/NEXT_TASK.md"
+$maxActiveTasks = 3
 
 if (-not (Test-Path -LiteralPath $templatePath)) {
     Fail "Task template bulunamadi ($templatePath)."
@@ -49,8 +50,12 @@ $locksRaw = Get-Content -Path $locksPath -Raw
 if ($locksRaw -match [regex]::Escape("| $TaskId |")) {
     Fail "TASK_LOCKS icinde ayni TaskId mevcut. Task ID tekrar kullanilamaz."
 }
-if ($locksRaw -match '\|[^\r\n]*\|\s*active\s*\|') {
-    Fail "TASK_LOCKS icinde aktif task var. Yeni task acmadan once mevcut active lock kapatilmalidir."
+$activeTaskCount = ([regex]::Matches($locksRaw, '\|[^\r\n]*\|\s*active\s*\|')).Count
+if ($activeTaskCount -ge $maxActiveTasks) {
+    Fail "TASK_LOCKS icinde $activeTaskCount aktif task var. En fazla $maxActiveTasks aktif task acilabilir."
+}
+if ($locksRaw -match "\|[^\r\n]*\|\s*$Agent\s*\|[^\r\n]*\|\s*active\s*\|") {
+    Fail "$Agent icin zaten aktif task var. Her ajan ayni anda yalniz 1 aktif task tasiyabilir."
 }
 
 $localBranchHit = git branch --list $Branch
@@ -86,8 +91,7 @@ $taskContent = $taskContent.Replace('`agent/agent-name/task-xxx`', ('`' + $Branc
 $taskContent = $taskContent.Replace('`YYYY-MM-DD HH:mm`', ('`' + $nowShort + '`'))
 $taskContent = $taskContent.Replace('- Bu gorevin amaci', ('- ' + $taskSummary))
 $taskContent = [regex]::Replace($taskContent, '(?s)## Lock Dosyalari\r?\n- `path/one`\r?\n- `path/two`', "## Lock Dosyalari`r`n$lockSection")
-$taskContent = $taskContent.Replace('powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick', 'powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick')
-Set-Content -Path $taskFile -Value $taskContent
+Set-Content -Encoding utf8 -Path $taskFile -Value $taskContent
 Write-Host "[start-task] step-1 task file -> $taskFile"
 Write-Host "[start-task] note: task owner checklistleri gercek sonuca gore doldurmak, WORKLOG/TASK_LOCKS/NEXT_TASK kapanisini yapmak ve teslim kanitini sunmak zorundadir"
 
@@ -97,9 +101,23 @@ Add-Content -Path $locksPath -Value $lockLine
 Write-Host "[start-task] step-2 lock row -> $locksPath"
 
 $nextRaw = Get-Content -Path $nextTaskPath -Raw
+$nextRaw = $nextRaw -replace 'Durum: `READY`', 'Durum: `ACTIVE`'
 $nextRaw = $nextRaw -replace 'Durum: `IDLE`', 'Durum: `ACTIVE`'
-$nextRaw = $nextRaw -replace '1\. Aktif koordinator gorevi yok\.', ('1. `' + $TaskId + '` - ' + $taskSummary)
-Set-Content -Path $nextTaskPath -Value $nextRaw
+$activeLine = '- `' + $TaskId + '` - ' + $taskSummary
+if ($nextRaw -match '## Aktif Gorevler \(Tek Kaynak\)') {
+    $nextRaw = $nextRaw -replace '## Aktif Gorevler \(Tek Kaynak\)', '## Aktif Gorevler (Merkezi Koordinasyon)'
+}
+if ($nextRaw -match '1\. `YOK`.*') {
+    $nextRaw = $nextRaw -replace '1\. `YOK`.*', ('1. `' + $TaskId + '` - ' + $taskSummary)
+} else {
+    $activeMatches = [regex]::Matches($nextRaw, '(?m)^\d+\. `TASK-\d{3}` - .+$')
+    $nextIndex = $activeMatches.Count + 1
+    if ($nextIndex -gt $maxActiveTasks) {
+        Fail "NEXT_TASK icinde zaten $($activeMatches.Count) aktif gorev listelenmis. En fazla $maxActiveTasks aktif gorev desteklenir."
+    }
+    $nextRaw = [regex]::Replace($nextRaw, '(## Aktif Gorevler \(Merkezi Koordinasyon\)\r?\n)', "$1$nextIndex. `$TaskId` - $taskSummary`r`n", 1)
+}
+Set-Content -Encoding utf8 -Path $nextTaskPath -Value $nextRaw
 Write-Host "[start-task] step-3 next task -> $nextTaskPath"
 
 git checkout -b $Branch | Out-Null

@@ -1,4 +1,4 @@
-# TASK LOCKS
+﻿# TASK LOCKS
 
 Durumlar:
 - `active`: gorev acik, lock var
@@ -82,5 +82,8 @@ Sabit Ajan Kimlikleri:
 
 | TASK-064 | codex | agent/codex/task-064 | closed | docs/tasks/TASK-064.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,AGENTS.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/tasks/_TEMPLATE.md,docs/WORKLOG.md | 2026-03-17 14:52:28 | 2026-03-17 14:58:00 | TASK-063'e superseded edildi |
 | TASK-065 | codex-b | agent/codex-b/task-065 | closed | docs/tasks/TASK-065.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php,local-rebuild/apps/orkestram/public/assets/v1.css,local-rebuild/apps/izmirorkestra/public/assets/v1.css,local-rebuild/apps/orkestram/database/seeders/**,local-rebuild/apps/izmirorkestra/database/seeders/**,local-rebuild/apps/orkestram/database/factories/**,local-rebuild/apps/izmirorkestra/database/factories/**,local-rebuild/apps/orkestram/app/Console/Commands/**,local-rebuild/apps/izmirorkestra/app/Console/Commands/**,local-rebuild/apps/orkestram/storage/app/public/**,local-rebuild/apps/izmirorkestra/storage/app/public/**,docs/WORKLOG.md | 2026-03-17 15:40:00 | 2026-03-18 00:30:00 | Listing detail UI v1 ve mevcut demo veri audit'i tamamlandi; whitelist/idempotent fixture otomasyonu ayri taska ayrilacak |
+
+
+| TASK-066 | codex | agent/codex/task-066 | closed | docs/tasks/TASK-066.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,AGENTS.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/tasks/_TEMPLATE.md,scripts/start-task.ps1,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/WORKLOG.md | 2026-03-19 00:01:37 | 2026-03-19 01:09:56 | Kontrollu paralel task, task genisletme ve merkezi koordinasyon kurallari resmi disipline alindi; pre-pr PASS |
 
 

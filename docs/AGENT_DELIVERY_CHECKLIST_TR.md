@@ -1,4 +1,4 @@
-# Agent Delivery Checklist (TR)
+﻿# Agent Delivery Checklist (TR)
 
 Amac: Ajan tesliminde dogrulama sirasi, paylasilacak kanit formati ve yari kesilen isin resume protokolunu tek yerde standardize etmek.
 
@@ -10,6 +10,8 @@ Amac: Ajan tesliminde dogrulama sirasi, paylasilacak kanit formati ve yari kesil
 4. `docs/TASK_LOCKS.md` icine tek bir `active` kayit ac.
 5. Lock'a yazilmayan dosyalara dokunma.
 6. `git remote -v` ile `origin`in GitHub oldugunu, local WSL referansi varsa `canonical` olarak ayrildigini dogrula.
+7. Ayni kapsam revizesi gerekiyorsa yeni task acma; once mevcut taskin devam edip etmeyecegini kontrol et.
+8. Hedef ayni kalip yeni dosya gerekiyorsa bunu `task genisletme` olarak task kartina ve lock listesine isle.
 
 ## 2. Runtime Kisa Hijyen Checklisti
 Her teslim ve smoke turundan once su 4 kontrol yapilir:
@@ -76,6 +78,7 @@ Kural:
 2. Kanitsiz madde isaretlenmez.
 3. Task karti placeholder birakilmaz.
 4. Bu alanlar doldurulmadan gorev teslim edilmis sayilmaz.
+5. `Task Karari` bolumunde yalniz tek secim isaretlenir: `mevcut task devam`, `task genisletme` veya `yeni task`.
 
 ## 4B. UI / Tasarim Teslim Ek Kaniti
 UI gorevlerinde zorunlu ek teslim paketi:
