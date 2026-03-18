@@ -1,4 +1,4 @@
-# Agent Lock Matrix (TR)
+﻿# Agent Lock Matrix (TR)
 
 Tarih: 2026-03-16
 
@@ -62,6 +62,29 @@ Koordinator devralma akisi:
    - `agent/codex/<task-id>`
 4. Devralinan kapsam disina tasmaz; sadece bloke eden dosyalari locklar.
 5. Is bitince kapanis kanitini veya neden kanit alinamadigini not eder.
+
+## 4A) Stale Cleanup / Koruma / Devralma Matrisi
+
+| Durum | Karar | Owner | Zorunlu Kanit |
+|---|---|---|---|
+| Aktif task yok, kirli branch var, icerik degeri belirsiz | `koru` | Koordinator kaydi acar, owner daha sonra netlesir | worktree path, branch, upstream, status sayisi, temsilci dosyalar |
+| `main` uzerinde kirli worktree | `koru` veya `devral` | Koordinator | handoff kaydi, neden `main`de kaldigi, yeni task gerekip gerekmedigi |
+| Task kapali, yalniz satir-sonu/encoding drift'i var | `temizle` | Koordinator veya ayni owner | `git diff` kaniti, drift sinifi, cleanup sonrasi temiz status |
+| Sahipsiz stale kapsam release/merge blokaji uretiyor | `devral` | Koordinator | bloke nedeni, eski owner/task notu, yeni task kaydi |
+| Aktif ajan hala duzenli ilerleme notu veriyor | cleanup/devralma yok | Mevcut owner | mevcut aktif lock ve ilerleme kaniti |
+
+Kurallar:
+1. `temizle` karari resmi kayit olmadan uygulanmaz.
+2. `koru` sinifi potansiyel is kaybini onleme sinifidir; varsayilan guvenli karar budur.
+3. `devral` yalniz bloke kaldiran minimum kapsama iner; stale worktree'deki tum dosyalar otomatik koordinator lock'una alinmaz.
+
+## 4B) Destructive Cleanup Kisitlari
+
+1. `git reset --hard`, `git clean`, `git checkout --`, toplu `git restore` gibi komutlar yalniz resmi stale cleanup karari uzerinden uygulanir.
+2. Baska ajan worktree'sinde destructive cleanup oncesi `SESSION_HANDOFF_TR.md` kaydi zorunludur.
+3. Cleanup komutu uygulanacaksa once temsilci diff kaniti alinmis olmalidir.
+4. Cleanup sonrasi `git status --short` ve gerekiyorsa `scripts/agent-status.ps1 -Detailed` yeniden kayda alinir.
+5. Kanit paketi yoksa lock kapanmaz ve cleanup tamamlandi sayilmaz.
 
 ## 5) Koordinatorun Devralamayacagi Durumlar
 

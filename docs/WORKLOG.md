@@ -1,4 +1,4 @@
-# WORKLOG (Gunluk Is Kaydi)
+﻿# WORKLOG (Gunluk Is Kaydi)
 
 Bu dosyada her ajan turu icin tek kayit acilir.  
 Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
@@ -1568,3 +1568,28 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - Bu task stale worktree temizligi yapmadi; yalniz gorunurluk, handoff ve karar zemini kurdu. Temizlik ve devralma icin sonraki task gerekir.
+
+- Tarih: 2026-03-19
+- Task: `TASK-068`
+- Is Ozeti:
+  - Stale worktree'ler icin `koru | devral | temizle` karar siniflari resmi hale getirildi.
+  - `OPERATING_MODEL_TR.md` ve `AGENT_LOCK_MATRIX_TR.md` icinde destructive cleanup guvenceleri, zorunlu kanit paketi ve koordinator karar akisi eklendi.
+  - `SESSION_HANDOFF_TR.md` guncellenerek `codex-a`, `codex-b` ve `codex-c` worktree'leri gecici karar siniflariyla kayda alindi.
+  - `docs/TASK_LOCKS.md` icindeki `TASK-067` bozuk kapanis satiri resmi lock listesiyle duzeltildi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-068.md`
+  - `docs/OPERATING_MODEL_TR.md`
+  - `docs/AGENT_LOCK_MATRIX_TR.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git fetch --all --prune`
+  - `git remote -v`
+  - `git branch -vv`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && pwd && git rev-parse --show-toplevel && git branch --show-current && git status --short"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+- Sonuc:
+  - `IN_PROGRESS`
+- Not:
+  - Bu task standart ve karar zemini kurar; stale worktree'lerde destructive cleanup sonraki resmi karara birakilir.

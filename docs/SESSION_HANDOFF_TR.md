@@ -1,53 +1,59 @@
 ﻿# Session Handoff (TR)
 
-Guncelleme Zamani: $nowShort
-Koordinator Branch: gent/codex/task-067
-Koordinator Task: yok
+Guncelleme Zamani: 2026-03-19 02:35
+Koordinator Branch: agent/codex/task-068
+Koordinator Task: TASK-068
 
 ## Aktif Tasklar
-1. YOK - TASK-067 operasyon modeli, session handoff ve ajan durum panosu standardi ile kapatildi.
+1. TASK-068 - stale worktree temizligi, koruma ve koordinator devralma standardi resmi operasyon akisina baglaniyor.
 
 ## Ajan / Worktree Durumu
 1. codex
    - Worktree: /home/bekir/orkestram-k
-   - Branch: gent/codex/task-067
-   - Aktif task: yok
-   - Status ozeti: u branch kapanis commitinden sonra temizlenmelidir
-   - Not: Koordinator worktree bu taski kapattiktan sonra temiz duruma donecek.
+   - Branch: agent/codex/task-068
+   - Aktif task: TASK-068
+   - Status ozeti: resmi task acilisi nedeniyle merkezi dokuman degisiklikleri var
+   - Karar sinifi: n/a
+   - Not: Koordinator worktree stale aday degil; aktif task kapsaminda ilerliyor.
 2. codex-a
    - Worktree: /home/bekir/orkestram-a
-   - Branch: gent/codex-a/task-056
+   - Branch: agent/codex-a/task-056
    - Aktif task: yok
    - Status ozeti: 32 kirli dosya
-   - Not: Aktif task kaydi olmadan kirli worktree; stale aday.
+   - Karar sinifi: koru
+   - Not: Aktif task kaydi olmadan kirli branch; once kapsam/handoff netlesmeden cleanup yok.
 3. codex-b
    - Worktree: /home/bekir/orkestram-b
    - Branch: main
    - Aktif task: yok
    - Status ozeti: 40 kirli dosya
-   - Not: main uzerinde kirli durum; stale aday.
+   - Karar sinifi: devral-degerlendir
+   - Not: `main` uzerinde kirli durum; once temsilci diff ve kapsam cikarilacak, sonra resmi cleanup/devralma taski acilacak.
 4. codex-c
    - Worktree: /home/bekir/orkestram-c
    - Branch: main
    - Aktif task: yok
    - Status ozeti: 34 kirli dosya
-   - Not: main uzerinde kirli durum; stale aday.
+   - Karar sinifi: devral-degerlendir
+   - Not: `main` uzerinde kirli durum; `codex-b` ile ayni guvenli karar akisi uygulanacak.
 
 ## Preview / Source Durumu
-1. Bu oturum stale worktree gorunurlugu odaklidir; preview/source eslesmesi degistirilmemistir.
+1. Bu oturum stale worktree karar standardi odaklidir; preview/source eslesmesi degistirilmemistir.
 2. UI review kararlari icin mevcut Edit Source == Mount Source kurali gecerlidir.
 
 ## Bugun Alinan Kararlar
 1. Stale worktree temizligi yeni urun tasklari icine gomulmeyecek.
-2. Once gorunurluk, handoff ve ajan durum panosu standardi kurulacak.
-3. Temizlik veya devralma gerekiyorsa sonraki taskta resmi karar ile ilerlenilecek.
+2. Stale adaylar artik `koru | devral | temizle` siniflarindan biri ile etiketlenecek.
+3. Yikici cleanup komutlari resmi kayit ve kanit olmadan uygulanmayacak.
+4. `main` uzerinde kirli stale worktree icin varsayilan karar dogrudan cleanup olmayacak; once devralma/koruma degerlendirilecek.
 
 ## Acik Riskler
-1. orkestram-b ve orkestram-c worktree'leri main uzerinde kirli gorunuyor.
+1. orkestram-b ve orkestram-c worktree'leri `main` uzerinde kirli gorunuyor.
 2. orkestram-a aktif task olmadan kirli branch tasiyor.
 3. WSL status sayimi ile Windows shell status gorunumu farkli olabilir; karar kaynagi olarak koordinator raporu standardize edilmelidir.
+4. `TASK-067` kapanis satiri `docs/TASK_LOCKS.md` icinde bozuk kayit tasiyordu; merkezi kayit temizleniyor.
 
 ## Sonraki Adim
-1. Stale worktree temizligi ve devralma standardi icin ayri task ac.
-2. scripts/agent-status.ps1 ciktisini yeni task acma oncesi zorunlu okuma haline getir.
-3. Gerekirse stale worktree temizligi oncesi karar kayitlarini docs/SESSION_HANDOFF_TR.md icinde guncelle.
+1. TASK-068 icinde stale worktree karar/cleanup/devralma standardini finalize et.
+2. `codex-b` ve `codex-c` icin temsilci diff ve cleanup riski siniflandirmasini ayri resmi taska hazirla.
+3. `codex-a` icin task-056 kalintisinin korunacak mi devralinacak mi oldugunu kanitla netlestir.

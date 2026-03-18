@@ -1,4 +1,4 @@
-# Operating Model (TR)
+﻿# Operating Model (TR)
 
 Tarih: 2026-03-19
 
@@ -98,12 +98,49 @@ Kural:
 1. Stale worktree temizligi ayni taskta sessizce yapilmaz.
 2. Once gorunurluk ve handoff dosyasina islenir.
 3. Temizlik veya devralma gerekiyorsa ayri task veya koordinator karari ile ilerlenir.
+4. Yikici komut (`reset`, `clean`, `checkout --`, toplu `restore`) uygulanmadan once karar sinifi yazili hale getirilir.
+
+## 6A) Stale Karar Siniflari
+
+Her stale aday su siniflardan tam biri ile etiketlenir:
+1. `koru`
+   - Worktree icinde potansiyel deger tasiyan ama aktif task kaydi olmayan is vardir.
+   - Once owner, branch ve kapsam handoff kaydina yazilir; sessiz cleanup yoktur.
+2. `devral`
+   - Koordinator, bloke edici veya sahipsiz stale kapsam icin resmi task acar.
+   - Eski durum handoff ve lock kaydinda korunur; devralinan kapsam minimum tutulur.
+3. `temizle`
+   - Degisimler task-disi, tekrar uretilebilir veya kanitli sekilde satir-sonu/encoding drift'idir.
+   - Cleanup ancak resmi kayit ve kanit sonrasi uygulanir.
+
+## 6B) Stale Karar Akisi
+
+Koordinator stale aday gordugunde su sirayi izler:
+1. `scripts/agent-status.ps1 -Detailed` raporunu alir.
+2. Su kanit paketini toplar:
+   - worktree path
+   - branch ve upstream
+   - `git status --short` veya status sayisi
+   - temsilci dosya/path listesi
+   - aktif task uyusmazligi varsa onun notu
+3. Adayi `koru | devral | temizle` olarak siniflar.
+4. Karari `docs/SESSION_HANDOFF_TR.md` icine yazar.
+5. Yalniz bundan sonra yeni task acar veya cleanup/devralma karari uygular.
+
+## 6C) Destructive Cleanup Guvenceleri
+
+1. Baska ajanin worktree'sinde yikici temizlik, ayri task veya acik koordinator karari olmadan uygulanmaz.
+2. `main` uzerinde kirli stale worktree gorulurse varsayilan karar `temizle` degil, once `koru` veya `devral` degerlendirmesidir.
+3. Icerik farki yok, yalniz satir-sonu/encoding drift'i varsa koordinator bunu kanitlayip kendi worktree'sinde temizleyebilir.
+4. `git diff` icerik farki tasiyan stale worktree'de cleanup karari owner/handoff karari olmadan verilmez.
+5. Cleanup sonrasi ayni task icinde tekrar `agent-status` raporu alinip handoff dosyasina sonuc yazilir.
 
 ## 7) Stop Kurallari
 
 1. `SESSION_HANDOFF_TR.md` guncel degil ve ajan durum panosu okunmadiysa koordinator dagitim kararini bekletir.
 2. Stale aday worktree yeni gorev alacaksa once rapor, sonra karar alinir.
 3. Ortak operasyon dosyalarinda paralel yazim yoktur.
+4. Stale worktree icin karar sinifi yazilmadan cleanup/devralma uygulanmaz.
 
 ## 8) Kapanis
 
