@@ -87,3 +87,5 @@ Sabit Ajan Kimlikleri:
 | TASK-066 | codex | agent/codex/task-066 | closed | docs/tasks/TASK-066.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,AGENTS.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/tasks/_TEMPLATE.md,scripts/start-task.ps1,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/WORKLOG.md | 2026-03-19 00:01:37 | 2026-03-19 01:09:56 | Kontrollu paralel task, task genisletme ve merkezi koordinasyon kurallari resmi disipline alindi; pre-pr PASS |
 
 
+| TASK-067 | codex | agent/codex/task-067 | closed || 2026-03-19 01:42:09 | 2026-03-19 02:08:21 | Session handoff, ajan durum panosu ve stale worktree gorunurlugu resmi operasyon modeline baglandi; pre-pr PASS |
+

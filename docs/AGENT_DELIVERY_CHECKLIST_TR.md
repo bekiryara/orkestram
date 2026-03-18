@@ -3,7 +3,7 @@
 Amac: Ajan tesliminde dogrulama sirasi, paylasilacak kanit formati ve yari kesilen isin resume protokolunu tek yerde standardize etmek.
 
 ## 1. Goreve Baslamadan Once
-1. `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md` ve `docs/MULTI_AGENT_RULES_TR.md` oku.
+1. `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md` ve `docs/SESSION_HANDOFF_TR.md` oku.
 2. `git fetch --all --prune` calistir.
 3. Sadece kendi branch'inle ilerle:
    - `agent/<ajan>/<task-id>`
@@ -48,6 +48,7 @@ Teslim mesaji kisa ve kanit odakli olur. Asgari format:
 4. Zorunlu 4 kanit
 5. Task kartindaki checklistlerin gercek sonuca gore guncellendigi notu
 6. Kapanis adimlarinin tamamlandigi notu
+7. worktree durumunun ve gerekiyorsa stale aday notunun paylasildigi ozet
 
 Zorunlu 4 kanit aynen paylasilir:
 
@@ -121,6 +122,7 @@ Koordinator veya baska ajan devralacaksa son mesajda su net olur:
 2. Acik kalan kisim
 3. Son calisan komut/dogrulama
 4. Branch ve lock durumu
+5. worktree status ozeti ve stale aday bilgisi
 
 Bu bilgi yoksa is resume icin hazir sayilmaz.
 

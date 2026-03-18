@@ -1538,3 +1538,33 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - Kapanis sonrasi aktif task yok; koordinasyon panosu `READY` durumuna cekildi.
+
+- Tarih: 2026-03-19
+- Task: `TASK-067`
+- Is Ozeti:
+  - `OPERATING_MODEL_TR.md` ile tek merkez operasyon modeli eklendi; task acma, task genisletme, yeni task, stale worktree gorunurlugu ve session handoff akisi tek referansa toplandi.
+  - `SESSION_HANDOFF_TR.md` ve `scripts/agent-status.ps1` eklendi; koordinator yeni is oncesi ajan/worktree branch, status, upstream ve stale aday durumunu dosya ve script uzerinden gorebilir hale geldi.
+  - `AGENTS.md`, `REPO_DISCIPLINE_TR.md`, `MULTI_AGENT_RULES_TR.md`, `AGENT_DELIVERY_CHECKLIST_TR.md` ve `AGENT_LOCK_MATRIX_TR.md` handoff ve stale worktree gorunurlugu modeline hizalandi.
+  - Kanitli stale adaylar: `codex-a` (`32 kirli dosya`, branch `agent/codex-a/task-056`), `codex-b` (`40 kirli dosya`, branch `main`), `codex-c` (`34 kirli dosya`, branch `main`).
+- Degisen Dosyalar:
+  - `AGENTS.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `docs/AGENT_LOCK_MATRIX_TR.md`
+  - `docs/OPERATING_MODEL_TR.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `scripts/agent-status.ps1`
+  - `docs/tasks/TASK-067.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1`
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+  - `git push -u origin agent/codex/task-067`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Bu task stale worktree temizligi yapmadi; yalniz gorunurluk, handoff ve karar zemini kurdu. Temizlik ve devralma icin sonraki task gerekir.

@@ -15,6 +15,7 @@ Amac:
 4. Lock acilmadan degisiklik yapilmaz; lock kapanmadan gorev tamamlandi sayilmaz.
 5. Ajan sadece kendi branch'i ve kendi worktree klasoru icinde calisir.
 6. Koordinator (`codex`) yalnizca operasyonel dokuman, stale lock temizligi veya resmi devralma icin dosya locklar.
+7. `scripts/agent-status.ps1` salt-okuma gorunurluk araci oldugu icin lock gerektirmez.
 
 ## 2) Cakismasiz Lock Matrisi
 
@@ -26,6 +27,7 @@ Amac:
 | Ayrik dosyalar | `docs/A.md` ve `docs/B.md` | Serbest | Kesisim yok |
 | Ayrik klasorler | `apps/orkestram/**` ve `apps/izmirorkestra/**` | Serbest | Fiziksel calisma alani ayrik |
 | Salt okuma ihtiyaci | Ajan sadece inceleme yapiyor | Lock gerekmez | Yazma yoksa sahiplik yok |
+| Ajan durum panosu raporu | `scripts/agent-status.ps1` calisiyor | Serbest | Salt okuma gorunurlugu merkezi raporlar |
 | Ortak operasyon dosyasi | `docs/TASK_LOCKS.md` | Sadece aktif lock acan ajan veya koordinator yazar | Tablo tek kaynak kabul edilir |
 | Kapanis kaniti eksik gorev | Kod tamam ama `pre-pr` kaniti yok | Lock `active` kalir | Gorev bitse bile resmi kapanis yok |
 

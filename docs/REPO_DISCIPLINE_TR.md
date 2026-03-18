@@ -123,23 +123,27 @@ Her gorevde dogrulama oncesi su 4 kontrol yapilir:
    - YOK yalniz hic aktif task yoksa kullanilir.
 2. `docs/WORKLOG.md`
    - Her ajan turu sonunda degisen dosya + komut + PASS/FAIL kaydi zorunlu.
-3. `docs/ROLLBACK_POINTS.md`
+3. `docs/SESSION_HANDOFF_TR.md`
+   - Aktif tasklar, worktree durumlari, stale adaylar ve sonraki adim icin merkezi operasyon hafizasidir.
+4. `scripts/agent-status.ps1`
+   - Ajan/worktree branch, status, upstream ve stale aday durumunu salt-okuma raporlar.
+5. `docs/ROLLBACK_POINTS.md`
    - Riskli degisimlerden once geri donus noktasi kaydi acilir.
-4. `scripts/validate.ps1`
+6. `scripts/validate.ps1`
    - "Bitti" demeden once zorunlu dogrulama komutu.
    - Standart:
      - `powershell -ExecutionPolicy Bypass -File scripts/validate.ps1 -App both`
-5. `scripts/pre-pr.ps1`
+7. `scripts/pre-pr.ps1`
    - PR acmadan once zorunlu hizli kapidir.
    - Standart:
      - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
-6. `.github/pull_request_template.md`
+8. `.github/pull_request_template.md`
    - PR acilisinda ozet + test + dosya listesi zorunlu format.
-7. `scripts/security-gate.ps1`
+9. `scripts/security-gate.ps1`
    - Potansiyel secret/key sizintilarini tarar.
    - Standart:
      - `powershell -ExecutionPolicy Bypass -File scripts/security-gate.ps1`
-8. `docs/TASK_LOCKS.md` + `docs/tasks/_TEMPLATE.md`
+10. `docs/TASK_LOCKS.md` + `docs/tasks/_TEMPLATE.md`
    - Gorev lock ve task kaydi script bagimsiz (manual) acilir.
    - Standart task acma sirasi:
      1. `docs/tasks/TASK-0xx.md`
@@ -149,13 +153,14 @@ Her gorevde dogrulama oncesi su 4 kontrol yapilir:
    - Mekanik komut:
      - `powershell -ExecutionPolicy Bypass -File scripts/start-task.ps1 -TaskId TASK-0xx -Agent codex -Files "path/one,path/two" -Note "kisa ozet"`
 
-
 Kurallar:
 1. Repo genelinde ayni anda en fazla 3 `active` task olabilir.
 2. Ayni kapsamda revize, polish veya kapanis eksigi icin yeni task acilmaz; mevcut task devam eder.
 3. Hedef ayni kalip yeni dosya gerekiyorsa task genisletilir; lock listesi ve task karti guncellenir.
 4. Yeni task ancak yeni kabul kriteri, yeni risk sinifi, yeni lock alani veya ayrik owner gerektiriyorsa acilir.
-5. `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md` ve `docs/WORKLOG.md` merkezi koordinasyon alanidir; bu dosyalarda paralel kapanis gerekiyorsa koordinatör kontrollu entegrasyon uygulanir.
+5. `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md`, `docs/WORKLOG.md` ve `docs/SESSION_HANDOFF_TR.md` merkezi koordinasyon alanidir; bu dosyalarda paralel kapanis gerekiyorsa koordinat?r kontrollu entegrasyon uygulanir.
+6. Koordinator yeni is veya dagitim oncesi `scripts/agent-status.ps1` raporunu okuyarak stale worktree adaylarini kontrol eder.
+
 ## 11) Yeni Gelen Ajan Onboarding (Zorunlu)
 
 Her yeni ajan ilk turda su sirayi uygular:

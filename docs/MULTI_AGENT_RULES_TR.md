@@ -43,7 +43,7 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
 ## Not
 1. Ayni makinede 3 ajan calisacaksa farkli klasor/worktree onerilir.
 2. Lock/Task kaydi olmayan is "resmi is" sayilmaz.
-3. `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md` ve `docs/WORKLOG.md` merkezi koordinasyon alanidir; paralel kapanis ve entegrasyon yalniz koordinatör kontrollu yapilir.
+3. `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md`, `docs/WORKLOG.md` ve `docs/SESSION_HANDOFF_TR.md` merkezi koordinasyon alanidir; paralel kapanis ve entegrasyon yalniz koordinat?r kontrollu yapilir.
 
 ## Yeni Gelen Ajan Kurali (Zorunlu)
 1. Ilk adimda `AGENTS.md` okunur.
@@ -80,6 +80,9 @@ Koordinator yeni is geldiginde su sirayla karar verir:
 6. Is ortak belge veya ortak entegrasyon alani mi?
    - Evet: koordinatör lock'u kendi elinde tutar.
    - Hayir: ayrik ajan lock'larina boler.
+7. `scripts/agent-status.ps1` raporunda stale aday worktree var mi?
+   - Evet: once handoff dosyasina islenir, sonra dagitim karari verilir.
+   - Hayir: dagitim normal akar.
 
 ## Koordinator Dagitim Formati
 Koordinator ajan gorevi verirken su formati kullanir:
