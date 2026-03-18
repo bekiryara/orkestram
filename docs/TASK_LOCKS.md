@@ -89,5 +89,6 @@ Sabit Ajan Kimlikleri:
 
 | TASK-067 | codex | agent/codex/task-067 | closed | docs/tasks/TASK-067.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/OPERATING_MODEL_TR.md,docs/SESSION_HANDOFF_TR.md,AGENTS.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/AGENT_LOCK_MATRIX_TR.md,scripts/agent-status.ps1,docs/WORKLOG.md | 2026-03-19 01:42:09 | 2026-03-19 02:08:21 | Session handoff, ajan durum panosu ve stale worktree gorunurlugu resmi operasyon modeline baglandi; pre-pr PASS |
 
-| TASK-068 | codex | agent/codex/task-068 | active | docs/tasks/TASK-068.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/SESSION_HANDOFF_TR.md,docs/OPERATING_MODEL_TR.md,docs/AGENT_LOCK_MATRIX_TR.md | 2026-03-19 02:28:54 | 2026-03-19 02:28:54 | stale worktree temizligi ve devralma standardini resmi operasyon akisina bagla |
+| TASK-068 | codex | agent/codex/task-068 | closed | docs/tasks/TASK-068.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/SESSION_HANDOFF_TR.md,docs/OPERATING_MODEL_TR.md,docs/AGENT_LOCK_MATRIX_TR.md | 2026-03-19 02:28:54 | 2026-03-19 03:05:00 | stale worktree temizligi ve devralma standardi resmi operasyon akisina baglandi; pre-pr PASS |
+
 

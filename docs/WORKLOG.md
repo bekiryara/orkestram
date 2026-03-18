@@ -1562,6 +1562,8 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Calistirilan Komutlar:
   - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1`
   - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+  - `git push -u origin agent/codex/task-068`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
   - `git push -u origin agent/codex/task-067`
   - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - Sonuc:
@@ -1589,7 +1591,15 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `git branch -vv`
   - `wsl -e bash -lc "cd /home/bekir/orkestram-k && pwd && git rev-parse --show-toplevel && git branch --show-current && git status --short"`
   - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+  - `git push -u origin agent/codex/task-068`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - Sonuc:
-  - `IN_PROGRESS`
+  - `PASS`
 - Not:
-  - Bu task standart ve karar zemini kurar; stale worktree'lerde destructive cleanup sonraki resmi karara birakilir.
+  - Bu task standart ve karar zemini kurdu; stale worktree'lerde destructive cleanup sonraki resmi cleanup/devralma taskina birakildi.
+
+
+
+
+
+

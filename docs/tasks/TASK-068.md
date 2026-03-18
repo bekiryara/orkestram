@@ -1,6 +1,6 @@
 ﻿# TASK-068
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex`  
 Branch: `agent/codex/task-068`  
 Baslangic: `2026-03-19 02:28`
@@ -47,35 +47,36 @@ Baslangic: `2026-03-19 02:28`
 ## Uygulama Adimlari
 - [x] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
 - [x] Branch dogrulandi: `agent/<ajan>/<task-id>`
-- [ ] Lock kapsam disina cikilmadi
-- [ ] Gorev kapsamindaki degisiklikler tamamlandi
-- [ ] Goreve ozel test/dogrulama calistirildi
+- [x] Lock kapsam disina cikilmadi
+- [x] Gorev kapsamindaki degisiklikler tamamlandi
+- [x] Goreve ozel test/dogrulama calistirildi
 
 ## Kabul Kriterleri
-- [ ] `OPERATING_MODEL_TR.md` stale worktree icin acik karar akisi ve stop kurallari icerir
-- [ ] `AGENT_LOCK_MATRIX_TR.md` destructive cleanup/devralma kosullarini ve kanit paketini netlestirir
-- [ ] `SESSION_HANDOFF_TR.md` mevcut stale adaylari `koru | devral | temizle` siniflariyla kaydeder
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
+- [x] `OPERATING_MODEL_TR.md` stale worktree icin acik karar akisi ve stop kurallari icerir
+- [x] `AGENT_LOCK_MATRIX_TR.md` destructive cleanup/devralma kosullarini ve kanit paketini netlestirir
+- [x] `SESSION_HANDOFF_TR.md` mevcut stale adaylari `koru | devral | temizle` siniflariyla kaydeder
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
-- [ ] `git branch --show-current`
-- [ ] `git branch -vv`
-- [ ] `git status --short`
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
-- [ ] Goreve ozel test/komut sonucu: `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+- [x] `git branch --show-current`
+- [x] `git branch -vv`
+- [x] `git status --short`
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- [x] Goreve ozel test/komut sonucu: `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
 - [x] `Edit Source == Mount Source` kaniti
-- [ ] Commit hash
+- [x] Commit hash: `e004cb6`
 
 ## Kapanis Adimlari
-- [ ] Task kartindaki checklistler gercek sonuca gore guncellendi
-- [ ] `docs/WORKLOG.md` guncellendi
-- [ ] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
-- [ ] `docs/NEXT_TASK.md` panosu guncellendi
-- [ ] Branch pushlandi
+- [x] Task kartindaki checklistler gercek sonuca gore guncellendi
+- [x] `docs/WORKLOG.md` guncellendi
+- [x] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
+- [x] `docs/NEXT_TASK.md` panosu guncellendi
+- [x] Branch pushlandi
 
 ## Komutlar
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed
+git push -u origin agent/codex/task-068
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ```
 

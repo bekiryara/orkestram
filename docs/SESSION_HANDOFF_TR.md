@@ -1,20 +1,20 @@
 ﻿# Session Handoff (TR)
 
-Guncelleme Zamani: 2026-03-19 02:35
+Guncelleme Zamani: 2026-03-19 03:05
 Koordinator Branch: agent/codex/task-068
-Koordinator Task: TASK-068
+Koordinator Task: yok
 
 ## Aktif Tasklar
-1. TASK-068 - stale worktree temizligi, koruma ve koordinator devralma standardi resmi operasyon akisina baglaniyor.
+1. YOK - TASK-068 stale worktree temizligi, koruma ve koordinator devralma standardini pre-pr PASS ile kapatti.
 
 ## Ajan / Worktree Durumu
 1. codex
    - Worktree: /home/bekir/orkestram-k
    - Branch: agent/codex/task-068
-   - Aktif task: TASK-068
-   - Status ozeti: resmi task acilisi nedeniyle merkezi dokuman degisiklikleri var
+   - Aktif task: yok
+   - Status ozeti: TASK-068 kapanis degisiklikleri var
    - Karar sinifi: n/a
-   - Not: Koordinator worktree stale aday degil; aktif task kapsaminda ilerliyor.
+   - Not: Koordinator worktree stale aday degil; branch kapanis pushundan sonra temizlenecek.
 2. codex-a
    - Worktree: /home/bekir/orkestram-a
    - Branch: agent/codex-a/task-056
@@ -51,9 +51,8 @@ Koordinator Task: TASK-068
 1. orkestram-b ve orkestram-c worktree'leri `main` uzerinde kirli gorunuyor.
 2. orkestram-a aktif task olmadan kirli branch tasiyor.
 3. WSL status sayimi ile Windows shell status gorunumu farkli olabilir; karar kaynagi olarak koordinator raporu standardize edilmelidir.
-4. `TASK-067` kapanis satiri `docs/TASK_LOCKS.md` icinde bozuk kayit tasiyordu; merkezi kayit temizleniyor.
 
 ## Sonraki Adim
-1. TASK-068 icinde stale worktree karar/cleanup/devralma standardini finalize et.
-2. `codex-b` ve `codex-c` icin temsilci diff ve cleanup riski siniflandirmasini ayri resmi taska hazirla.
-3. `codex-a` icin task-056 kalintisinin korunacak mi devralinacak mi oldugunu kanitla netlestir.
+1. `codex-b` ve `codex-c` icin temsilci diff ve cleanup riski siniflandirmasini ayri resmi taska hazirla.
+2. `codex-a` icin task-056 kalintisinin korunacak mi devralinacak mi oldugunu kanitla netlestir.
+3. Yeni stale cleanup/devralma taski acilacaksa once `docs/NEXT_TASK.md` ve `docs/TASK_LOCKS.md` uzerinden resmi karar ver.
