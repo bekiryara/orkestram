@@ -71,7 +71,7 @@ Baslangic: `2026-03-19 01:42`
 - [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - [x] Goreve ozel test/komut sonucu
 - [x] `Edit Source == Mount Source` kaniti
-- [ ] Commit hash
+- [x] Commit hash: `f7d3ae8`
 
 ## Kapanis Adimlari
 - [x] Task kartindaki checklistler gercek sonuca gore guncellendi
@@ -89,3 +89,4 @@ powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 
 ## Risk / Not
 - Bu task stale worktree'leri temizlemedi; yalniz gorunurluk, handoff ve karar sistemi kuruldu. `codex-a`, `codex-b` ve `codex-c` icin stale temizlik veya devralma karari ayri task gerektirir.
+
