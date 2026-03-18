@@ -70,7 +70,7 @@ Baslangic: `2026-03-19 00:01`
 - [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - [x] Goreve ozel test/komut sonucu
 - [x] `Edit Source == Mount Source` kaniti
-- [ ] Commit hash
+- [x] Commit hash: `8dccd6d`
 
 ## Kapanis Adimlari
 - [x] Task kartindaki checklistler gercek sonuca gore guncellendi
@@ -87,3 +87,4 @@ powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 
 ## Risk / Not
 - Koordinasyon dosyalari merkezi alan oldugu icin kural gevsetilirken lock cakismasi ve belge drift riski artabilir; bu nedenle en fazla 3 aktif task ve koordinator kontrollu entegrasyon birlikte uygulandi.
+
