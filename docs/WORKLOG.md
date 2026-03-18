@@ -1483,3 +1483,33 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 
 - Not:
   - Deterministic demo fixture kapsami ayni taskta acik kaldigi icin TASK-065 kapanmadi; sonraki adim whitelist demo veri/media kurulumudur.
+
+- Tarih: 2026-03-18
+- Task: `TASK-065`
+- Is Ozeti:
+  - Listing detail UI v1 sonucu iki appte parity ile korundu; `b9f3141` ile gelen quote flow ve sosyal kanit duzeltmeleri onayli son commit olarak kaldirildi.
+  - Design-preview'de kullanilan `demo-bando-sahil-seremonisi` ve `demo-bando-kordon-alayi` kayitlari `orkestram-local-mysql` uzerinden read-only audit ile dogrulandi; summary/content/fiyat/telefon/WhatsApp/galeri/features/attribute/yeni yorum dolulugu mevcut bulundu.
+  - Ayrik whitelist/idempotent fixture otomasyonunun UI gorevinin zorunlu parcasi olmadigi netlestirildi; bu kalan kisim yeni taska ayrilacak sekilde TASK-065 kapatildi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-065.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git branch --show-current`
+  - `git branch -vv`
+  - `git status --short`
+  - `docker exec orkestram-local-mysql mysql -uorkestram -porkestram -D orkestram_local -e "SELECT id, site, slug, name, status, category_id, city, district, cover_image_path, phone, whatsapp FROM listings WHERE slug IN ('demo-bando-sahil-seremonisi','demo-bando-kordon-alayi','test-bando-a','test-bando-b') ORDER BY slug, site;"`
+  - `docker exec orkestram-local-mysql mysql -uorkestram -porkestram -D orkestram_local -e "SELECT l.slug, l.site, COUNT(DISTINCT lk.id) AS like_count, COUNT(DISTINCT f.id) AS feedback_count FROM listings l LEFT JOIN listing_likes lk ON lk.listing_id = l.id LEFT JOIN listing_feedback f ON f.listing_id = l.id WHERE l.slug IN ('demo-bando-sahil-seremonisi','demo-bando-kordon-alayi','test-bando-a','test-bando-b') GROUP BY l.slug, l.site ORDER BY l.slug, l.site;"`
+  - `docker exec orkestram-local-mysql mysql -uorkestram -porkestram -D orkestram_local -e "SELECT id, site, slug, summary, content, price_label, gallery_json, features_json, meta_json FROM listings WHERE slug IN ('demo-bando-sahil-seremonisi','demo-bando-kordon-alayi') ORDER BY slug, site;"`
+  - `docker exec orkestram-local-mysql mysql -uorkestram -porkestram -D orkestram_local -e "SELECT l.slug, l.site, ca.key AS attribute_key, ca.label, lav.value_text, lav.value_number, lav.value_json, lav.normalized_value FROM listings l JOIN listing_attribute_values lav ON lav.listing_id = l.id JOIN category_attributes ca ON ca.id = lav.category_attribute_id WHERE l.slug IN ('demo-bando-sahil-seremonisi','demo-bando-kordon-alayi') ORDER BY l.slug, ca.sort_order, ca.id;"`
+  - `docker exec orkestram-local-mysql mysql -uorkestram -porkestram -D orkestram_local -e "SELECT l.slug, l.site, f.status, f.visibility, f.content, f.owner_reply, u.name AS user_name, f.created_at FROM listings l JOIN listing_feedback f ON f.listing_id = l.id LEFT JOIN users u ON u.id = f.user_id WHERE l.slug IN ('demo-bando-sahil-seremonisi','demo-bando-kordon-alayi') ORDER BY l.slug, f.created_at;"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Manuel UI Ozet:
+  - Hero solda kimlik/fiyat/guven ve sagda buyuk medya hiyerarsisiyle korundu.
+  - Galeri hero'dan ayrik, yorumlar benzer ilanlardan once, benzer ilanlar sayfanin sonunda kaldi.
+  - Demo preview listinglerinde bos alan birakan veri eksigi gorulmedi; acik kalan konu UI degil resmi fixture otomasyonu oldu.
+- Not:
+  - TASK-065 kapatildi; whitelist/idempotent fixture otomasyonu ayri task olarak acilacak.
