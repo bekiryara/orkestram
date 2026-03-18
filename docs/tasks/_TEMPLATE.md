@@ -20,6 +20,15 @@ Baslangic: `YYYY-MM-DD HH:mm`
 - `path/one`
 - `path/two`
 
+## Preview Kontrati
+- Lane: `main | design | n/a`
+- Preview URL: `n/a`
+- Mount Source: `n/a`
+- Edit Source: `n/a`
+- UI review gerekir mi?: `yes | no`
+- UI Review Durumu: `pending | revize | approved | n/a`
+- Revize Notu: `n/a`
+
 ## Uygulama Adimlari
 - [ ] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
 - [ ] Branch dogrulandi: `agent/<ajan>/<task-id>`
@@ -38,6 +47,7 @@ Baslangic: `YYYY-MM-DD HH:mm`
 - [ ] `git status --short`
 - [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - [ ] Goreve ozel test/komut sonucu
+- [ ] `Edit Source == Mount Source` kaniti
 - [ ] Commit hash
 
 ## Kapanis Adimlari
@@ -54,3 +64,4 @@ powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 
 ## Risk / Not
 - Riskler ve geri donus notu
+

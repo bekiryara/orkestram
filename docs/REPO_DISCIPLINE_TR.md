@@ -207,3 +207,37 @@ Kural:
    4. `sonraki adim: ...`
 3. `git remote -v` ve `git branch -vv` dogrulamasi gorev baslangici ve `pre-pr` oncesi zorunludur.
 4. `origin` GitHub degilse veya aktif branch upstream'i `origin/<branch>` degilse commit/push akisi durdurulur.
+
+## 16) Preview Lane Standardi
+
+Kural:
+1. `main preview` merge edilmis dunya icindir ve koordinator worktree'sinden servis verir.
+2. `design preview` tasarim gorevleri icindir ve sabit tasarim ajaninin worktree'sinden servis verir.
+3. Tasarim review icin merge yapilmaz; once `design preview` gorulur, sonra onayli is merge edilir.
+4. `design preview` URL'leri sabittir:
+   - `http://127.0.0.1:8280` -> orkestram design
+   - `http://127.0.0.1:8281` -> izmirorkestra design
+5. Runtime komutu mount source kaniti vermeden UI gorevi review'e cikmaz.
+
+## 17) UI Review ve Merge Sirasi
+
+Kural:
+1. UI tasklarda begenilmeyen duzeltmeler, kapsam ayni kaldigi surece ayni taskta revize edilir.
+2. Yeni task ancak yeni ozellik, yeni lock dosyalari veya yeni ekran kapsami aciliyorsa olusur.
+3. Koordinator UI islerinde merge'i su sirayla ilerletir:
+   - `design-preview`da goster
+   - kullanici onayi al
+   - `pre-pr` PASS al
+   - push/teslim kanitini topla
+   - merge et
+4. Kullanici onayi olmadan UI isleri `main`e alinmaz.
+5. `main`e bakmak review degil, onayli sonucu gormektir.
+
+## 18) Edit Source = Preview Source Standardi
+
+Kural:
+1. UI gorevlerinde kodun degistirildigi worktree/path ile preview'un mount ettigi worktree/path ayni olmak zorundadir.
+2. `Edit Source != Mount Source` ise review gecersizdir; merge karari verilmez.
+3. Koordinator UI review oncesi `Edit Source`, `Mount Source` ve `Preview URL` ucunu birlikte dogrular.
+4. Farkli worktree'de patch yazip baska worktree preview'u gostermek operasyonel ihlaldir.
+5. Bu esitlik saglanmiyorsa once kaynak hizasi duzeltilir, sonra UI review baslar.

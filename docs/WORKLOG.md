@@ -1344,7 +1344,7 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Sorumlu: `codex-b`
 - Is Ozeti:
   - Listing detail hero yerlesimi referans ekrana yaklastirildi; solda profil/kimlik, sagda buyuk ana gorsel olacak sekilde yeniden kurgulandi.
-  - Galeri ana hero altina tasindi; yorum yaz ve begeni gibi ikincil aksiyonlar ust CTA bloðunda ama ikincil hizada tutuldu.
+  - Galeri ana hero altina tasindi; yorum yaz ve begeni gibi ikincil aksiyonlar ust CTA blounda ama ikincil hizada tutuldu.
   - Tekrar eden sehir/bolge/hizmet metinleri azaltildi; fallback gorsel icin daha kontrollu yukseklik tanimlandi.
 - Degisen Dosyalar:
   - `docs/tasks/TASK-060.md`
@@ -1362,3 +1362,154 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Manuel Inceleme Ozeti:
   - Sol panelde kimlik/profil tek kaynakli, sag panelde buyuk ana gorsel baskin, galeri hemen altta.
   - Aciklama yorumlardan once, benzer ilanlar en sonda; Ara ve WhatsApp ustte guclu, Mesaj/Begeni/Yorumlar ikincil kaldi.
+- Tarih: 2026-03-17
+- Task: TASK-061
+- Is Ozeti:
+  - design-preview lane'i eklendi; orkestram ve izmirorkestra icin sabit preview URL'leri 8280/8281 olarak tanimlandi.
+  - scripts/dev-up.ps1 main/design lane ayrimi, mount-source kaniti ve design lane icin shared runtime artifact (.env, endor, storage, public/uploads) modeliyle sertlestirildi.
+  - scripts/smoke-test.ps1 lane bazli container/base URL secimiyle guncellendi; task template ve disiplin dokumanlarina Preview URL + Mount Source kontrati eklendi.
+- Degisen Dosyalar:
+  - local-rebuild/docker-compose.yml
+  - scripts/dev-up.ps1
+  - scripts/smoke-test.ps1
+  - docs/tasks/_TEMPLATE.md
+  - docs/MULTI_AGENT_RULES_TR.md
+  - docs/AGENT_DELIVERY_CHECKLIST_TR.md
+  - docs/REPO_DISCIPLINE_TR.md
+  - docs/tasks/TASK-061.md
+  - docs/TASK_LOCKS.md
+  - docs/NEXT_TASK.md
+  - docs/WORKLOG.md
+- Calistirilan Komutlar:
+  - powershell -ExecutionPolicy Bypass -File scripts/dev-up.ps1 -App both -Lane design
+  - powershell -ExecutionPolicy Bypass -File scripts/smoke-test.ps1 -App both -Lane design
+  - powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick (upstream verilmeden once FAIL; push sonrasi tekrar kosulacak)
+- Sonuc:
+  - PENDING PUSH
+- Manuel / Operasyonel Ozet:
+  - Design preview lane su an orkestram-b worktree'sinden servis veriyor; ana merge preview'i orkestram-k olarak ayri kaldi.
+  - Tasarim review artik merge etmeden http://127.0.0.1:8280 ve http://127.0.0.1:8281 uzerinden yapilabilecek.
+- Tarih: 2026-03-17
+- Task: TASK-062
+- Is Ozeti:
+  - UI tasklarda design-preview gorulmeden merge edilmeyecegi, main preview'in review araci olmadigi kural olarak sabitlendi.
+  - Kapsam ayni kaldigi surece begenilmeyen UI duzeltmelerinin ayni taskta revize edilecegi ve yeni task acilmayacagi netlestirildi.
+  - Task template, AGENTS ve teslim/disiplin belgeleri UI Review Durumu, Revize Notu ve preview onayi -> pre-pr PASS -> merge sirasina gore guncellendi.
+- Degisen Dosyalar:
+  - AGENTS.md
+  - docs/AGENT_DELIVERY_CHECKLIST_TR.md
+  - docs/MULTI_AGENT_RULES_TR.md
+  - docs/REPO_DISCIPLINE_TR.md
+  - docs/tasks/_TEMPLATE.md
+  - docs/tasks/TASK-062.md
+  - docs/TASK_LOCKS.md
+  - docs/NEXT_TASK.md
+  - docs/WORKLOG.md
+- Calistirilan Komutlar:
+  - powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
+- Sonuc:
+  - PASS
+- Operasyonel Ozet:
+  - UI revizeleri artik ayni task icinde donebilir; merge ancak kullanici preview onayi ve pre-pr PASS sonrasi ilerler.
+- Tarih: 2026-03-17
+- Task: `TASK-063`
+- Is Ozeti:
+  - `PublicController::siteFromRequest()` iki appte de `:8281` portunu `izmirorkestra.net` olarak cozecek sekilde guncellendi.
+  - `powershell -ExecutionPolicy Bypass -File scripts/smoke-test.ps1 -App izmirorkestra -Lane design` PASS aldi; design lane temel davranisi bozulmadi.
+  - `http://127.0.0.1:8281/ilan/izmir-bandosu` 404 kaldigi icin kok sorun `edit source != preview source` olarak ayrildi; design lane `orkestram-b` worktree'sini gosterdigi icin kaynak esitleme ayri goreve cikartildi.
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/app/Http/Controllers/PublicController.php`
+  - `local-rebuild/apps/izmirorkestra/app/Http/Controllers/PublicController.php`
+  - `docs/tasks/TASK-063.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/smoke-test.ps1 -App izmirorkestra -Lane design`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS WITH FOLLOW-UP`
+- Tarih: 2026-03-17
+- Task: `TASK-063`
+- Is Ozeti:
+  - `PublicController::siteFromRequest()` iki appte de `:8281` portunu `izmirorkestra.net` olarak cozecek sekilde kalici hale getirildi.
+  - `Edit Source`, `Mount Source` ve `Preview URL` ucunun birlikte verilmesi; `Edit Source != Mount Source` ise UI review ve merge'in durmasi AGENTS, disiplin, checklist ve task template seviyesinde resmi kurala baglandi.
+  - Ayrik `TASK-064` superseded edilerek ayni incident tek task altinda kapatildi.
+- Degisen Dosyalar:
+  - `AGENTS.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/tasks/_TEMPLATE.md`
+  - `docs/tasks/TASK-063.md`
+  - `docs/tasks/TASK-064.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `local-rebuild/apps/orkestram/app/Http/Controllers/PublicController.php`
+  - `local-rebuild/apps/izmirorkestra/app/Http/Controllers/PublicController.php`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/smoke-test.ps1 -App izmirorkestra -Lane design`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Operasyonel Ozet:
+  - Bundan sonra design-preview review'lari `Edit Source == Mount Source` kaniti olmadan gecerli sayilmayacak; yanlis worktree'de patch atip baska preview'da kontrol etme akisi resmi olarak yasaklandi.
+
+- Tarih: 2026-03-17
+- Task: `TASK-065`
+- Is Ozeti:
+  - Listing detail sayfasi iki appte de referans yone gore `Listing Detail V1` milestone'una getirildi: solda editorial kimlik/fiyat/guven, sagda buyuk hero medya, hero disinda ayri galeri, `Hakkinda`, yorumlar ve en sonda benzer ilanlar akisi kuruldu.
+  - `Mesaj`, `Begeni` ve `Yorum Yap` aksiyonlari `Musteri deneyimleri` bolumune ikonlu, ikincil ve durum gosteren pill satiri olarak tasindi; `Yorum Yap` popup form ile cozuldu.
+  - Design preview review'i iki hedef URL uzerinden tamamlandi: `http://127.0.0.1:8280/ilan/demo-bando-sahil-seremonisi` ve `http://127.0.0.1:8281/ilan/demo-bando-kordon-alayi`.
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php`
+  - `local-rebuild/apps/orkestram/public/assets/v1.css`
+  - `local-rebuild/apps/izmirorkestra/public/assets/v1.css`
+  - `docs/tasks/TASK-065.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Manuel UI Ozet:
+  - Hero solda sade kimlik satiri + fiyat/guven, sagda buyuk medya olarak korundu.
+  - Galeri hero?dan ayrildi; desktop 3-up, mobil 1-up kayan blok ve ok kontrollu gezinme ile cozuldu.
+  - `Hakkinda` galerinin altinda veriden beslenecek sekilde yerlestirildi.
+  - `Mesaj`, `Begeni` ve `Yorum Yap` aksiyonlari `Musteri deneyimleri` blogunda ayni satira tasindi.
+
+- Not:
+  - Deterministic demo fixture kapsami ayni taskta acik kaldigi icin TASK-065 kapanmadi; sonraki adim whitelist demo veri/media kurulumudur.
+
+- Tarih: 2026-03-18
+- Task: `TASK-065`
+- Is Ozeti:
+  - Listing detail UI v1 sonucu iki appte parity ile korundu; `b9f3141` ile gelen quote flow ve sosyal kanit duzeltmeleri onayli son commit olarak kaldirildi.
+  - Design-preview'de kullanilan `demo-bando-sahil-seremonisi` ve `demo-bando-kordon-alayi` kayitlari `orkestram-local-mysql` uzerinden read-only audit ile dogrulandi; summary/content/fiyat/telefon/WhatsApp/galeri/features/attribute/yeni yorum dolulugu mevcut bulundu.
+  - Ayrik whitelist/idempotent fixture otomasyonunun UI gorevinin zorunlu parcasi olmadigi netlestirildi; bu kalan kisim yeni taska ayrilacak sekilde TASK-065 kapatildi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-065.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git branch --show-current`
+  - `git branch -vv`
+  - `git status --short`
+  - `docker exec orkestram-local-mysql mysql -uorkestram -porkestram -D orkestram_local -e "SELECT id, site, slug, name, status, category_id, city, district, cover_image_path, phone, whatsapp FROM listings WHERE slug IN ('demo-bando-sahil-seremonisi','demo-bando-kordon-alayi','test-bando-a','test-bando-b') ORDER BY slug, site;"`
+  - `docker exec orkestram-local-mysql mysql -uorkestram -porkestram -D orkestram_local -e "SELECT l.slug, l.site, COUNT(DISTINCT lk.id) AS like_count, COUNT(DISTINCT f.id) AS feedback_count FROM listings l LEFT JOIN listing_likes lk ON lk.listing_id = l.id LEFT JOIN listing_feedback f ON f.listing_id = l.id WHERE l.slug IN ('demo-bando-sahil-seremonisi','demo-bando-kordon-alayi','test-bando-a','test-bando-b') GROUP BY l.slug, l.site ORDER BY l.slug, l.site;"`
+  - `docker exec orkestram-local-mysql mysql -uorkestram -porkestram -D orkestram_local -e "SELECT id, site, slug, summary, content, price_label, gallery_json, features_json, meta_json FROM listings WHERE slug IN ('demo-bando-sahil-seremonisi','demo-bando-kordon-alayi') ORDER BY slug, site;"`
+  - `docker exec orkestram-local-mysql mysql -uorkestram -porkestram -D orkestram_local -e "SELECT l.slug, l.site, ca.key AS attribute_key, ca.label, lav.value_text, lav.value_number, lav.value_json, lav.normalized_value FROM listings l JOIN listing_attribute_values lav ON lav.listing_id = l.id JOIN category_attributes ca ON ca.id = lav.category_attribute_id WHERE l.slug IN ('demo-bando-sahil-seremonisi','demo-bando-kordon-alayi') ORDER BY l.slug, ca.sort_order, ca.id;"`
+  - `docker exec orkestram-local-mysql mysql -uorkestram -porkestram -D orkestram_local -e "SELECT l.slug, l.site, f.status, f.visibility, f.content, f.owner_reply, u.name AS user_name, f.created_at FROM listings l JOIN listing_feedback f ON f.listing_id = l.id LEFT JOIN users u ON u.id = f.user_id WHERE l.slug IN ('demo-bando-sahil-seremonisi','demo-bando-kordon-alayi') ORDER BY l.slug, f.created_at;"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Manuel UI Ozet:
+  - Hero solda kimlik/fiyat/guven ve sagda buyuk medya hiyerarsisiyle korundu.
+  - Galeri hero'dan ayrik, yorumlar benzer ilanlardan once, benzer ilanlar sayfanin sonunda kaldi.
+  - Demo preview listinglerinde bos alan birakan veri eksigi gorulmedi; acik kalan konu UI degil resmi fixture otomasyonu oldu.
+- Not:
+  - TASK-065 kapatildi; whitelist/idempotent fixture otomasyonu ayri task olarak acilacak.

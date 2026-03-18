@@ -650,7 +650,7 @@ class PublicController extends Controller
         $httpHost = strtolower($request->getHttpHost());
 
         // Local port mapping for multi-site testing.
-        if (str_contains($httpHost, ':8181')) {
+        if (str_contains($httpHost, ':8181') || str_contains($httpHost, ':8281')) {
             return 'izmirorkestra.net';
         }
 
@@ -1003,3 +1003,4 @@ class PublicController extends Controller
         return $paginator->withQueryString();
     }
 }
+

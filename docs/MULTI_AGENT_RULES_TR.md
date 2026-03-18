@@ -110,3 +110,40 @@ Koordinator karar cevabi yalniz su 4 satirla verilir:
 1. Gorev basinda `git remote -v` ve `git branch -vv` zorunludur.
 2. `origin` GitHub degilse is baslatilmaz.
 3. Aktif branch upstream'i `origin/<branch>` degilse push/PR adimina gecilmez.
+
+## Design Preview Lane (Zorunlu UI Review Kurali)
+1. UI/tasarim gorevleri merge oncesi `design-preview` lane'inde gorulmeden kapatilmaz.
+2. `design-preview` tek sabit lane'dir; ayni anda yalniz bir UI gorevi review edilir.
+3. Task kartinda su alanlar zorunludur:
+   - `Preview URL`
+   - `Mount Source`
+   - `Lane`
+   - `UI Review Durumu`
+4. `main preview` yalniz merge edilmis dunyadir; tasarim review araci olarak kullanilmaz.
+5. UI gorev tesliminde ajan su kaniti verir:
+   - worktree path
+   - mount source
+   - preview URL
+   - manuel UI kontrol ozeti
+
+## UI Revize ve Merge Kurali (Zorunlu)
+1. Kapsam ayni kaldigi surece begenilmeyen UI duzeltmeleri icin yeni task acilmaz; ayni taskta revize devam eder.
+2. Yeni task ancak kapsam, lock dosyalari veya hedef ekran anlamli sekilde degisirse acilir.
+3. UI gorevinde merge sirasi sabittir:
+   - `design-preview`da goster
+   - kullanici preview onayi verirse finalize et
+   - `pre-pr` PASS al
+   - push et
+   - merge et
+4. Kullanici preview onayi vermeden koordinator merge adimina gecmez.
+5. `main`e merge, UI review araci degil sadece onaylanmis sonucu entegre etme adimidir.
+
+## Edit Source = Preview Source Kurali (Zorunlu)
+1. UI gorevlerinde `Edit Source` ile `Mount Source` ayni worktree/path olmak zorundadir.
+2. `Edit Source != Mount Source` ise preview review gecersiz sayilir ve is durdurulur.
+3. Koordinator UI review baslatmadan once su 3 kaniti birlikte ister:
+   - `Edit Source`
+   - `Mount Source`
+   - `Preview URL`
+4. Farkli worktree'de patch yazip baska worktree preview'u gostermek yasaktir.
+5. UI merge karari yalniz `Edit Source == Mount Source` dogrulandiysa verilir.
