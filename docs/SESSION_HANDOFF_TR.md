@@ -1,54 +1,57 @@
 ﻿# Session Handoff (TR)
 
-Guncelleme Zamani: 2026-03-19 05:58
-Koordinator Branch: agent/codex/task-073
-Koordinator Task: yok
+Guncelleme Zamani: 2026-03-19 06:15
+Koordinator Branch: agent/codex/task-076
+Koordinator Task: TASK-076
 
 ## Aktif Tasklar
-1. YOK - TASK-073 3 ajan orkestrasyonu ve lock overlap kapisi pre-pr PASS ile kapatildi.
+1. `TASK-074` - codex-b / merge sonrasi preview-runtime lifecycle ve design lane yasam dongusu standardi
+2. `TASK-075` - codex-c / deterministic demo fixture standardi ve review demo veri kurali
+3. `TASK-076` - codex / task acilis recovery ve NEXT_TASK aktif sayim hatasi duzeltmesi
 
 ## Ajan / Worktree Durumu
 1. codex
    - Worktree: /home/bekir/orkestram-k
-   - Branch: agent/codex/task-073
-   - Aktif task: yok
-   - Status ozeti: kapanis commit/push sonrasi temiz olmaya hazir
-   - Karar sinifi: n/a
-   - Not: Koordinator yeni task acmak icin hazir.
+   - Branch: agent/codex/task-076
+   - Aktif task: TASK-076
+   - Status ozeti: koordinasyon recovery ve handoff senkronizasyonu suruyor
+   - Karar sinifi: aktif
+   - Not: Merkezi panolar ve task-acma scripti onariliyor.
 2. codex-a
    - Worktree: /home/bekir/orkestram-a
    - Branch: agent/codex-a/task-056
    - Aktif task: yok
-   - Status ozeti: temiz
-   - Karar sinifi: temizlendi
-   - Not: stale aday degil.
+   - Status ozeti: temiz ve bosta
+   - Karar sinifi: hazir
+   - Not: Yeni dagitim gelene kadar beklemede.
 3. codex-b
    - Worktree: /home/bekir/orkestram-b
    - Branch: main
-   - Aktif task: yok
-   - Status ozeti: temiz
-   - Karar sinifi: temizlendi
-   - Not: stale aday degil.
+   - Aktif task: TASK-074
+   - Status ozeti: gorev karti acildi, resmi devir talimati bekliyor
+   - Karar sinifi: aktif-atama-bekliyor
+   - Not: Preview/runtime lifecycle dokumantasyonu bu slota verilecek.
 4. codex-c
    - Worktree: /home/bekir/orkestram-c
    - Branch: main
-   - Aktif task: yok
-   - Status ozeti: temiz
-   - Karar sinifi: temizlendi
-   - Not: stale aday degil.
+   - Aktif task: TASK-075
+   - Status ozeti: gorev karti acildi, resmi devir talimati bekliyor
+   - Karar sinifi: aktif-atama-bekliyor
+   - Not: Demo fixture standardi bu slota verilecek.
 
 ## Preview / Source Durumu
-1. Bu oturum UI review oturumu degildir.
-2. Preview/source kurallari degismedi.
+1. Bu oturum dokuman/operasyon lifecycle duzenleme oturumudur; UI kodu degisimi yoktur.
+2. `TASK-074` design-preview lane davranisini tanimlayacak, preview URL dagitimi sonra netlesecek.
 
 ## Bugun Alinan Kararlar
-1. Surekli coklu ajan uretim modeli icin varsayilan paketler `UI | data-fixture | test-ops` olarak resmi operasyona baglandi.
-2. `start-task.ps1` aktif lock overlap gordugunde task acilisini reddeden script kapisi kazandi.
-3. Koordinasyon dosyalari overlap kontrolunden haric tutularak gereksiz blokaj riski kapatildi.
+1. Varsayilan 3 ajan paketi korunur: `codex-a` bos/hazir, `codex-b` preview lifecycle, `codex-c` fixture standardi.
+2. `TASK-074` ve `TASK-075` korunacak; yeni ID acilmadan mevcut aktif kayitlar toparlanacak.
+3. `start-task.ps1` yalniz `Aktif Gorevler` bolumunu sayacak sekilde onarilacak.
 
 ## Acik Riskler
-1. Acik operasyonel risk kalmadi.
+1. Recovery tamamlanmadan yeni task acma denemesi tekrar kismi kayit uretebilir.
+2. codex-b ve codex-c'ye devir mesaji gonderilmeden branch/task sahipligi fiilen baslamis sayilmaz.
 
 ## Sonraki Adim
-1. Yeni is gelirse bu orkestrasyon modeliyle resmi task acilir.
-2. Sonraki operasyon backlog'u icin fixture standardi veya merge sonrasi preview/runtime lifecycle ele alinabilir.
+1. `TASK-076` altinda pre-pr ve script smoke dogrulamasi alinacak.
+2. Ardindan codex-b icin `TASK-074`, codex-c icin `TASK-075` resmi gorev mesajlari gonderilecek.

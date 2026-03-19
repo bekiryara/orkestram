@@ -92,6 +92,20 @@ function Test-LockOverlap([string]$Left, [string]$Right) {
     return $false
 }
 
+function Get-ActiveNextTaskEntries([string]$NextRaw) {
+    if ([string]::IsNullOrWhiteSpace($NextRaw)) {
+        return @()
+    }
+
+    $sectionMatch = [regex]::Match($NextRaw, '## Aktif Gorevler \(Merkezi Koordinasyon\)\r?\n(?<body>[\s\S]*?)(?=\r?\n## |$)')
+    if (-not $sectionMatch.Success) {
+        return @()
+    }
+
+    $body = $sectionMatch.Groups['body'].Value
+    return [regex]::Matches($body, '(?m)^\d+\. `TASK-\d{3}` - .+$')
+}
+
 if ($TaskId -notmatch '^TASK-[0-9]{3}$') {
     Fail "TaskId formati gecersiz. Beklenen: TASK-XXX"
 }
@@ -208,7 +222,7 @@ if ($nextRaw -match '## Aktif Gorevler \(Tek Kaynak\)') {
 if ($nextRaw -match '1\. `YOK`.*') {
     $nextRaw = $nextRaw -replace '1\. `YOK`.*', ('1. `' + $TaskId + '` - ' + $taskSummary)
 } else {
-    $activeMatches = [regex]::Matches($nextRaw, '(?m)^\d+\. `TASK-\d{3}` - .+$')
+    $activeMatches = Get-ActiveNextTaskEntries $nextRaw
     $nextIndex = $activeMatches.Count + 1
     if ($nextIndex -gt $maxActiveTasks) {
         Fail "NEXT_TASK icinde zaten $($activeMatches.Count) aktif gorev listelenmis. En fazla $maxActiveTasks aktif gorev desteklenir."
@@ -226,6 +240,7 @@ Write-Host "[start-task] step-4 branch -> $Branch"
 Write-Host "[start-task] started_at: $nowStamp"
 Write-Host "[start-task] OK"
 exit 0
+
 
 
 
