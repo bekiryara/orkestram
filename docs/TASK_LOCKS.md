@@ -92,3 +92,4 @@ Sabit Ajan Kimlikleri:
 | TASK-068 | codex | agent/codex/task-068 | closed | docs/tasks/TASK-068.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/SESSION_HANDOFF_TR.md,docs/OPERATING_MODEL_TR.md,docs/AGENT_LOCK_MATRIX_TR.md | 2026-03-19 02:28:54 | 2026-03-19 03:05:00 | stale worktree temizligi ve devralma standardi resmi operasyon akisina baglandi; pre-pr PASS |
 
 
+| TASK-069 | codex | agent/codex/task-069 | active | docs/tasks/TASK-069.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/SESSION_HANDOFF_TR.md | 2026-03-19 03:06:17 | 2026-03-19 03:06:17 | codex-b ve codex-c stale worktree temsilci diff ve cleanup risk siniflamasini cikar |
