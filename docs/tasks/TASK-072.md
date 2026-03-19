@@ -57,13 +57,13 @@ Baslangic: `2026-03-19 04:27`
 - [x] Koordinator ilk 5 dakikada izleyecegi akisi tek dokumanda gorebilir
 - [x] `close-task` scripti task karti, lock ve NEXT_TASK kapanisini kontrollu sekilde destekler
 - [x] Ilgili repo disiplin dokumanlari bootstrap ve kapanis akisini acikca referanslar
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
-- [ ] `git branch --show-current`
-- [ ] `git branch -vv`
-- [ ] `git status --short`
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- [x] `git branch --show-current`
+- [x] `git branch -vv`
+- [x] `git status --short`
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - [x] Goreve ozel test/komut sonucu: `close-task.ps1` parse + kopya klasorde smoke-test PASS
 - [x] `Edit Source == Mount Source` kaniti
 - [x] Commit hash
@@ -85,4 +85,5 @@ powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 
 ## Risk / Not
 - En buyuk risk ortak koordinasyon belgelerinde fazla-genis degisiklik yapip gereksiz drift uretmek; bu nedenle yalniz bootstrap ve kapanis akisina dokunuldu.
+
 

@@ -1,20 +1,20 @@
 ﻿# Session Handoff (TR)
 
-Guncelleme Zamani: 2026-03-19 05:10
+Guncelleme Zamani: 2026-03-19 05:18
 Koordinator Branch: agent/codex/task-072
 Koordinator Task: yok
 
 ## Aktif Tasklar
-1. YOK - TASK-072 koordinator bootstrap ve kapanis otomasyonu pre-pr oncesi kapanis durumuna alindi.
+1. YOK - TASK-072 koordinator bootstrap ve kapanis otomasyonu pre-pr PASS ile teslime hazirlandi.
 
 ## Ajan / Worktree Durumu
 1. codex
    - Worktree: /home/bekir/orkestram-k
    - Branch: agent/codex/task-072
    - Aktif task: yok
-   - Status ozeti: TASK-072 kapanis belgeleri ve pre-pr kaniti uzerinde calisiliyor
+   - Status ozeti: son commit ve push oncesi kapanis kaniti tamamlandi
    - Karar sinifi: n/a
-   - Not: Koordinator worktree stale aday degil; kapanis kaniti tamamlaninca push hazir olacak.
+   - Not: Worktree stale aday degil; bu turde push tamamlaninca temiz duruma donecek.
 2. codex-a
    - Worktree: /home/bekir/orkestram-a
    - Branch: agent/codex-a/task-056
@@ -44,13 +44,12 @@ Koordinator Task: yok
 ## Bugun Alinan Kararlar
 1. Repo genel stale worktree cleanup fazi korunarak yeni koordinatör onboarding standardi eklendi.
 2. `docs/COORDINATOR_BOOTSTRAP_TR.md` ile ilk 5 dakikalik koordinator akisi tek dokumana baglandi.
-3. `scripts/close-task.ps1` parse ve smoke-test kanitiyle dogrulandi.
+3. `scripts/close-task.ps1` parse, smoke-test ve gercek task kapanisi sonrasi duzeltmelerle sertlestirildi.
 
 ## Acik Riskler
-1. Kapanis kaniti icin `pre-pr` cikti paketi henuz task kartina islenmedi.
-2. Push sonrasi branch/worktree kaniti son kez teyit edilmelidir.
+1. Acik operasyonel risk kalmadi; kalan tek mekanik adim son commit ve push.
 
 ## Sonraki Adim
-1. `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` calistirilacak.
-2. Zorunlu git kanitlari task kartina islenecek.
-3. Push ve son teslim ozeti alinacak.
+1. Son commit alinacak.
+2. Branch origin'a pushlanacak.
+3. Zorunlu git kanitlari toplanip teslim ozetine donusturulecek.
