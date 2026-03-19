@@ -1,7 +1,7 @@
 ﻿# Session Handoff (TR)
 
-Guncelleme Zamani: 2026-03-20 00:12
-Koordinator Branch: agent/codex/task-080
+Guncelleme Zamani: 2026-03-20 00:50
+Koordinator Branch: agent/codex/task-081
 Koordinator Task: yok
 
 ## Aktif Tasklar
@@ -10,48 +10,45 @@ Koordinator Task: yok
 ## Ajan / Worktree Durumu
 1. codex
    - Worktree: /home/bekir/orkestram-k
-   - Branch: agent/codex/task-080
+   - Branch: agent/codex/task-081
    - Aktif task: yok
-   - Status ozeti: `TASK-080` iki app owner coverage parity tamamlandi; branch merge hazir
-   - Karar sinifi: merge hazir
-   - Not: `TASK-079` owner icerigi parity branch'ine tasindi; merge karari artik bu branch uzerinden ilerler.
+   - Status ozeti: `TASK-081` drift cleanup tamamladi; koordinator worktree cleanup kaniti merkezi kayda islendi
+   - Karar sinifi: kapanis
+   - Not: Bu tur urun kodu degistirmedi; yalniz kanitli drift sinifindaki dosyalar restore edildi.
 2. codex-a
    - Worktree: /home/bekir/orkestram-a
    - Branch: agent/codex-a/task-079
    - Aktif task: yok
-   - Status ozeti: `TASK-079` owner teslim branch'i referans kaynak olarak korundu
+   - Status ozeti: `TASK-079` referans owner branch temiz ve upstream hizali
    - Karar sinifi: koru
-   - Not: Icerik `TASK-080` parity branch'ine tasindigi icin merge hedefi olarak degil, kaynak kanit branch'i olarak duruyor.
+   - Not: Bu turde degisiklik yok.
 3. codex-b
    - Worktree: /home/bekir/orkestram-b
    - Branch: agent/codex-b/task-074
    - Aktif task: yok
-   - Status ozeti: TASK-074 commit 6118d70 ile upstream ilerledi; worktree drift gorunurlugu ayri takip ister
-   - Karar sinifi: koru
-   - Not: Bu turde ele alinmadi.
+   - Status ozeti: Kanitli drift restore edildi; worktree temiz
+   - Karar sinifi: temizle
+   - Not: Yalniz `docs/tasks/TASK-074.md` satir-sonu/encoding drift'i restore edildi.
 4. codex-c
    - Worktree: /home/bekir/orkestram-c
    - Branch: agent/codex-c/task-075
    - Aktif task: yok
-   - Status ozeti: TASK-075 stale drift gorunurlugu devam ediyor
-   - Karar sinifi: koru
-   - Not: Bu turde ele alinmadi.
+   - Status ozeti: Kanitli drift restore edildi; worktree temiz
+   - Karar sinifi: temizle
+   - Not: `docs/DEMO_FIXTURE_STANDARD_TR.md` ve `docs/tasks/TASK-075.md` satir-sonu/encoding drift'i restore edildi.
 
 ## Preview / Source Durumu
 1. Bu oturum UI gorevi degil; preview lane kaniti gerekmiyor.
-2. Owner coverage parity dogrulamasi container test hattinda `OwnerPanelActionsTest` ile alindi.
+2. Cleanup yalniz stale gorunurlugu ve drift temizligi kapsamindadir.
 
 ## Bugun Alinan Kararlar
-1. `TASK-079` merkezi kapanis normalize edildi.
-2. Parity eksigi yeni lock alani gerektirdigi icin `TASK-080` task genisletme mantigiyla acildi.
-3. `izmirorkestra` owner write-path parity tamamlandi.
-4. `orkestram` ve `izmirorkestra` owner coverage write-pathi ayni branchte toplandi.
-5. Merge karari `agent/codex/task-080` branch'i uzerinden verilecek sekilde netlesti.
+1. `TASK-080` merge sonrasi stale gorunurlugu yeniden kontrol edildi.
+2. Koordinator, `git diff` ile icerik farki tasimayan satir-sonu/encoding drift dosyalarini ayri taskta topladi.
+3. `TASK-081` ile koordinator, `codex-b` ve `codex-c` stale drift gorunurlugu resmi cleanup ile kapatildi.
 
 ## Acik Riskler
-1. `codex-b` ve `codex-c` worktree'leri icin drift gorunurlugu yeniden ele alinmalidir.
-2. `TASK-080` branch'i merge edilmeden `main` dunyasi bu parity'yi tasimaz.
+1. Aktif stale worktree kalmadi.
+2. Sonraki koordinasyon turu yeni is dagitimi veya yeni is secimi ile sifirdan baslayabilir.
 
 ## Sonraki Adim
-1. `agent/codex/task-080` branch'i icin kontrollu merge uygulanabilir.
-2. Sonraki koordinasyon turu `codex-b` ve `codex-c` stale drift gorunurlugunu kapatmaya donebilir.
+1. Yeni is gelirse koordinator sabit 4 satirlik cevap protokolu ile yeni karar turune baslar.

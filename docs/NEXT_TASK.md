@@ -8,17 +8,14 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
 1. `YOK` - aktif koordinasyon gorevi bulunmuyor
 
 ## Son Koordinator Kapanisi
-1. `TASK-080` - owner coverage parity iki appte tamamlandi; branch merge hazir duruma getirildi
-2. `TASK-079` - owner coverage write-path teslimi merkezi kayitlarda kapatildi
-3. `TASK-078` - `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez karari merkezi kayda alindi
+1. `TASK-081` - kanitli satir-sonu/encoding drift temizlendi; `codex-b` ve `codex-c` stale gorunurlugu kapatildi
+2. `TASK-080` - owner coverage parity iki appte tamamlandi; branch merge hazir duruma getirildi
+3. `TASK-079` - owner coverage write-path teslimi merkezi kayitlarda kapatildi
 
 ## Son Kapanis
-1. `TASK-080` - iki app owner coverage write-path parity tamamlandi; `OwnerPanelActionsTest` iki appte PASS ve branch merge hazir
-2. `TASK-079` - owner coverage write-path teslimi commit `8d06a46` ve docs duzeltme `22cd676` ile kabul edilip aktif pano kapatildi
-3. `TASK-078` - `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez karari merkezi kayda alindi
-
-## Merge Bekleyen Degerlendirme
-1. `TASK-080` - `agent/codex/task-080` uzerinde iki app owner parity tamam; merge karari bu branch uzerinden verilebilir
+1. `TASK-081` - koordinator, `codex-b` ve `codex-c` worktree'lerinde yalniz drift sinifindaki dosyalar restore edilip temiz status alindi
+2. `TASK-080` - iki app owner coverage write-path parity tamamlandi; `OwnerPanelActionsTest` iki appte PASS ve branch merge hazir
+3. `TASK-079` - owner coverage write-path teslimi commit `8d06a46` ve docs duzeltme `22cd676` ile kabul edilip aktif pano kapatildi
 
 ## Kapanis Kurali (Zorunlu)
 1. Kapanis kaniti olmadan task `closed` edilemez.

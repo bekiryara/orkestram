@@ -2028,3 +2028,42 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `Yeni branch upstream'i kurulmadan ilk pre-pr turu upstream kapisinda fail verdi; commit/push sonrasi tekrar kosulup PASS kaniti alinmistir.`
+
+---
+
+### [2026-03-20 00:50] TASK-081 Kanitli Drift Cleanup ve Stale Kapanis
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Koordinator worktree'de icerik farki tasimayan task dokumani/script drift'i restore edildi.`
+  - `codex-b` ve `codex-c` worktree'lerinde kanitli drift dosyalari restore edilip temiz status alindi.`
+  - `Stale gorunurlugu agent-status ve handoff kayitlarinda kapatildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-081.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+  - `docs/tasks/TASK-066.md`
+  - `docs/tasks/TASK-067.md`
+  - `docs/tasks/TASK-068.md`
+  - `docs/tasks/TASK-069.md`
+  - `docs/tasks/TASK-070.md`
+  - `docs/tasks/TASK-071.md`
+  - `docs/tasks/TASK-074.md`
+  - `docs/tasks/TASK-075.md`
+  - `docs/tasks/TASK-076.md`
+  - `docs/tasks/TASK-077.md`
+  - `docs/tasks/TASK-080.md`
+  - `docs/DEMO_FIXTURE_STANDARD_TR.md`
+  - `scripts/agent-status.ps1`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && git diff -- docs/tasks/TASK-066.md docs/tasks/TASK-067.md docs/tasks/TASK-068.md docs/tasks/TASK-069.md docs/tasks/TASK-070.md docs/tasks/TASK-071.md docs/tasks/TASK-074.md docs/tasks/TASK-075.md docs/tasks/TASK-076.md docs/tasks/TASK-077.md docs/tasks/TASK-080.md scripts/agent-status.ps1"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && git restore docs/tasks/TASK-066.md docs/tasks/TASK-067.md docs/tasks/TASK-068.md docs/tasks/TASK-069.md docs/tasks/TASK-070.md docs/tasks/TASK-071.md docs/tasks/TASK-074.md docs/tasks/TASK-075.md docs/tasks/TASK-076.md docs/tasks/TASK-077.md docs/tasks/TASK-080.md scripts/agent-status.ps1"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-b && git restore docs/tasks/TASK-074.md"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-c && git restore docs/DEMO_FIXTURE_STANDARD_TR.md docs/tasks/TASK-075.md"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Cleanup yalniz icerik farki tasimayan satir-sonu/encoding drift dosyalarina uygulandi.`
