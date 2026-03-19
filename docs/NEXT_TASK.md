@@ -1,21 +1,21 @@
 ﻿# NEXT TASK (Koordinasyon Panosu)
 
-Durum: `ACTIVE`  
+Durum: `READY`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Merkezi Koordinasyon)
-1. `TASK-078` - Merge taskinin ne zaman gerekli oldugu ve ne zaman ayni taskta kapanabilecegi repo disiplinine yazilacak
+1. `YOK` - `TASK-078` merge taskinin varsayilan degil istisna oldugu repo disiplinine baglandi
 
 ## Son Koordinator Kapanisi
-1. `TASK-077` - owner branch PR hazir / merge hazir standardi ve varsayilan sira modeli kayda alindi
-2. `TASK-076` - task acilis recovery, aktif pano senkronu ve ajan teslimleri merkezi kapanisla tamamlandi
-3. `TASK-075` - deterministic demo fixture standardi agent teslimi 8351cba ve pre-pr PASS ile tamamlandi
+1. `TASK-078` - merge taskinin varsayilan degil istisna oldugu repo disiplinine baglandi
+2. `TASK-077` - owner branch PR hazir / merge hazir standardi ve varsayilan sira modeli kayda alindi
+3. `TASK-076` - task acilis recovery, aktif pano senkronu ve ajan teslimleri merkezi kapanisla tamamlandi
 
 ## Son Kapanis
-1. `TASK-077` - owner branch PR hazir / merge hazir standardi ve varsayilan sira modeli kayda alindi
-2. `TASK-076` - task acilis recovery, aktif pano senkronu ve ajan teslimleri merkezi kapanisla tamamlandi
-3. `TASK-075` - deterministic demo fixture standardi agent teslimi 8351cba ve pre-pr PASS ile tamamlandi
+1. `TASK-078` - merge taskinin varsayilan degil istisna oldugu repo disiplinine baglandi
+2. `TASK-077` - owner branch PR hazir / merge hazir standardi ve varsayilan sira modeli kayda alindi
+3. `TASK-076` - task acilis recovery, aktif pano senkronu ve ajan teslimleri merkezi kapanisla tamamlandi
 
 ## Kapanis Kurali (Zorunlu)
 1. Kapanis kaniti olmadan task `closed` edilemez.
@@ -26,4 +26,3 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
    - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` sonucu `PASS`
 3. Kanit yoksa task durumu `active` kalir.
 4. Bu pano ile `docs/TASK_LOCKS.md` birebir senkron tutulur; paralel kapanis ve sira degisikligi yalniz koordinator tarafindan islenir.
-

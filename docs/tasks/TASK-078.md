@@ -1,6 +1,6 @@
 ﻿# TASK-078
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex`  
 Branch: `agent/codex/task-078`  
 Baslangic: `2026-03-19 14:54`
@@ -14,9 +14,9 @@ Baslangic: `2026-03-19 14:54`
 - [x] yeni task
 
 ## In Scope
-- [ ] Merge taskinin ne zaman gerekli oldugu net kurala baglanacak
-- [ ] Tek owner dusuk riskli teslimlerde merge'in ayni taskta kapanabilecegi yazilacak
-- [ ] Koordinatorun merge taski acmadan once soracagi istisna sorusu resmi dokumanlara islenecek
+- [x] Merge taskinin ne zaman gerekli oldugu net kurala baglanacak
+- [x] Tek owner dusuk riskli teslimlerde merge'in ayni taskta kapanabilecegi yazilacak
+- [x] Koordinatorun merge taski acmadan once soracagi istisna sorusu resmi dokumanlara islenecek
 
 ## Out of Scope
 - [ ] TASK-074 veya TASK-075 owner branch'lerini merge etmek
@@ -45,29 +45,29 @@ Baslangic: `2026-03-19 14:54`
 ## Uygulama Adimlari
 - [x] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
 - [x] Branch dogrulandi: `agent/<ajan>/<task-id>`
-- [ ] Lock kapsam disina cikilmadi
-- [ ] Gorev kapsamindaki degisiklikler tamamlandi
-- [ ] Goreve ozel test/dogrulama calistirildi
+- [x] Lock kapsam disina cikilmadi
+- [x] Gorev kapsamindaki degisiklikler tamamlandi
+- [x] Goreve ozel test/dogrulama calistirildi
 
 ## Kabul Kriterleri
-- [ ] Merge taskinin varsayilan degil istisna oldugu resmi olarak yazilir
-- [ ] Ayrı merge taski acilacak kosullar ve acilmayacak kosullar ayrilir
-- [ ] powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick PASS
+- [x] Merge taskinin varsayilan degil istisna oldugu resmi olarak yazilir
+- [x] Ayrı merge taski acilacak kosullar ve acilmayacak kosullar ayrilir
+- [x] powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick PASS
 
 ## Teslimde Zorunlu Kanit
-- [ ] `git branch --show-current`
-- [ ] `git branch -vv`
-- [ ] `git status --short`
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
-- [ ] Goreve ozel test/komut sonucu
+- [x] `git branch --show-current`
+- [x] `git branch -vv`
+- [x] `git status --short`
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- [x] Goreve ozel test/komut sonucu
 - [ ] `Edit Source == Mount Source` kaniti
 - [ ] Commit hash
 
 ## Kapanis Adimlari
-- [ ] Task kartindaki checklistler gercek sonuca gore guncellendi
-- [ ] `docs/WORKLOG.md` guncellendi
-- [ ] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
-- [ ] `docs/NEXT_TASK.md` panosu guncellendi
+- [x] Task kartindaki checklistler gercek sonuca gore guncellendi
+- [x] `docs/WORKLOG.md` guncellendi
+- [x] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
+- [x] `docs/NEXT_TASK.md` panosu guncellendi
 - [ ] Branch pushlandi
 
 ## Komutlar
@@ -77,5 +77,6 @@ powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-078
 ```
 
 ## Risk / Not
-- Risk, merge icin her teslimde ikinci task zorunlulugu olusup repo yukunu gereksiz artirmak; bu task merge taskini istisna modeline cekiyor.
+- Risk, merge icin her teslimde ikinci task zorunlulugu olusup repo yukunu gereksiz artirmakti; bu task merge taskini istisna modeline cekti.
+- Bundan sonra ayri merge taski yalniz yeni operasyon riski veya yeni kabul kriteri doguruyorsa acilacak.
 

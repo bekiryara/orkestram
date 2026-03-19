@@ -1824,3 +1824,30 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `n/a`
+---
+
+### [2026-03-19 15:20] TASK-078 Merge Taski Istisna Standardi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Merge taskinin varsayilan degil, istisna oldugu repo disiplinine yazildi.`
+  - `Tek owner ve dusuk riskli teslimlerde merge'in ayni taskta kapanabilecegi netlestirildi.`
+  - `Koordinatorun ayrik merge taski acmadan once risk / kabul kriteri sorusunu yanitlamasi zorunlu hale getirildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-078.md`
+  - `docs/PR_FLOW_TR.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git push -u origin agent/codex/task-078`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+  - `git branch --show-current`
+  - `git branch -vv`
+  - `git status --short`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `n/a`
