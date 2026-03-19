@@ -9,9 +9,9 @@ Baslangic: `2026-03-19 14:54`
 - Merge taskinin ne zaman gerekli oldugu ve ne zaman ayni taskta kapanabilecegi repo disiplinine yazilacak
 
 ## Task Karari
-- [ ] mevcut task devam
+- [x] mevcut task devam
 - [ ] task genisletme
-- [x] yeni task
+- [ ] yeni task
 
 ## In Scope
 - [x] Merge taskinin ne zaman gerekli oldugu net kurala baglanacak
@@ -48,10 +48,12 @@ Baslangic: `2026-03-19 14:54`
 - [x] Lock kapsam disina cikilmadi
 - [x] Gorev kapsamindaki degisiklikler tamamlandi
 - [x] Goreve ozel test/dogrulama calistirildi
+- [x] Merkezi kapanis drift'i `TASK-078 aktif task` modeliyle hizalandi
+- [x] `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez karari merkezi kayda islendi
 
 ## Kabul Kriterleri
 - [x] Merge taskinin varsayilan degil istisna oldugu resmi olarak yazilir
-- [x] Ayrı merge taski acilacak kosullar ve acilmayacak kosullar ayrilir
+- [x] Ayri merge taski acilacak kosullar ve acilmayacak kosullar ayrilir
 - [x] powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick PASS
 
 ## Teslimde Zorunlu Kanit
@@ -72,11 +74,11 @@ Baslangic: `2026-03-19 14:54`
 
 ## Komutlar
 ```powershell
+wsl -e bash -lc "cd /home/bekir/orkestram-k && git branch --show-current && git branch -vv && git status --short"
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
-powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-078 -Agent agent-name -ClosureNote "kisa kapanis ozeti" -WorklogTitle "baslik" -WorklogSummary "madde-1" -Files "dosya-1" -Commands "komut-1" -Result PASS
 ```
 
 ## Risk / Not
 - Risk, merge icin her teslimde ikinci task zorunlulugu olusup repo yukunu gereksiz artirmakti; bu task merge taskini istisna modeline cekti.
 - Bundan sonra ayri merge taski yalniz yeni operasyon riski veya yeni kabul kriteri doguruyorsa acilacak.
-
+- Merkezi kayda islenen net karar: `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez; owner task akisi icinde ilerlenir.

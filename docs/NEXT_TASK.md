@@ -5,15 +5,15 @@ Koordinator: `codex`
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Merkezi Koordinasyon)
-1. `YOK` - `TASK-078` merge taskinin varsayilan degil istisna oldugu repo disiplinine baglandi
+1. `YOK` - `TASK-078` kapsaminda ayrik merge task gerekmez kararlari kayda alindi ve merkezi koordinasyon kapanisa hazirlandi
 
 ## Son Koordinator Kapanisi
-1. `TASK-078` - merge taskinin varsayilan degil istisna oldugu repo disiplinine baglandi
+1. `TASK-078` - `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez karari merkezi kayda alindi
 2. `TASK-077` - owner branch PR hazir / merge hazir standardi ve varsayilan sira modeli kayda alindi
 3. `TASK-076` - task acilis recovery, aktif pano senkronu ve ajan teslimleri merkezi kapanisla tamamlandi
 
 ## Son Kapanis
-1. `TASK-078` - merge taskinin varsayilan degil istisna oldugu repo disiplinine baglandi
+1. `TASK-078` - `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez karari merkezi kayda alindi
 2. `TASK-077` - owner branch PR hazir / merge hazir standardi ve varsayilan sira modeli kayda alindi
 3. `TASK-076` - task acilis recovery, aktif pano senkronu ve ajan teslimleri merkezi kapanisla tamamlandi
 

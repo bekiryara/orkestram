@@ -1851,3 +1851,68 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `n/a`
+
+---
+
+### [2026-03-19 15:43] TASK-078 Aktif Task Senkronu
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-078 kapatilmadan aktif task olarak devam edecek sekilde merkezi kayit drift'i hizalandi.`
+  - `docs/TASK_LOCKS.md active kaydi ile docs/NEXT_TASK.md, task karti ve SESSION_HANDOFF_TR.md ayni duruma cekildi.`
+  - `TASK-074` ve `TASK-075` icin yalniz karar hazirligi korunup uygulama yapilmadi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-078.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && git status --short"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && sed -n '1,220p' docs/tasks/TASK-078.md"`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Bu turda pre-pr, push ve close-task uygulanmadi; yalniz aktif-task senkronu yapildi.`
+
+---
+
+### [2026-03-19 15:50] TASK-078 Merge Task Karar Kaydi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-074` icin ayrik merge task gerekmez karari merkezi kayda islendi.
+  - `TASK-075` icin ayrik merge task gerekmez karari merkezi kayda islendi.
+  - `TASK-078` icinde bu kararlarin yazildigi netlestirildi; uygulama yapilmadi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-078.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && sed -n '1,140p' docs/tasks/TASK-078.md"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && sed -n '1,120p' docs/SESSION_HANDOFF_TR.md"`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Bu turda merge, push, close-task veya yeni task uygulanmadi; yalniz karar kaydi guncellendi.`
+
+---
+
+### [2026-03-19 16:43] TASK-078 Merkezi Karar Kaydi Kapanisi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez karari merkezi kayitlara kalici olarak islendi.
+  - `TASK-078` task karti, TASK_LOCKS, NEXT_TASK ve SESSION_HANDOFF bu kararlarla kapanis durumuna getirildi.
+  - `pre-pr` PASS alindi; merge, push veya yeni task uygulamasi yapilmadi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-078.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && git branch --show-current && git branch -vv && git status --short"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Bu turda merge, push veya yeni task uygulanmadi; yalniz merkezi karar kaydi ve koordinasyon kapanisi tamamlandi.`
