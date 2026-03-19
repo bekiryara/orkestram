@@ -1704,3 +1704,30 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `Bootstrap ve kapanis otomasyonu urun/runtime koduna dokunmadan tamamlandi.`
+
+---
+
+### [2026-03-19 05:54] TASK-073 Multi-Ajan Orkestrasyon ve Overlap Kapisi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `3 ajan surekli calisma paketi ve paralel task secim modeli operasyon dokumanlarina eklendi.`
+  - `start-task.ps1 icine aktif lock overlap kapisi eklendi; koordinasyon dosyalari overlap kontrolunde haric tutuldu.`
+  - `start-task scripti parse ve kopya smoke senaryosu ile overlap/non-overlap davranisinda dogrulandi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-073.md`
+  - `docs/OPERATING_MODEL_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/AGENT_LOCK_MATRIX_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `scripts/start-task.ps1`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -NoProfile -Command "[void][scriptblock]::Create((Get-Content 'scripts/start-task.ps1' -Raw)); 'PARSE_OK'"`
+  - `powershell local smoke: overlap case FAIL, non-overlap case OK`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `n/a`

@@ -1,22 +1,19 @@
 ﻿# NEXT TASK (Koordinasyon Panosu)
 
-Durum: `ACTIVE`  
+Durum: `READY`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Merkezi Koordinasyon)
-1. `TASK-073` - 3 ajan surekli calisma orkestrasyonu ve lock overlap otomatik kontrolu sertlestirilecek
-
+1. YOK - `TASK-073` 3 ajan surekli calisma orkestrasyonu ve lock overlap otomatik kontrolu tamamlandi
 ## Son Koordinator Kapanisi
-1. `TASK-072` - Koordinator bootstrap akisi ve kontrollu task kapanis otomasyonu tamamlandi
+1. `TASK-073` - 3 ajan surekli calisma orkestrasyonu ve lock overlap otomatik kontrolu tamamlandi
 2. `TASK-071` - codex-a task-056 stale branch'i drift olarak dogrulandi ve kontrollu cleanup ile temizlendi.
 3. `TASK-070` - codex-b ve codex-c worktree'leri kontrollu restore ile temizlendi; stale aday durumlari kapatildi.
-
 ## Son Kapanis
-1. `TASK-072` - Koordinator bootstrap akisi ve kontrollu task kapanis otomasyonu tamamlandi
+1. `TASK-073` - 3 ajan surekli calisma orkestrasyonu ve lock overlap otomatik kontrolu tamamlandi
 2. `TASK-071` - codex-a stale branch cleanup'i tamamlandi; boylece repo genel stale worktree problemi kapandi.
 3. `TASK-070` - `codex-b` ve `codex-c` icin kontrollu cleanup uygulandi; her iki worktree de temiz duruma dondu.
-
 ## Kapanis Kurali (Zorunlu)
 1. Kapanis kaniti olmadan task `closed` edilemez.
 2. Zorunlu kanit paketi:
