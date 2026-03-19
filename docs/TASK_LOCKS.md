@@ -115,3 +115,5 @@ Sabit Ajan Kimlikleri:
 
 | TASK-081 | codex | agent/codex/task-081 | closed | docs/tasks/TASK-081.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/SESSION_HANDOFF_TR.md,docs/WORKLOG.md,docs/tasks/TASK-066.md,docs/tasks/TASK-067.md,docs/tasks/TASK-068.md,docs/tasks/TASK-069.md,docs/tasks/TASK-070.md,docs/tasks/TASK-071.md,docs/tasks/TASK-074.md,docs/tasks/TASK-075.md,docs/tasks/TASK-076.md,docs/tasks/TASK-077.md,docs/tasks/TASK-080.md,docs/DEMO_FIXTURE_STANDARD_TR.md,scripts/agent-status.ps1 | 2026-03-20 00:39:19 | 2026-03-20 00:50:00 | Kanitli satir-sonu/encoding drift temizlendi; stale gorunurlugu kapatildi |
 
+| TASK-082 | codex | agent/codex/task-082 | active | docs/tasks/TASK-082.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/SESSION_HANDOFF_TR.md,AGENTS.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/COORDINATOR_BOOTSTRAP_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/OPERATING_MODEL_TR.md,docs/tasks/_TEMPLATE.md,scripts/pre-pr.ps1,scripts/validate.ps1 | 2026-03-20 01:10:17 | 2026-03-20 01:20:00 | Ortam guardrail kisa taski acildi; koordinator task/lock/pano kaydini tamamladi, uygulama owner'i varsayilan olarak codex-a planlandi |
+

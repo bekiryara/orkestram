@@ -2067,3 +2067,25 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `Cleanup yalniz icerik farki tasimayan satir-sonu/encoding drift dosyalarina uygulandi.`
+
+---
+
+### [2026-03-20 01:20] TASK-082 Ortam Guardrail Kisa Taski Acilisi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Runtime kontrati, readiness siniflari, shell/katman disiplini ve sandbox fallback kurallari icin TASK-082 acildi.`
+  - `Koordinator, task karti, lock, aktif pano ve handoff kaydini resmi disipline gore olusturdu.`
+  - `Bu turda urun kodu degistirilmedi; implementasyon uygun ajan owner'ina devredilecek sekilde planlandi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-082.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/start-task.ps1 -TaskId TASK-082 -Agent codex -Files "docs/SESSION_HANDOFF_TR.md,AGENTS.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/COORDINATOR_BOOTSTRAP_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/OPERATING_MODEL_TR.md,docs/tasks/_TEMPLATE.md,scripts/pre-pr.ps1,scripts/validate.ps1" -Note "Ortam guardrail kisa taski: runtime kontrati, readiness siniflari, shell/katman disiplini ve sandbox fallback kurallarini resmi hale getir"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && git checkout -b agent/codex/task-082 && git branch --show-current && git status --short"`
+- Sonuc:
+  - `PASS (acilis zinciri)`
+- Not:
+  - `start-task.ps1` UNC uzerinde branch acilisinda kirildi; task/lock/pano kayitlari yazildiktan sonra branch WSL icinde dogru katmanda acildi.`

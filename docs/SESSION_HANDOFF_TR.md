@@ -1,54 +1,56 @@
 ﻿# Session Handoff (TR)
 
-Guncelleme Zamani: 2026-03-20 00:50
-Koordinator Branch: agent/codex/task-081
-Koordinator Task: yok
+Guncelleme Zamani: 2026-03-20 01:20
+Koordinator Branch: agent/codex/task-082
+Koordinator Task: TASK-082
 
 ## Aktif Tasklar
-1. Aktif task yok.
+1. `TASK-082` - ortam guardrail kisa taski aktif; koordinator acilis ve devir kaydini tamamladi, uygulama asamasi ajan teslimine hazirlaniyor.
 
 ## Ajan / Worktree Durumu
 1. codex
    - Worktree: /home/bekir/orkestram-k
-   - Branch: agent/codex/task-081
-   - Aktif task: yok
-   - Status ozeti: `TASK-081` drift cleanup tamamladi; koordinator worktree cleanup kaniti merkezi kayda islendi
-   - Karar sinifi: kapanis
-   - Not: Bu tur urun kodu degistirmedi; yalniz kanitli drift sinifindaki dosyalar restore edildi.
+   - Branch: agent/codex/task-082
+   - Aktif task: TASK-082
+   - Status ozeti: Task karti, merkezi lock ve pano kaydi acildi; uygulama henuz baslamadi
+   - Karar sinifi: devral
+   - Not: Koordinator bu turda yalniz task acilisi ve devir planini yurutur.
 2. codex-a
    - Worktree: /home/bekir/orkestram-a
    - Branch: agent/codex-a/task-079
    - Aktif task: yok
-   - Status ozeti: `TASK-079` referans owner branch temiz ve upstream hizali
+   - Status ozeti: Ortam guardrail taski icin varsayilan uygulayici owner olarak planlandi
    - Karar sinifi: koru
-   - Not: Bu turde degisiklik yok.
+   - Not: Uygulama dosya alani lock devri ile netlestirilecek; bu turde degisiklik yok.
 3. codex-b
    - Worktree: /home/bekir/orkestram-b
    - Branch: agent/codex-b/task-074
    - Aktif task: yok
-   - Status ozeti: Kanitli drift restore edildi; worktree temiz
-   - Karar sinifi: temizle
-   - Not: Yalniz `docs/tasks/TASK-074.md` satir-sonu/encoding drift'i restore edildi.
+   - Status ozeti: temiz
+   - Karar sinifi: koru
+   - Not: Bu turde degisiklik yok.
 4. codex-c
    - Worktree: /home/bekir/orkestram-c
    - Branch: agent/codex-c/task-075
    - Aktif task: yok
-   - Status ozeti: Kanitli drift restore edildi; worktree temiz
-   - Karar sinifi: temizle
-   - Not: `docs/DEMO_FIXTURE_STANDARD_TR.md` ve `docs/tasks/TASK-075.md` satir-sonu/encoding drift'i restore edildi.
+   - Status ozeti: temiz
+   - Karar sinifi: koru
+   - Not: Bu turde degisiklik yok.
 
 ## Preview / Source Durumu
 1. Bu oturum UI gorevi degil; preview lane kaniti gerekmiyor.
-2. Cleanup yalniz stale gorunurlugu ve drift temizligi kapsamindadir.
+2. Bu taskin ana konusu `Edit Source / Mount Source / Runtime Source / Preview Source` kontratini resmi hale getirmektir.
 
 ## Bugun Alinan Kararlar
-1. `TASK-080` merge sonrasi stale gorunurlugu yeniden kontrol edildi.
-2. Koordinator, `git diff` ile icerik farki tasimayan satir-sonu/encoding drift dosyalarini ayri taskta topladi.
-3. `TASK-081` ile koordinator, `codex-b` ve `codex-c` stale drift gorunurlugu resmi cleanup ile kapatildi.
+1. Yeni buyuk urun paketi acilmamasi karari korundu.
+2. Urun tasklarindan once dar kapsamli ortam guardrail taski acilmasi karari `TASK-082` olarak resmi kayda alindi.
+3. Koordinator implementasyona girmeden yalniz task/lock/pano/handoff acilisi yapacak, uygulama uygun ajan owner'ina verilecek.
 
 ## Acik Riskler
-1. Aktif stale worktree kalmadi.
-2. Sonraki koordinasyon turu yeni is dagitimi veya yeni is secimi ile sifirdan baslayabilir.
+1. `start-task.ps1` UNC uzerinde branch acilisinda halen kirilabiliyor; WSL branch fallback'i resmi kurala baglanmali.
+2. `apply_patch` / sandbox refresh kirilmasi halen tekrar eden operasyon riski.
+3. `validate` / `pre-pr` fail'lerinde kod hatasi ile ortam blokaji siniflari henuz resmi degil.
 
 ## Sonraki Adim
-1. Yeni is gelirse koordinator sabit 4 satirlik cevap protokolu ile yeni karar turune baslar.
+1. `TASK-082` icinde runtime kontrati, execution-layer matrisi, readiness siniflari ve sandbox fallback kurallari yazilacak.
+2. Koordinator, uygun owner ajan planini netlestirip uygulama asamasini ayrik teslim disipliniyle yurutacak.
