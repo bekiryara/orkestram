@@ -13,6 +13,26 @@ Set-Location $repoRoot
 $devUpScript = Convert-Path (Join-Path $scriptDir 'dev-up.ps1')
 $smokeTestScript = Convert-Path (Join-Path $scriptDir 'smoke-test.ps1')
 
+function Fail-Step {
+    param(
+        [string]$Name,
+        [string]$Reason,
+        [string]$Class = "",
+        [string]$Solution = ""
+    )
+
+    Write-Host "[validate] FAIL -> $Name"
+    if (-not [string]::IsNullOrWhiteSpace($Class)) {
+        Write-Host "[validate] sinif: $Class"
+    }
+    if (-not [string]::IsNullOrWhiteSpace($Reason)) {
+        Write-Host "[validate] neden: $Reason"
+    }
+    if (-not [string]::IsNullOrWhiteSpace($Solution)) {
+        Write-Host "[validate] cozum: $Solution"
+    }
+}
+
 function Run-Step {
     param(
         [string]$Name,
@@ -25,21 +45,26 @@ function Run-Step {
     } catch {
         $raw = $_.Exception.Message
         if ($raw -match "permission denied while trying to connect to the docker API") {
-            Write-Host "[validate] FAIL -> $Name"
-            Write-Host "[validate] neden: Docker erisim izni yok. Cozum: komutu Docker erisimi olan yetkiyle tekrar calistir."
+            Fail-Step -Name $Name -Class "ENV_BLOCKED" -Reason "Docker erisim izni yok" -Solution "komutu Docker erisimi olan yetkiyle tekrar calistir"
             exit 1
         }
         if ($raw -match "storage/framework/views" -or $raw -match "bootstrap/cache") {
-            Write-Host "[validate] FAIL -> $Name"
-            Write-Host "[validate] neden: Runtime izin sorunu (storage/bootstrap-cache yazma izni). Cozum: dev-up preflightini tekrar calistir."
+            Fail-Step -Name $Name -Class "RUNTIME_BLOCKED" -Reason "Runtime izin sorunu (storage/bootstrap-cache yazma izni)" -Solution "dev-up preflightini tekrar calistir"
+            exit 1
+        }
+        if ($raw -match "No such container" -or $raw -match "is not running") {
+            Fail-Step -Name $Name -Class "RUNTIME_BLOCKED" -Reason "Container ayakta degil" -Solution "dev-up ve runtime readiness kanitini tekrar al"
+            exit 1
+        }
+        if ($raw -match "vendor/autoload.php" -or $raw -match "Failed opening required") {
+            Fail-Step -Name $Name -Class "RUNTIME_BLOCKED" -Reason "Uygulama dependency/runtime hazir degil" -Solution "vendor/runtime hazirligini dogrula; bu durum kod fail degil ortam blokajidir"
             exit 1
         }
         throw
     }
 
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "[validate] FAIL -> $Name"
-        Write-Host "[validate] neden: Komut exit code=$LASTEXITCODE"
+        Fail-Step -Name $Name -Class "CODE_FAIL" -Reason "Komut exit code=$LASTEXITCODE"
         exit $LASTEXITCODE
     }
     Write-Host "[validate] OK -> $Name"
@@ -77,3 +102,5 @@ Run-Step -Name "smoke-test ($App)" -Action {
 
 Write-Host "[validate] PASS"
 exit 0
+
+

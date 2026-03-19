@@ -113,7 +113,36 @@ Her gorevde dogrulama oncesi su 4 kontrol yapilir:
 5. Git akisi:
    - `git fetch origin --prune`
    - gerekirse `git pull --ff-only origin <branch>`
-   - gorev bitince `git push -u origin agent/<ajan>/<task-id>`
+   - yeni branch upstream'i yoksa ilk baglama adimi: `git push -u origin agent/<ajan>/<task-id>`
+   - upstream kurulduktan sonra `pre-pr PASS` olmadan yeni push yok
+
+## 9A) Komut Katmani ve Ortam Readiness Siniflari
+
+Komut katmani:
+1. `git`, branch acilisi, upstream ve worktree status dogrulamasi:
+   - varsayilan katman `WSL`
+2. `scripts/*.ps1`:
+   - varsayilan katman `PowerShell`
+3. `php artisan test` ve uygulama ici komutlar:
+   - varsayilan katman `container`
+4. Runtime mount/source veya preview kaniti:
+   - `WSL + ilgili script`
+
+Ortam/readiness siniflari:
+1. `ENV_BLOCKED`
+   - upstream yok, credential/auth blokaji, yanlis shell, quoting hatasi, arac eksigi
+2. `RUNTIME_BLOCKED`
+   - container ayakta degil, mount source yanlis, `vendor/autoload.php` eksik, runtime izin sorunu var
+3. `SANDBOX_BLOCKED`
+   - sandbox refresh veya arac katmani (`apply_patch`, dosya okuma) kirildi
+4. `CODE_FAIL`
+   - test/smoke/validate dogrudan koddan fail verdi
+
+Kural:
+1. `ENV_BLOCKED`, `RUNTIME_BLOCKED` ve `SANDBOX_BLOCKED` durumlari urun hatasi diye kapanmaz.
+2. Blokaj sinifi gorulurse ayni kirik komut tekrar edilmez; dogru fallback katmanina gecilir.
+3. PowerShell icinde `&&` kullanilip yarim komut zinciri uretilmez.
+4. WSL credential/helper sorunu varsa `read OK / write auth blocked` olarak kayda alinir.
 
 ## 10) Operasyonel Disiplin Dosyalari (Zorunlu)
 
@@ -153,6 +182,10 @@ Her gorevde dogrulama oncesi su 4 kontrol yapilir:
    - Mekanik komut:
      - `powershell -ExecutionPolicy Bypass -File scripts/start-task.ps1 -TaskId TASK-0xx -Agent codex -Files "path/one,path/two" -Note "kisa ozet"`
    - Script aktif lock overlap tespit ederse task acilmaz.
+   - UNC path uzerinde branch acilisi kirilirse durum `PARTIAL_OPEN` sayilir:
+     1. task karti + lock + `NEXT_TASK` yazildiysa silinmez
+     2. branch acilisi WSL icinde tamamlanir
+     3. durum `docs/SESSION_HANDOFF_TR.md` icine islenir
 11. `docs/COORDINATOR_BOOTSTRAP_TR.md`
    - Yeni gelen koordinatorun ilk 5 dakika akisi icin tek referans dokumandir.
 12. `scripts/close-task.ps1`
@@ -276,6 +309,7 @@ Kural:
 3. Koordinator UI review oncesi `Edit Source`, `Mount Source` ve `Preview URL` ucunu birlikte dogrular.
 4. Farkli worktree'de patch yazip baska worktree preview'u gostermek operasyonel ihlaldir.
 5. Bu esitlik saglanmiyorsa once kaynak hizasi duzeltilir, sonra UI review baslar.
+
 
 
 

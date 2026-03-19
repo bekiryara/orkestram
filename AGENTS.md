@@ -40,6 +40,31 @@ powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ```
 PASS olmadan commit/push yasak.
 
+Istisna:
+1. Yeni acilan branch'in upstream'i yoksa ilk baglama adimi olarak `git push -u origin agent/<ajan>/<task-id>` uygulanabilir.
+2. Bu istisna yalniz upstream olusturma icindir; upstream kurulduktan sonraki push'larda `pre-pr PASS` zorunludur.
+
+## Ortam Blokaj Siniflari
+1. `ENV_BLOCKED`
+   - upstream yok, credential/auth blokaji var, powershell/shell katmani yanlis veya zorunlu arac eksik
+2. `RUNTIME_BLOCKED`
+   - container yok, mount source yanlis, `vendor/autoload.php` yok, storage/bootstrap izin sorunu var
+3. `SANDBOX_BLOCKED`
+   - sandbox refresh, `apply_patch`, `Get-Content` veya benzeri arac katmani kiriliyor
+4. `CODE_FAIL`
+   - test, smoke veya validation dogrudan kod/regresyon hatasi veriyor
+
+Kural:
+1. Blokaj sinifi goruldugunde ayni kirik komut kor tekrar edilmez.
+2. `SANDBOX_BLOCKED` halinde once WSL kaniti veya izinli fallback denenir.
+3. `ENV_BLOCKED` ve `RUNTIME_BLOCKED` durumlari urun bug'i gibi raporlanmaz; ortamsal blocker olarak yazilir.
+
+## Komut Katmani Disiplini
+1. Git branch acilisi ve kritik git operasyonlari mumkun oldugunca WSL icinde yapilir.
+2. PowerShell icinde `&&` kullanilmaz; ayri komut adimlari veya tek WSL `bash -lc` stringi kullanilir.
+3. `php artisan test`, `docker exec`, `validate` ve `pre-pr` dogru katmanda calistirilir; yanlis shell/katman tespitinde is durdurulur.
+4. Urun taski yapan ajan gerekcesiz `dev-up`, mount/source oynatma veya runtime yeniden kurulumuna gitmez; bu koordinator kararidir.
+
 ## Kanit Zorunlulugu
 Her gorev sonunda su 4 kanit ayni formatta paylasilir:
 1. `git branch --show-current`
@@ -93,3 +118,4 @@ Koordinator, sistem okumasindan sonra senden tek net karar ister:
 1. mevcut task devam edecek
 2. yeni task acilacak
 3. is ajanlara dagitilacak
+

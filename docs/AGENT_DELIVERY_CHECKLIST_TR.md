@@ -39,6 +39,21 @@ Bu sira bozulmaz:
 Not:
 - `pre-pr`, `validate` yerine gecmez; `validate` once gelir.
 - Ortamda `powershell` veya `pwsh` yoksa bu durum teslim notunda acikca yazilir.
+- Yeni branch upstream'i yoksa once `git push -u origin <branch>` ile upstream kurulur; sonra `pre-pr` kosulur.
+
+## 3A. Ortam Blokaj Siniflari
+1. `ENV_BLOCKED`
+   - upstream yok, credential/auth blokaji, quoting veya shell katmani yanlis
+2. `RUNTIME_BLOCKED`
+   - container yok, mount source yanlis, `vendor/autoload.php` eksik, runtime izin sorunu var
+3. `SANDBOX_BLOCKED`
+   - sandbox refresh veya arac kirigi var
+4. `CODE_FAIL`
+   - test/smoke/validate kod kaynakli fail veriyor
+
+Kural:
+1. Teslim notunda blocker varsa bu siniflardan biriyle yazilir.
+2. `ENV_BLOCKED`, `RUNTIME_BLOCKED` ve `SANDBOX_BLOCKED` gorulurse ayni kirik komut kor tekrar edilmez.
 
 ## 4. Teslim Formati
 Teslim mesaji kisa ve kanit odakli olur. Asgari format:
@@ -108,7 +123,8 @@ Bir is yarida kaldiysa veya ajan yeniden baglandiysa:
 2. Su 3 kontrolu yap:
    - `git branch --show-current`
    - `git status --short`
-   - `docs/TASK_LOCKS.md` icinde gorevin hala sana ait ve `active` oldugunu dogrula
+   - docs/TASK_LOCKS.md icinde gorevin hala sana ait ve ctive oldugunu dogrula
+   - gerekiyorsa git branch -vv ile upstream durumunu dogrula
 3. Lock baska ajan uzerindeyse veya branch farkliysa calismayi durdur.
 4. Kaldigin noktayi tek satir notla guncelle:
    - hedef
@@ -151,4 +167,5 @@ Not:
 Kural (Edit Source Esitligi):
 1. UI tesliminde `Edit Source` ile `Mount Source` ayni worktree/path degilse teslim reddedilir.
 2. Ajan farkli source'ta kod degistirip baska source preview'u veremez.
+
 

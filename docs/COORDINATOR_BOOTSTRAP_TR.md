@@ -25,7 +25,7 @@ Amac:
 3. `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed` ile worktree gorunurlugunu al.
 4. WSL hizalama kanitini al:
    - `wsl -e bash -lc "cd /home/bekir/orkestram-k && pwd && git rev-parse --show-toplevel && git branch --show-current && git status --short"`
-5. `git remote -v` ve `git branch -vv` ciktilarini dogrula.
+5. `git remote -v` ve `git branch -vv` ciktilarini dogrula.`r`n6. Komut katmanini dogrula:`r`n   - `git` icin WSL`r`n   - `scripts/*.ps1` icin PowerShell`r`n   - uygulama ici test icin container
 
 ## 2) Ilk Karar Kurali
 
@@ -47,7 +47,7 @@ Amac:
 4. `docs/TASK_LOCKS.md` kaydini `active` olarak ekle.
 5. `docs/NEXT_TASK.md` panosunu senkronla.
 6. Branch'i en son ac.
-7. Sadece lock dosyalarinda calis.
+7. Sadece lock dosyalarinda calis.`r`n`r`nNot:`r`n1. `start-task.ps1` task/lock/pano yazip branch acilisinda UNC nedeniyle kirilirse durum `PARTIAL_OPEN` kabul edilir.`r`n2. Bu durumda kayitlar korunur, branch WSL icinde acilir ve handoff dosyasina not dusulur.
 
 Standart komut:
 ```powershell
@@ -73,7 +73,7 @@ powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-0xx
 1. Git operasyonlari mumkun oldugunca WSL icinde yurutulur.
 2. UNC path uzerinde Windows `git` yanlis remote veya sahte kirli status uretirse is durdurulur.
 3. Bu durumda ayni kontrol `wsl -e bash -lc` icinde tekrar kosulur.
-4. WSL kaniti temiz degilse yeni task acilmaz, kapanis da yapilmaz.
+4. WSL kaniti temiz degilse yeni task acilmaz, kapanis da yapilmaz.`r`n5. Upstream olmayan yeni branch icin once `git push -u origin <branch>` ile baglama adimi tamamlanir, sonra `pre-pr` kosulur.
 
 ## 6) Stop Kurallari
 
@@ -81,4 +81,5 @@ powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-0xx
 2. Lock yoksa degisiklik yok.
 3. WSL kaniti yoksa dagitim yok.
 4. `Edit Source != Mount Source` ise UI review yok.
-5. `pre-pr` PASS yoksa kapanis yok.
+5. `pre-pr` PASS yoksa kapanis yok.`r`n6. `ENV_BLOCKED`, `RUNTIME_BLOCKED` veya `SANDBOX_BLOCKED` sinifi varsa ayni komut tekrar edilmez; blocker resmi kayda yazilir.
+

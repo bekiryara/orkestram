@@ -2089,3 +2089,35 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS (acilis zinciri)`
 - Not:
   - `start-task.ps1` UNC uzerinde branch acilisinda kirildi; task/lock/pano kayitlari yazildiktan sonra branch WSL icinde dogru katmanda acildi.`
+
+---
+
+### [2026-03-20 01:55] TASK-082 Ortam Guardrail Standardizasyonu Kapanisi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Task template icine Runtime Kontrati bolumu eklendi; Edit/Mount/Runtime/Preview source ve execution-layer alanlari resmi hale getirildi.`
+  - `AGENTS, repo disiplini, multi-agent, koordinator bootstrap, delivery checklist ve operating model dokumanlarina ortam blokaj siniflari, quoting guardrail'i ve upstream baglama sirasi yazildi.`
+  - `pre-pr` ve `validate` scriptleri `ENV_BLOCKED`, `RUNTIME_BLOCKED`, `SANDBOX_BLOCKED` ve `CODE_FAIL` siniflarini yazacak sekilde guclendirildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-082.md`
+  - `docs/tasks/_TEMPLATE.md`
+  - `AGENTS.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/COORDINATOR_BOOTSTRAP_TR.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `docs/OPERATING_MODEL_TR.md`
+  - `scripts/pre-pr.ps1`
+  - `scripts/validate.ps1`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -NoProfile -Command "[void][scriptblock]::Create((Get-Content 'scripts/pre-pr.ps1' -Raw)); 'PARSE_OK'"`
+  - `powershell -NoProfile -Command "[void][scriptblock]::Create((Get-Content 'scripts/validate.ps1' -Raw)); 'PARSE_OK'"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Bu task ortamsal guardrail standardini resmileştirdi; WSL credential helper ve start-task UNC davranisinin mekanik sertlestirmesi gerekirse ayrik operasyon taskina acilabilir.`

@@ -155,6 +155,21 @@ Koordinator stale aday gordugunde su sirayi izler:
 2. Stale aday worktree yeni gorev alacaksa once rapor, sonra karar alinir.
 3. Ortak operasyon dosyalarinda paralel yazim yoktur.
 4. Stale worktree icin karar sinifi yazilmadan cleanup/devralma uygulanmaz.
+5. `ENV_BLOCKED`, `RUNTIME_BLOCKED`, `SANDBOX_BLOCKED` veya `CODE_FAIL` sinifi yazilmadan blocker kapatilmamis sayilir.
+
+## 7B) Ortam Blokaj Yurutme Kurali
+
+1. `ENV_BLOCKED`
+   - upstream yok, auth/credential blokaji, yanlis shell veya quoting
+   - koordinator once dogru katmani ve fallback komutunu yazar
+2. `RUNTIME_BLOCKED`
+   - container, mount source veya runtime dependency hazir degil
+   - koordinator bunu urun bug'i gibi dagitmaz
+3. `SANDBOX_BLOCKED`
+   - arac katmani kirik
+   - ayni komut tekrar edilmez; WSL veya izinli fallback denenir
+4. `CODE_FAIL`
+   - dogrudan urun/regresyon sinifidir
 
 ## 7A) Paralel Task Secim Kurali
 
@@ -173,4 +188,5 @@ Bir operasyon gorevi ancak su durumda kapanir:
 3. `WORKLOG`, `TASK_LOCKS`, `NEXT_TASK` guncel
 4. `pre-pr PASS`
 5. commit/push tamam
+
 
