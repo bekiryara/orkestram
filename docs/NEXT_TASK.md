@@ -1,23 +1,21 @@
 ﻿# NEXT TASK (Koordinasyon Panosu)
 
-Durum: `ACTIVE`  
+Durum: `READY`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Merkezi Koordinasyon)
-1. `TASK-074` - Merge sonrasi preview/runtime lifecycle ve design lane yasam dongusu standardi yazilacak
-2. `TASK-075` - Deterministic demo fixture standardi ve review demo veri kurali yazilacak
-3. `TASK-076` - Task acilis recovery akisi ve NEXT_TASK aktif sayim hatasi duzeltilecek
+1. `YOK` - `TASK-076` task acilis recovery, aktif pano senkronu ve ajan teslimleri merkezi kapanisla tamamlandi
 
 ## Son Koordinator Kapanisi
-1. `TASK-073` - 3 ajan surekli calisma orkestrasyonu ve lock overlap otomatik kontrolu tamamlandi
-2. `TASK-071` - codex-a task-056 stale branch'i drift olarak dogrulandi ve kontrollu cleanup ile temizlendi.
-3. `TASK-070` - codex-b ve codex-c worktree'leri kontrollu restore ile temizlendi; stale aday durumlari kapatildi.
+1. `TASK-076` - task acilis recovery, aktif pano senkronu ve ajan teslimleri merkezi kapanisla tamamlandi
+2. `TASK-075` - deterministic demo fixture standardi agent teslimi 8351cba ve pre-pr PASS ile tamamlandi
+3. `TASK-074` - merge sonrasi preview/runtime lifecycle standardi agent teslimi 4f95fa0 ve pre-pr PASS ile tamamlandi
 
 ## Son Kapanis
-1. `TASK-073` - 3 ajan surekli calisma orkestrasyonu ve lock overlap otomatik kontrolu tamamlandi
-2. `TASK-071` - codex-a stale branch cleanup'i tamamlandi; boylece repo genel stale worktree problemi kapandi.
-3. `TASK-070` - `codex-b` ve `codex-c` icin kontrollu cleanup uygulandi; her iki worktree de temiz duruma dondu.
+1. `TASK-076` - task acilis recovery, aktif pano senkronu ve ajan teslimleri merkezi kapanisla tamamlandi
+2. `TASK-075` - deterministic demo fixture standardi agent teslimi 8351cba ve pre-pr PASS ile tamamlandi
+3. `TASK-074` - merge sonrasi preview/runtime lifecycle standardi agent teslimi 4f95fa0 ve pre-pr PASS ile tamamlandi
 
 ## Kapanis Kurali (Zorunlu)
 1. Kapanis kaniti olmadan task `closed` edilemez.

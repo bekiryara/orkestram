@@ -1731,3 +1731,71 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `n/a`
+---
+
+### [2026-03-19 07:40] TASK-074 Preview Runtime Lifecycle Standardi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `AJAN-B owner branch'te merge sonrasi preview/runtime lifecycle standardini tamamladi.`
+  - `Review URL / Final URL ayrimi, design-preview lane davranisi ve runtime refresh kaniti dokumanlara islendi.`
+  - `Agent teslim kaniti 4f95fa0 commit hash'i ve pre-pr PASS olarak merkezi kayitlara aktarıldi.`
+- Degisen Dosyalar:
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git fetch origin --prune`
+  - `git show --stat --oneline origin/agent/codex-b/task-074`
+  - `AJAN-B teslim kaniti: git branch --show-current / git branch -vv / git status --short / pre-pr PASS`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Owner branch: agent/codex-b/task-074`
+
+---
+
+### [2026-03-19 07:40] TASK-075 Deterministic Demo Fixture Standardi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `AJAN-C owner branch'te deterministic demo fixture standardini tamamladi.`
+  - `Whitelist slug, repo ici medya kaynagi, idempotent update ve smoke/test ayrimi net kurala baglandi.`
+  - `Agent teslim kaniti 8351cba commit hash'i ve pre-pr PASS olarak merkezi kayitlara aktarıldi.`
+- Degisen Dosyalar:
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git fetch origin --prune`
+  - `git show --stat --oneline origin/agent/codex-c/task-075`
+  - `AJAN-C teslim kaniti: git branch --show-current / git branch -vv / git status --short / pre-pr PASS`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Owner branch: agent/codex-c/task-075`
+
+---
+
+### [2026-03-19 07:40] TASK-076 Task Acilis Recovery ve Merkezi Kapanis
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `start-task.ps1 icindeki NEXT_TASK aktif sayim hatasi duzeltildi.`
+  - `TASK-074 ve TASK-075 yari acilis durumu toparlandi; TASK_LOCKS, NEXT_TASK ve SESSION_HANDOFF senkronize edildi.`
+  - `Owner ajan teslimleri merkezi kapanis kayitlarina islenerek aktif task listesi READY durumuna getirildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-076.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+  - `scripts/start-task.ps1`
+- Calistirilan Komutlar:
+  - `git fetch origin --prune`
+  - `git show --stat --oneline origin/agent/codex-b/task-074`
+  - `git show --stat --oneline origin/agent/codex-c/task-075`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Owner task icerigi koordinator branch'ine tasinmadi; yalniz merkezi kapanis yapildi.`
