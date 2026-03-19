@@ -1,6 +1,6 @@
 ﻿# TASK-073
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex`  
 Branch: `agent/codex/task-073`  
 Baslangic: `2026-03-19 05:41`
@@ -14,14 +14,14 @@ Baslangic: `2026-03-19 05:41`
 - [x] yeni task
 
 ## In Scope
-- [ ] 3 ajan surekli calisma paketi ve paralel task secim modeli dokumanlastirilacak
-- [ ] `start-task.ps1` icine aktif lock overlap otomatik kontrolu eklenecek
-- [ ] Ilgili operasyon dokumanlari yeni orkestrasyon ve overlap kapisina gore hizalanacak
+- [x] 3 ajan surekli calisma paketi ve paralel task secim modeli dokumanlastirilacak
+- [x] `start-task.ps1` icine aktif lock overlap otomatik kontrolu eklenecek
+- [x] Ilgili operasyon dokumanlari yeni orkestrasyon ve overlap kapisina gore hizalanacak
 
 ## Out of Scope
-- [ ] Urun/runtime kodunu degistirmek
-- [ ] Demo fixture standardini bu taskta tamamlamak
-- [ ] Merge sonrasi preview/runtime lifecycle maddelerini bu taskta kapatmak
+- [x] Urun/runtime kodunu degistirmek
+- [x] Demo fixture standardini bu taskta tamamlamak
+- [x] Merge sonrasi preview/runtime lifecycle maddelerini bu taskta kapatmak
 
 ## Lock Dosyalari
 - `docs/tasks/TASK-073.md`
@@ -47,36 +47,38 @@ Baslangic: `2026-03-19 05:41`
 - [x] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
 - [x] Branch dogrulandi: `agent/<ajan>/<task-id>`
 - [x] Lock kapsam disina cikilmadi
-- [ ] Gorev kapsamindaki degisiklikler tamamlandi
-- [ ] Goreve ozel test/dogrulama calistirildi
+- [x] Gorev kapsamindaki degisiklikler tamamlandi
+- [x] Goreve ozel test/dogrulama calistirildi
 
 ## Kabul Kriterleri
-- [ ] 3 ajan surekli calisma orkestrasyonu, paralel task secimi ve kontrat bazli dagitim kurali resmi dokumana girer
-- [ ] `start-task.ps1`, aktif locklarla kesisen yeni dosya/wildcard taleplerini task acilmadan reddeder
-- [ ] Repo disiplini ve lock matrix overlap kapisini acikca referanslar
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
+- [x] 3 ajan surekli calisma orkestrasyonu, paralel task secimi ve kontrat bazli dagitim kurali resmi dokumana girer
+- [x] `start-task.ps1`, aktif locklarla kesisen yeni dosya/wildcard taleplerini task acilmadan reddeder
+- [x] Repo disiplini ve lock matrix overlap kapisini acikca referanslar
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
-- [ ] `git branch --show-current`
-- [ ] `git branch -vv`
-- [ ] `git status --short`
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
-- [ ] Goreve ozel test/komut sonucu
-- [ ] `Edit Source == Mount Source` kaniti
-- [ ] Commit hash
+- [x] `git branch --show-current`
+- [x] `git branch -vv`
+- [x] `git status --short`
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- [x] Goreve ozel test/komut sonucu: `start-task.ps1` parse PASS; kopya smoke senaryosunda overlap case `FAIL`, non-overlap case `OK`
+- [x] `Edit Source == Mount Source` kaniti
+- [x] Commit hash
 
 ## Kapanis Adimlari
-- [ ] Task kartindaki checklistler gercek sonuca gore guncellendi
-- [ ] `docs/WORKLOG.md` guncellendi
-- [ ] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
-- [ ] `docs/NEXT_TASK.md` panosu guncellendi
-- [ ] Branch pushlandi
+- [x] Task kartindaki checklistler gercek sonuca gore guncellendi
+- [x] `docs/WORKLOG.md` guncellendi
+- [x] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
+- [x] `docs/NEXT_TASK.md` panosu guncellendi
+- [x] Branch pushlandi
 
 ## Komutlar
 ```powershell
+powershell -NoProfile -Command "[void][scriptblock]::Create((Get-Content 'scripts/start-task.ps1' -Raw)); 'PARSE_OK'"
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
-powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-073 -Agent codex -ClosureNote "kisa kapanis ozeti" -WorklogTitle "baslik" -WorklogSummary "madde-1" -Files "dosya-1" -Commands "komut-1" -Result PASS
 ```
 
 ## Risk / Not
-- En buyuk risk ortak koordinasyon dosyalarinda gereksiz sert blokaj uretmek; overlap kapisi koordinasyon dosyalarini degil gercek hedef lock alanlarini esas alacak.
+- Overlap kapisi koordinasyon dosyalarini haric tutacak sekilde yazildi; aksi durumda paralel task acma akisi gereksiz sert blokaja girerdi.
+
+
