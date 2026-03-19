@@ -1938,3 +1938,62 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `Koordinator uygulama yapmadi; yalniz task acilisi ve ajan devri yapildi.`
+
+---
+
+### [2026-03-19 22:56] TASK-079 Owner Teslim Kabul ve Merkezi Kapanis
+- Sorumlu: `codex-a`
+- Is Ozeti:
+  - `codex-a owner teslim kaniti dogrulandi: branch temiz, upstream hizali, validate PASS ve pre-pr PASS,TASK-079 task karti merkezi kopyada owner teslim gercegine gore kapatildi,TASK_LOCKS, NEXT_TASK ve WORKLOG owner teslim kabulune gore senkronlandi`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-079.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc 'cd /home/bekir/orkestram-a && git branch --show-current && git branch -vv && git status --short && sed -n 1,220p docs/tasks/TASK-079.md',powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Owner branch teslimi commit 8d06a46 + docs duzeltme 22cd676 ile kabul edildi,Runtime mount source halen owner worktree ile birebir hizali olmadigi icin mount kaniti bu kapanista uretilmedi; risk handoff kaydina ayrica islenmelidir`
+
+---
+
+### [2026-03-19 23:35] TASK-079 Merkezi Normalizasyon ve Merge Bekleme Karari
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-079 task kartindaki placeholder checklistler gercek owner teslim kanitina gore normalize edildi.`
+  - `Merkezi handoff ve pano kayitlarinda TASK-079 icin otomatik merge izlenimi kaldirildi.`
+  - `izmirorkestra owner coverage write-path parity eksigi acik risk olarak merkezi kayda islenip merge karari koordinator degerlendirmesine birakildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-079.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && pwd && git rev-parse --show-toplevel && git branch --show-current && git status --short"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Bu tur urun kodu degistirmedi; yalniz merkezi koordinasyon kayitlari normalize edildi.`
+
+---
+
+### [2026-03-19 23:35] TASK-079 Merkezi Normalizasyon ve Merge Bekleme Karari
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-079 task kartindaki placeholder checklistler gercek owner teslim kanitina gore normalize edildi.`
+  - `Merkezi handoff ve pano kayitlarinda TASK-079 icin otomatik merge izlenimi kaldirildi.`
+  - `izmirorkestra owner coverage write-path parity eksigi acik risk olarak merkezi kayda islenip merge karari koordinator degerlendirmesine birakildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-079.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && pwd && git rev-parse --show-toplevel && git branch --show-current && git status --short"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Bu tur urun kodu degistirmedi; yalniz merkezi koordinasyon kayitlari normalize edildi.`
