@@ -152,6 +152,7 @@ Her gorevde dogrulama oncesi su 4 kontrol yapilir:
      4. branch acilisi
    - Mekanik komut:
      - `powershell -ExecutionPolicy Bypass -File scripts/start-task.ps1 -TaskId TASK-0xx -Agent codex -Files "path/one,path/two" -Note "kisa ozet"`
+   - Script aktif lock overlap tespit ederse task acilmaz.
 11. `docs/COORDINATOR_BOOTSTRAP_TR.md`
    - Yeni gelen koordinatorun ilk 5 dakika akisi icin tek referans dokumandir.
 12. `scripts/close-task.ps1`
@@ -166,6 +167,7 @@ Kurallar:
 4. Yeni task ancak yeni kabul kriteri, yeni risk sinifi, yeni lock alani veya ayrik owner gerektiriyorsa acilir.
 5. `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md`, `docs/WORKLOG.md` ve `docs/SESSION_HANDOFF_TR.md` merkezi koordinasyon alanidir; bu dosyalarda paralel kapanis gerekiyorsa koordinat?r kontrollu entegrasyon uygulanir.
 6. Koordinator yeni is veya dagitim oncesi `scripts/agent-status.ps1` raporunu okuyarak stale worktree adaylarini kontrol eder.
+7. Surekli 3 ajan orkestrasyonunda varsayilan paketler `UI | data-fixture | test-ops` olarak dusunulur; lock cakismasi varsa dagitim iptal edilir.
 
 ## 11) Yeni Gelen Ajan Onboarding (Zorunlu)
 
@@ -261,6 +263,7 @@ Kural:
 3. Koordinator UI review oncesi `Edit Source`, `Mount Source` ve `Preview URL` ucunu birlikte dogrular.
 4. Farkli worktree'de patch yazip baska worktree preview'u gostermek operasyonel ihlaldir.
 5. Bu esitlik saglanmiyorsa once kaynak hizasi duzeltilir, sonra UI review baslar.
+
 
 
 

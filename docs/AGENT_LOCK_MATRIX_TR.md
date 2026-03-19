@@ -31,6 +31,12 @@ Amac:
 | Ortak operasyon dosyasi | `docs/TASK_LOCKS.md` | Sadece aktif lock acan ajan veya koordinator yazar | Tablo tek kaynak kabul edilir |
 | Kapanis kaniti eksik gorev | Kod tamam ama `pre-pr` kaniti yok | Lock `active` kalir | Gorev bitse bile resmi kapanis yok |
 
+## 2A) Script Kapisi
+1. scripts/start-task.ps1, yeni task acilirken aktif satirlardaki hedef dosya/wildcard alanlarini otomatik tarar.
+2. Koordinasyon icin zorunlu eklenen docs/TASK_LOCKS.md, docs/NEXT_TASK.md ve task karti bu overlap kapisinda hariç tutulur.
+3. Gercek hedef dosya veya wildcard alaninda kesisim varsa script yeni taski FAIL ile durdurur.
+4. Script seviyesi kontrol koordinator kararinin yerine gecmez; yalniz erken blokaj katmanidir.
+
 ## 3) Lock Alma Karar Agaci
 
 1. Degistirmek istedigin dosya veya wildcard desenlerini kesin listele.
@@ -111,3 +117,4 @@ Belirsiz notlar kullanilmaz:
 2. Kesisim varsa ajan durur; lock sahibini veya koordinatoru bekler.
 3. Kapanis kaniti yoksa lock kapanmaz.
 4. Devralma varsa tek kaynak `docs/TASK_LOCKS.md` not alanidir.
+

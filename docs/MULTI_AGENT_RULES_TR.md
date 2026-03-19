@@ -86,6 +86,13 @@ Koordinator yeni is geldiginde su sirayla karar verir:
    - Evet: once handoff dosyasina islenir, sonra dagitim karari verilir.
    - Hayir: dagitim normal akar.
 
+## 3 Ajan Paket Orkestrasyonu
+1. Varsayilan paket dagitimi: codex-a = UI, codex-b = data-fixture, codex-c = test-ops.
+2. Koordinator bu dagitimi ancak lock ve risk ayrikligi varsa kullanir.
+3. Paket kontrati olmadan alt gorev dagitilmaz.
+4. Her paket icin hedef dosyalar, owner ve kapanis kaniti baslangicta net yazilir.
+5. Ortak belge/entegrasyon dosyalari koordinator disinda aktif yazici alamaz.
+
 ## Koordinator Dagitim Formati
 Koordinator ajan gorevi verirken su formati kullanir:
 1. ajan
@@ -172,5 +179,6 @@ Koordinator karar cevabi yalniz su 4 satirla verilir:
    - `Preview URL`
 4. Farkli worktree'de patch yazip baska worktree preview'u gostermek yasaktir.
 5. UI merge karari yalniz `Edit Source == Mount Source` dogrulandiysa verilir.
+
 
 

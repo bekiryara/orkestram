@@ -44,6 +44,20 @@ Koordinator veya ajan ise baslamadan once su sirayi izler:
    - `pre-pr PASS`
    - commit/push
 
+## 2A) 3 Ajan Surekli Calisma Orkestrasyonu
+
+Varsayilan paket dagitimi:
+1. codex-a -> UI / frontend / preview odakli ayrik ekran veya blade/css kapsamı
+2. codex-b -> data-fixture / content / admin veri akisi / migration-disindan veri hazirlama
+3. codex-c -> test-ops / servis-hardening / smoke-dogrulama / risk kapatma
+
+Kurallar:
+1. Bu dagitim sabit kisilik degil, varsayilan paket modelidir; koordinator ihtiyaca gore yer degistirebilir.
+2. Ayni anda en fazla 3 aktif task acilir ve her paket yalniz ayrik lock alaniyla calisir.
+3. Ortak koordinasyon dosyalari koordinator lock'unda kalir; ajanlara dagitilmaz.
+4. Tek bir is ajanlara bolunecekse once kontratlar yazilir: owner, hedef dosya, kabul kaniti, kapanis kaniti.
+5. UI + fixture + test-ops ayni hedefe hizmet ediyorsa once UI iskeleti, sonra fixture, sonra test-ops sirasi tercih edilir.
+
 ## 3) Task Karar Kurali
 
 1. Hedef ve kabul kriteri ayniysa:
@@ -142,6 +156,15 @@ Koordinator stale aday gordugunde su sirayi izler:
 3. Ortak operasyon dosyalarinda paralel yazim yoktur.
 4. Stale worktree icin karar sinifi yazilmadan cleanup/devralma uygulanmaz.
 
+## 7A) Paralel Task Secim Kurali
+
+Koordinator yeni isi ajanlara bolmeden once su sirayla filtreler:
+1. Hedef tek owner ile bitebiliyorsa dagitmaz, tek taskta tutar.
+2. Ayri lock alanlari varsa paketlere ayirir.
+3. Ortak entegrasyon dosyalari varsa ayrik ajanlara vermez; koordinator tutar.
+4. Her alt is teslimi kendi kaniti ile gelir; entegrasyon kaniti ayrica koordinator tarafinda uretilir.
+5. Lock cakismasi veya overlap sinyali varsa task acma durur.
+
 ## 8) Kapanis
 
 Bir operasyon gorevi ancak su durumda kapanir:
@@ -150,3 +173,4 @@ Bir operasyon gorevi ancak su durumda kapanir:
 3. `WORKLOG`, `TASK_LOCKS`, `NEXT_TASK` guncel
 4. `pre-pr PASS`
 5. commit/push tamam
+

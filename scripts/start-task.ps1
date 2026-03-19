@@ -18,6 +18,80 @@ function Fail([string]$Message) {
     exit 1
 }
 
+function Normalize-LockTarget([string]$Target) {
+    if ([string]::IsNullOrWhiteSpace($Target)) {
+        return ""
+    }
+    return ($Target.Trim() -replace '\\', '/')
+}
+
+function Has-Wildcard([string]$Target) {
+    return (Normalize-LockTarget $Target) -match '[*?]'
+}
+
+function Get-LockBase([string]$Target) {
+    $normalized = Normalize-LockTarget $Target
+    if ([string]::IsNullOrWhiteSpace($normalized)) {
+        return ""
+    }
+    $match = [regex]::Match($normalized, '[*?]')
+    if (-not $match.Success) {
+        return $normalized
+    }
+    return $normalized.Substring(0, $match.Index)
+}
+
+function Is-CoordinationTarget([string]$Target) {
+    $normalized = Normalize-LockTarget $Target
+    if ([string]::IsNullOrWhiteSpace($normalized)) {
+        return $true
+    }
+    if ($normalized -in @('docs/TASK_LOCKS.md', 'docs/NEXT_TASK.md', 'docs/WORKLOG.md')) {
+        return $true
+    }
+    if ($normalized -match '^docs/tasks/TASK-[0-9]{3}\.md$') {
+        return $true
+    }
+    return $false
+}
+
+function Test-LockOverlap([string]$Left, [string]$Right) {
+    $leftNorm = Normalize-LockTarget $Left
+    $rightNorm = Normalize-LockTarget $Right
+    if ([string]::IsNullOrWhiteSpace($leftNorm) -or [string]::IsNullOrWhiteSpace($rightNorm)) {
+        return $false
+    }
+    if ($leftNorm -eq $rightNorm) {
+        return $true
+    }
+
+    $leftWild = Has-Wildcard $leftNorm
+    $rightWild = Has-Wildcard $rightNorm
+    if (-not $leftWild -and -not $rightWild) {
+        return $false
+    }
+
+    $leftBase = Get-LockBase $leftNorm
+    $rightBase = Get-LockBase $rightNorm
+    if ([string]::IsNullOrWhiteSpace($leftBase) -or [string]::IsNullOrWhiteSpace($rightBase)) {
+        return $true
+    }
+
+    if ($leftWild -and $rightNorm.StartsWith($leftBase, [System.StringComparison]::OrdinalIgnoreCase)) {
+        return $true
+    }
+    if ($rightWild -and $leftNorm.StartsWith($rightBase, [System.StringComparison]::OrdinalIgnoreCase)) {
+        return $true
+    }
+    if ($leftWild -and $rightWild) {
+        if ($leftBase.StartsWith($rightBase, [System.StringComparison]::OrdinalIgnoreCase) -or $rightBase.StartsWith($leftBase, [System.StringComparison]::OrdinalIgnoreCase)) {
+            return $true
+        }
+    }
+
+    return $false
+}
+
 if ($TaskId -notmatch '^TASK-[0-9]{3}$') {
     Fail "TaskId formati gecersiz. Beklenen: TASK-XXX"
 }
@@ -68,7 +142,32 @@ $nowStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 $nowShort = Get-Date -Format "yyyy-MM-dd HH:mm"
 $filesList = @()
 if (-not [string]::IsNullOrWhiteSpace($Files)) {
-    $filesList = $Files.Split(',') | ForEach-Object { $_.Trim() } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+    $filesList = $Files.Split(',') | ForEach-Object { Normalize-LockTarget $_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+}
+
+$requestedTargets = $filesList | Where-Object { -not (Is-CoordinationTarget $_) }
+if ($requestedTargets.Count -gt 0) {
+    $lockLines = Get-Content -Path $locksPath | Where-Object { $_ -match '^\|\s*TASK-[0-9]{3}\s*\|.*\|\s*active\s*\|' }
+    foreach ($line in $lockLines) {
+        $parts = $line.Split('|') | ForEach-Object { $_.Trim() }
+        if ($parts.Count -lt 9) {
+            continue
+        }
+        $existingTask = $parts[1]
+        $existingAgent = $parts[2]
+        $existingFilesRaw = $parts[5]
+        if ([string]::IsNullOrWhiteSpace($existingFilesRaw)) {
+            continue
+        }
+        $existingTargets = $existingFilesRaw.Split(',') | ForEach-Object { Normalize-LockTarget $_ } | Where-Object { -not (Is-CoordinationTarget $_) }
+        foreach ($requestedTarget in $requestedTargets) {
+            foreach ($existingTarget in $existingTargets) {
+                if (Test-LockOverlap $requestedTarget $existingTarget) {
+                    Fail "Lock overlap: '$requestedTarget' aktif gorev $existingTask ($existingAgent) icindeki '$existingTarget' ile cakisiyor."
+                }
+            }
+        }
+    }
 }
 
 $lockFiles = [System.Collections.Generic.List[string]]::new()
@@ -103,7 +202,6 @@ Write-Host "[start-task] step-2 lock row -> $locksPath"
 $nextRaw = Get-Content -Path $nextTaskPath -Raw
 $nextRaw = $nextRaw -replace 'Durum: `READY`', 'Durum: `ACTIVE`'
 $nextRaw = $nextRaw -replace 'Durum: `IDLE`', 'Durum: `ACTIVE`'
-$activeLine = '- `' + $TaskId + '` - ' + $taskSummary
 if ($nextRaw -match '## Aktif Gorevler \(Tek Kaynak\)') {
     $nextRaw = $nextRaw -replace '## Aktif Gorevler \(Tek Kaynak\)', '## Aktif Gorevler (Merkezi Koordinasyon)'
 }
@@ -120,8 +218,14 @@ if ($nextRaw -match '1\. `YOK`.*') {
 Set-Content -Encoding utf8 -Path $nextTaskPath -Value $nextRaw
 Write-Host "[start-task] step-3 next task -> $nextTaskPath"
 
-git checkout -b $Branch | Out-Null
+$branchOutput = cmd /c "git checkout --quiet -b $Branch" 2>&1
+if ($LASTEXITCODE -ne 0) {
+    Fail "Branch acilamadi ($Branch): $($branchOutput -join ' ')"
+}
 Write-Host "[start-task] step-4 branch -> $Branch"
 Write-Host "[start-task] started_at: $nowStamp"
 Write-Host "[start-task] OK"
 exit 0
+
+
+
