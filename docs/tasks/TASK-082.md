@@ -20,6 +20,10 @@ Baslangic: `2026-03-20 01:10`
 - [ ] Sandbox / `apply_patch` kirilmasinda tekrar deneme yerine durdurma ve fallback akisini resmi hale getirmek
 - [ ] Urun tasklari sirasinda gereksiz `dev-up` veya runtime/source oynatma riskini koordinator kontrollu modele baglamak
 - [ ] Yeni gelen ajanin ilk 5 dakikada sisteme hizalanmasi icin acik onboarding guardrail'leri eklemek
+- [ ] PowerShell quoting ve Windows/WSL komut ayiraclarindan dogan yanlis komut riskini resmi kurala baglamak
+- [ ] BOM / line-ending drift'in ne zaman icerik farki sayilacagi, ne zaman cleanup sinifi oldugu netlestirmek
+- [ ] Upstream baglama sirasini task acilisi, commit ve `pre-pr` akisi icinde acik kurala baglamak
+- [ ] WSL git credential/auth blokajini `read OK / write auth blocked` olarak ayristirip resmi ortamsal risk sinifina baglamak
 
 ## Out of Scope
 - [ ] Yeni urun ozelligi gelistirmek
@@ -64,6 +68,8 @@ Baslangic: `2026-03-20 01:10`
 - [ ] `validate` ve `pre-pr` tarafinda ortam blokaji ile kod hatasi ayrimi netlestirilir
 - [ ] Sandbox kirilmasinda tekrar deneme yerine durdurma/fallback akisi yazili hale gelir
 - [ ] Yeni gelen ajanin ilk turda hizalanmasi icin onboarding guardrail'i resmi hale gelir
+- [ ] PowerShell quoting, BOM/line-ending drift ve upstream baglama sirasi icin acik stop/fallback kurali yazilir
+- [ ] WSL git credential/auth blokaji resmi readiness sinifi olarak tanimlanir
 - [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
@@ -92,3 +98,4 @@ powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-082
 - Bu task urun gelistirme taski degildir; yalniz ortam guardrail standardizasyonu icindir.
 - Koordinator bu turda yalniz task acilisi, lock ve devir planini yurutur; uygulama uygun ajan tarafinda tamamlanir.
 - Varsayilan uygulayici ajan `codex-a` olarak planlanmistir; lock cakismasi veya worktree gorunurlugu degisirse koordinator owner kararini yeniden degerlendirir.
+- Basit tasklarin bile bozuk/yarim cevre katmanlarina carpip uzadigi goruldugu icin bu task urun kodundan once ortam zincirini sertlestirmeyi hedefler.
