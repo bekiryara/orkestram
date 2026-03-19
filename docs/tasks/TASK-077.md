@@ -1,6 +1,6 @@
 ﻿# TASK-077
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex`  
 Branch: `agent/codex/task-077`  
 Baslangic: `2026-03-19 14:20`
@@ -50,22 +50,22 @@ Baslangic: `2026-03-19 14:20`
 ## Kabul Kriterleri
 - [x] TASK-074 ve TASK-075 icin hangi branch'in ne zaman PR veya merge hazir sayilacagi net kurala baglanir
 - [x] Koordinatorun owner branch teslimini merkezi olarak nasil siralayacagi yazilir
-- [ ] powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick PASS
+- [x] powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick PASS
 
 ## Teslimde Zorunlu Kanit
-- [ ] `git branch --show-current`
-- [ ] `git branch -vv`
-- [ ] `git status --short`
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
-- [ ] Goreve ozel test/komut sonucu
+- [x] `git branch --show-current`
+- [x] `git branch -vv`
+- [x] `git status --short`
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- [x] Goreve ozel test/komut sonucu
 - [ ] `Edit Source == Mount Source` kaniti
 - [ ] Commit hash
 
 ## Kapanis Adimlari
-- [ ] Task kartindaki checklistler gercek sonuca gore guncellendi
-- [ ] `docs/WORKLOG.md` guncellendi
-- [ ] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
-- [ ] `docs/NEXT_TASK.md` panosu guncellendi
+- [x] Task kartindaki checklistler gercek sonuca gore guncellendi
+- [x] `docs/WORKLOG.md` guncellendi
+- [x] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
+- [x] `docs/NEXT_TASK.md` panosu guncellendi
 - [ ] Branch pushlandi
 
 ## Komutlar
@@ -75,6 +75,6 @@ powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-077
 ```
 
 ## Risk / Not
-- Risk, koordinatorun tekrar owner ajan isine girmesi veya PR siralama yerine dogrudan merge akisina kaymasi; bu task yalniz merkezi merge-hazirlik standardini cikaracak.
-
+- Risk, koordinatorun owner ajan isine girmesi veya PR siralama yerine dogrudan merge akisina kaymasiydi; bu taskta yalniz merkezi hazirlik ve siralama standardi kayda alindi.
+- Varsayilan merge kuyrugu TASK-074 sonra TASK-075 olarak yazildi; uygulama gorevi ayri taskta ele alinacak.
 

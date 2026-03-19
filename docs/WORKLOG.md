@@ -1799,3 +1799,28 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `Owner task icerigi koordinator branch'ine tasinmadi; yalniz merkezi kapanis yapildi.`
+---
+
+### [2026-03-19 15:05] TASK-077 Owner Branch PR / Merge Hazirlik Standardi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Owner branch teslimleri icin PR hazir / merge hazir siniflari resmi akisa baglandi.`
+  - `TASK-074` ve `TASK-075` owner branch'leri icin varsayilan merge kuyrugu `074 -> 075` olarak kayda alindi.`
+  - `Koordinatorun owner branch icerigine girmeden yalniz hazirlik, siralama ve merkezi gorunurluk saglayacagi netlestirildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-077.md`
+  - `docs/PR_FLOW_TR.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git push -u origin agent/codex/task-077`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+  - `git branch --show-current`
+  - `git branch -vv`
+  - `git status --short`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `n/a`
