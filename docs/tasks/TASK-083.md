@@ -1,6 +1,6 @@
 ﻿# TASK-083
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex`  
 Branch: `agent/codex/task-083`  
 Baslangic: `2026-03-20 02:08`
@@ -14,11 +14,11 @@ Baslangic: `2026-03-20 02:08`
 - [x] yeni task
 
 ## In Scope
-- [ ] `start-task.ps1` icinde UNC path uzerinde branch acilamama durumunu WSL fallback ile mekanik olarak toparlamak
-- [ ] `close-task.ps1` icindeki hardcoded kapanis davranisini generic ve tekrar kullanilabilir hale getirmek
-- [ ] `start-task.ps1` icinde zorunlu koordinasyon dosyalarini (`docs/WORKLOG.md`, koordinator icin `docs/SESSION_HANDOFF_TR.md`) otomatik lock kapsaminda acmak
-- [ ] Repo-local kirik credential helper kaydini temizleyip Windows git push akisini gereksiz hata mesajindan arindirmak
-- [ ] Task acma/kapatma zincirinde upstream ve branch durumunun daha deterministik ilerlemesini saglamak
+- [x] `start-task.ps1` icinde UNC path uzerinde branch acilamama durumunu WSL fallback ile mekanik olarak toparlamak
+- [x] `close-task.ps1` icindeki hardcoded kapanis davranisini generic ve tekrar kullanilabilir hale getirmek
+- [x] `start-task.ps1` icinde zorunlu koordinasyon dosyalarini (`docs/WORKLOG.md`, koordinator icin `docs/SESSION_HANDOFF_TR.md`) otomatik lock kapsaminda acmak
+- [x] Repo-local kirik credential helper kaydini temizleyip Windows git push akisini gereksiz hata mesajindan arindirmak
+- [x] Task acma/kapatma zincirinde upstream ve branch durumunun daha deterministik ilerlemesini saglamak
 
 ## Out of Scope
 - [ ] Yeni urun ozelligi gelistirmek
@@ -58,38 +58,38 @@ Baslangic: `2026-03-20 02:08`
 - Script Katmani: `PowerShell`
 - App/Test Katmani: `n/a`
 - Runtime Readiness: `ready`
-- Upstream Durumu: `yok`
+- Upstream Durumu: `origin/agent/codex/task-083`
 - Not: `Bu task mekanik acilis/kapanis scriptlerini sertlestirir; urun runtime davranisini degistirmez.`
 
 ## Uygulama Adimlari
 - [x] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
 - [x] Branch dogrulandi: `agent/<ajan>/<task-id>`
 - [x] Lock kapsam disina cikilmadi
-- [ ] Gorev kapsamindaki degisiklikler tamamlandi
-- [ ] Goreve ozel test/dogrulama calistirildi
+- [x] Gorev kapsamindaki degisiklikler tamamlandi
+- [x] Goreve ozel test/dogrulama calistirildi
 
 ## Kabul Kriterleri
-- [ ] `start-task.ps1` UNC uzerinde task karti/lock/pano yazdikten sonra branch acilisini WSL fallback ile tamamlayabilir
-- [ ] `close-task.ps1` aktif taski generic olarak kapatip kalan aktif tasklari koruyarak `NEXT_TASK` listelerini hardcoded icerik olmadan guncelleyebilir
-- [ ] `start-task.ps1` zorunlu koordinasyon dosyalarini otomatik lock listesine ekler
-- [ ] Repo-local kirik credential helper kaydi temizlenir
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
+- [x] `start-task.ps1` UNC uzerinde task karti/lock/pano yazdikten sonra branch acilisini WSL fallback ile tamamlayabilir
+- [x] `close-task.ps1` aktif taski generic olarak kapatip kalan aktif tasklari koruyarak `NEXT_TASK` listelerini hardcoded icerik olmadan guncelleyebilir
+- [x] `start-task.ps1` zorunlu koordinasyon dosyalarini otomatik lock listesine ekler
+- [x] Repo-local kirik credential helper kaydi temizlenir
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
-- [ ] `git branch --show-current`
-- [ ] `git branch -vv`
-- [ ] `git status --short`
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
-- [ ] Goreve ozel test/komut sonucu
-- [ ] `Edit Source == Mount Source` kaniti veya `n/a` gerekcesi
-- [ ] Commit hash
+- [x] `git branch --show-current`
+- [x] `git branch -vv`
+- [x] `git status --short`
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- [x] Goreve ozel test/komut sonucu
+- [x] `Edit Source == Mount Source` kaniti veya `n/a` gerekcesi
+- [x] Commit hash
 
 ## Kapanis Adimlari
-- [ ] Task kartindaki checklistler gercek sonuca gore guncellendi
-- [ ] `docs/WORKLOG.md` guncellendi
-- [ ] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
-- [ ] `docs/NEXT_TASK.md` panosu guncellendi
-- [ ] Branch pushlandi
+- [x] Task kartindaki checklistler gercek sonuca gore guncellendi
+- [x] `docs/WORKLOG.md` guncellendi
+- [x] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
+- [x] `docs/NEXT_TASK.md` panosu guncellendi
+- [x] Branch pushlandi
 
 ## Komutlar
 ```powershell
@@ -101,4 +101,8 @@ wsl -e bash -lc "cd /home/bekir/orkestram-k && git checkout -b agent/codex/task-
 - Bu task ortam/disiplin scriptlerini hedefler; urun kodu degistirmez.
 - `start-task.ps1` mevcut haliyle cukür urettigi icin bu task acilisi bizzat WSL fallback ile toparlandi; duzeltme dogrudan bu taskin kabul kriteridir.
 - Kapanis zincirinde `docs/WORKLOG.md` zorunlu oldugu icin lock kapsami mevcut task icinde genisletildi; bu yeni task nedeni degildir.
+- `close-task.ps1` ilk gercek calistirmada `NEXT_TASK` icinde backtick/literal `$TaskId` bozulmasi urettigi icin ayni task icinde duzeltildi; hata repoda birakilmadi.
+
+
+
 

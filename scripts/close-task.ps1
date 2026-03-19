@@ -80,7 +80,7 @@ function Get-ActiveTaskEntries([System.Collections.Generic.List[string]]$Lines) 
         if ([string]::IsNullOrWhiteSpace($line)) {
             continue
         }
-        if ($line -match '^\d+\.\s+`YOK` - ') {
+        if ($line -like '1. `YOK` -*') {
             continue
         }
         $entries += ($line -replace '^\d+\.\s+', '')
@@ -97,6 +97,8 @@ $taskFile = "docs/tasks/$TaskId.md"
 $locksPath = "docs/TASK_LOCKS.md"
 $nextTaskPath = "docs/NEXT_TASK.md"
 $worklogPath = "docs/WORKLOG.md"
+$taskEntryPrefix = '`' + $TaskId + '` - '
+$emptyActiveLine = '1. ' + '`YOK` - aktif koordinasyon gorevi bulunmuyor'
 
 foreach ($path in @($taskFile, $locksPath, $nextTaskPath, $worklogPath)) {
     if (-not (Test-Path -LiteralPath $path)) {
@@ -159,12 +161,12 @@ if ($activeStart -lt 0 -or $coordinatorStart -le $activeStart) {
     Fail 'NEXT_TASK aktif gorevler bolumu beklenen formatta degil.'
 }
 
-$remainingActiveItems = @(Get-ActiveTaskEntries -Lines $lineList | Where-Object { $_ -notmatch "^`$TaskId` - " })
+$remainingActiveItems = @(Get-ActiveTaskEntries -Lines $lineList | Where-Object { -not $_.StartsWith($taskEntryPrefix) })
 for ($i = $coordinatorStart - 1; $i -gt $activeStart; $i--) {
     [void]$lineList.RemoveAt($i)
 }
 if ($remainingActiveItems.Count -eq 0) {
-    $lineList.Insert($activeStart + 1, '1. `YOK` - aktif koordinasyon gorevi bulunmuyor')
+    $lineList.Insert($activeStart + 1, $emptyActiveLine)
 }
 else {
     $replacement = Build-NumberedList $remainingActiveItems
@@ -203,25 +205,25 @@ for ($i = $closeStart + 1; $i -lt $ruleStart; $i++) {
         $existingClosing += $lineList[$i] -replace '^\d+\.\s+', ''
     }
 }
-$existingCoordinator = $existingCoordinator | Where-Object { $_ -notmatch "^`$TaskId` - " }
-$existingClosing = $existingClosing | Where-Object { $_ -notmatch "^`$TaskId` - " }
-$coordinatorItems = @("`$TaskId` - $cleanNote") + ($existingCoordinator | Select-Object -First 2)
-$closingItems = @("`$TaskId` - $cleanNote") + ($existingClosing | Select-Object -First 2)
+$existingCoordinator = $existingCoordinator | Where-Object { -not $_.StartsWith($taskEntryPrefix) }
+$existingClosing = $existingClosing | Where-Object { -not $_.StartsWith($taskEntryPrefix) }
+$coordinatorItems = @($taskEntryPrefix + $cleanNote) + ($existingCoordinator | Select-Object -First 2)
+$closingItems = @($taskEntryPrefix + $cleanNote) + ($existingClosing | Select-Object -First 2)
 Replace-SectionLines -Lines $lineList -StartHeader '## Son Koordinator Kapanisi' -EndHeader '## Son Kapanis' -Items $coordinatorItems
 Replace-SectionLines -Lines $lineList -StartHeader '## Son Kapanis' -EndHeader '## Kapanis Kurali (Zorunlu)' -Items $closingItems
 Set-Content -Encoding utf8 -Path $nextTaskPath -Value $lineList
 Write-Host "[close-task] step-3 next task -> $nextTaskPath"
 
-$summaryLines = $WorklogSummary | ForEach-Object { "  - ``$([string](Normalize-Line $_))``" }
-$fileLines = $Files | ForEach-Object { "  - ``$([string](Normalize-Line $_))``" }
-$commandLines = $Commands | ForEach-Object { "  - ``$([string](Normalize-Line $_))``" }
-$noteLines = if ($WorklogNote.Count -gt 0) { $WorklogNote | ForEach-Object { "  - ``$([string](Normalize-Line $_))``" } } else { @('  - `n/a`') }
+$summaryLines = $WorklogSummary | ForEach-Object { '  - `' + [string](Normalize-Line $_) + '`' }
+$fileLines = $Files | ForEach-Object { '  - `' + [string](Normalize-Line $_) + '`' }
+$commandLines = $Commands | ForEach-Object { '  - `' + [string](Normalize-Line $_) + '`' }
+$noteLines = if ($WorklogNote.Count -gt 0) { $WorklogNote | ForEach-Object { '  - `' + [string](Normalize-Line $_) + '`' } } else { @('  - `n/a`') }
 $entryLines = @(
     '',
     '---',
     '',
     "### [$nowShort] $WorklogTitle",
-    "- Sorumlu: ``$Agent``",
+    '- Sorumlu: `' + $Agent + '`',
     '- Is Ozeti:'
 ) + $summaryLines + @(
     '- Degisen Dosyalar:'
@@ -229,7 +231,7 @@ $entryLines = @(
     '- Calistirilan Komutlar:'
 ) + $commandLines + @(
     '- Sonuc:',
-    "  - ``$Result``",
+    '  - `' + $Result + '`',
     '- Not:'
 ) + $noteLines
 Add-Content -Path $worklogPath -Value ($entryLines -join "`r`n")

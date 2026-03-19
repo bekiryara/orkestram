@@ -2121,3 +2121,30 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `Bu task ortamsal guardrail standardini resmileştirdi; WSL credential helper ve start-task UNC davranisinin mekanik sertlestirmesi gerekirse ayrik operasyon taskina acilabilir.`
+
+---
+
+### [2026-03-20 02:36] TASK-083 mekanik task acma-kapatma sertlestirmesi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `start-task.ps1 UNC branch acilisini WSL fallback ile sertlestirdi ve zorunlu koordinasyon locklarini otomatik hale getirdi.`
+  - `close-task.ps1 kalan aktif tasklari koruyan generic NEXT_TASK guncellemesine gecirildi.`
+  - `Repo-local kirik credential helper kaydi temizlenmis durum dogrulandi ve upstream push akisi canonical origin uzerinden tamamlandi.`
+- Degisen Dosyalar:
+  - `scripts/start-task.ps1`
+  - `scripts/close-task.ps1`
+  - `docs/tasks/TASK-083.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `parse-check start-task`
+  - `parse-check close-task`
+  - `credential-helper proof`
+  - `git push -u origin agent/codex/task-083`
+  - `pre-pr -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `n/a`
