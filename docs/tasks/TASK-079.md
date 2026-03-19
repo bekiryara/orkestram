@@ -62,7 +62,7 @@ Kapanis: `2026-03-19 21:32`
 - [x] `git status --short`
 - [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - [x] Goreve ozel test/komut sonucu
-- [x] `Edit Source == Mount Source` kaniti
+- [ ] `Edit Source == Mount Source` kaniti
 - [x] Commit hash
 
 ## Kapanis Adimlari
@@ -74,6 +74,7 @@ Kapanis: `2026-03-19 21:32`
 
 ## Komutlar
 ```powershell
+powershell -ExecutionPolicy Bypass -File scripts/validate.ps1 -App both
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-079 -Agent codex-a -ClosureNote "kisa kapanis ozeti" -WorklogTitle "baslik" -WorklogSummary "madde-1" -Files "dosya-1" -Commands "komut-1" -Result PASS
 ```
@@ -84,5 +85,6 @@ powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-079
 ## Kapanis Notu
 - Owner create/update write-path'ine `coverage_mode` ve `service_areas_text` baglandi; kayit sonrasi `ListingCoverageService::syncFromRawText(...)` ile service area yazimi aktiflestirildi.
 - Owner edit ekraninda mevcut service area secimleri relation uzerinden geri dolduruldu ve owner panel feature testi coverage yazim senaryosu ile genisletildi.
-- Teslim kaniti: `git branch --show-current` => `agent/codex-a/task-079`, `git branch -vv` => `origin/agent/codex-a/task-079: ahead 1`, `git status --short` => temiz, `pre-pr -Mode quick` => PASS, commit => `8d06a46`.
+- Teslim kaniti: `git branch --show-current` => `agent/codex-a/task-079`, `git status --short` => temiz, owner write-path commit'i => `8d06a46`, task karti owner teslim gercegine gore duzeltildi ve validate/pre-pr PASS sonrasi push adimina hazirlandi.
+- Validate kaniti: `powershell -ExecutionPolicy Bypass -File scripts/validate.ps1 -App both` => PASS.
 - Merkezi kapanis dosyalari (`docs/WORKLOG.md`, `docs/TASK_LOCKS.md`, `docs/NEXT_TASK.md`) koordinator alaninda kaldigi icin owner tesliminde degistirilmedi.
