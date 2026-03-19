@@ -1627,3 +1627,28 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - Bu task siniflamayi tamamlar; cleanup sonraki resmi stale cleanup taskinda uygulanir.
 
 
+
+- Tarih: 2026-03-19
+- Task: `TASK-070`
+- Is Ozeti:
+  - `codex-b` ve `codex-c` icin cleanup oncesi temsilci drift kaniti tekrar alindi.
+  - Her iki worktree'de kontrollu `git restore --worktree .` uygulandi.
+  - Cleanup sonrasi `codex-b` ve `codex-c` icin `git status --short` bos dondu; `agent-status` raporunda `StatusCount 0` ve `StaleCandidate no` goruldu.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-070.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-b && git diff -- docs/TASK_LOCKS.md && git diff --ignore-cr-at-eol --stat"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-c && git diff -- docs/TASK_LOCKS.md && git diff --ignore-cr-at-eol --stat"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-b && git restore --worktree . && git status --short"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-c && git restore --worktree . && git status --short"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+  - `git push -u origin agent/codex/task-070`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Bu task yalniz `codex-b` ve `codex-c` cleanup'ini uyguladi; `codex-a` stale branch'i sonraki taskta ele alinacak.
