@@ -1,4 +1,4 @@
-# TASK LOCKS
+﻿# TASK LOCKS
 
 Durumlar:
 - `active`: gorev acik, lock var
@@ -82,5 +82,34 @@ Sabit Ajan Kimlikleri:
 
 | TASK-064 | codex | agent/codex/task-064 | closed | docs/tasks/TASK-064.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,AGENTS.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/tasks/_TEMPLATE.md,docs/WORKLOG.md | 2026-03-17 14:52:28 | 2026-03-17 14:58:00 | TASK-063'e superseded edildi |
 | TASK-065 | codex-b | agent/codex-b/task-065 | closed | docs/tasks/TASK-065.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php,local-rebuild/apps/orkestram/public/assets/v1.css,local-rebuild/apps/izmirorkestra/public/assets/v1.css,local-rebuild/apps/orkestram/database/seeders/**,local-rebuild/apps/izmirorkestra/database/seeders/**,local-rebuild/apps/orkestram/database/factories/**,local-rebuild/apps/izmirorkestra/database/factories/**,local-rebuild/apps/orkestram/app/Console/Commands/**,local-rebuild/apps/izmirorkestra/app/Console/Commands/**,local-rebuild/apps/orkestram/storage/app/public/**,local-rebuild/apps/izmirorkestra/storage/app/public/**,docs/WORKLOG.md | 2026-03-17 15:40:00 | 2026-03-18 00:30:00 | Listing detail UI v1 ve mevcut demo veri audit'i tamamlandi; whitelist/idempotent fixture otomasyonu ayri taska ayrilacak |
+
+
+| TASK-066 | codex | agent/codex/task-066 | closed | docs/tasks/TASK-066.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,AGENTS.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/tasks/_TEMPLATE.md,scripts/start-task.ps1,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/WORKLOG.md | 2026-03-19 00:01:37 | 2026-03-19 01:09:56 | Kontrollu paralel task, task genisletme ve merkezi koordinasyon kurallari resmi disipline alindi; pre-pr PASS |
+
+
+| TASK-067 | codex | agent/codex/task-067 | closed | docs/tasks/TASK-067.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/OPERATING_MODEL_TR.md,docs/SESSION_HANDOFF_TR.md,AGENTS.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/AGENT_LOCK_MATRIX_TR.md,scripts/agent-status.ps1,docs/WORKLOG.md | 2026-03-19 01:42:09 | 2026-03-19 02:08:21 | Session handoff, ajan durum panosu ve stale worktree gorunurlugu resmi operasyon modeline baglandi; pre-pr PASS |
+
+| TASK-068 | codex | agent/codex/task-068 | closed | docs/tasks/TASK-068.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/SESSION_HANDOFF_TR.md,docs/OPERATING_MODEL_TR.md,docs/AGENT_LOCK_MATRIX_TR.md | 2026-03-19 02:28:54 | 2026-03-19 03:05:00 | stale worktree temizligi ve devralma standardi resmi operasyon akisina baglandi; pre-pr PASS |
+
+
+| TASK-069 | codex | agent/codex/task-069 | closed | docs/tasks/TASK-069.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/SESSION_HANDOFF_TR.md | 2026-03-19 03:06:17 | 2026-03-19 03:20:00 | codex-b ve codex-c stale worktree risk siniflamasi temsilci kanitla tamamlandi; pre-pr PASS |
+
+| TASK-070 | codex | agent/codex/task-070 | closed | docs/tasks/TASK-070.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/SESSION_HANDOFF_TR.md | 2026-03-19 03:34:56 | 2026-03-19 03:42:00 | codex-b ve codex-c stale cleanup uygulandi; temiz status ve pre-pr PASS ile kapatildi |
+
+| TASK-071 | codex | agent/codex/task-071 | closed | docs/tasks/TASK-071.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/SESSION_HANDOFF_TR.md | 2026-03-19 04:05:32 | 2026-03-19 04:10:00 | codex-a stale branch drift olarak dogrulandi ve cleanup ile temizlendi; pre-pr PASS |
+| TASK-072 | codex | agent/codex/task-072 | closed | docs/tasks/TASK-072.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,AGENTS.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/SESSION_HANDOFF_TR.md,docs/tasks/_TEMPLATE.md,docs/COORDINATOR_BOOTSTRAP_TR.md,scripts/close-task.ps1 | 2026-03-19 04:27:00 | 2026-03-19 05:05:52 | Koordinator bootstrap akisi ve kontrollu task kapanis otomasyonu tamamlandi |
+
+| TASK-073 | codex | agent/codex/task-073 | closed | docs/tasks/TASK-073.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/OPERATING_MODEL_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/REPO_DISCIPLINE_TR.md,docs/AGENT_LOCK_MATRIX_TR.md,docs/SESSION_HANDOFF_TR.md,scripts/start-task.ps1 | 2026-03-19 05:41:17 | 2026-03-19 05:54:01 | 3 ajan surekli calisma orkestrasyonu ve lock overlap otomatik kontrolu tamamlandi |
+| TASK-074 | codex-b | agent/codex-b/task-074 | closed | docs/tasks/TASK-074.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/OPERATING_MODEL_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/REPO_DISCIPLINE_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/SESSION_HANDOFF_TR.md | 2026-03-19 06:06:58 | 2026-03-19 07:40:29 | Merge sonrasi preview/runtime lifecycle standardi agent teslimi 4f95fa0 ve pre-pr PASS ile tamamlandi |
+| TASK-075 | codex-c | agent/codex-c/task-075 | closed | docs/tasks/TASK-075.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/DEMO_FIXTURE_STANDARD_TR.md | 2026-03-19 06:07:49 | 2026-03-19 07:40:29 | Deterministic demo fixture standardi agent teslimi 8351cba ve pre-pr PASS ile tamamlandi |
+| TASK-076 | codex | agent/codex/task-076 | closed | docs/tasks/TASK-076.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/SESSION_HANDOFF_TR.md,scripts/start-task.ps1 | 2026-03-19 06:12:48 | 2026-03-19 07:40:29 | Task acilis recovery, aktif pano senkronu ve ajan teslimleri merkezi kapanisla tamamlandi |
+
+
+| TASK-077 | codex | agent/codex/task-077 | closed | docs/tasks/TASK-077.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/PR_FLOW_TR.md,docs/SESSION_HANDOFF_TR.md,docs/WORKLOG.md | 2026-03-19 14:20:31 | 2026-03-19 15:05:00 | Owner branch PR hazir / merge hazir standardi ve varsayilan sira modeli kayda alindi |
+
+| TASK-078 | codex | agent/codex/task-078 | closed | docs/tasks/TASK-078.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/PR_FLOW_TR.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/SESSION_HANDOFF_TR.md,docs/WORKLOG.md | 2026-03-19 14:54:05 | 2026-03-19 16:43:37 | `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez karari merkezi kayda alindi |
+| TASK-079 | codex-a | agent/codex-a/task-079 | closed | docs/tasks/TASK-079.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,local-rebuild/apps/orkestram/app/Http/Controllers/Owner/OwnerDashboardController.php,local-rebuild/apps/orkestram/resources/views/portal/owner/listings-create.blade.php,local-rebuild/apps/orkestram/resources/views/portal/owner/listings-edit.blade.php,local-rebuild/apps/orkestram/tests/Feature/OwnerPanelActionsTest.php | 2026-03-19 19:11:17 | 2026-03-19 22:56:38 | Owner coverage write-path teslimi commit 8d06a46 ve docs duzeltme 22cd676 ile kabul edildi |
+
+| TASK-080 | codex | agent/codex/task-080 | closed | docs/tasks/TASK-080.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,local-rebuild/apps/izmirorkestra/app/Http/Controllers/Owner/OwnerDashboardController.php,local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-create.blade.php,local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-edit.blade.php,local-rebuild/apps/izmirorkestra/tests/Feature/OwnerPanelActionsTest.php,local-rebuild/apps/orkestram/app/Http/Controllers/Owner/OwnerDashboardController.php,local-rebuild/apps/orkestram/resources/views/portal/owner/listings-create.blade.php,local-rebuild/apps/orkestram/resources/views/portal/owner/listings-edit.blade.php,local-rebuild/apps/orkestram/tests/Feature/OwnerPanelActionsTest.php,docs/SESSION_HANDOFF_TR.md,docs/WORKLOG.md | 2026-03-19 23:42:08 | 2026-03-20 00:12:00 | Owner coverage parity iki appte tamamlandi; branch merge hazir |
 
 

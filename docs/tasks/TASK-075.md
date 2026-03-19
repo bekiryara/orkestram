@@ -1,37 +1,41 @@
-﻿# TASK-XXX
+﻿# TASK-075
 
-Durum: `TODO | DOING | DONE`  
-Ajan: `agent-name`  
-Branch: `agent/agent-name/task-xxx`  
-Baslangic: `YYYY-MM-DD HH:mm`
+Durum: `DOING`  
+Ajan: `codex-c`  
+Branch: `agent/codex-c/task-075`  
+Baslangic: `2026-03-19 06:07`
 
 ## Gorev Ozeti
-- Bu gorevin amaci
+- Deterministic demo fixture standardi ve review demo veri kurali yazilacak
 
 ## Task Karari
 - [ ] mevcut task devam
 - [ ] task genisletme
-- [ ] yeni task
+- [x] yeni task
 
 ## In Scope
-- [ ] Degisiklik 1
-- [ ] Degisiklik 2
+- [ ] Design-preview review icin deterministic demo fixture standardi yazilacak
+- [ ] Demo slug, whitelist, idempotent update ve medya kaynagi kurallari netlestirilecek
+- [ ] Review demo verisi ile smoke/test verisinin ayrimi dokumana islenecek
 
 ## Out of Scope
-- [ ] Konu disi 1
-- [ ] Konu disi 2
+- [ ] Seed/command implementasyonu yazmak
+- [ ] Mevcut test/smoke fixturelarini degistirmek
+- [ ] Merkezi kapanis dosyalarini tek basina finalize etmek
 
 ## Lock Dosyalari
-- `path/one`
-- `path/two`
+- `docs/tasks/TASK-075.md`
+- `docs/TASK_LOCKS.md`
+- `docs/NEXT_TASK.md`
+- `docs/DEMO_FIXTURE_STANDARD_TR.md`
 
 ## Preview Kontrati
-- Lane: `main | design-preview | n/a`
+- Lane: `design-preview`
 - Preview URL: `n/a`
 - Mount Source: `n/a`
 - Edit Source: `n/a`
-- UI review gerekir mi?: `yes | no`
-- UI Review Durumu: `pending | revize | approved | n/a`
+- UI review gerekir mi?: `no`
+- UI Review Durumu: `n/a`
 - Revize Notu: `n/a`
 
 ## Uygulama Adimlari
@@ -42,8 +46,9 @@ Baslangic: `YYYY-MM-DD HH:mm`
 - [ ] Goreve ozel test/dogrulama calistirildi
 
 ## Kabul Kriterleri
-- [ ] Beklenen davranis 1
-- [ ] Beklenen davranis 2
+- [ ] Demo review icin deterministic fixture standardi tek dokumanda toplanir
+- [ ] Whitelist slug, medya kaynagi ve idempotent update kurali net yazilir
+- [ ] Smoke/test fixturelari ile preview demo fixturelarinin ayrimi aciklanir
 - [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
@@ -65,8 +70,7 @@ Baslangic: `YYYY-MM-DD HH:mm`
 ## Komutlar
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
-powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-XXX -Agent agent-name -ClosureNote "kisa kapanis ozeti" -WorklogTitle "baslik" -WorklogSummary "madde-1" -Files "dosya-1" -Commands "komut-1" -Result PASS
 ```
 
 ## Risk / Not
-- Riskler ve geri donus notu
+- Risk, demo fixture standardinin mevcut smoke/test fixturelarini etkileyecek sekilde genis yazilmasi; belge yalniz ayrik review hattini hedeflemeli.

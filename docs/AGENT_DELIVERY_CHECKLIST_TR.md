@@ -1,15 +1,18 @@
-# Agent Delivery Checklist (TR)
+﻿# Agent Delivery Checklist (TR)
 
 Amac: Ajan tesliminde dogrulama sirasi, paylasilacak kanit formati ve yari kesilen isin resume protokolunu tek yerde standardize etmek.
 
 ## 1. Goreve Baslamadan Once
-1. `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md` ve `docs/MULTI_AGENT_RULES_TR.md` oku.
+1. `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md` ve `docs/SESSION_HANDOFF_TR.md` oku.
+   - Koordinator isen `docs/COORDINATOR_BOOTSTRAP_TR.md` da zorunludur.
 2. `git fetch --all --prune` calistir.
 3. Sadece kendi branch'inle ilerle:
    - `agent/<ajan>/<task-id>`
 4. `docs/TASK_LOCKS.md` icine tek bir `active` kayit ac.
 5. Lock'a yazilmayan dosyalara dokunma.
 6. `git remote -v` ile `origin`in GitHub oldugunu, local WSL referansi varsa `canonical` olarak ayrildigini dogrula.
+7. Ayni kapsam revizesi gerekiyorsa yeni task acma; once mevcut taskin devam edip etmeyecegini kontrol et.
+8. Hedef ayni kalip yeni dosya gerekiyorsa bunu `task genisletme` olarak task kartina ve lock listesine isle.
 
 ## 2. Runtime Kisa Hijyen Checklisti
 Her teslim ve smoke turundan once su 4 kontrol yapilir:
@@ -46,6 +49,7 @@ Teslim mesaji kisa ve kanit odakli olur. Asgari format:
 4. Zorunlu 4 kanit
 5. Task kartindaki checklistlerin gercek sonuca gore guncellendigi notu
 6. Kapanis adimlarinin tamamlandigi notu
+7. worktree durumunun ve gerekiyorsa stale aday notunun paylasildigi ozet
 
 Zorunlu 4 kanit aynen paylasilir:
 
@@ -76,6 +80,7 @@ Kural:
 2. Kanitsiz madde isaretlenmez.
 3. Task karti placeholder birakilmaz.
 4. Bu alanlar doldurulmadan gorev teslim edilmis sayilmaz.
+5. `Task Karari` bolumunde yalniz tek secim isaretlenir: `mevcut task devam`, `task genisletme` veya `yeni task`.
 
 ## 4B. UI / Tasarim Teslim Ek Kaniti
 UI gorevlerinde zorunlu ek teslim paketi:
@@ -118,6 +123,7 @@ Koordinator veya baska ajan devralacaksa son mesajda su net olur:
 2. Acik kalan kisim
 3. Son calisan komut/dogrulama
 4. Branch ve lock durumu
+5. worktree status ozeti ve stale aday bilgisi
 
 Bu bilgi yoksa is resume icin hazir sayilmaz.
 
@@ -129,6 +135,7 @@ Koordinator asagidaki eksiklerden biri varsa teslimi reddeder:
 4. `docs/NEXT_TASK.md` guncellenmemis
 5. Zorunlu kanit paketi eksik
 6. `pre-pr` PASS yok
+7. Koordinator mekanik kapanis icin `scripts/close-task.ps1` kullanabilir; yine de task karti icerigi gercek sonuca gore kontrol edilir.
 
 ## 7. Koordinator Ilk Karar Mesaji (Sabit Sablon)
 Koordinator yeni iste ilk karar mesajini su sabit formatla verir:
@@ -144,3 +151,4 @@ Not:
 Kural (Edit Source Esitligi):
 1. UI tesliminde `Edit Source` ile `Mount Source` ayni worktree/path degilse teslim reddedilir.
 2. Ajan farkli source'ta kod degistirip baska source preview'u veremez.
+

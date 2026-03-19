@@ -1,4 +1,4 @@
-# Repo Disiplini ve Teknik Borc Kurallari (TR)
+﻿# Repo Disiplini ve Teknik Borc Kurallari (TR)
 
 Tarih: 2026-03-09
 
@@ -118,27 +118,32 @@ Her gorevde dogrulama oncesi su 4 kontrol yapilir:
 ## 10) Operasyonel Disiplin Dosyalari (Zorunlu)
 
 1. `docs/NEXT_TASK.md`
-   - Tek aktif gorev buraya yazilir.
-   - Ayni anda birden fazla aktif gorev acilmaz.
+   - En fazla 3 aktif gorev buraya yazilir.
+   - docs/TASK_LOCKS.md ile birebir senkron tutulur.
+   - YOK yalniz hic aktif task yoksa kullanilir.
 2. `docs/WORKLOG.md`
    - Her ajan turu sonunda degisen dosya + komut + PASS/FAIL kaydi zorunlu.
-3. `docs/ROLLBACK_POINTS.md`
+3. `docs/SESSION_HANDOFF_TR.md`
+   - Aktif tasklar, worktree durumlari, stale adaylar ve sonraki adim icin merkezi operasyon hafizasidir.
+4. `scripts/agent-status.ps1`
+   - Ajan/worktree branch, status, upstream ve stale aday durumunu salt-okuma raporlar.
+5. `docs/ROLLBACK_POINTS.md`
    - Riskli degisimlerden once geri donus noktasi kaydi acilir.
-4. `scripts/validate.ps1`
+6. `scripts/validate.ps1`
    - "Bitti" demeden once zorunlu dogrulama komutu.
    - Standart:
      - `powershell -ExecutionPolicy Bypass -File scripts/validate.ps1 -App both`
-5. `scripts/pre-pr.ps1`
+7. `scripts/pre-pr.ps1`
    - PR acmadan once zorunlu hizli kapidir.
    - Standart:
      - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
-6. `.github/pull_request_template.md`
+8. `.github/pull_request_template.md`
    - PR acilisinda ozet + test + dosya listesi zorunlu format.
-7. `scripts/security-gate.ps1`
+9. `scripts/security-gate.ps1`
    - Potansiyel secret/key sizintilarini tarar.
    - Standart:
      - `powershell -ExecutionPolicy Bypass -File scripts/security-gate.ps1`
-8. `docs/TASK_LOCKS.md` + `docs/tasks/_TEMPLATE.md`
+10. `docs/TASK_LOCKS.md` + `docs/tasks/_TEMPLATE.md`
    - Gorev lock ve task kaydi script bagimsiz (manual) acilir.
    - Standart task acma sirasi:
      1. `docs/tasks/TASK-0xx.md`
@@ -147,7 +152,36 @@ Her gorevde dogrulama oncesi su 4 kontrol yapilir:
      4. branch acilisi
    - Mekanik komut:
      - `powershell -ExecutionPolicy Bypass -File scripts/start-task.ps1 -TaskId TASK-0xx -Agent codex -Files "path/one,path/two" -Note "kisa ozet"`
+   - Script aktif lock overlap tespit ederse task acilmaz.
+11. `docs/COORDINATOR_BOOTSTRAP_TR.md`
+   - Yeni gelen koordinatorun ilk 5 dakika akisi icin tek referans dokumandir.
+12. `scripts/close-task.ps1`
+   - Task karti + `TASK_LOCKS` + `NEXT_TASK` + `WORKLOG` mekanik kapanis yardimcisidir.
+   - Standart:
+     - `powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-0xx -Agent codex -ClosureNote "kisa kapanis ozeti" -WorklogTitle "baslik" -WorklogSummary "madde-1" -Files "dosya-1" -Commands "komut-1" -Result PASS`
 
+Kurallar:
+1. Repo genelinde ayni anda en fazla 3 `active` task olabilir.
+2. Ayni kapsamda revize, polish veya kapanis eksigi icin yeni task acilmaz; mevcut task devam eder.
+3. Hedef ayni kalip yeni dosya gerekiyorsa task genisletilir; lock listesi ve task karti guncellenir.
+4. Yeni task ancak yeni kabul kriteri, yeni risk sinifi, yeni lock alani veya ayrik owner gerektiriyorsa acilir.
+5. `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md`, `docs/WORKLOG.md` ve `docs/SESSION_HANDOFF_TR.md` merkezi koordinasyon alanidir; bu dosyalarda paralel kapanis gerekiyorsa koordinat?r kontrollu entegrasyon uygulanir.
+6. Koordinator yeni is veya dagitim oncesi `scripts/agent-status.ps1` raporunu okuyarak stale worktree adaylarini kontrol eder.
+7. Surekli 3 ajan orkestrasyonunda varsayilan paketler `UI | data-fixture | test-ops` olarak dusunulur; lock cakismasi varsa dagitim iptal edilir.
+
+## 10A) Merge Taski Istisna Standardi
+
+Kural:
+1. Her teslim icin otomatik ikinci bir `merge taski` acilmaz.
+2. Varsayilan model su olur:
+   - owner task teslim + PR + merge + kapanis ayni taskta tamamlanir
+3. Ayrı merge taski yalniz su durumda acilir:
+   - merge yeni operasyon riski doguruyorsa
+   - birden fazla owner branch icin sira karari gerekiyorsa
+   - merge sonrasi runtime/preview etkisi ayri takip gerektiriyorsa
+   - merkezi koordinasyon kayitlari mevcut task kapsamindan cikiyorsa
+4. Tek owner branch, temiz teslim kaniti ve dusuk operasyon riski varsa yeni merge taski acmak yerine mevcut task kapanisinda ilerlenir.
+5. Koordinator merge taski aciyorsa gerekceyi task kartinda acik yazar; `varsayilan degil, istisna` oldugu belirtilir.
 ## 11) Yeni Gelen Ajan Onboarding (Zorunlu)
 
 Her yeni ajan ilk turda su sirayi uygular:
@@ -158,6 +192,7 @@ Her yeni ajan ilk turda su sirayi uygular:
 5. `docs/TASK_LOCKS.md` icinde lock almadan kod degisikligi yapmaz.
 6. `pre-pr` PASS olmadan commit/push yapmaz.
 7. `git remote -v` ile `origin`in GitHub oldugunu dogrular.
+8. Koordinator ise `docs/COORDINATOR_BOOTSTRAP_TR.md` akisini da uygular.
 
 ## 12) WSL Tek Kaynak + 3 Ajan Klasoru Standardi
 
@@ -241,3 +276,8 @@ Kural:
 3. Koordinator UI review oncesi `Edit Source`, `Mount Source` ve `Preview URL` ucunu birlikte dogrular.
 4. Farkli worktree'de patch yazip baska worktree preview'u gostermek operasyonel ihlaldir.
 5. Bu esitlik saglanmiyorsa once kaynak hizasi duzeltilir, sonra UI review baslar.
+
+
+
+
+

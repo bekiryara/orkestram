@@ -12,6 +12,7 @@ use App\Models\ListingLike;
 use App\Models\User;
 use App\Services\Locations\LocationDictionaryProvider;
 use App\Services\Listings\ListingAttributeService;
+use App\Services\Listings\ListingCoverageService;
 use App\Services\Listings\ListingMediaService;
 use App\Services\Portal\OwnerResourceAccess;
 use App\Services\Portal\PortalContext;
@@ -93,11 +94,16 @@ class OwnerDashboardController extends Controller
         $categoriesByMain = $this->categoriesByMain();
         $selectedCategoryId = (int) old('category_id', (int) $request->query('category_id', 0));
         $dynamicAttributes = $this->attributeService->buildFormFields($selectedCategoryId, null);
+        $item = new Listing(['site_scope' => 'single', 'coverage_mode' => 'location_only']);
 
-        return view('portal.owner.listings-create', compact('locationOptions', 'categoriesByMain', 'dynamicAttributes'));
+        return view('portal.owner.listings-create', compact('item', 'locationOptions', 'categoriesByMain', 'dynamicAttributes'));
     }
 
-    public function store(Request $request, ListingMediaService $mediaService): RedirectResponse
+    public function store(
+        Request $request,
+        ListingMediaService $mediaService,
+        ListingCoverageService $coverageService
+    ): RedirectResponse
     {
         $adminUserId = $this->context->adminUserId($request);
         if ($adminUserId <= 0) {
@@ -118,6 +124,8 @@ class OwnerDashboardController extends Controller
             'address_note' => ['nullable', 'string', 'max:255'],
             'service_type' => ['nullable', 'string', 'max:120'],
             'price_label' => ['nullable', 'string', 'max:120'],
+            'coverage_mode' => ['required', 'in:location_only,service_area_only,hybrid'],
+            'service_areas_text' => ['nullable', 'string', 'max:4000'],
             'phone' => ['nullable', 'string', 'max:64'],
             'whatsapp' => ['nullable', 'string', 'max:64'],
             'summary' => ['nullable', 'string', 'max:5000'],
@@ -160,6 +168,7 @@ class OwnerDashboardController extends Controller
             'address_note' => isset($data['address_note']) ? trim((string) $data['address_note']) : null,
             'service_type' => $data['service_type'] ?? null,
             'price_label' => $data['price_label'] ?? null,
+            'coverage_mode' => $data['coverage_mode'],
             'phone' => $data['phone'] ?? null,
             'whatsapp' => $data['whatsapp'] ?? null,
             'summary' => $data['summary'] ?? null,
@@ -169,6 +178,7 @@ class OwnerDashboardController extends Controller
         $listingData = $mediaService->apply($request, $listingData);
 
         $listing = Listing::query()->create($listingData);
+        $coverageService->syncFromRawText($listing, (string) ($data['service_areas_text'] ?? ''));
         $this->attributeService->syncForRequest($request, $listing, isset($data['category_id']) ? (int) $data['category_id'] : 0);
 
         return redirect()
@@ -197,7 +207,7 @@ class OwnerDashboardController extends Controller
 
     public function editListing(Request $request, Listing $listing): View
     {
-        $item = $listing;
+        $item = $listing->load('serviceAreas');
         $locationOptions = $this->locationDictionary->options();
         $categoriesByMain = $this->categoriesByMain();
         $selectedCategoryId = (int) old('category_id', (int) $item->category_id);
@@ -206,7 +216,12 @@ class OwnerDashboardController extends Controller
         return view('portal.owner.listings-edit', compact('item', 'locationOptions', 'categoriesByMain', 'dynamicAttributes'));
     }
 
-    public function updateListing(Request $request, Listing $listing, ListingMediaService $mediaService): RedirectResponse
+    public function updateListing(
+        Request $request,
+        Listing $listing,
+        ListingMediaService $mediaService,
+        ListingCoverageService $coverageService
+    ): RedirectResponse
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -221,6 +236,8 @@ class OwnerDashboardController extends Controller
             'address_note' => ['nullable', 'string', 'max:255'],
             'service_type' => ['nullable', 'string', 'max:120'],
             'price_label' => ['nullable', 'string', 'max:120'],
+            'coverage_mode' => ['required', 'in:location_only,service_area_only,hybrid'],
+            'service_areas_text' => ['nullable', 'string', 'max:4000'],
             'phone' => ['nullable', 'string', 'max:64'],
             'whatsapp' => ['nullable', 'string', 'max:64'],
             'summary' => ['nullable', 'string', 'max:5000'],
@@ -254,6 +271,7 @@ class OwnerDashboardController extends Controller
             'address_note' => isset($data['address_note']) ? trim((string) $data['address_note']) : null,
             'service_type' => $data['service_type'] ?? null,
             'price_label' => $data['price_label'] ?? null,
+            'coverage_mode' => $data['coverage_mode'],
             'phone' => $data['phone'] ?? null,
             'whatsapp' => $data['whatsapp'] ?? null,
             'summary' => $data['summary'] ?? null,
@@ -262,6 +280,7 @@ class OwnerDashboardController extends Controller
         $listingData = $mediaService->apply($request, $listingData, $listing);
 
         $listing->update($listingData);
+        $coverageService->syncFromRawText($listing, (string) ($data['service_areas_text'] ?? ''));
         $this->attributeService->syncForRequest($request, $listing, isset($data['category_id']) ? (int) $data['category_id'] : 0);
 
         return redirect()->route('owner.listings.index')->with('ok', 'Ilan guncellendi.');

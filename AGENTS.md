@@ -1,8 +1,10 @@
-# AGENTS.md
+﻿# AGENTS.md
 
-Bu repo'ya gelen her ajan bu dosyayi ve asagidaki iki dokumani okumadan ise baslamaz:
+Bu repo'ya gelen her ajan bu dosyayi ve asagidaki dokumanlari okumadan ise baslamaz:
 - `docs/REPO_DISCIPLINE_TR.md`
 - `docs/MULTI_AGENT_RULES_TR.md`
+- `docs/SESSION_HANDOFF_TR.md`
+- `docs/COORDINATOR_BOOTSTRAP_TR.md` (koordinator ise zorunlu)
 
 ## Zorunlu WSL Hizalama (Hard Guard)
 Ajan terminali `D:\orkestram` altinda acilsa bile kod degisikligine gecmeden once su adimlar zorunludur:
@@ -17,9 +19,19 @@ Ajan terminali `D:\orkestram` altinda acilsa bile kod degisikligine gecmeden onc
 2. Sadece kendi branch'inde calis:
    - `agent/<ajan>/<task-id>`
 3. Gorev almadan lock ac:
-   - `docs/TASK_LOCKS.md` icine tek `active` kayit
+   - `docs/TASK_LOCKS.md` icine kendi gorevi icin `active` kayit
 4. Sadece lock'ta yazan dosyalara dokun.
 5. Is bitince lock'u `closed` yap.
+
+Kural:
+1. Repo genelinde ayni anda en fazla 3 `active` task olabilir.
+2. Her ajan ayni anda yalniz 1 `active` task tasir.
+3. Ayni kapsamda revize veya kapanis eksigi varsa yeni task acilmaz; mevcut task devam eder.
+4. Hedef ayni kalip yeni dosya gerekiyorsa task koordinatör onayi ile genisletilir.
+5. Yeni task ancak yeni kabul kriteri, yeni risk sinifi, yeni lock alani veya ayrik owner gerektiriyorsa acilir.
+6. `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md`, `docs/WORKLOG.md` ve `docs/SESSION_HANDOFF_TR.md` merkezi koordinasyon alanidir; paralel kapanis gerekiyorsa koordinatör kontrollu ilerlenir.
+7. Koordinator yeni is oncesi `scripts/agent-status.ps1` ile worktree gorunurlugunu kontrol eder.
+8. Koordinator ilk teknik turda `docs/COORDINATOR_BOOTSTRAP_TR.md` akisina uyar ve mekanik kapanista `scripts/close-task.ps1` kullanabilir.
 
 ## Zorunlu Dogrulama
 Commit/push oncesi zorunlu:

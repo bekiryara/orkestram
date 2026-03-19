@@ -1,4 +1,4 @@
-# WORKLOG (Gunluk Is Kaydi)
+﻿# WORKLOG (Gunluk Is Kaydi)
 
 Bu dosyada her ajan turu icin tek kayit acilir.  
 Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
@@ -1513,3 +1513,518 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - Demo preview listinglerinde bos alan birakan veri eksigi gorulmedi; acik kalan konu UI degil resmi fixture otomasyonu oldu.
 - Not:
   - TASK-065 kapatildi; whitelist/idempotent fixture otomasyonu ayri task olarak acilacak.
+
+- Tarih: 2026-03-19
+- Task: `TASK-066`
+- Is Ozeti:
+  - Repo genelinde tek active task modeli kaldirildi; ayni anda en fazla 3 active task, her ajan icin ayni anda yalniz 1 active task ve ayni kapsam revizesinde mevcut taskta kalma kurali resmi disipline baglandi.
+  - `task genisletme` karari AGENTS, `REPO_DISCIPLINE`, `MULTI_AGENT_RULES`, teslim checklisti ve task template seviyesinde standardize edildi; `docs/NEXT_TASK.md`, `docs/TASK_LOCKS.md` ve `docs/WORKLOG.md` merkezi koordinasyon alani olarak netlestirildi.
+  - `scripts/start-task.ps1` tek active task blokaji yerine repo-geneli 3 active task siniri ve ajan-basi tek active task kurali ile guncellendi; `NEXT_TASK` panosu coklu aktif gorev modeline hizalandi.
+- Degisen Dosyalar:
+  - `AGENTS.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `docs/tasks/_TEMPLATE.md`
+  - `scripts/start-task.ps1`
+  - `docs/tasks/TASK-066.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git push -u origin agent/codex/task-066`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Kapanis sonrasi aktif task yok; koordinasyon panosu `READY` durumuna cekildi.
+
+- Tarih: 2026-03-19
+- Task: `TASK-067`
+- Is Ozeti:
+  - `OPERATING_MODEL_TR.md` ile tek merkez operasyon modeli eklendi; task acma, task genisletme, yeni task, stale worktree gorunurlugu ve session handoff akisi tek referansa toplandi.
+  - `SESSION_HANDOFF_TR.md` ve `scripts/agent-status.ps1` eklendi; koordinator yeni is oncesi ajan/worktree branch, status, upstream ve stale aday durumunu dosya ve script uzerinden gorebilir hale geldi.
+  - `AGENTS.md`, `REPO_DISCIPLINE_TR.md`, `MULTI_AGENT_RULES_TR.md`, `AGENT_DELIVERY_CHECKLIST_TR.md` ve `AGENT_LOCK_MATRIX_TR.md` handoff ve stale worktree gorunurlugu modeline hizalandi.
+  - Kanitli stale adaylar: `codex-a` (`32 kirli dosya`, branch `agent/codex-a/task-056`), `codex-b` (`40 kirli dosya`, branch `main`), `codex-c` (`34 kirli dosya`, branch `main`).
+- Degisen Dosyalar:
+  - `AGENTS.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `docs/AGENT_LOCK_MATRIX_TR.md`
+  - `docs/OPERATING_MODEL_TR.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `scripts/agent-status.ps1`
+  - `docs/tasks/TASK-067.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1`
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+  - `git push -u origin agent/codex/task-068`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+  - `git push -u origin agent/codex/task-067`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Bu task stale worktree temizligi yapmadi; yalniz gorunurluk, handoff ve karar zemini kurdu. Temizlik ve devralma icin sonraki task gerekir.
+
+- Tarih: 2026-03-19
+- Task: `TASK-068`
+- Is Ozeti:
+  - Stale worktree'ler icin `koru | devral | temizle` karar siniflari resmi hale getirildi.
+  - `OPERATING_MODEL_TR.md` ve `AGENT_LOCK_MATRIX_TR.md` icinde destructive cleanup guvenceleri, zorunlu kanit paketi ve koordinator karar akisi eklendi.
+  - `SESSION_HANDOFF_TR.md` guncellenerek `codex-a`, `codex-b` ve `codex-c` worktree'leri gecici karar siniflariyla kayda alindi.
+  - `docs/TASK_LOCKS.md` icindeki `TASK-067` bozuk kapanis satiri resmi lock listesiyle duzeltildi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-068.md`
+  - `docs/OPERATING_MODEL_TR.md`
+  - `docs/AGENT_LOCK_MATRIX_TR.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git fetch --all --prune`
+  - `git remote -v`
+  - `git branch -vv`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && pwd && git rev-parse --show-toplevel && git branch --show-current && git status --short"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+  - `git push -u origin agent/codex/task-068`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Bu task standart ve karar zemini kurdu; stale worktree'lerde destructive cleanup sonraki resmi cleanup/devralma taskina birakildi.
+
+
+
+
+
+
+
+- Tarih: 2026-03-19
+- Task: `TASK-069`
+- Is Ozeti:
+  - `codex-b` ve `codex-c` worktree'leri icin temsilci stale diff kaniti toplandi.
+  - Her iki worktree'de `docs/TASK_LOCKS.md` diff'i buyuk gorunse de `git diff --ignore-cr-at-eol --stat` bos dondu; risk sinifi satir-sonu/encoding drift olarak kayda alindi.
+  - `SESSION_HANDOFF_TR.md` icinde `codex-b` ve `codex-c` karar sinifi `temizle` olarak guncellendi; cleanup'in ayri taskta yapilacagi netlestirildi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-069.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-b && git status --short && git diff -- docs/TASK_LOCKS.md && git diff --ignore-cr-at-eol --stat"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-c && git status --short && git diff -- docs/TASK_LOCKS.md && git diff --ignore-cr-at-eol --stat"`
+  - `git push -u origin agent/codex/task-069`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `IN_PROGRESS`
+- Not:
+  - Bu task siniflamayi tamamlar; cleanup sonraki resmi stale cleanup taskinda uygulanir.
+
+
+
+- Tarih: 2026-03-19
+- Task: `TASK-070`
+- Is Ozeti:
+  - `codex-b` ve `codex-c` icin cleanup oncesi temsilci drift kaniti tekrar alindi.
+  - Her iki worktree'de kontrollu `git restore --worktree .` uygulandi.
+  - Cleanup sonrasi `codex-b` ve `codex-c` icin `git status --short` bos dondu; `agent-status` raporunda `StatusCount 0` ve `StaleCandidate no` goruldu.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-070.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-b && git diff -- docs/TASK_LOCKS.md && git diff --ignore-cr-at-eol --stat"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-c && git diff -- docs/TASK_LOCKS.md && git diff --ignore-cr-at-eol --stat"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-b && git restore --worktree . && git status --short"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-c && git restore --worktree . && git status --short"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+  - `git push -u origin agent/codex/task-070`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Bu task yalniz `codex-b` ve `codex-c` cleanup'ini uyguladi; `codex-a` stale branch'i sonraki taskta ele alinacak.
+
+- Tarih: 2026-03-19
+- Task: `TASK-071`
+- Is Ozeti:
+  - `codex-a` task-056 stale branch'i icin task karti, branch/upstream ve temsilci diff kaniti toplandi.
+  - `git diff --ignore-cr-at-eol --stat` bos dondu; risk sinifi satir-sonu/encoding drift olarak netlesti.
+  - `codex-a` icin kontrollu `git restore --worktree .` uygulandi ve cleanup sonrasi `git status --short` bos dondu.
+  - `agent-status` raporunda artik `codex-a`, `codex-b` ve `codex-c` icin `StatusCount 0` ve `StaleCandidate no` goruluyor.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-071.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-a && git status --short && sed -n '1,220p' docs/tasks/TASK-056.md && git diff -- docs/TASK_LOCKS.md && git diff --ignore-cr-at-eol --stat"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-a && git restore --worktree . && git status --short"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+  - `git push -u origin agent/codex/task-071`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - Bu task ile stale worktree cleanup zinciri tamamlandi; acik stale aday kalmadi.
+---
+
+### [2026-03-19 05:05] TASK-072 Koordinator Bootstrap ve Kapanis Otomasyonu
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Koordinator icin ilk 5 dakikalik bootstrap dokumani eklendi.`
+  - `close-task.ps1 ile task karti, TASK_LOCKS, NEXT_TASK ve WORKLOG kapanisi mekanik hale getirildi.`
+  - `AGENTS, repo disiplini ve delivery dokumanlari bootstrap/kapanis akisina minimum referanslarla hizalandi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-072.md`
+  - `docs/COORDINATOR_BOOTSTRAP_TR.md`
+  - `scripts/close-task.ps1`
+  - `AGENTS.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `docs/tasks/_TEMPLATE.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -NoProfile -Command "[void][scriptblock]::Create((Get-Content 'scripts/close-task.ps1' -Raw)); 'PARSE_OK'"`
+  - `powershell -NoProfile -File scripts/close-task.ps1 -TaskId TASK-999 -Agent codex -ClosureNote "smoke close tamam" -WorklogTitle "Smoke Close" -WorklogSummary "mekanik kapanis smoke" -Files "docs/tasks/TASK-999.md" -Commands "powershell -NoProfile -File scripts/close-task.ps1" -Result PASS`
+  - `powershell -NoProfile -File scripts/close-task.ps1 -TaskId TASK-072 ...`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Bootstrap ve kapanis otomasyonu urun/runtime koduna dokunmadan tamamlandi.`
+
+---
+
+### [2026-03-19 05:54] TASK-073 Multi-Ajan Orkestrasyon ve Overlap Kapisi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `3 ajan surekli calisma paketi ve paralel task secim modeli operasyon dokumanlarina eklendi.`
+  - `start-task.ps1 icine aktif lock overlap kapisi eklendi; koordinasyon dosyalari overlap kontrolunde haric tutuldu.`
+  - `start-task scripti parse ve kopya smoke senaryosu ile overlap/non-overlap davranisinda dogrulandi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-073.md`
+  - `docs/OPERATING_MODEL_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/AGENT_LOCK_MATRIX_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `scripts/start-task.ps1`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -NoProfile -Command "[void][scriptblock]::Create((Get-Content 'scripts/start-task.ps1' -Raw)); 'PARSE_OK'"`
+  - `powershell local smoke: overlap case FAIL, non-overlap case OK`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `n/a`
+---
+
+### [2026-03-19 07:40] TASK-074 Preview Runtime Lifecycle Standardi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `AJAN-B owner branch'te merge sonrasi preview/runtime lifecycle standardini tamamladi.`
+  - `Review URL / Final URL ayrimi, design-preview lane davranisi ve runtime refresh kaniti dokumanlara islendi.`
+  - `Agent teslim kaniti 4f95fa0 commit hash'i ve pre-pr PASS olarak merkezi kayitlara aktarıldi.`
+- Degisen Dosyalar:
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git fetch origin --prune`
+  - `git show --stat --oneline origin/agent/codex-b/task-074`
+  - `AJAN-B teslim kaniti: git branch --show-current / git branch -vv / git status --short / pre-pr PASS`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Owner branch: agent/codex-b/task-074`
+
+---
+
+### [2026-03-19 07:40] TASK-075 Deterministic Demo Fixture Standardi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `AJAN-C owner branch'te deterministic demo fixture standardini tamamladi.`
+  - `Whitelist slug, repo ici medya kaynagi, idempotent update ve smoke/test ayrimi net kurala baglandi.`
+  - `Agent teslim kaniti 8351cba commit hash'i ve pre-pr PASS olarak merkezi kayitlara aktarıldi.`
+- Degisen Dosyalar:
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git fetch origin --prune`
+  - `git show --stat --oneline origin/agent/codex-c/task-075`
+  - `AJAN-C teslim kaniti: git branch --show-current / git branch -vv / git status --short / pre-pr PASS`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Owner branch: agent/codex-c/task-075`
+
+---
+
+### [2026-03-19 07:40] TASK-076 Task Acilis Recovery ve Merkezi Kapanis
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `start-task.ps1 icindeki NEXT_TASK aktif sayim hatasi duzeltildi.`
+  - `TASK-074 ve TASK-075 yari acilis durumu toparlandi; TASK_LOCKS, NEXT_TASK ve SESSION_HANDOFF senkronize edildi.`
+  - `Owner ajan teslimleri merkezi kapanis kayitlarina islenerek aktif task listesi READY durumuna getirildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-076.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+  - `scripts/start-task.ps1`
+- Calistirilan Komutlar:
+  - `git fetch origin --prune`
+  - `git show --stat --oneline origin/agent/codex-b/task-074`
+  - `git show --stat --oneline origin/agent/codex-c/task-075`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Owner task icerigi koordinator branch'ine tasinmadi; yalniz merkezi kapanis yapildi.`
+---
+
+### [2026-03-19 15:05] TASK-077 Owner Branch PR / Merge Hazirlik Standardi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Owner branch teslimleri icin PR hazir / merge hazir siniflari resmi akisa baglandi.`
+  - `TASK-074` ve `TASK-075` owner branch'leri icin varsayilan merge kuyrugu `074 -> 075` olarak kayda alindi.`
+  - `Koordinatorun owner branch icerigine girmeden yalniz hazirlik, siralama ve merkezi gorunurluk saglayacagi netlestirildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-077.md`
+  - `docs/PR_FLOW_TR.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git push -u origin agent/codex/task-077`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+  - `git branch --show-current`
+  - `git branch -vv`
+  - `git status --short`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `n/a`
+---
+
+### [2026-03-19 15:20] TASK-078 Merge Taski Istisna Standardi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Merge taskinin varsayilan degil, istisna oldugu repo disiplinine yazildi.`
+  - `Tek owner ve dusuk riskli teslimlerde merge'in ayni taskta kapanabilecegi netlestirildi.`
+  - `Koordinatorun ayrik merge taski acmadan once risk / kabul kriteri sorusunu yanitlamasi zorunlu hale getirildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-078.md`
+  - `docs/PR_FLOW_TR.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git push -u origin agent/codex/task-078`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+  - `git branch --show-current`
+  - `git branch -vv`
+  - `git status --short`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `n/a`
+
+---
+
+### [2026-03-19 15:43] TASK-078 Aktif Task Senkronu
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-078 kapatilmadan aktif task olarak devam edecek sekilde merkezi kayit drift'i hizalandi.`
+  - `docs/TASK_LOCKS.md active kaydi ile docs/NEXT_TASK.md, task karti ve SESSION_HANDOFF_TR.md ayni duruma cekildi.`
+  - `TASK-074` ve `TASK-075` icin yalniz karar hazirligi korunup uygulama yapilmadi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-078.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && git status --short"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && sed -n '1,220p' docs/tasks/TASK-078.md"`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Bu turda pre-pr, push ve close-task uygulanmadi; yalniz aktif-task senkronu yapildi.`
+
+---
+
+### [2026-03-19 15:50] TASK-078 Merge Task Karar Kaydi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-074` icin ayrik merge task gerekmez karari merkezi kayda islendi.
+  - `TASK-075` icin ayrik merge task gerekmez karari merkezi kayda islendi.
+  - `TASK-078` icinde bu kararlarin yazildigi netlestirildi; uygulama yapilmadi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-078.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && sed -n '1,140p' docs/tasks/TASK-078.md"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && sed -n '1,120p' docs/SESSION_HANDOFF_TR.md"`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Bu turda merge, push, close-task veya yeni task uygulanmadi; yalniz karar kaydi guncellendi.`
+
+---
+
+### [2026-03-19 16:43] TASK-078 Merkezi Karar Kaydi Kapanisi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez karari merkezi kayitlara kalici olarak islendi.
+  - `TASK-078` task karti, TASK_LOCKS, NEXT_TASK ve SESSION_HANDOFF bu kararlarla kapanis durumuna getirildi.
+  - `pre-pr` PASS alindi; merge, push veya yeni task uygulamasi yapilmadi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-078.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && git branch --show-current && git branch -vv && git status --short"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Bu turda merge, push veya yeni task uygulanmadi; yalniz merkezi karar kaydi ve koordinasyon kapanisi tamamlandi.`
+
+---
+
+### [2026-03-19 19:11] TASK-079 Paket 01 Task Acilisi ve Devir
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Paket 01 owner service area / coverage write-path isi repo disiplinine gore TASK-079 olarak acildi.`
+  - `Dar lock kapsamı yalniz owner controller, owner create/edit view ve owner flow test alanina indirildi.`
+  - `Uygulama gorevi koordinator tarafinda degil, `codex-a` ajanina devredildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-079.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && git fetch --all --prune && git status --short && git branch --show-current"`
+  - `Get-Content docs/tasks/_TEMPLATE.md`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Koordinator uygulama yapmadi; yalniz task acilisi ve ajan devri yapildi.`
+
+---
+
+### [2026-03-19 22:56] TASK-079 Owner Teslim Kabul ve Merkezi Kapanis
+- Sorumlu: `codex-a`
+- Is Ozeti:
+  - `codex-a owner teslim kaniti dogrulandi: branch temiz, upstream hizali, validate PASS ve pre-pr PASS,TASK-079 task karti merkezi kopyada owner teslim gercegine gore kapatildi,TASK_LOCKS, NEXT_TASK ve WORKLOG owner teslim kabulune gore senkronlandi`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-079.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc 'cd /home/bekir/orkestram-a && git branch --show-current && git branch -vv && git status --short && sed -n 1,220p docs/tasks/TASK-079.md',powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Owner branch teslimi commit 8d06a46 + docs duzeltme 22cd676 ile kabul edildi,Runtime mount source halen owner worktree ile birebir hizali olmadigi icin mount kaniti bu kapanista uretilmedi; risk handoff kaydina ayrica islenmelidir`
+
+---
+
+### [2026-03-19 23:35] TASK-079 Merkezi Normalizasyon ve Merge Bekleme Karari
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-079 task kartindaki placeholder checklistler gercek owner teslim kanitina gore normalize edildi.`
+  - `Merkezi handoff ve pano kayitlarinda TASK-079 icin otomatik merge izlenimi kaldirildi.`
+  - `izmirorkestra owner coverage write-path parity eksigi acik risk olarak merkezi kayda islenip merge karari koordinator degerlendirmesine birakildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-079.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && pwd && git rev-parse --show-toplevel && git branch --show-current && git status --short"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Bu tur urun kodu degistirmedi; yalniz merkezi koordinasyon kayitlari normalize edildi.`
+
+---
+
+### [2026-03-19 23:35] TASK-079 Merkezi Normalizasyon ve Merge Bekleme Karari
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-079 task kartindaki placeholder checklistler gercek owner teslim kanitina gore normalize edildi.`
+  - `Merkezi handoff ve pano kayitlarinda TASK-079 icin otomatik merge izlenimi kaldirildi.`
+  - `izmirorkestra owner coverage write-path parity eksigi acik risk olarak merkezi kayda islenip merge karari koordinator degerlendirmesine birakildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-079.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && pwd && git rev-parse --show-toplevel && git branch --show-current && git status --short"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Bu tur urun kodu degistirmedi; yalniz merkezi koordinasyon kayitlari normalize edildi.`
+
+---
+
+### [2026-03-20 00:12] TASK-080 Owner Coverage Parity ve Merge Hazirlik
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `izmirorkestra owner coverage write-path zinciri orkestram referansina gore tamamlandi.`
+  - `orkestram ve izmirorkestra owner coverage write-path dosyalari ayni parity branchinde toplandi.`
+  - `OwnerPanelActionsTest` iki appte PASS alindi ve merge karari `agent/codex/task-080` branch'i uzerine tasindi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-080.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+  - `local-rebuild/apps/izmirorkestra/app/Http/Controllers/Owner/OwnerDashboardController.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-create.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-edit.blade.php`
+  - `local-rebuild/apps/izmirorkestra/tests/Feature/OwnerPanelActionsTest.php`
+  - `local-rebuild/apps/orkestram/app/Http/Controllers/Owner/OwnerDashboardController.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-create.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-edit.blade.php`
+  - `local-rebuild/apps/orkestram/tests/Feature/OwnerPanelActionsTest.php`
+- Calistirilan Komutlar:
+  - `docker exec orkestram-local-web php artisan test --filter=OwnerPanelActionsTest`
+  - `docker exec izmirorkestra-local-web php artisan test --filter=OwnerPanelActionsTest`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Yeni branch upstream'i kurulmadan ilk pre-pr turu upstream kapisinda fail verdi; commit/push sonrasi tekrar kosulup PASS kaniti alinmistir.`

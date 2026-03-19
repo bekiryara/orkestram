@@ -1,4 +1,4 @@
-param(
+﻿param(
     [Parameter(Mandatory = $true)]
     [string]$TaskId,
 
@@ -18,6 +18,94 @@ function Fail([string]$Message) {
     exit 1
 }
 
+function Normalize-LockTarget([string]$Target) {
+    if ([string]::IsNullOrWhiteSpace($Target)) {
+        return ""
+    }
+    return ($Target.Trim() -replace '\\', '/')
+}
+
+function Has-Wildcard([string]$Target) {
+    return (Normalize-LockTarget $Target) -match '[*?]'
+}
+
+function Get-LockBase([string]$Target) {
+    $normalized = Normalize-LockTarget $Target
+    if ([string]::IsNullOrWhiteSpace($normalized)) {
+        return ""
+    }
+    $match = [regex]::Match($normalized, '[*?]')
+    if (-not $match.Success) {
+        return $normalized
+    }
+    return $normalized.Substring(0, $match.Index)
+}
+
+function Is-CoordinationTarget([string]$Target) {
+    $normalized = Normalize-LockTarget $Target
+    if ([string]::IsNullOrWhiteSpace($normalized)) {
+        return $true
+    }
+    if ($normalized -in @('docs/TASK_LOCKS.md', 'docs/NEXT_TASK.md', 'docs/WORKLOG.md')) {
+        return $true
+    }
+    if ($normalized -match '^docs/tasks/TASK-[0-9]{3}\.md$') {
+        return $true
+    }
+    return $false
+}
+
+function Test-LockOverlap([string]$Left, [string]$Right) {
+    $leftNorm = Normalize-LockTarget $Left
+    $rightNorm = Normalize-LockTarget $Right
+    if ([string]::IsNullOrWhiteSpace($leftNorm) -or [string]::IsNullOrWhiteSpace($rightNorm)) {
+        return $false
+    }
+    if ($leftNorm -eq $rightNorm) {
+        return $true
+    }
+
+    $leftWild = Has-Wildcard $leftNorm
+    $rightWild = Has-Wildcard $rightNorm
+    if (-not $leftWild -and -not $rightWild) {
+        return $false
+    }
+
+    $leftBase = Get-LockBase $leftNorm
+    $rightBase = Get-LockBase $rightNorm
+    if ([string]::IsNullOrWhiteSpace($leftBase) -or [string]::IsNullOrWhiteSpace($rightBase)) {
+        return $true
+    }
+
+    if ($leftWild -and $rightNorm.StartsWith($leftBase, [System.StringComparison]::OrdinalIgnoreCase)) {
+        return $true
+    }
+    if ($rightWild -and $leftNorm.StartsWith($rightBase, [System.StringComparison]::OrdinalIgnoreCase)) {
+        return $true
+    }
+    if ($leftWild -and $rightWild) {
+        if ($leftBase.StartsWith($rightBase, [System.StringComparison]::OrdinalIgnoreCase) -or $rightBase.StartsWith($leftBase, [System.StringComparison]::OrdinalIgnoreCase)) {
+            return $true
+        }
+    }
+
+    return $false
+}
+
+function Get-ActiveNextTaskEntries([string]$NextRaw) {
+    if ([string]::IsNullOrWhiteSpace($NextRaw)) {
+        return @()
+    }
+
+    $sectionMatch = [regex]::Match($NextRaw, '## Aktif Gorevler \(Merkezi Koordinasyon\)\r?\n(?<body>[\s\S]*?)(?=\r?\n## |$)')
+    if (-not $sectionMatch.Success) {
+        return @()
+    }
+
+    $body = $sectionMatch.Groups['body'].Value
+    return [regex]::Matches($body, '(?m)^\d+\. `TASK-\d{3}` - .+$')
+}
+
 if ($TaskId -notmatch '^TASK-[0-9]{3}$') {
     Fail "TaskId formati gecersiz. Beklenen: TASK-XXX"
 }
@@ -31,6 +119,7 @@ $taskFile = "docs/tasks/$TaskId.md"
 $templatePath = "docs/tasks/_TEMPLATE.md"
 $locksPath = "docs/TASK_LOCKS.md"
 $nextTaskPath = "docs/NEXT_TASK.md"
+$maxActiveTasks = 3
 
 if (-not (Test-Path -LiteralPath $templatePath)) {
     Fail "Task template bulunamadi ($templatePath)."
@@ -49,8 +138,12 @@ $locksRaw = Get-Content -Path $locksPath -Raw
 if ($locksRaw -match [regex]::Escape("| $TaskId |")) {
     Fail "TASK_LOCKS icinde ayni TaskId mevcut. Task ID tekrar kullanilamaz."
 }
-if ($locksRaw -match '\|[^\r\n]*\|\s*active\s*\|') {
-    Fail "TASK_LOCKS icinde aktif task var. Yeni task acmadan once mevcut active lock kapatilmalidir."
+$activeTaskCount = ([regex]::Matches($locksRaw, '\|[^\r\n]*\|\s*active\s*\|')).Count
+if ($activeTaskCount -ge $maxActiveTasks) {
+    Fail "TASK_LOCKS icinde $activeTaskCount aktif task var. En fazla $maxActiveTasks aktif task acilabilir."
+}
+if ($locksRaw -match "\|[^\r\n]*\|\s*$Agent\s*\|[^\r\n]*\|\s*active\s*\|") {
+    Fail "$Agent icin zaten aktif task var. Her ajan ayni anda yalniz 1 aktif task tasiyabilir."
 }
 
 $localBranchHit = git branch --list $Branch
@@ -63,7 +156,32 @@ $nowStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 $nowShort = Get-Date -Format "yyyy-MM-dd HH:mm"
 $filesList = @()
 if (-not [string]::IsNullOrWhiteSpace($Files)) {
-    $filesList = $Files.Split(',') | ForEach-Object { $_.Trim() } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+    $filesList = $Files.Split(',') | ForEach-Object { Normalize-LockTarget $_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+}
+
+$requestedTargets = $filesList | Where-Object { -not (Is-CoordinationTarget $_) }
+if ($requestedTargets.Count -gt 0) {
+    $lockLines = Get-Content -Path $locksPath | Where-Object { $_ -match '^\|\s*TASK-[0-9]{3}\s*\|.*\|\s*active\s*\|' }
+    foreach ($line in $lockLines) {
+        $parts = $line.Split('|') | ForEach-Object { $_.Trim() }
+        if ($parts.Count -lt 9) {
+            continue
+        }
+        $existingTask = $parts[1]
+        $existingAgent = $parts[2]
+        $existingFilesRaw = $parts[5]
+        if ([string]::IsNullOrWhiteSpace($existingFilesRaw)) {
+            continue
+        }
+        $existingTargets = $existingFilesRaw.Split(',') | ForEach-Object { Normalize-LockTarget $_ } | Where-Object { -not (Is-CoordinationTarget $_) }
+        foreach ($requestedTarget in $requestedTargets) {
+            foreach ($existingTarget in $existingTargets) {
+                if (Test-LockOverlap $requestedTarget $existingTarget) {
+                    Fail "Lock overlap: '$requestedTarget' aktif gorev $existingTask ($existingAgent) icindeki '$existingTarget' ile cakisiyor."
+                }
+            }
+        }
+    }
 }
 
 $lockFiles = [System.Collections.Generic.List[string]]::new()
@@ -86,8 +204,7 @@ $taskContent = $taskContent.Replace('`agent/agent-name/task-xxx`', ('`' + $Branc
 $taskContent = $taskContent.Replace('`YYYY-MM-DD HH:mm`', ('`' + $nowShort + '`'))
 $taskContent = $taskContent.Replace('- Bu gorevin amaci', ('- ' + $taskSummary))
 $taskContent = [regex]::Replace($taskContent, '(?s)## Lock Dosyalari\r?\n- `path/one`\r?\n- `path/two`', "## Lock Dosyalari`r`n$lockSection")
-$taskContent = $taskContent.Replace('powershell -ExecutionPolicy Bypass -File D:\orkestram\scripts\pre-pr.ps1 -Mode quick', 'powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick')
-Set-Content -Path $taskFile -Value $taskContent
+Set-Content -Encoding utf8 -Path $taskFile -Value $taskContent
 Write-Host "[start-task] step-1 task file -> $taskFile"
 Write-Host "[start-task] note: task owner checklistleri gercek sonuca gore doldurmak, WORKLOG/TASK_LOCKS/NEXT_TASK kapanisini yapmak ve teslim kanitini sunmak zorundadir"
 
@@ -97,13 +214,33 @@ Add-Content -Path $locksPath -Value $lockLine
 Write-Host "[start-task] step-2 lock row -> $locksPath"
 
 $nextRaw = Get-Content -Path $nextTaskPath -Raw
+$nextRaw = $nextRaw -replace 'Durum: `READY`', 'Durum: `ACTIVE`'
 $nextRaw = $nextRaw -replace 'Durum: `IDLE`', 'Durum: `ACTIVE`'
-$nextRaw = $nextRaw -replace '1\. Aktif koordinator gorevi yok\.', ('1. `' + $TaskId + '` - ' + $taskSummary)
-Set-Content -Path $nextTaskPath -Value $nextRaw
+if ($nextRaw -match '## Aktif Gorevler \(Tek Kaynak\)') {
+    $nextRaw = $nextRaw -replace '## Aktif Gorevler \(Tek Kaynak\)', '## Aktif Gorevler (Merkezi Koordinasyon)'
+}
+if ($nextRaw -match '1\. `YOK`.*') {
+    $nextRaw = $nextRaw -replace '1\. `YOK`.*', ('1. `' + $TaskId + '` - ' + $taskSummary)
+} else {
+    $activeMatches = Get-ActiveNextTaskEntries $nextRaw
+    $nextIndex = $activeMatches.Count + 1
+    if ($nextIndex -gt $maxActiveTasks) {
+        Fail "NEXT_TASK icinde zaten $($activeMatches.Count) aktif gorev listelenmis. En fazla $maxActiveTasks aktif gorev desteklenir."
+    }
+    $nextRaw = [regex]::Replace($nextRaw, '(## Aktif Gorevler \(Merkezi Koordinasyon\)\r?\n)', "$1$nextIndex. `$TaskId` - $taskSummary`r`n", 1)
+}
+Set-Content -Encoding utf8 -Path $nextTaskPath -Value $nextRaw
 Write-Host "[start-task] step-3 next task -> $nextTaskPath"
 
-git checkout -b $Branch | Out-Null
+$branchOutput = cmd /c "git checkout --quiet -b $Branch" 2>&1
+if ($LASTEXITCODE -ne 0) {
+    Fail "Branch acilamadi ($Branch): $($branchOutput -join ' ')"
+}
 Write-Host "[start-task] step-4 branch -> $Branch"
 Write-Host "[start-task] started_at: $nowStamp"
 Write-Host "[start-task] OK"
 exit 0
+
+
+
+
