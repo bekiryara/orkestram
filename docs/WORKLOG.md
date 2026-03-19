@@ -1676,3 +1676,31 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - Bu task ile stale worktree cleanup zinciri tamamlandi; acik stale aday kalmadi.
+---
+
+### [2026-03-19 05:05] TASK-072 Koordinator Bootstrap ve Kapanis Otomasyonu
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Koordinator icin ilk 5 dakikalik bootstrap dokumani eklendi.`
+  - `close-task.ps1 ile task karti, TASK_LOCKS, NEXT_TASK ve WORKLOG kapanisi mekanik hale getirildi.`
+  - `AGENTS, repo disiplini ve delivery dokumanlari bootstrap/kapanis akisina minimum referanslarla hizalandi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-072.md`
+  - `docs/COORDINATOR_BOOTSTRAP_TR.md`
+  - `scripts/close-task.ps1`
+  - `AGENTS.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `docs/tasks/_TEMPLATE.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -NoProfile -Command "[void][scriptblock]::Create((Get-Content 'scripts/close-task.ps1' -Raw)); 'PARSE_OK'"`
+  - `powershell -NoProfile -File scripts/close-task.ps1 -TaskId TASK-999 -Agent codex -ClosureNote "smoke close tamam" -WorklogTitle "Smoke Close" -WorklogSummary "mekanik kapanis smoke" -Files "docs/tasks/TASK-999.md" -Commands "powershell -NoProfile -File scripts/close-task.ps1" -Result PASS`
+  - `powershell -NoProfile -File scripts/close-task.ps1 -TaskId TASK-072 ...`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Bootstrap ve kapanis otomasyonu urun/runtime koduna dokunmadan tamamlandi.`

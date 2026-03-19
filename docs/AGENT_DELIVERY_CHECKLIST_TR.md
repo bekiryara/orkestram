@@ -4,6 +4,7 @@ Amac: Ajan tesliminde dogrulama sirasi, paylasilacak kanit formati ve yari kesil
 
 ## 1. Goreve Baslamadan Once
 1. `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md` ve `docs/SESSION_HANDOFF_TR.md` oku.
+   - Koordinator isen `docs/COORDINATOR_BOOTSTRAP_TR.md` da zorunludur.
 2. `git fetch --all --prune` calistir.
 3. Sadece kendi branch'inle ilerle:
    - `agent/<ajan>/<task-id>`
@@ -134,6 +135,7 @@ Koordinator asagidaki eksiklerden biri varsa teslimi reddeder:
 4. `docs/NEXT_TASK.md` guncellenmemis
 5. Zorunlu kanit paketi eksik
 6. `pre-pr` PASS yok
+7. Koordinator mekanik kapanis icin `scripts/close-task.ps1` kullanabilir; yine de task karti icerigi gercek sonuca gore kontrol edilir.
 
 ## 7. Koordinator Ilk Karar Mesaji (Sabit Sablon)
 Koordinator yeni iste ilk karar mesajini su sabit formatla verir:
@@ -149,3 +151,4 @@ Not:
 Kural (Edit Source Esitligi):
 1. UI tesliminde `Edit Source` ile `Mount Source` ayni worktree/path degilse teslim reddedilir.
 2. Ajan farkli source'ta kod degistirip baska source preview'u veremez.
+

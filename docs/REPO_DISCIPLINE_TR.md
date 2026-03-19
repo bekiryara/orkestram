@@ -152,6 +152,12 @@ Her gorevde dogrulama oncesi su 4 kontrol yapilir:
      4. branch acilisi
    - Mekanik komut:
      - `powershell -ExecutionPolicy Bypass -File scripts/start-task.ps1 -TaskId TASK-0xx -Agent codex -Files "path/one,path/two" -Note "kisa ozet"`
+11. `docs/COORDINATOR_BOOTSTRAP_TR.md`
+   - Yeni gelen koordinatorun ilk 5 dakika akisi icin tek referans dokumandir.
+12. `scripts/close-task.ps1`
+   - Task karti + `TASK_LOCKS` + `NEXT_TASK` + `WORKLOG` mekanik kapanis yardimcisidir.
+   - Standart:
+     - `powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-0xx -Agent codex -ClosureNote "kisa kapanis ozeti" -WorklogTitle "baslik" -WorklogSummary "madde-1" -Files "dosya-1" -Commands "komut-1" -Result PASS`
 
 Kurallar:
 1. Repo genelinde ayni anda en fazla 3 `active` task olabilir.
@@ -171,6 +177,7 @@ Her yeni ajan ilk turda su sirayi uygular:
 5. `docs/TASK_LOCKS.md` icinde lock almadan kod degisikligi yapmaz.
 6. `pre-pr` PASS olmadan commit/push yapmaz.
 7. `git remote -v` ile `origin`in GitHub oldugunu dogrular.
+8. Koordinator ise `docs/COORDINATOR_BOOTSTRAP_TR.md` akisini da uygular.
 
 ## 12) WSL Tek Kaynak + 3 Ajan Klasoru Standardi
 
@@ -254,5 +261,6 @@ Kural:
 3. Koordinator UI review oncesi `Edit Source`, `Mount Source` ve `Preview URL` ucunu birlikte dogrular.
 4. Farkli worktree'de patch yazip baska worktree preview'u gostermek operasyonel ihlaldir.
 5. Bu esitlik saglanmiyorsa once kaynak hizasi duzeltilir, sonra UI review baslar.
+
 
 

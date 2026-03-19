@@ -37,6 +37,7 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
    - `agent/<ajan>/<task-id>` -> `main`
 7. Merge sonrasi lock kapat:
    - `docs/TASK_LOCKS.md` kaydinda durumu `closed` yap.
+   - Koordinator mekanik kapanista `scripts/close-task.ps1` kullanabilir.
 8. Task karti doldur:
    - `Uygulama Adimlari`, `Kabul Kriterleri`, `Teslimde Zorunlu Kanit`, `Kapanis Adimlari` placeholder kalmaz.
 
@@ -52,6 +53,7 @@ Amac: Ayni anda birden fazla ajan calisirken cakismaz, izlenebilir ve determinis
 4. Is bitiminde lock `closed` yapilmadan gorev kapatilmaz.
 5. `pre-pr` PASS olmayan is commit/push edilmez.
 6. Task karti checklistleri doldurulmadan teslim kabul edilmez.
+7. Koordinator ilk teknik turda `docs/COORDINATOR_BOOTSTRAP_TR.md` akisina uyar.
 
 ## Baslangic Guard (Zorunlu)
 1. Ajan `D:\orkestram`'da acilsa bile gelistirmeden once WSL hizalama kaniti verir:
@@ -170,4 +172,5 @@ Koordinator karar cevabi yalniz su 4 satirla verilir:
    - `Preview URL`
 4. Farkli worktree'de patch yazip baska worktree preview'u gostermek yasaktir.
 5. UI merge karari yalniz `Edit Source == Mount Source` dogrulandiysa verilir.
+
 

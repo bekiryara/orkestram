@@ -65,6 +65,7 @@ Baslangic: `YYYY-MM-DD HH:mm`
 ## Komutlar
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
+powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-XXX -Agent agent-name -ClosureNote "kisa kapanis ozeti" -WorklogTitle "baslik" -WorklogSummary "madde-1" -Files "dosya-1" -Commands "komut-1" -Result PASS
 ```
 
 ## Risk / Not
