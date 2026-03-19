@@ -1731,3 +1731,28 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `n/a`
+
+---
+
+### [2026-03-19 19:06] TASK-074 Merge Sonrasi Preview Runtime Lifecycle Kapanisi
+- Sorumlu: `codex-b`
+- Is Ozeti:
+  - `Merge sonrasi design-preview lane'in main ile ne zaman hizalanacagi resmi kurala baglandi`
+  - `Review URL ve Final URL ayrimi ile runtime refresh checklisti operasyon dokumanlarina eklendi`
+  - `TASK-074 branch'i origin/agent/codex-b/task-074 upstream'ine hizalandi, commit 4f95fa0 pushlandi ve pre-pr PASS alindi`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-074.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `docs/OPERATING_MODEL_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+- Calistirilan Komutlar:
+  - `git push -u origin agent/codex-b/task-074`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `UI review gorevi olmadigi icin Edit Source == Mount Source kaniti n-a olarak kaydedildi.`

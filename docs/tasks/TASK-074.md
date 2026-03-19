@@ -1,6 +1,6 @@
 # TASK-074
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex-b`  
 Branch: `agent/codex-b/task-074`  
 Baslangic: `2026-03-19 06:06`
@@ -53,23 +53,23 @@ Baslangic: `2026-03-19 06:06`
 - [x] Merge sonrasi design-preview lane durumu net kural olarak yazilir
 - [x] Main/design lane farki ve kullaniciya hangi URL'in ne amacla verilecegi tek akista anlatilir
 - [x] Merge sonrasi runtime tazeleme/checklisti eklenir
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
-- [ ] `git branch --show-current`
-- [ ] `git branch -vv`
-- [ ] `git status --short`
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- [x] `git branch --show-current`
+- [x] `git branch -vv`
+- [x] `git status --short`
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - [x] Goreve ozel test/komut sonucu
 - [x] `Edit Source == Mount Source` kaniti `n/a` (UI review yok; Preview Kontrati `no`)
-- [ ] Commit hash
+- [x] Commit hash `4f95fa0`
 
 ## Kapanis Adimlari
-- [ ] Task kartindaki checklistler gercek sonuca gore guncellendi
-- [ ] `docs/WORKLOG.md` guncellendi
-- [ ] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
-- [ ] `docs/NEXT_TASK.md` panosu guncellendi
-- [ ] Branch pushlandi
+- [x] Task kartindaki checklistler gercek sonuca gore guncellendi
+- [x] `docs/WORKLOG.md` guncellendi
+- [x] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
+- [x] `docs/NEXT_TASK.md` panosu guncellendi
+- [x] Branch pushlandi
 
 ## Komutlar
 ```powershell
@@ -78,4 +78,6 @@ powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ## Risk / Not
 - Risk, merge sonrasi lane akisini gereksiz karmasik hale getirmek; hedef tek bakista anlasilan lifecycle yazmak.
 - Goreve ozel komut dogrulamasi rg aramasi ile alindi: Merge Sonrasi Preview / Runtime | Review URL | Final URL | Runtime refresh | design-preview.
-- Bu gorev dokuman/lifecycle kapsamindadir; UI review calismadigi icin Edit Source == Mount Source kaniti n-a olarak kaydedildi.
+- Bu gorev dokuman/lifecycle kapsamindadir; UI review calismadigi icin Edit Source == Mount Source kaniti n/a olarak kaydedildi.
+
+

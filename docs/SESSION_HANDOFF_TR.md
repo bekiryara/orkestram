@@ -1,13 +1,12 @@
-ï»¿# Session Handoff (TR)
+# Session Handoff (TR)
 
-Guncelleme Zamani: 2026-03-19 06:15
+Guncelleme Zamani: 2026-03-19 19:06
 Koordinator Branch: agent/codex/task-076
 Koordinator Task: TASK-076
 
 ## Aktif Tasklar
-1. `TASK-074` - codex-b / merge sonrasi preview-runtime lifecycle ve design lane yasam dongusu standardi
-2. `TASK-075` - codex-c / deterministic demo fixture standardi ve review demo veri kurali
-3. `TASK-076` - codex / task acilis recovery ve NEXT_TASK aktif sayim hatasi duzeltmesi
+1. `TASK-075` - codex-c / deterministic demo fixture standardi ve review demo veri kurali
+2. `TASK-076` - codex / task acilis recovery ve NEXT_TASK aktif sayim hatasi duzeltmesi
 
 ## Ajan / Worktree Durumu
 1. codex
@@ -26,11 +25,11 @@ Koordinator Task: TASK-076
    - Not: Yeni dagitim gelene kadar beklemede.
 3. codex-b
    - Worktree: /home/bekir/orkestram-b
-   - Branch: main
-   - Aktif task: TASK-074
-   - Status ozeti: gorev karti acildi, resmi devir talimati bekliyor
-   - Karar sinifi: aktif-atama-bekliyor
-   - Not: Preview/runtime lifecycle dokumantasyonu bu slota verilecek.
+   - Branch: agent/codex-b/task-074
+   - Aktif task: yok
+   - Status ozeti: TASK-074 kapatildi; branch temiz ve teslim kaniti tamam
+   - Karar sinifi: hazir
+   - Not: Preview/runtime lifecycle dokumantasyonu commit `4f95fa0` ile pushlandi.
 4. codex-c
    - Worktree: /home/bekir/orkestram-c
    - Branch: main
@@ -41,17 +40,17 @@ Koordinator Task: TASK-076
 
 ## Preview / Source Durumu
 1. Bu oturum dokuman/operasyon lifecycle duzenleme oturumudur; UI kodu degisimi yoktur.
-2. `TASK-074` design-preview lane davranisini tanimlayacak, preview URL dagitimi sonra netlesecek.
+2. `TASK-074` tamamlandi; lifecycle kurali artik operasyon dokumanlarinda resmi referanstir.
 
 ## Bugun Alinan Kararlar
-1. Varsayilan 3 ajan paketi korunur: `codex-a` bos/hazir, `codex-b` preview lifecycle, `codex-c` fixture standardi.
-2. `TASK-074` ve `TASK-075` korunacak; yeni ID acilmadan mevcut aktif kayitlar toparlanacak.
+1. Varsayilan 3 ajan paketi korunur: `codex-a` bos/hazir, `codex-b` lifecycle dokumani kapandi, `codex-c` fixture standardi bekliyor.
+2. `TASK-074` kapatildi; aktif task seti `TASK-075` ve `TASK-076` olarak daraldi.
 3. `start-task.ps1` yalniz `Aktif Gorevler` bolumunu sayacak sekilde onarilacak.
 
 ## Acik Riskler
 1. Recovery tamamlanmadan yeni task acma denemesi tekrar kismi kayit uretebilir.
-2. codex-b ve codex-c'ye devir mesaji gonderilmeden branch/task sahipligi fiilen baslamis sayilmaz.
+2. `TASK-075` ve `TASK-076` merkezi kapanis gormeden pano tekrar hatali sadeleþebilir.
 
 ## Sonraki Adim
 1. `TASK-076` altinda pre-pr ve script smoke dogrulamasi alinacak.
-2. Ardindan codex-b icin `TASK-074`, codex-c icin `TASK-075` resmi gorev mesajlari gonderilecek.
+2. Ardindan `TASK-075` resmi gorev akisi tamamlanacak ve merkezi panolar tekrar senkronize edilecek.
