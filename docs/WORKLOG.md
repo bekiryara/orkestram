@@ -1619,7 +1619,11 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Calistirilan Komutlar:
   - `wsl -e bash -lc "cd /home/bekir/orkestram-b && git status --short && git diff -- docs/TASK_LOCKS.md && git diff --ignore-cr-at-eol --stat"`
   - `wsl -e bash -lc "cd /home/bekir/orkestram-c && git status --short && git diff -- docs/TASK_LOCKS.md && git diff --ignore-cr-at-eol --stat"`
+  - `git push -u origin agent/codex/task-069`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - Sonuc:
   - `IN_PROGRESS`
 - Not:
-  - Bu task siniflama yapar; cleanup sonraki resmi taskta uygulanir.
+  - Bu task siniflamayi tamamlar; cleanup sonraki resmi stale cleanup taskinda uygulanir.
+
+

@@ -1,20 +1,20 @@
 ﻿# Session Handoff (TR)
 
-Guncelleme Zamani: 2026-03-19 03:15
+Guncelleme Zamani: 2026-03-19 03:20
 Koordinator Branch: agent/codex/task-069
-Koordinator Task: TASK-069
+Koordinator Task: yok
 
 ## Aktif Tasklar
-1. TASK-069 - codex-b ve codex-c stale worktree temsilci diff ve cleanup risk siniflamasi cikariliyor.
+1. YOK - TASK-069 codex-b ve codex-c stale worktree risk siniflamasini pre-pr PASS ile kapatti.
 
 ## Ajan / Worktree Durumu
 1. codex
    - Worktree: /home/bekir/orkestram-k
    - Branch: agent/codex/task-069
-   - Aktif task: TASK-069
-   - Status ozeti: resmi task acilisi ve handoff kayitlari var
+   - Aktif task: yok
+   - Status ozeti: TASK-069 kapanis degisiklikleri var
    - Karar sinifi: n/a
-   - Not: Koordinator worktree stale aday degil; aktif task kapsaminda ilerliyor.
+   - Not: Koordinator worktree stale aday degil; branch kapanis pushundan sonra temizlenecek.
 2. codex-a
    - Worktree: /home/bekir/orkestram-a
    - Branch: agent/codex-a/task-056
@@ -45,10 +45,10 @@ Koordinator Task: TASK-069
 1. `codex-b` ve `codex-c` icin ilk cleanup adimi destructive komut degil, temsilci diff kaniti oldu.
 2. Her iki worktree'de de temsilci kanit satir-sonu/encoding drift sinifina isaret ediyor.
 3. Bu iki worktree icin sonraki resmi adim cleanup taski acmak; urun kodu devralmasi gerekmiyor.
-4. `codex-a` stale branch'i bu taskta degil, ayri karar turunda ele alinacak.
+4. `codex-a` stale branch'i ayri karar turunda ele alinacak.
 
 ## Acik Riskler
-1. `codex-b` ve `codex-c` icin bugun yalniz temsilci path kaniti alindi; cleanup yine de ayri taskta uygulanmali.
+1. `codex-b` ve `codex-c` cleanup'i henuz uygulanmadi; yalniz risk siniflandi.
 2. `codex-a` aktif task olmadan kirli branch tasiyor.
 3. WSL status sayimi ile Windows shell status gorunumu farkli olabilir; karar kaynagi olarak koordinator raporu standardize edilmelidir.
 

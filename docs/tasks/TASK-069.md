@@ -1,6 +1,6 @@
 ﻿# TASK-069
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex`  
 Branch: `agent/codex/task-069`  
 Baslangic: `2026-03-19 03:06`
@@ -42,36 +42,37 @@ Baslangic: `2026-03-19 03:06`
 ## Uygulama Adimlari
 - [x] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
 - [x] Branch dogrulandi: `agent/<ajan>/<task-id>`
-- [ ] Lock kapsam disina cikilmadi
-- [ ] Gorev kapsamindaki degisiklikler tamamlandi
-- [ ] Goreve ozel test/dogrulama calistirildi
+- [x] Lock kapsam disina cikilmadi
+- [x] Gorev kapsamindaki degisiklikler tamamlandi
+- [x] Goreve ozel test/dogrulama calistirildi
 
 ## Kabul Kriterleri
-- [ ] `codex-b` icin temsilci diff ve `ignore-cr-at-eol` kaniti kayda alindi
-- [ ] `codex-c` icin temsilci diff ve `ignore-cr-at-eol` kaniti kayda alindi
-- [ ] `SESSION_HANDOFF_TR.md` icinde `codex-b` ve `codex-c` karar sinifi resmi sonuca gore guncellendi
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
+- [x] `codex-b` icin temsilci diff ve `ignore-cr-at-eol` kaniti kayda alindi
+- [x] `codex-c` icin temsilci diff ve `ignore-cr-at-eol` kaniti kayda alindi
+- [x] `SESSION_HANDOFF_TR.md` icinde `codex-b` ve `codex-c` karar sinifi resmi sonuca gore guncellendi
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
-- [ ] `git branch --show-current`
-- [ ] `git branch -vv`
-- [ ] `git status --short`
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
-- [ ] Goreve ozel test/komut sonucu: `codex-b` ve `codex-c` icin temsilci `git diff` + `git diff --ignore-cr-at-eol --stat`
+- [x] `git branch --show-current`
+- [x] `git branch -vv`
+- [x] `git status --short`
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- [x] Goreve ozel test/komut sonucu: `codex-b` ve `codex-c` icin temsilci `git diff` + `git diff --ignore-cr-at-eol --stat`
 - [x] `Edit Source == Mount Source` kaniti
-- [ ] Commit hash
+- [x] Commit hash: `d6c3cee`
 
 ## Kapanis Adimlari
-- [ ] Task kartindaki checklistler gercek sonuca gore guncellendi
-- [ ] `docs/WORKLOG.md` guncellendi
-- [ ] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
-- [ ] `docs/NEXT_TASK.md` panosu guncellendi
-- [ ] Branch pushlandi
+- [x] Task kartindaki checklistler gercek sonuca gore guncellendi
+- [x] `docs/WORKLOG.md` guncellendi
+- [x] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
+- [x] `docs/NEXT_TASK.md` panosu guncellendi
+- [x] Branch pushlandi
 
 ## Komutlar
 ```powershell
 wsl -e bash -lc "cd /home/bekir/orkestram-b && git diff -- docs/TASK_LOCKS.md && git diff --ignore-cr-at-eol --stat"
 wsl -e bash -lc "cd /home/bekir/orkestram-c && git diff -- docs/TASK_LOCKS.md && git diff --ignore-cr-at-eol --stat"
+git push -u origin agent/codex/task-069
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ```
 
