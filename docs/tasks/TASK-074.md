@@ -1,4 +1,4 @@
-﻿# TASK-074
+# TASK-074
 
 Durum: `DOING`  
 Ajan: `codex-b`  
@@ -14,9 +14,9 @@ Baslangic: `2026-03-19 06:06`
 - [x] yeni task
 
 ## In Scope
-- [ ] Design-preview lane merge sonrasi ne zaman main'e hizalanir kurali yazilacak
-- [ ] Review URL ile final URL farkini tek akista aciklayan lifecycle maddeleri eklenecek
-- [ ] Merge sonrasi runtime tazeleme ve kontrol checklisti resmi dokumanlara islenecek
+- [x] Design-preview lane merge sonrasi ne zaman main'e hizalanir kurali yazilacak
+- [x] Review URL ile final URL farkini tek akista aciklayan lifecycle maddeleri eklenecek
+- [x] Merge sonrasi runtime tazeleme ve kontrol checklisti resmi dokumanlara islenecek
 
 ## Out of Scope
 - [ ] Demo fixture standardini yazmak
@@ -43,16 +43,16 @@ Baslangic: `2026-03-19 06:06`
 - Revize Notu: `n/a`
 
 ## Uygulama Adimlari
-- [ ] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
-- [ ] Branch dogrulandi: `agent/<ajan>/<task-id>`
-- [ ] Lock kapsam disina cikilmadi
-- [ ] Gorev kapsamindaki degisiklikler tamamlandi
-- [ ] Goreve ozel test/dogrulama calistirildi
+- [x] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
+- [x] Branch dogrulandi: `agent/<ajan>/<task-id>`
+- [x] Lock kapsam disina cikilmadi
+- [x] Gorev kapsamindaki degisiklikler tamamlandi
+- [x] Goreve ozel test/dogrulama calistirildi
 
 ## Kabul Kriterleri
-- [ ] Merge sonrasi design-preview lane durumu net kural olarak yazilir
-- [ ] Main/design lane farki ve kullaniciya hangi URL'in ne amacla verilecegi tek akista anlatilir
-- [ ] Merge sonrasi runtime tazeleme/checklisti eklenir
+- [x] Merge sonrasi design-preview lane durumu net kural olarak yazilir
+- [x] Main/design lane farki ve kullaniciya hangi URL'in ne amacla verilecegi tek akista anlatilir
+- [x] Merge sonrasi runtime tazeleme/checklisti eklenir
 - [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
@@ -60,8 +60,8 @@ Baslangic: `2026-03-19 06:06`
 - [ ] `git branch -vv`
 - [ ] `git status --short`
 - [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
-- [ ] Goreve ozel test/komut sonucu
-- [ ] `Edit Source == Mount Source` kaniti
+- [x] Goreve ozel test/komut sonucu
+- [x] `Edit Source == Mount Source` kaniti `n/a` (UI review yok; Preview Kontrati `no`)
 - [ ] Commit hash
 
 ## Kapanis Adimlari
@@ -75,6 +75,7 @@ Baslangic: `2026-03-19 06:06`
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 ```
-
 ## Risk / Not
 - Risk, merge sonrasi lane akisini gereksiz karmasik hale getirmek; hedef tek bakista anlasilan lifecycle yazmak.
+- Goreve ozel komut dogrulamasi rg aramasi ile alindi: Merge Sonrasi Preview / Runtime | Review URL | Final URL | Runtime refresh | design-preview.
+- Bu gorev dokuman/lifecycle kapsamindadir; UI review calismadigi icin Edit Source == Mount Source kaniti n-a olarak kaydedildi.

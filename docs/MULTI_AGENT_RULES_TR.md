@@ -169,6 +169,18 @@ Koordinator karar cevabi yalniz su 4 satirla verilir:
    - merge et
 4. Kullanici preview onayi vermeden koordinator merge adimina gecmez.
 5. `main`e merge, UI review araci degil sadece onaylanmis sonucu entegre etme adimidir.
+## Merge Sonrasi Preview / Runtime Lifecycle Kurali
+1. `design-preview` merge sonrasinda kalici referans olarak birakilmaz; review gorevi bittiginde tekrar `main`e yaklastirilir.
+2. Kullaniciya iki farkli adres ayni isimle verilmez:
+   - `review URL` = onay icin gecici lane
+   - `final URL` = merge sonrasi bakilacak adres
+3. Koordinator, merge tesliminde `review URL artik gecersiz`, `final URL artik referans` bilgisini tek satirda net yazar.
+4. Merge sonrasi runtime refresh tamamlanmadan "sisteme yansidi" denmez.
+5. Runtime refresh kaniti asgari su uc adimi icerir:
+   - source/mount dogrulamasi
+   - refresh/redeploy adimi
+   - final URL manuel kontrolu
+6. Review sonrasinda ayni kapsam icin yeni UI revizesi yoksa `design-preview` eski task goruntusunu tasimaz.
 
 ## Edit Source = Preview Source Kurali (Zorunlu)
 1. UI gorevlerinde `Edit Source` ile `Mount Source` ayni worktree/path olmak zorundadir.
@@ -179,6 +191,7 @@ Koordinator karar cevabi yalniz su 4 satirla verilir:
    - `Preview URL`
 4. Farkli worktree'de patch yazip baska worktree preview'u gostermek yasaktir.
 5. UI merge karari yalniz `Edit Source == Mount Source` dogrulandiysa verilir.
+
 
 
 

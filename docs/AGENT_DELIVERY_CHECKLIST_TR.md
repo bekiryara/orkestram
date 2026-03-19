@@ -97,6 +97,22 @@ Kural:
 3. Preview URL gorev kartinda yazmiyorsa teslim eksik sayilir.
 4. Kapsam ayni ise revize ayni taskta devam eder; yeni task acilmaz.
 5. Kullanici `approved` demeden UI gorevinin merge teslimi tamamlanmis sayilmaz.
+## 4C. Merge Sonrasi Preview / Runtime Teslim Ek Kaniti
+UI veya preview lifecycle gorevlerinde teslime su fark notu eklenir:
+1. `Review URL`
+2. `Final URL`
+3. `design-preview` durumu:
+   - aktif review lane
+   - merge sonrasi `main`e hizalandi
+4. Runtime refresh ozeti:
+   - source/mount dogrulamasi
+   - refresh veya yeniden yukleme adimi
+   - final URL manuel kontrol sonucu
+
+Kural:
+1. `Review URL` ile `Final URL` birbirine karistirilmaz; teslim mesajinda ikisi ayri yazilir.
+2. Merge sonrasi runtime refresh ozeti yoksa "sisteme yansidi" teslimi eksik sayilir.
+3. `design-preview` merge sonrasi eski review halini tasiyorsa bu durum kapanis riski olarak yazilir.
 
 ## 5. Resume Protokolu
 Bir is yarida kaldiysa veya ajan yeniden baglandiysa:
@@ -151,4 +167,5 @@ Not:
 Kural (Edit Source Esitligi):
 1. UI tesliminde `Edit Source` ile `Mount Source` ayni worktree/path degilse teslim reddedilir.
 2. Ajan farkli source'ta kod degistirip baska source preview'u veremez.
+
 

@@ -240,6 +240,21 @@ Kural:
    - `http://127.0.0.1:8280` -> orkestram design
    - `http://127.0.0.1:8281` -> izmirorkestra design
 5. Runtime komutu mount source kaniti vermeden UI gorevi review'e cikmaz.
+## 16A) Merge Sonrasi Preview / Runtime Standardi
+
+Kural:
+1. `design preview` merge oncesi inceleme hattidir; merge sonrasi kalici teslim adresi degildir.
+2. Bir UI gorevi `main`e alindiginda artik esas referans `main preview` veya dogrudan final runtime URL''idir.
+3. Merge sonrasi `design preview` kaynagi `main` ile hizalanmadan eski review goruntusu "son hal" diye gosterilmez.
+4. Teslim notunda iki alan zorunludur:
+   - `Review URL`
+   - `Final URL`
+5. `Review URL` ile `Final URL` ayni ise bu yine acik yazilir; gizli varsayim yapilmaz.
+6. Merge sonrasi "yansidi" demeden once su checklist tamamlanir:
+   - aktif source `main`i gosteriyor mu
+   - runtime refresh/reload uygulandi mi
+   - final URL elle kontrol edildi mi
+7. Bu checklist tamamlanmadan kullaniciya runtime gecikmesi "bug" diye raporlanmaz; once source ve refresh farki ayristirilir.
 
 ## 17) UI Review ve Merge Sirasi
 
@@ -263,6 +278,7 @@ Kural:
 3. Koordinator UI review oncesi `Edit Source`, `Mount Source` ve `Preview URL` ucunu birlikte dogrular.
 4. Farkli worktree'de patch yazip baska worktree preview'u gostermek operasyonel ihlaldir.
 5. Bu esitlik saglanmiyorsa once kaynak hizasi duzeltilir, sonra UI review baslar.
+
 
 
 

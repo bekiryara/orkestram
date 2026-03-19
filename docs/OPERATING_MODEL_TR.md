@@ -57,6 +57,31 @@ Kurallar:
 3. Ortak koordinasyon dosyalari koordinator lock'unda kalir; ajanlara dagitilmaz.
 4. Tek bir is ajanlara bolunecekse once kontratlar yazilir: owner, hedef dosya, kabul kaniti, kapanis kaniti.
 5. UI + fixture + test-ops ayni hedefe hizmet ediyorsa once UI iskeleti, sonra fixture, sonra test-ops sirasi tercih edilir.
+## 2B) Merge Sonrasi Preview / Runtime Yasam Dongusu
+
+Amac:
+1. `design-preview` review dunyasinin merge sonrasi neye donustugunu tek kuralla tanimlamak.
+2. Review URL ile final runtime URL'ini birbirine karistirmayi engellemek.
+3. Merge sonrasi zorunlu runtime tazeleme adimlarini standartlastirmak.
+
+Kurallar:
+1. `design-preview` merge oncesi review lane'idir; merge sonrasi nihai kaynak sayilmaz.
+2. Kullanici onayi alip ilgili is `main`e alindiktan sonra ayni kapsam icin referans URL artik `main preview` veya final runtime URL'idir.
+3. Merge sonrasinda `design-preview` lane'i en kisa surede `main` ile yeniden hizalanir; onceki review goruntusu kalici ortam gibi sunulmaz.
+4. `design-preview` ancak yeni bir UI revizesi baslayinca tekrar ayrisir; aradaki durumda en son onayli `main` dunyasina yaklastirilir.
+5. Koordinator veya gorev sahibi teslimde iki URL'i ayri isimle yazar:
+   - `review URL`: kullanici onayi icin gecici review adresi
+   - `final URL`: merge sonrasi kalici olarak bakilacak adres
+6. `review URL` uzerinden gorulen durum merge sonrasi otomatik final sonuc sayilmaz; runtime tazeleme checklisti tamamlanmadan final diye duyurulmaz.
+
+Merge Sonrasi Runtime Tazeleme Checklisti:
+1. Merge edilen branch'in `main`e gectigi git kaniti alinir.
+2. Runtime'in baktigi source tekrar dogrulanir:
+   - `main preview` koordinator worktree
+   - `design-preview` tasarim ajan worktree
+3. Gerekli runtime refresh komutu calistirilir veya container/runtime yeniden yuklenir.
+4. En az bir final URL acilarak merge edilen icerigin gorundugu manuel kontrol edilir.
+5. Eski review URL ile final URL karismasin diye teslim notunda hangisinin artik referans oldugu acik yazilir.
 
 ## 3) Task Karar Kurali
 
@@ -173,4 +198,5 @@ Bir operasyon gorevi ancak su durumda kapanir:
 3. `WORKLOG`, `TASK_LOCKS`, `NEXT_TASK` guncel
 4. `pre-pr PASS`
 5. commit/push tamam
+
 
