@@ -108,6 +108,5 @@ Sabit Ajan Kimlikleri:
 | TASK-077 | codex | agent/codex/task-077 | closed | docs/tasks/TASK-077.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/PR_FLOW_TR.md,docs/SESSION_HANDOFF_TR.md,docs/WORKLOG.md | 2026-03-19 14:20:31 | 2026-03-19 15:05:00 | Owner branch PR hazir / merge hazir standardi ve varsayilan sira modeli kayda alindi |
 
 | TASK-078 | codex | agent/codex/task-078 | closed | docs/tasks/TASK-078.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/PR_FLOW_TR.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/SESSION_HANDOFF_TR.md,docs/WORKLOG.md | 2026-03-19 14:54:05 | 2026-03-19 16:43:37 | `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez karari merkezi kayda alindi |
-
-
+| TASK-079 | codex-a | agent/codex-a/task-079 | active | docs/tasks/TASK-079.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,local-rebuild/apps/orkestram/app/Http/Controllers/Owner/OwnerDashboardController.php,local-rebuild/apps/orkestram/resources/views/portal/owner/listings-create.blade.php,local-rebuild/apps/orkestram/resources/views/portal/owner/listings-edit.blade.php,local-rebuild/apps/orkestram/tests/Feature/OwnerPanelActionsTest.php | 2026-03-19 19:11:17 | 2026-03-19 19:11:17 | Paket 01 owner service area / coverage write-path tamamlama |
 

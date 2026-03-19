@@ -1,11 +1,11 @@
 ﻿# NEXT TASK (Koordinasyon Panosu)
 
-Durum: `READY`  
+Durum: `ACTIVE`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Merkezi Koordinasyon)
-1. `YOK` - `TASK-078` kapsaminda ayrik merge task gerekmez kararlari kayda alindi ve merkezi koordinasyon kapanisa hazirlandi
+1. `TASK-079` - Paket 01 owner service area / coverage write-path tamamlama `codex-a` ajanina devredildi
 
 ## Son Koordinator Kapanisi
 1. `TASK-078` - `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez karari merkezi kayda alindi

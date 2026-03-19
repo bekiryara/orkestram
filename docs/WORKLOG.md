@@ -1916,3 +1916,25 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `Bu turda merge, push veya yeni task uygulanmadi; yalniz merkezi karar kaydi ve koordinasyon kapanisi tamamlandi.`
+
+---
+
+### [2026-03-19 19:11] TASK-079 Paket 01 Task Acilisi ve Devir
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Paket 01 owner service area / coverage write-path isi repo disiplinine gore TASK-079 olarak acildi.`
+  - `Dar lock kapsamı yalniz owner controller, owner create/edit view ve owner flow test alanina indirildi.`
+  - `Uygulama gorevi koordinator tarafinda degil, `codex-a` ajanina devredildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-079.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && git fetch --all --prune && git status --short && git branch --show-current"`
+  - `Get-Content docs/tasks/_TEMPLATE.md`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Koordinator uygulama yapmadi; yalniz task acilisi ve ajan devri yapildi.`
