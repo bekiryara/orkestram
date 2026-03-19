@@ -1,4 +1,4 @@
-﻿# TASK-075
+# TASK-075
 
 Durum: `DOING`  
 Ajan: `codex-c`  
@@ -14,9 +14,9 @@ Baslangic: `2026-03-19 06:07`
 - [x] yeni task
 
 ## In Scope
-- [ ] Design-preview review icin deterministic demo fixture standardi yazilacak
-- [ ] Demo slug, whitelist, idempotent update ve medya kaynagi kurallari netlestirilecek
-- [ ] Review demo verisi ile smoke/test verisinin ayrimi dokumana islenecek
+- [x] Design-preview review icin deterministic demo fixture standardi yazilacak
+- [x] Demo slug, whitelist, idempotent update ve medya kaynagi kurallari netlestirilecek
+- [x] Review demo verisi ile smoke/test verisinin ayrimi dokumana islenecek
 
 ## Out of Scope
 - [ ] Seed/command implementasyonu yazmak
@@ -39,33 +39,40 @@ Baslangic: `2026-03-19 06:07`
 - Revize Notu: `n/a`
 
 ## Uygulama Adimlari
-- [ ] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
-- [ ] Branch dogrulandi: `agent/<ajan>/<task-id>`
-- [ ] Lock kapsam disina cikilmadi
-- [ ] Gorev kapsamindaki degisiklikler tamamlandi
-- [ ] Goreve ozel test/dogrulama calistirildi
+- [x] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
+- [x] Branch dogrulandi: `agent/codex-c/task-075`
+- [x] Lock kapsam disina cikilmadi
+- [x] Gorev kapsamindaki degisiklikler tamamlandi
+- [x] Goreve ozel test/dogrulama calistirildi
+  Not: `git fetch --all --prune`, `git remote -v`, `git branch -vv` ve `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 
 ## Kabul Kriterleri
-- [ ] Demo review icin deterministic fixture standardi tek dokumanda toplanir
-- [ ] Whitelist slug, medya kaynagi ve idempotent update kurali net yazilir
-- [ ] Smoke/test fixturelari ile preview demo fixturelarinin ayrimi aciklanir
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
+- [x] Demo review icin deterministic fixture standardi tek dokumanda toplanir
+- [x] Whitelist slug, medya kaynagi ve idempotent update kurali net yazilir
+- [x] Smoke/test fixturelari ile preview demo fixturelarinin ayrimi aciklanir
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
-- [ ] `git branch --show-current`
-- [ ] `git branch -vv`
-- [ ] `git status --short`
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
-- [ ] Goreve ozel test/komut sonucu
+- [x] `git branch --show-current`
+- [x] `git branch -vv`
+- [x] `git status --short`
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- [x] Goreve ozel test/komut sonucu
 - [ ] `Edit Source == Mount Source` kaniti
+  Gerekce: bu gorev UI gorevi degil, preview kodu degistirmiyor.
 - [ ] Commit hash
+  Bloke: commit/push henuz alinmadi.
 
 ## Kapanis Adimlari
-- [ ] Task kartindaki checklistler gercek sonuca gore guncellendi
+- [x] Task kartindaki checklistler gercek sonuca gore guncellendi
 - [ ] `docs/WORKLOG.md` guncellendi
+  Koordinator alani; bu gorevde dokunulmadi.
 - [ ] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
+  Koordinator alani; bu gorevde dokunulmadi.
 - [ ] `docs/NEXT_TASK.md` panosu guncellendi
+  Koordinator alani; bu gorevde dokunulmadi.
 - [ ] Branch pushlandi
+  Bloke: commit ve push adimi henuz tamamlanmadi.
 
 ## Komutlar
 ```powershell
@@ -74,3 +81,5 @@ powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 
 ## Risk / Not
 - Risk, demo fixture standardinin mevcut smoke/test fixturelarini etkileyecek sekilde genis yazilmasi; belge yalniz ayrik review hattini hedeflemeli.
+- Cikti: `docs/DEMO_FIXTURE_STANDARD_TR.md` olusturuldu; standart yalniz ayrik review/demo fixture hattini tarif eder.
+
