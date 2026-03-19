@@ -1,20 +1,20 @@
 ﻿# Session Handoff (TR)
 
-Guncelleme Zamani: 2026-03-19 05:18
+Guncelleme Zamani: 2026-03-19 05:22
 Koordinator Branch: agent/codex/task-072
 Koordinator Task: yok
 
 ## Aktif Tasklar
-1. YOK - TASK-072 koordinator bootstrap ve kapanis otomasyonu pre-pr PASS ile teslime hazirlandi.
+1. YOK - TASK-072 koordinator bootstrap ve kapanis otomasyonu pre-pr PASS ve push kaniti ile kapatildi.
 
 ## Ajan / Worktree Durumu
 1. codex
    - Worktree: /home/bekir/orkestram-k
    - Branch: agent/codex/task-072
    - Aktif task: yok
-   - Status ozeti: son commit ve push oncesi kapanis kaniti tamamlandi
+   - Status ozeti: temiz
    - Karar sinifi: n/a
-   - Not: Worktree stale aday degil; bu turde push tamamlaninca temiz duruma donecek.
+   - Not: Koordinator worktree stale aday degil; yeni task acmak icin hazir.
 2. codex-a
    - Worktree: /home/bekir/orkestram-a
    - Branch: agent/codex-a/task-056
@@ -44,12 +44,11 @@ Koordinator Task: yok
 ## Bugun Alinan Kararlar
 1. Repo genel stale worktree cleanup fazi korunarak yeni koordinatör onboarding standardi eklendi.
 2. `docs/COORDINATOR_BOOTSTRAP_TR.md` ile ilk 5 dakikalik koordinator akisi tek dokumana baglandi.
-3. `scripts/close-task.ps1` parse, smoke-test ve gercek task kapanisi sonrasi duzeltmelerle sertlestirildi.
+3. `scripts/close-task.ps1` parse, smoke-test, gercek task kapanisi ve duzeltme turleriyle sertlestirildi.
 
 ## Acik Riskler
-1. Acik operasyonel risk kalmadi; kalan tek mekanik adim son commit ve push.
+1. Acik operasyonel risk kalmadi.
 
 ## Sonraki Adim
-1. Son commit alinacak.
-2. Branch origin'a pushlanacak.
-3. Zorunlu git kanitlari toplanip teslim ozetine donusturulecek.
+1. Yeni koordinatör veya ajan geldigin­de bootstrap akisi dogrudan uygulanabilir.
+2. Yeni is gelirse aktif task yok durumundan normal task akisi ile ilerlenir.
