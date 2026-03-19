@@ -1997,3 +1997,34 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `Bu tur urun kodu degistirmedi; yalniz merkezi koordinasyon kayitlari normalize edildi.`
+
+---
+
+### [2026-03-20 00:12] TASK-080 Owner Coverage Parity ve Merge Hazirlik
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `izmirorkestra owner coverage write-path zinciri orkestram referansina gore tamamlandi.`
+  - `orkestram ve izmirorkestra owner coverage write-path dosyalari ayni parity branchinde toplandi.`
+  - `OwnerPanelActionsTest` iki appte PASS alindi ve merge karari `agent/codex/task-080` branch'i uzerine tasindi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-080.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+  - `local-rebuild/apps/izmirorkestra/app/Http/Controllers/Owner/OwnerDashboardController.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-create.blade.php`
+  - `local-rebuild/apps/izmirorkestra/resources/views/portal/owner/listings-edit.blade.php`
+  - `local-rebuild/apps/izmirorkestra/tests/Feature/OwnerPanelActionsTest.php`
+  - `local-rebuild/apps/orkestram/app/Http/Controllers/Owner/OwnerDashboardController.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-create.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-edit.blade.php`
+  - `local-rebuild/apps/orkestram/tests/Feature/OwnerPanelActionsTest.php`
+- Calistirilan Komutlar:
+  - `docker exec orkestram-local-web php artisan test --filter=OwnerPanelActionsTest`
+  - `docker exec izmirorkestra-local-web php artisan test --filter=OwnerPanelActionsTest`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Yeni branch upstream'i kurulmadan ilk pre-pr turu upstream kapisinda fail verdi; commit/push sonrasi tekrar kosulup PASS kaniti alinmistir.`

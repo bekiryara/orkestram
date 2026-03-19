@@ -8,17 +8,17 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
 1. `YOK` - aktif koordinasyon gorevi bulunmuyor
 
 ## Son Koordinator Kapanisi
-1. `TASK-079` - owner coverage write-path teslimi merkezi kayitlarda kapatildi
-2. `TASK-078` - `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez karari merkezi kayda alindi
-3. `TASK-077` - owner branch PR hazir / merge hazir standardi ve varsayilan sira modeli kayda alindi
+1. `TASK-080` - owner coverage parity iki appte tamamlandi; branch merge hazir duruma getirildi
+2. `TASK-079` - owner coverage write-path teslimi merkezi kayitlarda kapatildi
+3. `TASK-078` - `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez karari merkezi kayda alindi
 
 ## Son Kapanis
-1. `TASK-079` - owner coverage write-path teslimi commit `8d06a46` ve docs duzeltme `22cd676` ile kabul edilip aktif pano kapatildi
-2. `TASK-078` - `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez karari merkezi kayda alindi
-3. `TASK-077` - owner branch PR hazir / merge hazir standardi ve varsayilan sira modeli kayda alindi
+1. `TASK-080` - iki app owner coverage write-path parity tamamlandi; `OwnerPanelActionsTest` iki appte PASS ve branch merge hazir
+2. `TASK-079` - owner coverage write-path teslimi commit `8d06a46` ve docs duzeltme `22cd676` ile kabul edilip aktif pano kapatildi
+3. `TASK-078` - `TASK-074` ve `TASK-075` icin ayrik merge task gerekmez karari merkezi kayda alindi
 
 ## Merge Bekleyen Degerlendirme
-1. `TASK-079` - task karti merkezi olarak normalize edildi; ancak `izmirorkestra` owner parity yazim hattinda ayni degisiklik bulunmadigi icin merge karari ayrica verilecek
+1. `TASK-080` - `agent/codex/task-080` uzerinde iki app owner parity tamam; merge karari bu branch uzerinden verilebilir
 
 ## Kapanis Kurali (Zorunlu)
 1. Kapanis kaniti olmadan task `closed` edilemez.

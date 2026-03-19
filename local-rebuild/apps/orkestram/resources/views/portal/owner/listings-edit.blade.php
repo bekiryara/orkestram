@@ -18,9 +18,10 @@
             @php($selectedCityId = (int) old('city_id', $item->city_id))
             @php($selectedDistrictId = (int) old('district_id', $item->district_id))
             @php($selectedNeighborhoodId = (int) old('neighborhood_id', $item->neighborhood_id))
+            @php($coverageMode = old('coverage_mode', $item->coverage_mode ?: 'location_only'))
             @php($serviceAreasText = old('service_areas_text', $item->serviceAreasText()))
-            @php($selectedServiceAreaCityIds = old('service_area_city_ids', []))
-            @php($selectedServiceAreaDistrictIds = old('service_area_district_ids', []))
+            @php($selectedServiceAreaCityIds = old('service_area_city_ids', $item->serviceAreas->pluck('city_id')->filter()->map(static fn($id) => (string) $id)->values()->all()))
+            @php($selectedServiceAreaDistrictIds = old('service_area_district_ids', $item->serviceAreas->pluck('district_id')->filter()->map(static fn($id) => (string) $id)->values()->all()))
             @php($selectedServiceAreaCityIds = is_array($selectedServiceAreaCityIds) ? array_values(array_filter($selectedServiceAreaCityIds, static fn($v) => (string)$v !== '')) : [])
             @php($selectedServiceAreaDistrictIds = is_array($selectedServiceAreaDistrictIds) ? array_values(array_filter($selectedServiceAreaDistrictIds, static fn($v) => (string)$v !== '')) : [])
 
@@ -107,6 +108,14 @@
                     <div class="col-md-6">
                         <label class="form-label">Fiyat Etiketi</label>
                         <input type="text" name="price_label" class="form-control" value="{{ old('price_label', $item->price_label) }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Kapsama Modu</label>
+                        <select name="coverage_mode" class="form-select">
+                            <option value="location_only" @selected($coverageMode === 'location_only')>Sadece Konum</option>
+                            <option value="service_area_only" @selected($coverageMode === 'service_area_only')>Sadece Servis Alani</option>
+                            <option value="hybrid" @selected($coverageMode === 'hybrid')>Konum + Servis Alani</option>
+                        </select>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Fiyat Min</label>

@@ -1,7 +1,7 @@
 ﻿# Session Handoff (TR)
 
-Guncelleme Zamani: 2026-03-19 23:35
-Koordinator Branch: agent/codex/task-078
+Guncelleme Zamani: 2026-03-20 00:12
+Koordinator Branch: agent/codex/task-080
 Koordinator Task: yok
 
 ## Aktif Tasklar
@@ -10,48 +10,48 @@ Koordinator Task: yok
 ## Ajan / Worktree Durumu
 1. codex
    - Worktree: /home/bekir/orkestram-k
-   - Branch: agent/codex/task-078
+   - Branch: agent/codex/task-080
    - Aktif task: yok
-   - Status ozeti: `TASK-079` merkezi kayitlari normalize edildi; koordinator worktree commitlenmemis merkezi dokuman degisiklikleri tasiyor
-   - Karar sinifi: koru
-   - Not: Bu tur urun kodu degistirilmedi; merkezi task zinciri parity karari icin acik tutuldu.
+   - Status ozeti: `TASK-080` iki app owner coverage parity tamamlandi; branch merge hazir
+   - Karar sinifi: merge hazir
+   - Not: `TASK-079` owner icerigi parity branch'ine tasindi; merge karari artik bu branch uzerinden ilerler.
 2. codex-a
    - Worktree: /home/bekir/orkestram-a
    - Branch: agent/codex-a/task-079
    - Aktif task: yok
-   - Status ozeti: `TASK-079` owner teslimi commit `8d06a46` + docs duzeltme `22cd676` ile tamamlandi; branch temiz ve upstream hizali
-   - Karar sinifi: koordinator karari bekliyor
-   - Not: Merkezi task karti normalize edildi; `izmirorkestra` owner write-path parity eksigi nedeniyle merge/entegrasyon karari ayri koordinator turunde verilecek.
+   - Status ozeti: `TASK-079` owner teslim branch'i referans kaynak olarak korundu
+   - Karar sinifi: koru
+   - Not: Icerik `TASK-080` parity branch'ine tasindigi icin merge hedefi olarak degil, kaynak kanit branch'i olarak duruyor.
 3. codex-b
    - Worktree: /home/bekir/orkestram-b
    - Branch: agent/codex-b/task-074
    - Aktif task: yok
-   - Status ozeti: TASK-074 commit 4f95fa0 ve pre-pr PASS ile PR hazir durumda; worktree drift gorunurlugu ayri takip ister
+   - Status ozeti: TASK-074 commit 6118d70 ile upstream ilerledi; worktree drift gorunurlugu ayri takip ister
    - Karar sinifi: koru
-   - Not: Task karti worktree'de kirli gorunuyor; cleanup veya devralma karari ayri koordinator turunde verilmelidir.
+   - Not: Bu turde ele alinmadi.
 4. codex-c
    - Worktree: /home/bekir/orkestram-c
    - Branch: agent/codex-c/task-075
    - Aktif task: yok
-   - Status ozeti: TASK-075 commit 8351cba ve pre-pr PASS ile PR hazir durumda; worktree drift gorunurlugu ayri takip ister
+   - Status ozeti: TASK-075 stale drift gorunurlugu devam ediyor
    - Karar sinifi: koru
-   - Not: Task karti ve fixture dokumani worktree'de kirli gorunuyor; cleanup veya devralma karari ayri koordinator turunde verilmelidir.
+   - Not: Bu turde ele alinmadi.
 
 ## Preview / Source Durumu
-1. Bu oturum `TASK-079` merkezi normalizasyon ve merge-bekleme oturumudur; urun kodu koordinator tarafinda degistirilmedi.
-2. Runtime mount kaniti bu turda owner source ile hizali olarak uretilmedi; owner task kartinda `Edit Source == Mount Source` kaniti isaretlenmedi.
+1. Bu oturum UI gorevi degil; preview lane kaniti gerekmiyor.
+2. Owner coverage parity dogrulamasi container test hattinda `OwnerPanelActionsTest` ile alindi.
 
 ## Bugun Alinan Kararlar
-1. Paket sirasinda yalniz Paket 01 ele alindi.
-2. Paket 01 repo disiplinine gore `TASK-079` olarak acildi ve `codex-a` ajanina devredildi.
-3. Owner teslimi dogrulandi; `TASK-079` merkezi kayitlarda kapatildi.
-4. `TASK-079` task karti merkezi kayitta gercek teslim kanitina gore normalize edildi; merge karari parity degerlendirmesine birakildi.
+1. `TASK-079` merkezi kapanis normalize edildi.
+2. Parity eksigi yeni lock alani gerektirdigi icin `TASK-080` task genisletme mantigiyla acildi.
+3. `izmirorkestra` owner write-path parity tamamlandi.
+4. `orkestram` ve `izmirorkestra` owner coverage write-pathi ayni branchte toplandi.
+5. Merge karari `agent/codex/task-080` branch'i uzerinden verilecek sekilde netlesti.
 
 ## Acik Riskler
-1. Owner teslimi kod ve git kaniti seviyesinde temizdir; ancak runtime mount kaynagi halen `k` ve `b` lane'lerine bagli oldugu icin owner source ile birebir mount kaniti ayri operasyonda alinmalidir.
-2. `codex-b` ve `codex-c` worktree'leri icin drift gorunurlugu yeniden dogrulanip handoff notu guncellenmelidir.
-3. `izmirorkestra` owner flow tarafinda `coverage_mode` write-path ve owner feature test parity'si bulunmadigi icin `TASK-079` merge karari teknik parity acisindan aciktir.
+1. `codex-b` ve `codex-c` worktree'leri icin drift gorunurlugu yeniden ele alinmalidir.
+2. `TASK-080` branch'i merge edilmeden `main` dunyasi bu parity'yi tasimaz.
 
 ## Sonraki Adim
-1. `TASK-079` icin karar noktasi parity beklentisidir: tek-app merge mi, yoksa ayni hedefte task genisletme ile `izmirorkestra` owner parity tamamlama mi.
-2. `codex-b` ve `codex-c` stale drift gorunurlugu sonraki koordinasyon turunde tekrar ele alinmalidir.
+1. `agent/codex/task-080` branch'i icin kontrollu merge uygulanabilir.
+2. Sonraki koordinasyon turu `codex-b` ve `codex-c` stale drift gorunurlugunu kapatmaya donebilir.

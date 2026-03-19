@@ -31,6 +31,7 @@
                 @php($selectedCityId = (int) old('city_id'))
                 @php($selectedDistrictId = (int) old('district_id'))
                 @php($selectedNeighborhoodId = (int) old('neighborhood_id'))
+                @php($coverageMode = old('coverage_mode', $item->coverage_mode ?? 'location_only'))
                 @php($serviceAreasText = old('service_areas_text', ''))
                 @php($selectedServiceAreaCityIds = old('service_area_city_ids', []))
                 @php($selectedServiceAreaDistrictIds = old('service_area_district_ids', []))
@@ -109,6 +110,14 @@
                     <div class="col-md-6">
                         <label class="form-label">Fiyat Etiketi</label>
                         <input type="text" name="price_label" class="form-control" value="{{ old('price_label') }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Kapsama Modu</label>
+                        <select name="coverage_mode" class="form-select">
+                            <option value="location_only" @selected($coverageMode === 'location_only')>Sadece Konum</option>
+                            <option value="service_area_only" @selected($coverageMode === 'service_area_only')>Sadece Servis Alani</option>
+                            <option value="hybrid" @selected($coverageMode === 'hybrid')>Konum + Servis Alani</option>
+                        </select>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Fiyat Min</label>
