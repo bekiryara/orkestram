@@ -105,3 +105,4 @@ Sabit Ajan Kimlikleri:
 | TASK-076 | codex | agent/codex/task-076 | closed | docs/tasks/TASK-076.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/SESSION_HANDOFF_TR.md,scripts/start-task.ps1 | 2026-03-19 06:12:48 | 2026-03-19 07:40:29 | Task acilis recovery, aktif pano senkronu ve ajan teslimleri merkezi kapanisla tamamlandi |
 
 
+| TASK-077 | codex | agent/codex/task-077 | active | docs/tasks/TASK-077.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/PR_FLOW_TR.md,docs/SESSION_HANDOFF_TR.md,docs/WORKLOG.md | 2026-03-19 14:20:31 | 2026-03-19 14:20:31 | TASK-074 ve TASK-075 icin PR/merge hazirlik akisi ve merkezi siralama standardi cikarilacak |

@@ -1,20 +1,20 @@
 ﻿# Session Handoff (TR)
 
-Guncelleme Zamani: 2026-03-19 07:40
-Koordinator Branch: agent/codex/task-076
-Koordinator Task: yok
+Guncelleme Zamani: 2026-03-19 14:20
+Koordinator Branch: agent/codex/task-077
+Koordinator Task: TASK-077
 
 ## Aktif Tasklar
-1. YOK - TASK-076 recovery kapanisi tamamlandi; TASK-074 ve TASK-075 ajan teslimleri merkezi kayitlara islendi.
+1. `TASK-077` - TASK-074 ve TASK-075 icin PR/merge hazirlik akisi ve merkezi siralama standardi cikariliyor.
 
 ## Ajan / Worktree Durumu
 1. codex
    - Worktree: /home/bekir/orkestram-k
-   - Branch: agent/codex/task-076
-   - Aktif task: yok
-   - Status ozeti: merkezi kapanis commit/push asamasina geldi
-   - Karar sinifi: hazir
-   - Not: Yeni koordinasyon gorevi acilabilir.
+   - Branch: agent/codex/task-077
+   - Aktif task: TASK-077
+   - Status ozeti: merge-hazirlik standardi ve merkezi siralama kurali yaziliyor
+   - Karar sinifi: aktif
+   - Not: Koordinator yalniz merkezi PR/merge akisini netlestiriyor.
 2. codex-a
    - Worktree: /home/bekir/orkestram-a
    - Branch: agent/codex-a/task-056
@@ -27,28 +27,30 @@ Koordinator Task: yok
    - Branch: agent/codex-b/task-074
    - Aktif task: yok
    - Status ozeti: TASK-074 commit 4f95fa0 ve pre-pr PASS ile tamamlandi
-   - Karar sinifi: teslim edildi
-   - Not: Merkezi kapanis kaydi islendi.
+   - Karar sinifi: PR hazir
+   - Not: Owner teslim tamam; varsayilan merge sirasi 074 -> 075 olarak yazildi.
 4. codex-c
    - Worktree: /home/bekir/orkestram-c
    - Branch: agent/codex-c/task-075
    - Aktif task: yok
    - Status ozeti: TASK-075 commit 8351cba ve pre-pr PASS ile tamamlandi
-   - Karar sinifi: teslim edildi
-   - Not: Merkezi kapanis kaydi islendi.
+   - Karar sinifi: PR hazir
+   - Not: Owner teslim tamam; varsayilan merge sirasi 074 -> 075 olarak yazildi.
 
 ## Preview / Source Durumu
-1. Bu oturum dokuman/operasyon lifecycle ve fixture standardi kapanis oturumudur; UI kodu degisimi yoktur.
-2. Yeni UI review baslamadigi surece `design-preview` icin acik lifecycle gorevi kalmadi.
+1. Bu oturum owner branch merge-hazirlik standardi oturumudur; urun kodu degisimi yoktur.
+2. `TASK-074` ve `TASK-075` owner branch'leri teslim edildi, ancak merge sirasina henuz alinmadi.
 
 ## Bugun Alinan Kararlar
 1. `start-task.ps1` yalniz `Aktif Gorevler` bolumunu sayacak sekilde onarildi.
 2. `TASK-074` owner branch'te preview/runtime lifecycle standardi olarak tamamlandi.
 3. `TASK-075` owner branch'te deterministic demo fixture standardi olarak tamamlandi.
+4. Owner branch teslimleri artik `hazir degil | PR hazir | merge hazir | merge edildi` etiketleriyle merkezi olarak izlenecek.
+5. Varsayilan merge kuyrugu `TASK-074` sonra `TASK-075` olarak kayda alindi.
 
 ## Acik Riskler
-1. Acik operasyonel risk kalmadi.
+1. `TASK-074` ve `TASK-075` owner branch'leri henuz merge edilmedi; sira karari tamamlanmadan dogrudan merge edilmemeli.
 
 ## Sonraki Adim
-1. Yeni is gelirse resmi task acilip uygun ajana dagitilabilir.
-2. Gerekirse `agent/codex-b/task-074` ve `agent/codex-c/task-075` branchleri bagimsiz review/merge akisina alinabilir.
+1. Sonraki turda koordinator, bu iki owner branch icin ayrik PR/merge uygulama gorevi acabilir.
+2. Merge uygulama gorevinde `TASK-074` once, `TASK-075` sonra ele alinir.

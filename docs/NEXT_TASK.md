@@ -1,11 +1,11 @@
 ﻿# NEXT TASK (Koordinasyon Panosu)
 
-Durum: `READY`  
+Durum: `ACTIVE`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Merkezi Koordinasyon)
-1. `YOK` - `TASK-076` task acilis recovery, aktif pano senkronu ve ajan teslimleri merkezi kapanisla tamamlandi
+1. `TASK-077` - TASK-074 ve TASK-075 icin PR/merge hazirlik akisi ve merkezi siralama standardi cikarilacak
 
 ## Son Koordinator Kapanisi
 1. `TASK-076` - task acilis recovery, aktif pano senkronu ve ajan teslimleri merkezi kapanisla tamamlandi
@@ -26,3 +26,4 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
    - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` sonucu `PASS`
 3. Kanit yoksa task durumu `active` kalir.
 4. Bu pano ile `docs/TASK_LOCKS.md` birebir senkron tutulur; paralel kapanis ve sira degisikligi yalniz koordinator tarafindan islenir.
+
