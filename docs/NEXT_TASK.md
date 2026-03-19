@@ -1,11 +1,11 @@
 ﻿# NEXT TASK (Koordinasyon Panosu)
 
-Durum: `READY`  
+Durum: `ACTIVE`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Merkezi Koordinasyon)
-1. `YOK` - `TASK-077` owner branch PR hazir / merge hazir standardi ve varsayilan sira modeli kayda alindi
+1. `TASK-078` - Merge taskinin ne zaman gerekli oldugu ve ne zaman ayni taskta kapanabilecegi repo disiplinine yazilacak
 
 ## Son Koordinator Kapanisi
 1. `TASK-077` - owner branch PR hazir / merge hazir standardi ve varsayilan sira modeli kayda alindi
@@ -26,3 +26,4 @@ Kaynak Gercek: `docs/TASK_LOCKS.md`
    - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` sonucu `PASS`
 3. Kanit yoksa task durumu `active` kalir.
 4. Bu pano ile `docs/TASK_LOCKS.md` birebir senkron tutulur; paralel kapanis ve sira degisikligi yalniz koordinator tarafindan islenir.
+

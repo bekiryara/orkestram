@@ -120,6 +120,13 @@ Asagidaki durumlardan biri varsa koordinator isi durdurur:
 5. task karti checklistleri veya kapanis kaniti eksik
 6. repo genelindeki aktif task sayisi 3'u asiyor
 
+## Merge Taski Istisna Karari
+1. Multi-agent sistemde her owner teslim otomatik olarak ikinci bir merge taski dogurmaz.
+2. Koordinator merge taski acmadan once su ayrimi yapar:
+   - `tek owner + dusuk risk` -> ayni taskta merge kapanabilir
+   - `sirali owner branch veya yuksek risk` -> ayri merge taski acilir
+3. Ayni isi gereksiz yere iki taska bolmek repo yukunu arttirdigi icin yasak degil ama istisna mantigiyla sinirlanir.
+4. Ayrı merge taski acildiysa gerekce `sira`, `runtime etkisi`, `yeni kabul kriteri` veya `koordinasyon riski` olarak net yazilir.
 ## Koordinator Kapanis Sonrasi Davranisi
 Koordinator is bitince tek mesajda su 3 seyi verir:
 1. is kapandi mi, kaldi mi
@@ -179,6 +186,7 @@ Koordinator karar cevabi yalniz su 4 satirla verilir:
    - `Preview URL`
 4. Farkli worktree'de patch yazip baska worktree preview'u gostermek yasaktir.
 5. UI merge karari yalniz `Edit Source == Mount Source` dogrulandiysa verilir.
+
 
 
 

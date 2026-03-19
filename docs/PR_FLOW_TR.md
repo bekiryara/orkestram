@@ -67,6 +67,22 @@ Amac: Main branch'e sadece kontrollu, testli ve izlenebilir degisim gitsin.
    - gerekce: fixture standardi bagimsizdir ancak varsayilan merge sirasi olarak `TASK-074` sonrasina konur.
 3. Bu ornekte iki branch de `merge hazir` degil, yalniz `PR hazir` durumundadir; merge karari ayrik koordinator turunde verilir.
 
+## Merge Taski Acma Kurali
+1. Merge taski varsayilan akış degildir; mumkunse uretim taski icinde PR ve merge kapanir.
+2. Ayrı merge taski ancak su durumlarda acilir:
+   - birden fazla owner branch icin sira karari gerekiyorsa
+   - merge sonrasi runtime/preview etkisi ayri operasyon takibi gerektiriyorsa
+   - merkezi kayit, onay veya rollback riski yuksekse
+   - merge uygulamasi yeni kabul kriteri ve ayrik owner sorumlulugu doguruyorsa
+3. Su durumlarda ayrı merge taski acilmaz:
+   - tek owner branch var ve teslim kaniti tamamsa
+   - baska branch ile sira bagimliligi yoksa
+   - merge sonrasi ek operasyon riski olusmuyorsa
+   - ayni task icinde PR, merge ve kapanis izlenebilir sekilde tamamlanabiliyorsa
+4. Koordinator yeni merge taski acmadan once tek soruyu yanitlar:
+   - `Bu merge yeni bir operasyon riski veya yeni kabul kriteri doguruyor mu?`
+5. Cevap `hayir` ise merge ayrik task yerine mevcut taskin kapanis akisinda ele alinir.
+6. Cevap `evet` ise merge icin yeni task acilir ve nedeni task kartinda acik yazilir.
 ## Pull/Fetch Kurali
 1. Gunluk senkron:
    - `git fetch origin --prune`
@@ -91,3 +107,4 @@ Amac: Main branch'e sadece kontrollu, testli ve izlenebilir degisim gitsin.
 1. Main'e direkt push
 2. Test calistirmadan PR acma
 3. PR template'i bos gecme
+

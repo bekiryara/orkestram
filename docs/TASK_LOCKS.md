@@ -107,3 +107,4 @@ Sabit Ajan Kimlikleri:
 
 | TASK-077 | codex | agent/codex/task-077 | closed | docs/tasks/TASK-077.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/PR_FLOW_TR.md,docs/SESSION_HANDOFF_TR.md,docs/WORKLOG.md | 2026-03-19 14:20:31 | 2026-03-19 15:05:00 | Owner branch PR hazir / merge hazir standardi ve varsayilan sira modeli kayda alindi |
 
+| TASK-078 | codex | agent/codex/task-078 | active | docs/tasks/TASK-078.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/PR_FLOW_TR.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/SESSION_HANDOFF_TR.md,docs/WORKLOG.md | 2026-03-19 14:54:05 | 2026-03-19 14:54:05 | Merge taskinin ne zaman gerekli oldugu ve ne zaman ayni taskta kapanabilecegi repo disiplinine yazilacak |

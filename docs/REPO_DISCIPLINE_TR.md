@@ -169,6 +169,19 @@ Kurallar:
 6. Koordinator yeni is veya dagitim oncesi `scripts/agent-status.ps1` raporunu okuyarak stale worktree adaylarini kontrol eder.
 7. Surekli 3 ajan orkestrasyonunda varsayilan paketler `UI | data-fixture | test-ops` olarak dusunulur; lock cakismasi varsa dagitim iptal edilir.
 
+## 10A) Merge Taski Istisna Standardi
+
+Kural:
+1. Her teslim icin otomatik ikinci bir `merge taski` acilmaz.
+2. Varsayilan model su olur:
+   - owner task teslim + PR + merge + kapanis ayni taskta tamamlanir
+3. Ayrı merge taski yalniz su durumda acilir:
+   - merge yeni operasyon riski doguruyorsa
+   - birden fazla owner branch icin sira karari gerekiyorsa
+   - merge sonrasi runtime/preview etkisi ayri takip gerektiriyorsa
+   - merkezi koordinasyon kayitlari mevcut task kapsamindan cikiyorsa
+4. Tek owner branch, temiz teslim kaniti ve dusuk operasyon riski varsa yeni merge taski acmak yerine mevcut task kapanisinda ilerlenir.
+5. Koordinator merge taski aciyorsa gerekceyi task kartinda acik yazar; `varsayilan degil, istisna` oldugu belirtilir.
 ## 11) Yeni Gelen Ajan Onboarding (Zorunlu)
 
 Her yeni ajan ilk turda su sirayi uygular:
@@ -263,6 +276,7 @@ Kural:
 3. Koordinator UI review oncesi `Edit Source`, `Mount Source` ve `Preview URL` ucunu birlikte dogrular.
 4. Farkli worktree'de patch yazip baska worktree preview'u gostermek operasyonel ihlaldir.
 5. Bu esitlik saglanmiyorsa once kaynak hizasi duzeltilir, sonra UI review baslar.
+
 
 
 
