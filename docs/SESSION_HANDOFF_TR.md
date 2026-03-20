@@ -1,20 +1,20 @@
 ﻿# Session Handoff (TR)
 
-Guncelleme Zamani: 2026-03-20 09:16
-Koordinator Branch: agent/codex/task-086
-Koordinator Task: yok
+Guncelleme Zamani: 2026-03-20 10:02
+Koordinator Branch: agent/codex/task-087
+Koordinator Task: TASK-087
 
 ## Aktif Tasklar
-1. `YOK` - aktif koordinasyon gorevi bulunmuyor
+1. `TASK-087` - deterministic review demo medya hattı kod/test seviyesinde tamamlandi; commit ve upstream/pre-pr kapanis adimlari bekleniyor.
 
 ## Ajan / Worktree Durumu
 1. codex
    - Worktree: /home/bekir/orkestram-k
-   - Branch: agent/codex/task-086
-   - Aktif task: yok
-   - Status ozeti: TASK-086 kapandi; fixture katman ayrimi kod, test ve dokuman seviyesinde tamamlandi
+   - Branch: agent/codex/task-087
+   - Aktif task: TASK-087
+   - Status ozeti: desktop bando foto kaynaklari repo provenance manifestine ve iki appin tracked review_demo_media alanina alindi; review demo fixture komutu fiziksel medya sync yapar hale geldi
    - Karar sinifi: koru
-   - Not: implementation commit `e2f0088`, closure commit `4fa4ac7`; upstream pushlandi ve `pre-pr PASS` tekrar dogrulandi.
+   - Not: hedefli fixture testleri PASS, `validate PASS`; yeni branch icin upstream baglama ve `pre-pr` tekrar kosulacak.
 2. codex-a
    - Worktree: /home/bekir/orkestram-a
    - Branch: agent/codex-a/task-084
@@ -39,19 +39,19 @@ Koordinator Task: yok
 
 ## Preview / Source Durumu
 1. Bu oturum UI gorevi degil; preview lane kaniti gerekmiyor.
-2. Review demo fixture komutu sonraki design-preview hazirligi icin hazir durumdadir.
+2. Review demo medya sync komutu sonraki design-preview hazirligi icin kalici hale getirildi.
 
 ## Bugun Alinan Kararlar
-1. `baseline`, `smoke` ve `review_demo` fixture katmanlari yeni komut/standart ayrimiyla resmi hale getirildi.
-2. `TASK-075` lock'unda referans verilen ama HEAD'de olmayan `docs/DEMO_FIXTURE_STANDARD_TR.md` dosyasi yeniden kuruldu.
-3. `apply_patch` sandbox kirigi nedeniyle shell fallback kullanildi; degisiklikler tekrar okunup hedefli testler + validate + pre-pr ile dogrulandi.
+1. Desktop kaynak klasoru yalniz ilk alim icin kullanildi; rebuild/runtime bagimliligi repo icine tasindi.
+2. Review demo medya seti iki appte `database/seeders/data/review_demo_media/<slug>/...` altinda tracked hale getirildi.
+3. `demo:prepare-bando-review-fixture` komutu canonical tracked media setini `storage/uploads/listings/<slug>/...` pathine senkronlayacak sekilde sertlestirildi.
 
 ## Acik Riskler
 1. `scripts/agent-status.ps1` false-positive kirli status raporlamaya devam ediyor; kaynak gercek olarak WSL `git status --short` baz alinmali.
-2. `izmirorkestra/storage` host path'i izin sinirli; review demo medya path'leri repo-sozlesmesiyle yazildi, fiziksel medya parity'si ayri operasyon konusu olabilir.
-3. Review demo fixture su an listing/attribute/media path sozlesmesini kapsiyor; yorum/like gibi zengin demo dataset ihtiyaci olursa ayri task acilmali.
+2. Review demo medya secimi su an manuel secili 10 gorsel setinden geliyor; farkli slug veya daha genis galeri ihtiyaci ayri task gerektirir.
+3. `pre-pr` ilk denemede upstream yok diye fail verdi; yeni branch icin `push -u origin agent/codex/task-087` sonrasi tekrar kosulacak.
 
 ## Sonraki Adim
-1. Yeni ajan gorevi acilacaksa fixture tasklarinda `smoke:*` ve `demo:prepare-bando-review-fixture` ayrimi esas alinmali.
-2. Sonraki uygun koordinasyon isi olarak `agent-status` false-positive drift veya demo medya parity operasyonu ayrik taskta ele alinabilir.
-3. TASK-086 kapandi; merkezi pano `READY` durumunda.
+1. TASK-087 implementation commit'i alinacak.
+2. `git push -u origin agent/codex/task-087` ile upstream baglanacak.
+3. `pre-pr` tekrar kosulup mekanik kapanis `close-task.ps1` ile tamamlanacak.

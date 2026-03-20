@@ -146,6 +146,64 @@ $writeFixtureAttributeValues = function (Listing $listing, array $attributeMap, 
     }
 };
 
+$syncReviewDemoMedia = function (array $fixture): array {
+    $slug = (string) ($fixture['slug'] ?? '');
+    if ($slug === '') {
+        throw new RuntimeException('review demo fixture slug bos');
+    }
+
+    $sourceDir = base_path('database/seeders/data/review_demo_media/' . $slug);
+    if (!is_dir($sourceDir)) {
+        throw new RuntimeException('review demo media source bulunamadi: ' . $sourceDir);
+    }
+
+    $disk = Storage::disk('public');
+    $paths = array_merge([
+        (string) ($fixture['cover_image_path'] ?? ''),
+    ], array_map(static fn ($path) => (string) $path, (array) ($fixture['gallery_json'] ?? [])));
+
+    foreach ($paths as $path) {
+        $normalized = ltrim(trim($path), '/');
+        if ($normalized === '' || !str_starts_with($normalized, 'storage/')) {
+            continue;
+        }
+
+        $relative = substr($normalized, strlen('storage/'));
+        $targetName = basename($relative);
+        $sourcePath = $sourceDir . DIRECTORY_SEPARATOR . $targetName;
+        if (!is_file($sourcePath)) {
+            throw new RuntimeException('review demo media file eksik: ' . $sourcePath);
+        }
+
+        $directory = dirname($relative);
+        if ($directory !== '' && $directory !== '.') {
+            $disk->makeDirectory($directory);
+        }
+
+        $sourceHash = hash_file('sha256', $sourcePath);
+        $needsCopy = true;
+        if ($disk->exists($relative)) {
+            $existingHash = hash('sha256', (string) $disk->get($relative));
+            $needsCopy = !hash_equals($existingHash, $sourceHash);
+        }
+
+        if ($needsCopy) {
+            $stream = fopen($sourcePath, 'rb');
+            if ($stream === false) {
+                throw new RuntimeException('review demo media acilamadi: ' . $sourcePath);
+            }
+
+            try {
+                $disk->put($relative, $stream);
+            } finally {
+                fclose($stream);
+            }
+        }
+    }
+
+    return $fixture;
+};
+
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
@@ -397,7 +455,7 @@ Artisan::command('smoke:prepare-bando-fixture {--site=}', function () use ($ensu
     return 0;
 })->purpose('Smoke icin bando-takimi kategori filtre senaryosunu deterministik test ilanlariyla hazirlar');
 
-Artisan::command('demo:prepare-bando-review-fixture {--site=}', function () use ($ensureBandoFixtureCatalog, $writeFixtureAttributeValues) {
+Artisan::command('demo:prepare-bando-review-fixture {--site=}', function () use ($ensureBandoFixtureCatalog, $writeFixtureAttributeValues, $syncReviewDemoMedia) {
     $requestedSite = trim((string) ($this->option('site') ?: ''));
     $fixturesBySite = [
         'orkestram.net' => [
@@ -422,7 +480,7 @@ Artisan::command('demo:prepare-bando-review-fixture {--site=}', function () use 
                 'meta_json' => [
                     'fixture_layer' => 'review_demo',
                     'fixture_key' => 'demo-bando-sahil-seremonisi',
-                    'fixture_media_source' => 'repo-storage',
+                    'fixture_media_source' => 'repo-canonical',
                 ],
                 'attributes' => [
                     'sure_dk' => ['value_text' => '90', 'normalized_value' => '90'],
@@ -457,7 +515,7 @@ Artisan::command('demo:prepare-bando-review-fixture {--site=}', function () use 
                 'meta_json' => [
                     'fixture_layer' => 'review_demo',
                     'fixture_key' => 'demo-bando-kordon-alayi',
-                    'fixture_media_source' => 'repo-storage',
+                    'fixture_media_source' => 'repo-canonical',
                 ],
                 'attributes' => [
                     'sure_dk' => ['value_text' => '120', 'normalized_value' => '120'],
@@ -483,6 +541,8 @@ Artisan::command('demo:prepare-bando-review-fixture {--site=}', function () use 
         }
 
         foreach ($siteFixtures as $fixture) {
+            $fixture = $syncReviewDemoMedia($fixture);
+
             $listing = Listing::query()->updateOrCreate(
                 ['slug' => $fixture['slug'], 'site' => $site],
                 [
@@ -508,6 +568,7 @@ Artisan::command('demo:prepare-bando-review-fixture {--site=}', function () use 
             $writeFixtureAttributeValues($listing, $attributeMap, $fixture['attributes']);
             $this->line("review_demo_site=$site");
             $this->line('review_demo_slug=' . $fixture['slug']);
+            $this->line('review_demo_media_sync=ok');
         }
     }
 

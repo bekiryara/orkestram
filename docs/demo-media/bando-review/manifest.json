@@ -1,0 +1,78 @@
+﻿{
+    "version":  "bando-review-media-v1",
+    "created_at":  "2026-03-20",
+    "source_root":  "C:\\\\Users\\\\Bekir\\\\Desktop\\\\Bando Takımları\\\\Bando Hizmetleri\\\\etkinlik foto",
+    "canonical_root":  "docs/demo-media/bando-review",
+    "items":  [
+                  {
+                      "slug":  "demo-bando-sahil-seremonisi",
+                      "target":  "cover.jpg",
+                      "source_desktop_name":  "İzmirde en çok talep gören düğün bandosu.jpg",
+                      "sha256":  "FD2B169CA87B99DA5001FEA9635B9BBE9002192B9FFAE09FD0234B642F7A4575",
+                      "bytes":  486184
+                  },
+                  {
+                      "slug":  "demo-bando-sahil-seremonisi",
+                      "target":  "gallery-1.jpg",
+                      "source_desktop_name":  "Bando Takımı.jpg",
+                      "sha256":  "B8F3090E7A667B67DFA1D80B35BBCD42C4A8041A1E7C95E8B0211384E48C266F",
+                      "bytes":  59611
+                  },
+                  {
+                      "slug":  "demo-bando-sahil-seremonisi",
+                      "target":  "gallery-2.jpg",
+                      "source_desktop_name":  "Eskisehir Düğün Bandosu fiyatları.jpg",
+                      "sha256":  "72EB1D121294A651E8B762CE3A8A50D0F68CCB1C3F7A1AFB5169D77FADAF99A8",
+                      "bytes":  145361
+                  },
+                  {
+                      "slug":  "demo-bando-sahil-seremonisi",
+                      "target":  "gallery-3.jpg",
+                      "source_desktop_name":  "eskişehir gelin alma bandosı.jpg",
+                      "sha256":  "A2EAFF495A00755567515F9FA33A9DE6259FD81D3D552C90029CE489F4F3584C",
+                      "bytes":  134055
+                  },
+                  {
+                      "slug":  "demo-bando-sahil-seremonisi",
+                      "target":  "gallery-4.jpg",
+                      "source_desktop_name":  "kına Gecesi orkestra.jpg",
+                      "sha256":  "3CE0C4F874C9159ECB3DEAC501BD855BC36107CAFA3FF57E6FFB2E7921C96B4B",
+                      "bytes":  110198
+                  },
+                  {
+                      "slug":  "demo-bando-kordon-alayi",
+                      "target":  "cover.jpg",
+                      "source_desktop_name":  "Malatya Bando Takımları.jpg",
+                      "sha256":  "7D344A9A1B30AB8498E5787BD28F81A469C3798AE8F659E5BEE4CF5D81CFA3A5",
+                      "bytes":  211362
+                  },
+                  {
+                      "slug":  "demo-bando-kordon-alayi",
+                      "target":  "gallery-1.jpg",
+                      "source_desktop_name":  "Balıkesir Açılışlar kutlamalar.jpg",
+                      "sha256":  "AAD09227203F0F19FE057915104AE0305A5341B38A69A515BA2434ADABD9692B",
+                      "bytes":  123278
+                  },
+                  {
+                      "slug":  "demo-bando-kordon-alayi",
+                      "target":  "gallery-2.jpg",
+                      "source_desktop_name":  "Bando Takımı Kiralama fiyatları eskisehir.jpg",
+                      "sha256":  "819F3BA1C23CCD4358CC84F59AA9050062157015104CD0B8129C9221B1BF7980",
+                      "bytes":  126512
+                  },
+                  {
+                      "slug":  "demo-bando-kordon-alayi",
+                      "target":  "gallery-3.jpg",
+                      "source_desktop_name":  "eskişehir kurumsal etkinlik.jpg",
+                      "sha256":  "479FBA616652556FC468AC88AE180B224D176955256328CF223F032F59E780AF",
+                      "bytes":  139684
+                  },
+                  {
+                      "slug":  "demo-bando-kordon-alayi",
+                      "target":  "gallery-4.jpg",
+                      "source_desktop_name":  "sünnet orkestra kiralama.jpg",
+                      "sha256":  "F9BC68E56699F46F77622F5D55627F9FC0021E751A7A8B9B1193F98F3373616F",
+                      "bytes":  218880
+                  }
+              ]
+}
