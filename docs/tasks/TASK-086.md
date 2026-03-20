@@ -1,6 +1,6 @@
 ﻿# TASK-086
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex`  
 Branch: `agent/codex/task-086`  
 Baslangic: `2026-03-20 08:46`
@@ -53,8 +53,8 @@ Baslangic: `2026-03-20 08:46`
 - Script Katmani: `PowerShell`
 - App/Test Katmani: `container`
 - Runtime Readiness: `ready`
-- Upstream Durumu: `yok (ilk push -u bekleniyor)`
-- Not: `apply_patch` sandbox kirildigi icin shell fallback ile kontrollu yazim yapildi; hedefli fixture testleri ve validate PASS.`
+- Upstream Durumu: `origin/agent/codex/task-086`
+- Not: `apply_patch` sandbox kirildigi icin shell fallback ile kontrollu yazim yapildi; hedefli fixture testleri, validate ve pre-pr PASS.`
 
 ## Uygulama Adimlari
 - [x] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
@@ -68,23 +68,23 @@ Baslangic: `2026-03-20 08:46`
 - [x] `review_demo` komutu whitelist demo sluglarina dokunur ve smoke sluglarini mutate etmez
 - [x] `smoke` listingleri `meta_json.fixture_layer=smoke` isaretiyle uretilir
 - [x] Iki appte parity fixture komut testleri PASS verir
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
-- [ ] `git branch --show-current`
-- [ ] `git branch -vv`
-- [ ] `git status --short`
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- [x] `git branch --show-current`
+- [x] `git branch -vv`
+- [x] `git status --short`
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - [x] Goreve ozel test/komut sonucu
-- [ ] `Edit Source == Mount Source` kaniti
-- [ ] Commit hash
+- [x] `Edit Source == Mount Source` kaniti `n/a (UI gorevi degil)`
+- [x] Commit hash: `e2f0088`
 
 ## Kapanis Adimlari
-- [ ] Task kartindaki checklistler gercek sonuca gore guncellendi
-- [ ] `docs/WORKLOG.md` guncellendi
-- [ ] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
-- [ ] `docs/NEXT_TASK.md` panosu guncellendi
-- [ ] Branch pushlandi
+- [x] Task kartindaki checklistler gercek sonuca gore guncellendi
+- [x] `docs/WORKLOG.md` guncellendi
+- [x] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
+- [x] `docs/NEXT_TASK.md` panosu guncellendi
+- [x] Branch pushlandi
 
 ## Komutlar
 ```powershell
@@ -92,6 +92,7 @@ docker exec orkestram-local-web php artisan test --filter=FixtureCommandTest
 docker exec izmirorkestra-local-web php artisan test --filter=FixtureCommandTest
 powershell -ExecutionPolicy Bypass -File scripts/validate.ps1 -App both
 powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
+git push -u origin agent/codex/task-086
 ```
 
 ## Risk / Not

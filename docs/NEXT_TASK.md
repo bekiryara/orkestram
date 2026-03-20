@@ -1,19 +1,19 @@
 ﻿# NEXT TASK (Koordinasyon Panosu)
 
-Durum: `ACTIVE`  
+Durum: `READY`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Merkezi Koordinasyon)
-1. `TASK-086` - Baseline, smoke ve review-demo fixture katmanlarini ayrik komut ve standartla netlestir
+1. `YOK` - aktif koordinasyon gorevi bulunmuyor
 ## Son Koordinator Kapanisi
-1. `TASK-085` - Smoke gate thumb fallback ve locations manifest/import stabilizasyonu tamamlandi
-2. `TASK-083` - mekanik sertlestirme tamamlandi; task acma/kapatma akisi, koordinasyon locklari ve upstream zinciri repo disiplinine gore hizalandi
-3. `TASK-082` - ortam guardrail standardi runtime/source/readiness/sandbox/upstream/auth kurallariyla resmi hale getirildi
+1. `TASK-086` - Fixture layer separation ve review demo standardi tamamlandi
+2. `TASK-085` - Smoke gate thumb fallback ve locations manifest/import stabilizasyonu tamamlandi
+3. `TASK-083` - mekanik sertlestirme tamamlandi; task acma/kapatma akisi, koordinasyon locklari ve upstream zinciri repo disiplinine gore hizalandi
 ## Son Kapanis
-1. `TASK-085` - Smoke gate thumb fallback ve locations manifest/import stabilizasyonu tamamlandi
-2. `TASK-083` - mekanik sertlestirme tamamlandi; task acma/kapatma akisi, koordinasyon locklari ve upstream zinciri repo disiplinine gore hizalandi
-3. `TASK-082` - task template, ajan/koordinator disiplin dokumanlari ve `pre-pr`/`validate` scriptleri ortam blokaj siniflariyla guncellendi; `pre-pr PASS`
+1. `TASK-086` - Fixture layer separation ve review demo standardi tamamlandi
+2. `TASK-085` - Smoke gate thumb fallback ve locations manifest/import stabilizasyonu tamamlandi
+3. `TASK-083` - mekanik sertlestirme tamamlandi; task acma/kapatma akisi, koordinasyon locklari ve upstream zinciri repo disiplinine gore hizalandi
 ## Kapanis Kurali (Zorunlu)
 1. Kapanis kaniti olmadan task `closed` edilemez.
 2. Zorunlu kanit paketi:
