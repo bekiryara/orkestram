@@ -77,7 +77,7 @@ Baslangic: `2026-03-20 08:46`
 - [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - [x] Goreve ozel test/komut sonucu
 - [x] `Edit Source == Mount Source` kaniti `n/a (UI gorevi degil)`
-- [x] Commit hash: `e2f0088`
+- [x] Commit hash: `e2f0088`, `4fa4ac7`
 
 ## Kapanis Adimlari
 - [x] Task kartindaki checklistler gercek sonuca gore guncellendi
@@ -99,3 +99,4 @@ git push -u origin agent/codex/task-086
 - `apply_patch` sandbox katmani bu oturumda kirik oldugu icin shell fallback kullanildi; degisiklikler sonrasinda dosyalar tekrar okunarak dogrulandi.
 - `scripts/agent-status.ps1` halen false-positive kirli status raporluyor; WSL `git status --short` temiz kaniti kaynak gercek olarak baz alinmali.
 - `izmirorkestra/storage` host tarafinda izinli okunamadigi icin review demo medya path'i repo-sozlesmesiyle yazildi; runtime kaniti smoke/validate tarafinda bozulmadi.
+

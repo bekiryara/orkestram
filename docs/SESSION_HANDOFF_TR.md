@@ -1,8 +1,8 @@
 ﻿# Session Handoff (TR)
 
-Guncelleme Zamani: 2026-03-20 09:08
+Guncelleme Zamani: 2026-03-20 09:16
 Koordinator Branch: agent/codex/task-086
-Koordinator Task: TASK-086
+Koordinator Task: yok
 
 ## Aktif Tasklar
 1. `YOK` - aktif koordinasyon gorevi bulunmuyor
@@ -12,9 +12,9 @@ Koordinator Task: TASK-086
    - Worktree: /home/bekir/orkestram-k
    - Branch: agent/codex/task-086
    - Aktif task: yok
-   - Status ozeti: TASK-086 kapanis asamasinda; fixture katman ayrimi kod, test ve dokuman seviyesinde tamamlandi
+   - Status ozeti: TASK-086 kapandi; fixture katman ayrimi kod, test ve dokuman seviyesinde tamamlandi
    - Karar sinifi: koru
-   - Not: implementation commit `e2f0088`; pre-pr PASS alindi, closure docs commit ve son push bekleniyor.
+   - Not: implementation commit `e2f0088`, closure commit `4fa4ac7`; upstream pushlandi ve `pre-pr PASS` tekrar dogrulandi.
 2. codex-a
    - Worktree: /home/bekir/orkestram-a
    - Branch: agent/codex-a/task-084
@@ -39,7 +39,7 @@ Koordinator Task: TASK-086
 
 ## Preview / Source Durumu
 1. Bu oturum UI gorevi degil; preview lane kaniti gerekmiyor.
-2. Review demo fixture komutu sonraki design-preview hazirligi icin yazildi.
+2. Review demo fixture komutu sonraki design-preview hazirligi icin hazir durumdadir.
 
 ## Bugun Alinan Kararlar
 1. `baseline`, `smoke` ve `review_demo` fixture katmanlari yeni komut/standart ayrimiyla resmi hale getirildi.
@@ -52,6 +52,6 @@ Koordinator Task: TASK-086
 3. Review demo fixture su an listing/attribute/media path sozlesmesini kapsiyor; yorum/like gibi zengin demo dataset ihtiyaci olursa ayri task acilmali.
 
 ## Sonraki Adim
-1. TASK-086 closure docs commit'i alinacak ve branch'e pushlanacak.
-2. Son kanit paketi (`branch`, `branch -vv`, `status`, `pre-pr PASS`) alinacak.
-3. Sonraki uygun koordinasyon isi olarak `agent-status` false-positive drift veya demo medya parity operasyonu ayrik taskta ele alinabilir.
+1. Yeni ajan gorevi acilacaksa fixture tasklarinda `smoke:*` ve `demo:prepare-bando-review-fixture` ayrimi esas alinmali.
+2. Sonraki uygun koordinasyon isi olarak `agent-status` false-positive drift veya demo medya parity operasyonu ayrik taskta ele alinabilir.
+3. TASK-086 kapandi; merkezi pano `READY` durumunda.
