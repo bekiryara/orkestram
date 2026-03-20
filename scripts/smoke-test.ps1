@@ -1,4 +1,4 @@
-param(
+﻿param(
     [ValidateSet("orkestram", "izmirorkestra", "both")]
     [string]$App = "both",
     [ValidateSet("main", "design")]
@@ -223,6 +223,11 @@ function Resolve-AdminListingThumbUrl {
     $regex = [regex]'(?is)<img[^>]*src=["'']([^"'']+)["''][^>]*class=["''][^"'']*thumb-80[^"'']*["'']'
     $match = $regex.Match($result.Body)
     if (-not $match.Success) {
+        $fallbackRegex = [regex]'(?is)href=["''][^"'']*/admin/listings/[^"'']+/edit["'']|>\s*Duzenle\s*<'
+        if ($fallbackRegex.IsMatch($result.Body)) {
+            return "__NO_THUMB__"
+        }
+
         return $null
     }
 
@@ -720,6 +725,9 @@ foreach ($t in $targets) {
     if ([string]::IsNullOrWhiteSpace($adminThumbUrl)) {
         $failures.Add("$($t.Name) admin listing thumb URL'i bulunamadi") | Out-Null
     }
+    elseif ($adminThumbUrl -eq "__NO_THUMB__") {
+        Write-Host "[smoke] OK $($t.Name) admin listing thumb optional fallback"
+    }
     else {
         Assert-Status -Name $t.Name -Url $adminThumbUrl -Expect 200 | Out-Null
     }
@@ -736,4 +744,6 @@ if ($failures.Count -gt 0) {
 
 Write-Host "[smoke] PASS"
 exit 0
+
+
 

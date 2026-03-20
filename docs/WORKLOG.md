@@ -2148,3 +2148,40 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `n/a`
+
+### [2026-03-20 08:12] TASK-085 Baslangic (Smoke + Locations Stabilizasyonu)
+- Yapilanlar:
+  - `scripts/smoke-test.ps1` admin listing thumb kontrolu, kapak gorseli olmayan listinglerde optional fallback kabul edecek sekilde hizalandi.
+  - `docs/category-catalog/ready/locations_v1/manifest_v1.json` icindeki checksumlar repo snapshot dosyalarinin gercek SHA256 degerleriyle guncellendi ve encoding normalize edildi.
+  - `locations:import --from=/tmp/locations_v1` tekrar calistirilip root MySQL kaniti ile `cities=81`, `districts=973`, `neighborhoods=31855` dogrulandi.
+- Dosyalar:
+  - `scripts/smoke-test.ps1`
+  - `docs/category-catalog/ready/locations_v1/manifest_v1.json`
+  - `docs/tasks/TASK-085.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+- Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/validate.ps1 -App both`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k/local-rebuild && docker compose exec -T orkestram-web php artisan locations:import --from=/tmp/locations_v1"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k/local-rebuild && docker compose exec -T mysql mysql -uroot -proot -e 'USE orkestram_local; SELECT COUNT(*) FROM cities; SELECT COUNT(*) FROM districts; SELECT COUNT(*) FROM neighborhoods;'"`
+- Sonuc:
+  - Smoke PASS, validate PASS, pre-pr PASS; lokasyon sozlugu geri oturdu.
+
+---
+
+### [2026-03-20 08:26] TASK-085 Resmi Kapanis
+- Sorumlu: `
+codex
+`
+- Is Ozeti:
+  - `smoke gate repo gercegine hizalandi,locations manifest hash/encoding duzeltildi,locations import ve pre-pr PASS ile zemin tekrar oturdu`
+- Degisen Dosyalar:
+  - `scripts/smoke-test.ps1,docs/category-catalog/ready/locations_v1/manifest_v1.json,docs/tasks/TASK-085.md,docs/SESSION_HANDOFF_TR.md`
+- Calistirilan Komutlar:
+  - `scripts/validate.ps1,scripts/pre-pr.ps1,php artisan locations:import --from=/tmp/locations_v1`
+- Sonuc:
+  - `
+PASS
+`
+- Not:
+  - `n/a`

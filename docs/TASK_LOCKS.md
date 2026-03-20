@@ -120,3 +120,4 @@ Sabit Ajan Kimlikleri:
 
 | TASK-083 | codex | agent/codex/task-083 | closed | docs/tasks/TASK-083.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/SESSION_HANDOFF_TR.md,scripts/start-task.ps1,scripts/close-task.ps1,scripts/pre-pr.ps1,AGENTS.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/COORDINATOR_BOOTSTRAP_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/OPERATING_MODEL_TR.md | 2026-03-20 02:08:58 | 2026-03-20 02:36:37 | Mekanik sertlestirme tamamlandi; task acma/kapatma akisi, koordinasyon locklari ve upstream zinciri repo disiplinine gore hizalandi |
 
+| TASK-085 | codex | agent/codex/task-085 | closed | docs/tasks/TASK-085.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/SESSION_HANDOFF_TR.md,scripts/smoke-test.ps1,docs/category-catalog/ready/locations_v1/manifest_v1.json | 2026-03-20 08:08:42 | 2026-03-20 08:26:08 | Smoke gate thumb fallback ve locations manifest/import stabilizasyonu tamamlandi |
