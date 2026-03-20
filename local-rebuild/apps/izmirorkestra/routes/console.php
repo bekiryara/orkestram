@@ -7,8 +7,10 @@ use App\Models\Listing;
 use App\Models\MainCategory;
 use App\Models\Page;
 use App\Services\Locations\LocationSnapshotImporter;
+use Database\Seeders\LocalAccountFixtureSeeder;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 
 $ensureBandoFixtureCatalog = function (): array {
     $main = MainCategory::query()->updateOrCreate(
@@ -203,6 +205,48 @@ $syncReviewDemoMedia = function (array $fixture): array {
 
     return $fixture;
 };
+
+Artisan::command('local:prepare-account-fixture', function () {
+    $result = app(LocalAccountFixtureSeeder::class)->run();
+
+    foreach ($result as $row) {
+        $this->line('account=' . $row['username'] . ':' . $row['role']);
+    }
+
+    $this->info('local account fixture PASS');
+    return 0;
+})->purpose('Deterministic local admin/owner/customer/support hesap fixture katmanini idempotent olarak hazirlar');
+
+Artisan::command('local:prepare-reset-recovery {--with-locations} {--with-smoke} {--with-review-demo}', function () {
+    $sites = ['orkestram.net', 'izmirorkestra.net'];
+
+    app(LocalAccountFixtureSeeder::class)->run();
+    $this->line('accounts=prepared');
+
+    if ((bool) $this->option('with-locations')) {
+        Artisan::call('locations:import');
+        $this->output->write(Artisan::output());
+    }
+
+    if ((bool) $this->option('with-smoke')) {
+        foreach ($sites as $site) {
+            Artisan::call('smoke:prepare-range-fixture', ['--site' => $site]);
+            $this->output->write(Artisan::output());
+            Artisan::call('smoke:prepare-bando-fixture', ['--site' => $site]);
+            $this->output->write(Artisan::output());
+        }
+    }
+
+    if ((bool) $this->option('with-review-demo')) {
+        foreach ($sites as $site) {
+            Artisan::call('demo:prepare-bando-review-fixture', ['--site' => $site]);
+            $this->output->write(Artisan::output());
+        }
+    }
+
+    $this->info('local reset recovery PASS');
+    return 0;
+})->purpose('DB reset sonrasi local hesap, smoke ve review fixture katmanlarini resmi sirayla tekrar hazirlar');
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
@@ -574,3 +618,4 @@ Artisan::command('demo:prepare-bando-review-fixture {--site=}', function () use 
 
     return 0;
 })->purpose('Design-preview review icin whitelist bando demo fixture verisini smoke katmanindan ayri hazirlar');
+
