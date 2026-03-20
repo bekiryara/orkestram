@@ -10,6 +10,142 @@ use App\Services\Locations\LocationSnapshotImporter;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 
+$ensureBandoFixtureCatalog = function (): array {
+    $main = MainCategory::query()->updateOrCreate(
+        ['slug' => 'muzik-ekipleri'],
+        [
+            'name' => 'Muzik Ekipleri',
+            'is_active' => true,
+            'sort_order' => 10,
+        ]
+    );
+
+    $category = Category::query()->updateOrCreate(
+        ['slug' => 'bando-takimi'],
+        [
+            'main_category_id' => $main->id,
+            'name' => 'Bando Takimi',
+            'is_active' => true,
+            'is_indexable' => true,
+            'sort_order' => 20,
+        ]
+    );
+
+    $attributes = [
+        [
+            'key' => 'sure_dk',
+            'label' => 'Sure (dk)',
+            'field_type' => 'select',
+            'filter_mode' => 'exact',
+            'options_json' => ['30', '45', '60', '90', '120'],
+            'sort_order' => 10,
+        ],
+        [
+            'key' => 'enstruman_sayisi',
+            'label' => 'Enstruman Sayisi',
+            'field_type' => 'number',
+            'filter_mode' => 'range',
+            'options_json' => null,
+            'sort_order' => 20,
+        ],
+        [
+            'key' => 'solist_sayisi',
+            'label' => 'Solist Sayisi',
+            'field_type' => 'number',
+            'filter_mode' => 'range',
+            'options_json' => null,
+            'sort_order' => 30,
+        ],
+        [
+            'key' => 'solist_cinsiyeti',
+            'label' => 'Solist Cinsiyeti',
+            'field_type' => 'select',
+            'filter_mode' => 'exact',
+            'options_json' => ['Kadin', 'Erkek', 'Karma', 'Belirtilmemis'],
+            'sort_order' => 40,
+        ],
+        [
+            'key' => 'enstrumanlar',
+            'label' => 'Enstrumanlar',
+            'field_type' => 'multiselect',
+            'filter_mode' => 'exact',
+            'options_json' => ['Trampet', 'Davul', 'Trompet', 'Trombon', 'Saksafon', 'Klarnet', 'Tuba', 'Zil'],
+            'sort_order' => 50,
+        ],
+        [
+            'key' => 'sahne_aldigi_yerler',
+            'label' => 'Sahne Aldigi Yerler',
+            'field_type' => 'multiselect',
+            'filter_mode' => 'exact',
+            'options_json' => ['Dugun', 'Nisan', 'Kina', 'Festival', 'Kurumsal Etkinlik', 'Sokak Gosterisi', 'Acik Hava'],
+            'sort_order' => 60,
+        ],
+        [
+            'key' => 'kostum',
+            'label' => 'Kostum',
+            'field_type' => 'multiselect',
+            'filter_mode' => 'exact',
+            'options_json' => ['Aski', 'Sapka', 'Papyon'],
+            'sort_order' => 70,
+        ],
+    ];
+
+    $attributeMap = [];
+    foreach ($attributes as $row) {
+        $existing = $category->attributes()->where('key', $row['key'])->first();
+        if ($existing) {
+            $existing->update([
+                'label' => $row['label'],
+                'field_type' => $row['field_type'],
+                'filter_mode' => $row['filter_mode'],
+                'options_json' => $row['options_json'],
+                'is_required' => false,
+                'is_filterable' => true,
+                'is_active' => true,
+                'sort_order' => $row['sort_order'],
+            ]);
+            $attribute = $existing;
+        } else {
+            $attribute = $category->attributes()->create([
+                'key' => $row['key'],
+                'label' => $row['label'],
+                'field_type' => $row['field_type'],
+                'filter_mode' => $row['filter_mode'],
+                'options_json' => $row['options_json'],
+                'is_required' => false,
+                'is_filterable' => true,
+                'is_visible_in_card' => false,
+                'is_visible_in_detail' => true,
+                'is_active' => true,
+                'sort_order' => $row['sort_order'],
+            ]);
+        }
+        $attributeMap[$row['key']] = $attribute;
+    }
+
+    return [$category, $attributeMap];
+};
+
+$writeFixtureAttributeValues = function (Listing $listing, array $attributeMap, array $values): void {
+    foreach ($values as $key => $payload) {
+        $attribute = $attributeMap[$key] ?? null;
+        if (!$attribute) {
+            continue;
+        }
+
+        ListingAttributeValue::query()->updateOrCreate(
+            ['listing_id' => $listing->id, 'category_attribute_id' => $attribute->id],
+            [
+                'value_text' => $payload['value_text'] ?? null,
+                'value_number' => $payload['value_number'] ?? null,
+                'value_bool' => $payload['value_bool'] ?? null,
+                'value_json' => $payload['value_json'] ?? null,
+                'normalized_value' => $payload['normalized_value'] ?? null,
+            ]
+        );
+    }
+};
+
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
@@ -188,121 +324,9 @@ Artisan::command('smoke:prepare-range-fixture {--site=}', function () {
     return 0;
 })->purpose('Smoke icin deterministik range filtre fixture verisini idempotent hazirlar');
 
-Artisan::command('smoke:prepare-bando-fixture {--site=}', function () {
+Artisan::command('smoke:prepare-bando-fixture {--site=}', function () use ($ensureBandoFixtureCatalog, $writeFixtureAttributeValues) {
     $site = trim((string) ($this->option('site') ?: 'orkestram.net'));
-
-    $main = MainCategory::query()->updateOrCreate(
-        ['slug' => 'muzik-ekipleri'],
-        [
-            'name' => 'Muzik Ekipleri',
-            'is_active' => true,
-            'sort_order' => 10,
-        ]
-    );
-
-    $category = Category::query()->updateOrCreate(
-        ['slug' => 'bando-takimi'],
-        [
-            'main_category_id' => $main->id,
-            'name' => 'Bando Takimi',
-            'is_active' => true,
-            'is_indexable' => true,
-            'sort_order' => 20,
-        ]
-    );
-
-    $attributes = [
-        [
-            'key' => 'sure_dk',
-            'label' => 'Sure (dk)',
-            'field_type' => 'select',
-            'filter_mode' => 'exact',
-            'options_json' => ['30', '45', '60', '90', '120'],
-            'sort_order' => 10,
-        ],
-        [
-            'key' => 'enstruman_sayisi',
-            'label' => 'Enstruman Sayisi',
-            'field_type' => 'number',
-            'filter_mode' => 'range',
-            'options_json' => null,
-            'sort_order' => 20,
-        ],
-        [
-            'key' => 'solist_sayisi',
-            'label' => 'Solist Sayisi',
-            'field_type' => 'number',
-            'filter_mode' => 'range',
-            'options_json' => null,
-            'sort_order' => 30,
-        ],
-        [
-            'key' => 'solist_cinsiyeti',
-            'label' => 'Solist Cinsiyeti',
-            'field_type' => 'select',
-            'filter_mode' => 'exact',
-            'options_json' => ['Kadin', 'Erkek', 'Karma', 'Belirtilmemis'],
-            'sort_order' => 40,
-        ],
-        [
-            'key' => 'enstrumanlar',
-            'label' => 'Enstrumanlar',
-            'field_type' => 'multiselect',
-            'filter_mode' => 'exact',
-            'options_json' => ['Trampet', 'Davul', 'Trompet', 'Trombon', 'Saksafon', 'Klarnet', 'Tuba', 'Zil'],
-            'sort_order' => 50,
-        ],
-        [
-            'key' => 'sahne_aldigi_yerler',
-            'label' => 'Sahne Aldigi Yerler',
-            'field_type' => 'multiselect',
-            'filter_mode' => 'exact',
-            'options_json' => ['Dugun', 'Nisan', 'Kina', 'Festival', 'Kurumsal Etkinlik', 'Sokak Gosterisi', 'Acik Hava'],
-            'sort_order' => 60,
-        ],
-        [
-            'key' => 'kostum',
-            'label' => 'Kostum',
-            'field_type' => 'multiselect',
-            'filter_mode' => 'exact',
-            'options_json' => ['Aski', 'Sapka', 'Papyon'],
-            'sort_order' => 70,
-        ],
-    ];
-
-    $attributeMap = [];
-    foreach ($attributes as $row) {
-        $existing = $category->attributes()->where('key', $row['key'])->first();
-        if ($existing) {
-            // Preserve current visibility flags set by admin; update only non-visibility fields.
-            $existing->update([
-                'label' => $row['label'],
-                'field_type' => $row['field_type'],
-                'filter_mode' => $row['filter_mode'],
-                'options_json' => $row['options_json'],
-                'is_required' => false,
-                'is_filterable' => true,
-                'is_active' => true,
-                'sort_order' => $row['sort_order'],
-            ]);
-            $attribute = $existing;
-        } else {
-            $attribute = $category->attributes()->create([
-                'key' => $row['key'],
-                'label' => $row['label'],
-                'field_type' => $row['field_type'],
-                'filter_mode' => $row['filter_mode'],
-                'options_json' => $row['options_json'],
-                'is_required' => false,
-                'is_filterable' => true,
-                'is_visible_in_card' => false,
-                'is_visible_in_detail' => true,
-                'is_active' => true,
-                'sort_order' => $row['sort_order'],
-            ]);
-        }
-        $attributeMap[$row['key']] = $attribute;
-    }
+    [$category, $attributeMap] = $ensureBandoFixtureCatalog();
 
     $listingA = Listing::query()->updateOrCreate(
         ['slug' => 'test-bando-a', 'site' => $site],
@@ -317,6 +341,10 @@ Artisan::command('smoke:prepare-bando-fixture {--site=}', function () {
             'summary' => 'Smoke fixture A bando senaryosu',
             'content' => 'Smoke fixture A bando senaryosu icerik metni filtre testleri icin deterministik olarak tutulur.',
             'price_label' => '1000 TL',
+            'meta_json' => [
+                'fixture_layer' => 'smoke',
+                'fixture_key' => 'smoke-bando-a',
+            ],
         ]
     );
 
@@ -333,44 +361,32 @@ Artisan::command('smoke:prepare-bando-fixture {--site=}', function () {
             'summary' => 'Smoke fixture B bando senaryosu',
             'content' => 'Smoke fixture B bando senaryosu icerik metni filtre testleri icin deterministik olarak tutulur.',
             'price_label' => '2000 TL',
+            'meta_json' => [
+                'fixture_layer' => 'smoke',
+                'fixture_key' => 'smoke-bando-b',
+            ],
         ]
     );
 
-    $write = function (Listing $listing, string $key, ?string $valueText, ?float $valueNumber, ?bool $valueBool, ?array $valueJson, ?string $normalized = null) use ($attributeMap): void {
-        $attr = $attributeMap[$key] ?? null;
-        if (!$attr) {
-            return;
-        }
+    $writeFixtureAttributeValues($listingA, $attributeMap, [
+        'sure_dk' => ['value_text' => '60', 'normalized_value' => '60'],
+        'enstruman_sayisi' => ['value_number' => 5.0, 'normalized_value' => '5'],
+        'solist_sayisi' => ['value_number' => 1.0, 'normalized_value' => '1'],
+        'solist_cinsiyeti' => ['value_text' => 'Kadin', 'normalized_value' => 'kadin'],
+        'enstrumanlar' => ['value_text' => 'Trompet, Davul', 'value_json' => ['trompet', 'davul']],
+        'sahne_aldigi_yerler' => ['value_text' => 'Dugun', 'value_json' => ['dugun']],
+        'kostum' => ['value_text' => 'Sapka', 'value_json' => ['sapka']],
+    ]);
 
-        ListingAttributeValue::query()->updateOrCreate(
-            ['listing_id' => $listing->id, 'category_attribute_id' => $attr->id],
-            [
-                'value_text' => $valueText,
-                'value_number' => $valueNumber,
-                'value_bool' => $valueBool,
-                'value_json' => $valueJson,
-                'normalized_value' => $normalized,
-            ]
-        );
-    };
-
-    // Listing A values
-    $write($listingA, 'sure_dk', '60', null, null, null, '60');
-    $write($listingA, 'enstruman_sayisi', null, 5.0, null, null, '5');
-    $write($listingA, 'solist_sayisi', null, 1.0, null, null, '1');
-    $write($listingA, 'solist_cinsiyeti', 'Kadin', null, null, null, 'kadin');
-    $write($listingA, 'enstrumanlar', 'Trompet, Davul', null, null, ['trompet', 'davul'], null);
-    $write($listingA, 'sahne_aldigi_yerler', 'Dugun', null, null, ['dugun'], null);
-    $write($listingA, 'kostum', 'Sapka', null, null, ['sapka'], null);
-
-    // Listing B values
-    $write($listingB, 'sure_dk', '120', null, null, null, '120');
-    $write($listingB, 'enstruman_sayisi', null, 9.0, null, null, '9');
-    $write($listingB, 'solist_sayisi', null, 2.0, null, null, '2');
-    $write($listingB, 'solist_cinsiyeti', 'Erkek', null, null, null, 'erkek');
-    $write($listingB, 'enstrumanlar', 'Saksafon, Klarnet', null, null, ['saksafon', 'klarnet'], null);
-    $write($listingB, 'sahne_aldigi_yerler', 'Festival, Kurumsal Etkinlik', null, null, ['festival', 'kurumsal etkinlik'], null);
-    $write($listingB, 'kostum', 'Aski, Papyon', null, null, ['aski', 'papyon'], null);
+    $writeFixtureAttributeValues($listingB, $attributeMap, [
+        'sure_dk' => ['value_text' => '120', 'normalized_value' => '120'],
+        'enstruman_sayisi' => ['value_number' => 9.0, 'normalized_value' => '9'],
+        'solist_sayisi' => ['value_number' => 2.0, 'normalized_value' => '2'],
+        'solist_cinsiyeti' => ['value_text' => 'Erkek', 'normalized_value' => 'erkek'],
+        'enstrumanlar' => ['value_text' => 'Saksafon, Klarnet', 'value_json' => ['saksafon', 'klarnet']],
+        'sahne_aldigi_yerler' => ['value_text' => 'Festival, Kurumsal Etkinlik', 'value_json' => ['festival', 'kurumsal etkinlik']],
+        'kostum' => ['value_text' => 'Aski, Papyon', 'value_json' => ['aski', 'papyon']],
+    ]);
 
     $this->line('category_slug=bando-takimi');
     $this->line('listing_a=TEST Bando Senaryo A');
@@ -380,3 +396,120 @@ Artisan::command('smoke:prepare-bando-fixture {--site=}', function () {
 
     return 0;
 })->purpose('Smoke icin bando-takimi kategori filtre senaryosunu deterministik test ilanlariyla hazirlar');
+
+Artisan::command('demo:prepare-bando-review-fixture {--site=}', function () use ($ensureBandoFixtureCatalog, $writeFixtureAttributeValues) {
+    $requestedSite = trim((string) ($this->option('site') ?: ''));
+    $fixturesBySite = [
+        'orkestram.net' => [
+            [
+                'slug' => 'demo-bando-sahil-seremonisi',
+                'name' => 'Demo Bando Sahil Seremonisi',
+                'city' => 'Izmir',
+                'district' => 'Konak',
+                'summary' => 'Review demo fixture: sahil seremonisi akisina uygun bando listingi.',
+                'content' => 'Review demo fixture icerigi, design-preview tarafinda editorial listing detail kontrolu icin repo ici whitelist veri olarak korunur.',
+                'price_label' => '18.500 TL',
+                'phone' => '05320000001',
+                'whatsapp' => '905320000001',
+                'cover_image_path' => 'storage/uploads/listings/demo-bando-sahil-seremonisi/cover.jpg',
+                'gallery_json' => [
+                    'storage/uploads/listings/demo-bando-sahil-seremonisi/gallery-1.jpg',
+                    'storage/uploads/listings/demo-bando-sahil-seremonisi/gallery-2.jpg',
+                    'storage/uploads/listings/demo-bando-sahil-seremonisi/gallery-3.jpg',
+                    'storage/uploads/listings/demo-bando-sahil-seremonisi/gallery-4.jpg',
+                ],
+                'features_json' => ['Karsilama seremonisi', 'Kortej girisi', 'Acilis fanfari'],
+                'meta_json' => [
+                    'fixture_layer' => 'review_demo',
+                    'fixture_key' => 'demo-bando-sahil-seremonisi',
+                    'fixture_media_source' => 'repo-storage',
+                ],
+                'attributes' => [
+                    'sure_dk' => ['value_text' => '90', 'normalized_value' => '90'],
+                    'enstruman_sayisi' => ['value_number' => 8.0, 'normalized_value' => '8'],
+                    'solist_sayisi' => ['value_number' => 2.0, 'normalized_value' => '2'],
+                    'solist_cinsiyeti' => ['value_text' => 'Karma', 'normalized_value' => 'karma'],
+                    'enstrumanlar' => ['value_text' => 'Trompet, Trombon, Saksafon', 'value_json' => ['trompet', 'trombon', 'saksafon']],
+                    'sahne_aldigi_yerler' => ['value_text' => 'Dugun, Acik Hava', 'value_json' => ['dugun', 'acik hava']],
+                    'kostum' => ['value_text' => 'Sapka, Papyon', 'value_json' => ['sapka', 'papyon']],
+                ],
+            ],
+        ],
+        'izmirorkestra.net' => [
+            [
+                'slug' => 'demo-bando-kordon-alayi',
+                'name' => 'Demo Bando Kordon Alayi',
+                'city' => 'Izmir',
+                'district' => 'Konak',
+                'summary' => 'Review demo fixture: kordon alayi akisi icin whitelist listing.',
+                'content' => 'Review demo fixture icerigi, design-preview tarafinda ikinci app parity kontrolu icin repo ici whitelist veri olarak korunur.',
+                'price_label' => '22.000 TL',
+                'phone' => '05320000002',
+                'whatsapp' => '905320000002',
+                'cover_image_path' => 'storage/uploads/listings/demo-bando-kordon-alayi/cover.jpg',
+                'gallery_json' => [
+                    'storage/uploads/listings/demo-bando-kordon-alayi/gallery-1.jpg',
+                    'storage/uploads/listings/demo-bando-kordon-alayi/gallery-2.jpg',
+                    'storage/uploads/listings/demo-bando-kordon-alayi/gallery-3.jpg',
+                    'storage/uploads/listings/demo-bando-kordon-alayi/gallery-4.jpg',
+                ],
+                'features_json' => ['Kordon girisi', 'Ritim seti', 'Rota uyumlu kortej'],
+                'meta_json' => [
+                    'fixture_layer' => 'review_demo',
+                    'fixture_key' => 'demo-bando-kordon-alayi',
+                    'fixture_media_source' => 'repo-storage',
+                ],
+                'attributes' => [
+                    'sure_dk' => ['value_text' => '120', 'normalized_value' => '120'],
+                    'enstruman_sayisi' => ['value_number' => 10.0, 'normalized_value' => '10'],
+                    'solist_sayisi' => ['value_number' => 1.0, 'normalized_value' => '1'],
+                    'solist_cinsiyeti' => ['value_text' => 'Erkek', 'normalized_value' => 'erkek'],
+                    'enstrumanlar' => ['value_text' => 'Davul, Trompet, Klarnet', 'value_json' => ['davul', 'trompet', 'klarnet']],
+                    'sahne_aldigi_yerler' => ['value_text' => 'Festival, Sokak Gosterisi', 'value_json' => ['festival', 'sokak gosterisi']],
+                    'kostum' => ['value_text' => 'Aski, Sapka', 'value_json' => ['aski', 'sapka']],
+                ],
+            ],
+        ],
+    ];
+
+    $sites = $requestedSite !== '' ? [$requestedSite] : array_keys($fixturesBySite);
+    [$category, $attributeMap] = $ensureBandoFixtureCatalog();
+
+    foreach ($sites as $site) {
+        $siteFixtures = $fixturesBySite[$site] ?? null;
+        if ($siteFixtures === null) {
+            $this->error("site gecersiz: $site");
+            return 1;
+        }
+
+        foreach ($siteFixtures as $fixture) {
+            $listing = Listing::query()->updateOrCreate(
+                ['slug' => $fixture['slug'], 'site' => $site],
+                [
+                    'site_scope' => 'single',
+                    'coverage_mode' => 'location_only',
+                    'name' => $fixture['name'],
+                    'status' => 'published',
+                    'category_id' => $category->id,
+                    'city' => $fixture['city'],
+                    'district' => $fixture['district'],
+                    'summary' => $fixture['summary'],
+                    'content' => $fixture['content'],
+                    'price_label' => $fixture['price_label'],
+                    'phone' => $fixture['phone'],
+                    'whatsapp' => $fixture['whatsapp'],
+                    'cover_image_path' => $fixture['cover_image_path'],
+                    'gallery_json' => $fixture['gallery_json'],
+                    'features_json' => $fixture['features_json'],
+                    'meta_json' => $fixture['meta_json'],
+                ]
+            );
+
+            $writeFixtureAttributeValues($listing, $attributeMap, $fixture['attributes']);
+            $this->line("review_demo_site=$site");
+            $this->line('review_demo_slug=' . $fixture['slug']);
+        }
+    }
+
+    return 0;
+})->purpose('Design-preview review icin whitelist bando demo fixture verisini smoke katmanindan ayri hazirlar');

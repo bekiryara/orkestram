@@ -1,20 +1,20 @@
 ﻿# Session Handoff (TR)
 
-Guncelleme Zamani: 2026-03-20 08:18
-Koordinator Branch: agent/codex/task-085
-Koordinator Task: TASK-085
+Guncelleme Zamani: 2026-03-20 09:00
+Koordinator Branch: agent/codex/task-086
+Koordinator Task: TASK-086
 
 ## Aktif Tasklar
-1. `TASK-085` - smoke gate thumb fallback hizasi ve locations manifest checksum/encoding stabilizasyonu kapanis asamasinda.
+1. `TASK-086` - baseline/smoke/review-demo fixture katmanlari ayrildi; commit ve upstream/pre-pr kapanis adimlari bekleniyor.
 
 ## Ajan / Worktree Durumu
 1. codex
    - Worktree: /home/bekir/orkestram-k
-   - Branch: agent/codex/task-085
-   - Aktif task: TASK-085
-   - Status ozeti: smoke gate kapak-gorsel-opsiyonel fallback ile repo gercegine hizalandi; locations snapshot manifest hash/encoding zinciri dogrulandi ve import komutu tekrar calisir hale getirildi
+   - Branch: agent/codex/task-086
+   - Aktif task: TASK-086
+   - Status ozeti: smoke listingleri `meta_json.fixture_layer=smoke` ile isaretlendi; `demo:prepare-bando-review-fixture` komutu ve parity testleri eklendi; `docs/DEMO_FIXTURE_STANDARD_TR.md` geri getirildi
    - Karar sinifi: koru
-   - Not: `pre-pr PASS`; kapanis icin worklog + lock + next-task + commit/push adimi kaldi.
+   - Not: Hedefli fixture testleri PASS, `validate PASS`; yeni branch icin upstream baglama ve `pre-pr` tekrar kosulacak.
 2. codex-a
    - Worktree: /home/bekir/orkestram-a
    - Branch: agent/codex-a/task-084
@@ -39,19 +39,19 @@ Koordinator Task: TASK-085
 
 ## Preview / Source Durumu
 1. Bu oturum UI gorevi degil; preview lane kaniti gerekmiyor.
-2. Stabilizasyon kapanisinda urun runtime'i ve resmi gate tekrar yesile cekildi.
+2. Review demo fixture komutu design-preview hazirligi icin yazildi ama bu taskta UI review acilmadi.
 
 ## Bugun Alinan Kararlar
-1. Smoke gate'in admin listing thumb kontrolu, kapak gorseli olmayan seed/fixture listinglerini gereksiz urun hatasi gibi fail saymayacak sekilde hizalandi.
-2. `locations_v1` snapshot manifest hash zincirinin repo dosyalariyla uyumsuz oldugu kanitlandi ve gercek snapshot hash'leri esas alinarak duzeltildi.
-3. Lokasyon sozlugu deterministic snapshot uzerinden tekrar import edildi; root MySQL kaniti ile `81/973/31855` sayilari dogrulandi.
+1. `baseline`, `smoke` ve `review_demo` fixture katmanlari yeni komut/standart ayrimiyla resmi hale getirildi.
+2. `TASK-075` lock'unda referans verilen ama HEAD'de olmayan `docs/DEMO_FIXTURE_STANDARD_TR.md` dosyasi yeniden kuruldu.
+3. `apply_patch` sandbox kirigi nedeniyle shell fallback kullanildi; degisiklikler tekrar okunup hedefli testlerle dogrulandi.
 
 ## Acik Riskler
-1. Shared DB icinde baseline seed + smoke fixture birlikte duruyor; review/demo fixture ayrimi halen sonraki temizlestirme konusu.
-2. `locations:import` varsayilan path'i container icinde repo docs mount'u gormediginden dogrudan default path ile calismiyor; operasyonel kullanimda snapshot yolu acik verilmelidir.
-3. Koordinator worktree kapanis commit/push sonrasi tekrar `agent-status` ile temiz dogrulanmali.
+1. `scripts/agent-status.ps1` false-positive kirli status raporlamaya devam ediyor; kaynak gercek olarak WSL `git status --short` baz alinmali.
+2. `izmirorkestra/storage` host path'i izin sinirli; review demo medya path'leri repo-sozlesmesiyle yazildi, fiziksel medya parity'si ayri operasyon konusu olabilir.
+3. `pre-pr` ilk denemede upstream yok diye fail verdi; yeni branch icin `push -u origin agent/codex/task-086` sonrasi tekrar kosulacak.
 
 ## Sonraki Adim
-1. TASK-085 worklog, lock ve pano kapanisi tamamlanacak.
-2. Stabilizasyon commit'i alinip pushlanacak.
-3. Sonra fixture katmanlarini ayiran bir sonraki temiz task karari verilecek.
+1. TASK-086 implementation commit'i alinacak.
+2. `git push -u origin agent/codex/task-086` ile upstream baglanacak.
+3. `pre-pr` tekrar kosulup mekanik kapanis `close-task.ps1` ile tamamlanacak.
