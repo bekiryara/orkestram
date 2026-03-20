@@ -71,14 +71,14 @@ Baslangic: `2026-03-20 08:08`
 - [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - [x] Goreve ozel test/komut sonucu
 - [x] `Edit Source == Mount Source` kaniti
-- [ ] Commit hash
+- [x] Commit hash
 
 ## Kapanis Adimlari
 - [x] Task kartindaki checklistler gercek sonuca gore guncellendi
 - [x] `docs/WORKLOG.md` guncellendi
 - [x] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
 - [x] `docs/NEXT_TASK.md` panosu guncellendi
-- [ ] Branch pushlandi
+- [x] Branch pushlandi
 
 ## Komutlar
 ```powershell
@@ -92,3 +92,6 @@ wsl -e bash -lc "cd /home/bekir/orkestram-k/local-rebuild && docker compose exec
 - `locations:import` varsayilan path'i container icinde repo docs klasorunu gormedigi icin snapshot `/tmp/locations_v1` altina kopyalanarak calistirildi.
 - Importer hash guvencesi aktif oldugu icin bozuk manifest degil, gercek snapshot hash'leri esas alinmistir.
 
+
+## Teslim Notu
+- Delivery commit hash: `ac6933a`
