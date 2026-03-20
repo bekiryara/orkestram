@@ -1,6 +1,6 @@
-# TASK-088
+﻿# TASK-088
 
-Durum: `DOING`
+Durum: `DONE`
 Ajan: `codex`
 Branch: `agent/codex/task-088`
 Baslangic: `2026-03-20 18:34`
@@ -87,14 +87,14 @@ Baslangic: `2026-03-20 18:34`
   - `docker exec orkestram-local-web php artisan local:prepare-account-fixture` -> `PASS`
   - `docker exec izmirorkestra-local-web php artisan local:prepare-account-fixture` -> `PASS`
 - [x] `Edit Source == Mount Source` kaniti `n/a (UI gorevi degil)`
-- [ ] Commit hash
+- [x] Commit hash (`d832d22`)
 
 ## Kapanis Adimlari
-- [ ] Task kartindaki checklistler gercek sonuca gore guncellendi
-- [ ] `docs/WORKLOG.md` guncellendi
-- [ ] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
-- [ ] `docs/NEXT_TASK.md` panosu guncellendi
-- [ ] Branch pushlandi
+- [x] Task kartindaki checklistler gercek sonuca gore guncellendi
+- [x] `docs/WORKLOG.md` guncellendi
+- [x] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
+- [x] `docs/NEXT_TASK.md` panosu guncellendi
+- [x] Branch pushlandi
 
 ## Komutlar
 ```powershell
@@ -110,3 +110,5 @@ powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-088
 - En buyuk risk, recovery komutunun reset yaptigi varsayimiyla calistirilmasi olur; mevcut tasarim yalniz var olan DB uzerinde idempotent hazirlama yapar.
 - `scripts/smoke-test.ps1` icindeki helper daha once tum komutlara zorunlu `--site` ekliyordu; bu task ile ortak helper yalniz ihtiyac oldugunda `--site` gonderir hale getirildi.
 - Repo genelindeki `Zone.Identifier` metadata silinmeleri bu taskin kapsami degildir; kapanis kanitlari TASK-088 dosya seti ve `pre-pr PASS` uzerinden alinmistir.
+
+
