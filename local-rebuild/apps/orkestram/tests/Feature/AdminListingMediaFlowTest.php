@@ -87,7 +87,7 @@ class AdminListingMediaFlowTest extends TestCase
             'slug' => 'sirala-sil-test',
             'name' => 'Sirala Sil Test',
             'price_min' => 10000,
-            'price_max' => 16000,
+            'price_max' => '',
             'currency' => 'USD',
             'price_type' => 'starting_from',
             'gallery_order' => json_encode([
@@ -241,3 +241,5 @@ class AdminListingMediaFlowTest extends TestCase
         ];
     }
 }
+
+

@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Listing extends Model
 {
+    public const SIMPLE_PRICE_TYPES = [
+        'fixed',
+        'starting_from',
+        'range',
+        'hourly',
+        'daily',
+    ];
+
     protected $fillable = [
         'site',
         'owner_user_id',
@@ -79,31 +87,40 @@ class Listing extends Model
                 return;
             }
 
-            if ($hasPriceLabelInput) {
-                $listing->price_label = self::normalizeText($priceLabelInput);
-            }
-
             if ($hasStructuredInput) {
                 $listing->price_min = self::normalizeMoney($priceMinInput);
                 $listing->price_max = self::normalizeMoney($priceMaxInput);
+                $listing->price_type = self::normalizePriceType($priceTypeInput);
+
+                if ($listing->price_type !== 'range') {
+                    $listing->price_max = null;
+                }
 
                 $currency = self::normalizeCurrency($currencyInput);
                 if ($currency === null && ($listing->price_min !== null || $listing->price_max !== null)) {
                     $currency = 'TRY';
                 }
                 $listing->currency = $currency;
-                $listing->price_type = self::normalizePriceType($priceTypeInput);
-            }
 
-            if (self::normalizeText($listing->price_label) === null) {
                 $listing->price_label = self::buildPriceLabel(
                     $listing->price_min !== null ? (float) $listing->price_min : null,
                     $listing->price_max !== null ? (float) $listing->price_max : null,
                     self::normalizeCurrency($listing->currency),
                     self::normalizePriceType($listing->price_type)
-                );
+                ) ?? self::normalizeText($priceLabelInput) ?? self::normalizeText($listing->price_label);
+
+                return;
+            }
+
+            if ($hasPriceLabelInput) {
+                $listing->price_label = self::normalizeText($priceLabelInput);
             }
         });
+    }
+
+    public static function simplePriceTypes(): array
+    {
+        return self::SIMPLE_PRICE_TYPES;
     }
 
     public function category(): BelongsTo
@@ -272,11 +289,6 @@ class Listing extends Model
 
     public function displayPriceLabel(string $fallback = 'Iletisim ile netlesir'): string
     {
-        $label = self::normalizeText($this->price_label);
-        if ($label !== null) {
-            return $label;
-        }
-
         $built = self::buildPriceLabel(
             $this->price_min !== null ? (float) $this->price_min : null,
             $this->price_max !== null ? (float) $this->price_max : null,
@@ -284,7 +296,16 @@ class Listing extends Model
             self::normalizePriceType($this->price_type)
         );
 
-        return $built ?? $fallback;
+        if ($built !== null) {
+            return $built;
+        }
+
+        $label = self::normalizeText($this->price_label);
+        if ($label !== null) {
+            return $label;
+        }
+
+        return $fallback;
     }
 
     private static function normalizeText(mixed $value): ?string
@@ -339,8 +360,7 @@ class Listing extends Model
             return null;
         }
 
-        $allowed = ['fixed', 'starting_from', 'range', 'hourly', 'daily', 'label_only'];
-        return in_array($raw, $allowed, true) ? $raw : null;
+        return in_array($raw, self::simplePriceTypes(), true) ? $raw : null;
     }
 
     private static function buildPriceLabel(?float $min, ?float $max, ?string $currency, ?string $priceType): ?string
@@ -355,6 +375,14 @@ class Listing extends Model
 
         if ($priceType === 'starting_from' && $minText !== null) {
             return $minText . ' ' . $currency . " 'den baslar";
+        }
+
+        if ($priceType === 'hourly' && $minText !== null) {
+            return $minText . ' ' . $currency . ' / saat';
+        }
+
+        if ($priceType === 'daily' && $minText !== null) {
+            return $minText . ' ' . $currency . ' / gun';
         }
 
         if ($minText !== null && $maxText !== null) {
@@ -375,4 +403,3 @@ class Listing extends Model
         return $formatted;
     }
 }
-

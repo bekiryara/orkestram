@@ -110,31 +110,7 @@ class OwnerDashboardController extends Controller
             abort(403);
         }
 
-        $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'slug' => ['nullable', 'string', 'max:255', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'],
-            'category_id' => ['nullable', 'integer', Rule::exists('categories', 'id')->where(fn($q) => $q->where('is_active', true))],
-            'city_id' => ['required', 'integer', Rule::exists('cities', 'id')],
-            'district_id' => ['required', 'integer', Rule::exists('districts', 'id')],
-            'neighborhood_id' => ['required', 'integer', Rule::exists('neighborhoods', 'id')],
-            'avenue_name' => ['required', 'string', 'max:180'],
-            'street_name' => ['required', 'string', 'max:180'],
-            'building_no' => ['required', 'string', 'max:40'],
-            'unit_no' => ['required', 'string', 'max:40'],
-            'address_note' => ['nullable', 'string', 'max:255'],
-            'service_type' => ['nullable', 'string', 'max:120'],
-            'price_label' => ['nullable', 'string', 'max:120'],
-            'coverage_mode' => ['required', 'in:location_only,service_area_only,hybrid'],
-            'service_areas_text' => ['nullable', 'string', 'max:4000'],
-            'phone' => ['nullable', 'string', 'max:64'],
-            'whatsapp' => ['nullable', 'string', 'max:64'],
-            'summary' => ['nullable', 'string', 'max:5000'],
-            'content' => ['nullable', 'string', 'max:20000'],
-            'cover_image' => ['nullable', 'image', 'max:5120'],
-            'gallery_images' => ['nullable', 'array'],
-            'gallery_images.*' => ['nullable', 'image', 'max:5120'],
-        ]);
-
+        $data = $this->validateListingPayload($request);
         [$cityName, $districtName] = $this->assertValidLocationSelection($data);
 
         $site = $this->context->site($request);
@@ -167,7 +143,10 @@ class OwnerDashboardController extends Controller
             'unit_no' => trim((string) $data['unit_no']),
             'address_note' => isset($data['address_note']) ? trim((string) $data['address_note']) : null,
             'service_type' => $data['service_type'] ?? null,
-            'price_label' => $data['price_label'] ?? null,
+            'price_min' => $data['price_min'] ?? null,
+            'price_max' => $data['price_max'] ?? null,
+            'currency' => $data['currency'],
+            'price_type' => $data['price_type'],
             'coverage_mode' => $data['coverage_mode'],
             'phone' => $data['phone'] ?? null,
             'whatsapp' => $data['whatsapp'] ?? null,
@@ -223,35 +202,7 @@ class OwnerDashboardController extends Controller
         ListingCoverageService $coverageService
     ): RedirectResponse
     {
-        $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'category_id' => ['nullable', 'integer', Rule::exists('categories', 'id')->where(fn($q) => $q->where('is_active', true))],
-            'city_id' => ['required', 'integer', Rule::exists('cities', 'id')],
-            'district_id' => ['required', 'integer', Rule::exists('districts', 'id')],
-            'neighborhood_id' => ['required', 'integer', Rule::exists('neighborhoods', 'id')],
-            'avenue_name' => ['required', 'string', 'max:180'],
-            'street_name' => ['required', 'string', 'max:180'],
-            'building_no' => ['required', 'string', 'max:40'],
-            'unit_no' => ['required', 'string', 'max:40'],
-            'address_note' => ['nullable', 'string', 'max:255'],
-            'service_type' => ['nullable', 'string', 'max:120'],
-            'price_label' => ['nullable', 'string', 'max:120'],
-            'coverage_mode' => ['required', 'in:location_only,service_area_only,hybrid'],
-            'service_areas_text' => ['nullable', 'string', 'max:4000'],
-            'phone' => ['nullable', 'string', 'max:64'],
-            'whatsapp' => ['nullable', 'string', 'max:64'],
-            'summary' => ['nullable', 'string', 'max:5000'],
-            'content' => ['nullable', 'string', 'max:20000'],
-            'remove_cover_image' => ['nullable', 'in:1'],
-            'cover_image' => ['nullable', 'image', 'max:5120'],
-            'gallery_images' => ['nullable', 'array'],
-            'gallery_images.*' => ['nullable', 'image', 'max:5120'],
-            'remove_gallery' => ['nullable', 'array'],
-            'remove_gallery.*' => ['nullable', 'string', 'max:255'],
-            'gallery_order' => ['nullable', 'string', 'max:10000'],
-            'reset_gallery' => ['nullable', 'in:1'],
-        ]);
-
+        $data = $this->validateListingPayload($request);
         [$cityName, $districtName] = $this->assertValidLocationSelection($data);
         $this->attributeService->validateForCategory($request, isset($data['category_id']) ? (int) $data['category_id'] : 0);
 
@@ -270,7 +221,10 @@ class OwnerDashboardController extends Controller
             'unit_no' => trim((string) $data['unit_no']),
             'address_note' => isset($data['address_note']) ? trim((string) $data['address_note']) : null,
             'service_type' => $data['service_type'] ?? null,
-            'price_label' => $data['price_label'] ?? null,
+            'price_min' => $data['price_min'] ?? null,
+            'price_max' => $data['price_max'] ?? null,
+            'currency' => $data['currency'],
+            'price_type' => $data['price_type'],
             'coverage_mode' => $data['coverage_mode'],
             'phone' => $data['phone'] ?? null,
             'whatsapp' => $data['whatsapp'] ?? null,
@@ -310,6 +264,78 @@ class OwnerDashboardController extends Controller
         ]);
 
         return back()->with('ok', 'Lead guncellendi.');
+    }
+
+    private function validateListingPayload(Request $request): array
+    {
+        if ($request->filled('currency')) {
+            $request->merge(['currency' => strtoupper(trim((string) $request->input('currency')))]);
+        }
+
+        $validator = validator($request->all(), $this->listingRules($request));
+        $validator->after(function ($validator) use ($request): void {
+            $this->validatePricing($request, $validator);
+        });
+
+        return $validator->validate();
+    }
+
+    private function listingRules(Request $request): array
+    {
+        return [
+            'name' => ['required', 'string', 'max:255'],
+            'slug' => ['nullable', 'string', 'max:255', 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/'],
+            'category_id' => ['nullable', 'integer', Rule::exists('categories', 'id')->where(fn($q) => $q->where('is_active', true))],
+            'city_id' => ['required', 'integer', Rule::exists('cities', 'id')],
+            'district_id' => ['required', 'integer', Rule::exists('districts', 'id')],
+            'neighborhood_id' => ['required', 'integer', Rule::exists('neighborhoods', 'id')],
+            'avenue_name' => ['required', 'string', 'max:180'],
+            'street_name' => ['required', 'string', 'max:180'],
+            'building_no' => ['required', 'string', 'max:40'],
+            'unit_no' => ['required', 'string', 'max:40'],
+            'address_note' => ['nullable', 'string', 'max:255'],
+            'service_type' => ['nullable', 'string', 'max:120'],
+            'price_label' => ['nullable', 'string', 'max:120'],
+            'price_type' => ['required', Rule::in(Listing::simplePriceTypes())],
+            'price_min' => ['nullable', 'numeric', 'min:0', Rule::requiredIf(fn() => $this->selectedPriceType($request) !== null)],
+            'price_max' => ['nullable', 'numeric', 'min:0', Rule::requiredIf(fn() => $this->selectedPriceType($request) === 'range')],
+            'coverage_mode' => ['required', 'in:location_only,service_area_only,hybrid'],
+            'currency' => ['required', 'string', 'size:3'],
+            'service_areas_text' => ['nullable', 'string', 'max:4000'],
+            'phone' => ['nullable', 'string', 'max:64'],
+            'whatsapp' => ['nullable', 'string', 'max:64'],
+            'summary' => ['nullable', 'string', 'max:5000'],
+            'content' => ['nullable', 'string', 'max:20000'],
+            'cover_image' => ['nullable', 'image', 'max:5120'],
+            'gallery_images' => ['nullable', 'array'],
+            'gallery_images.*' => ['nullable', 'image', 'max:5120'],
+            'remove_cover_image' => ['nullable', 'in:1'],
+            'remove_gallery' => ['nullable', 'array'],
+            'remove_gallery.*' => ['nullable', 'string', 'max:255'],
+            'gallery_order' => ['nullable', 'string', 'max:10000'],
+            'reset_gallery' => ['nullable', 'in:1'],
+        ];
+    }
+
+    private function selectedPriceType(Request $request): ?string
+    {
+        $value = trim((string) $request->input('price_type', ''));
+        return $value === '' ? null : $value;
+    }
+
+    private function validatePricing(Request $request, $validator): void
+    {
+        $priceType = $this->selectedPriceType($request);
+        $priceMin = $request->input('price_min');
+        $priceMax = $request->input('price_max');
+
+        if ($priceType !== 'range' && $priceMax !== null && trim((string) $priceMax) !== '') {
+            $validator->errors()->add('price_max', 'Maksimum fiyat yalniz fiyat araligi secildiginde girilir.');
+        }
+
+        if ($priceType === 'range' && is_numeric((string) $priceMin) && is_numeric((string) $priceMax) && (float) $priceMax < (float) $priceMin) {
+            $validator->errors()->add('price_max', 'Maksimum fiyat minimum fiyattan kucuk olamaz.');
+        }
     }
 
     private function uniqueSlugForSite(string $site, string $baseSlug): string
@@ -373,4 +399,6 @@ class OwnerDashboardController extends Controller
         return [(string) $city->name, (string) $district->name];
     }
 }
+
+
 

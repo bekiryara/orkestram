@@ -1,27 +1,27 @@
-﻿# Session Handoff (TR)
+# Session Handoff (TR)
 
-Guncelleme Zamani: 2026-03-21 06:46
-Koordinator Branch: agent/codex/task-091
-Koordinator Task: TASK-091
+Guncelleme Zamani: 2026-03-22 02:25
+Koordinator Branch: agent/codex/task-092
+Koordinator Task: TASK-092
 
 ## Aktif Tasklar
-1. `YOK` - aktif koordinasyon gorevi bulunmuyor.
+1. `TASK-092` - SimplePricingV1 validation ve UI sadelestirme: `price_type` bazli kurallar, owner-admin parity ve `label_only` temizligi
 
 ## Ajan / Worktree Durumu
 1. codex
    - Worktree: /home/bekir/orkestram-k
-   - Branch: agent/codex/task-091
-   - Aktif task: yok
-   - Status ozeti: TASK-091 merge treni tamamlandi; `TASK-085`, `TASK-086`, `TASK-087`, `TASK-088` ve `TASK-090` zinciri entegre edilip `main`e fast-forward edildi ve `origin/main`e pushlandi.
+   - Branch: agent/codex/task-092
+   - Aktif task: `TASK-092`
+   - Status ozeti: Resmi task acilisi yapildi; `TASK-092` yalniz Orkestram icinde SimplePricingV1 validation ve form sadelestirme sinirini kilitleyecek.
    - Karar sinifi: koru
-   - Not: Merge conflictleri yalniz `docs/NEXT_TASK.md` ve `docs/TASK_LOCKS.md` tarafinda goruldu; urun/runtime dosyalarinda manuel conflict cozumune gerek kalmadi.
+   - Not: Bu turda kod degisikligine henuz gecilmedi; once task karti ve koordinasyon kayitlari repo disiplinine gore normalize ediliyor.
 2. codex-a
    - Worktree: /home/bekir/orkestram-a
    - Branch: agent/codex-a/task-084
    - Aktif task: yok
    - Status ozeti: temiz
    - Karar sinifi: koru
-   - Not: `TASK-056` branch'i `main` icinde oldugu icin merge trenine alinmadi.
+   - Not: `TASK-056` branch ref'i halen gorunse de `main` icinde oldugu merge-base kanitiyla tekrar dogrulandi.
 3. codex-b
    - Worktree: /home/bekir/orkestram-b
    - Branch: agent/codex-b/task-074
@@ -38,18 +38,18 @@ Koordinator Task: TASK-091
    - Not: Bu turde degisiklik yok.
 
 ## Preview / Source Durumu
-1. Bu oturum UI gorevi degil; preview lane kaniti gerekmiyor.
-2. Merge sonrasi runtime sagligi `pre-pr -Mode quick` icindeki validate + smoke zinciri ile dogrulandi.
+1. Bu task UI review gorevi degil; `design-preview` lane gerekmiyor.
+2. WSL hizalama kaniti alindi: `/home/bekir/orkestram-k`, branch `agent/codex/task-092`.
 
 ## Bugun Alinan Kararlar
-1. `TASK-085 -> TASK-090` zinciri tek merge taski altinda toplandi ve `TASK-091` olarak ana hatta tasindi.
-2. `TASK-056` merge adayi sayilmadi; branch'in zaten `main` icinde oldugu kanitlandi.
-3. DB/seeder riski destructive reset degil fixture/recovery sinifi olarak degerlendirildi; merge sonrasi smoke ile dogrulama zorunlu tutuldu.
+1. StructuredPricingV1 uygulamasina gecmeden once SimplePricingV1 siniri resmi task zinciriyle kilitlenecek.
+2. `TASK-092` yalniz validation ve form sadelestirmesini kapsayacak; publish guard ve islem aninda fiyat baglama sonraki tasklara kalacak.
+3. `agent/codex-a/task-056` yerel branch ref'i `main`e merge edilmemis risk olarak ele alinmayacak; `main` icinde oldugu tekrar kanitlandi.
 
 ## Acik Riskler
 1. WSL `credential.helper=manager-core` zinciri bu worktreede halen kirik; yeni upstream push turlarinda Windows Git fallback gerekebilir.
-2. Merge treniyle gelen merkezi belge kapanislari tarihsel olarak buyudu; yeni task acarken stale branch yerine aktif runtime ihtiyacina gore secim yapilmali.
-3. `TASK-090` structured pricing davranisi main runtime'a indi; canli kontrol ihtiyacinda liste filtre/sort ve detail JSON-LD davranisi tekrar manuel gozden gecirilmeli.
+2. Admin ve owner fiyat formlari bugun farkli beklentiler tasiyor; task 092'de bu farklar kapanirken test kapsaminda ek dogrulama gerekecek.
+3. SimplePricingV1 siniri task 092 ile kapanmaz; task 093 ve task 094 tamamlanmadan is akisinda gri alan kalabilir.
 
 ## Sonraki Adim
-1. Yeni urun ihtiyaci icin koordinator karariyla yeni task acilabilir; merge treni tamamlanmistir.
+1. `TASK-092` karti normalize edildikten sonra Orkestram simple pricing write-path'i satir bazli okunup implementasyon baslatilacak.

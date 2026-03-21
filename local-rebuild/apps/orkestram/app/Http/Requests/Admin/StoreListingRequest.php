@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use App\Models\City;
 use App\Models\District;
+use App\Models\Listing;
 use App\Models\Neighborhood;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
@@ -20,6 +21,10 @@ class StoreListingRequest extends FormRequest
     {
         if ($this->filled('slug')) {
             $this->merge(['slug' => Str::slug((string) $this->input('slug'))]);
+        }
+
+        if ($this->filled('currency')) {
+            $this->merge(['currency' => strtoupper(trim((string) $this->input('currency')))]);
         }
     }
 
@@ -57,7 +62,11 @@ class StoreListingRequest extends FormRequest
             'unit_no' => ['required', 'string', 'max:40'],
             'address_note' => ['nullable', 'string', 'max:255'],
             'service_type' => ['nullable', 'string', 'max:120'],
-            'price_label' => ['required', 'string', 'max:120'],
+            'price_label' => ['nullable', 'string', 'max:120'],
+            'price_type' => ['required', Rule::in(Listing::simplePriceTypes())],
+            'price_min' => ['nullable', 'numeric', 'min:0', Rule::requiredIf(fn() => $this->selectedPriceType() !== null)],
+            'price_max' => ['nullable', 'numeric', 'min:0', Rule::requiredIf(fn() => $this->selectedPriceType() === 'range')],
+            'currency' => ['required', 'string', 'size:3'],
             'summary' => ['required', 'string', 'min:30', 'max:500'],
             'content' => ['required', 'string', 'min:80'],
             'whatsapp' => ['nullable', 'string', 'max:32'],
@@ -109,6 +118,29 @@ class StoreListingRequest extends FormRequest
             if (!$isValidNeighborhood) {
                 $validator->errors()->add('neighborhood_id', 'Secilen mahalle il/ilce ile uyumlu degil.');
             }
+
+            $this->validatePricing($validator);
         });
+    }
+
+    private function selectedPriceType(): ?string
+    {
+        $value = trim((string) $this->input('price_type', ''));
+        return $value === '' ? null : $value;
+    }
+
+    private function validatePricing($validator): void
+    {
+        $priceType = $this->selectedPriceType();
+        $priceMin = $this->input('price_min');
+        $priceMax = $this->input('price_max');
+
+        if ($priceType !== 'range' && $priceMax !== null && trim((string) $priceMax) !== '') {
+            $validator->errors()->add('price_max', 'Maksimum fiyat yalniz fiyat araligi secildiginde girilir.');
+        }
+
+        if ($priceType === 'range' && is_numeric((string) $priceMin) && is_numeric((string) $priceMax) && (float) $priceMax < (float) $priceMin) {
+            $validator->errors()->add('price_max', 'Maksimum fiyat minimum fiyattan kucuk olamaz.');
+        }
     }
 }

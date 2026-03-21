@@ -1,4 +1,4 @@
-ï»¿# WORKLOG (Gunluk Is Kaydi)
+# WORKLOG (Gunluk Is Kaydi)
 
 Bu dosyada her ajan turu icin tek kayit acilir.  
 Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
@@ -20,6 +20,27 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS | FAIL`
 - Not:
   - Risk, geri alma notu veya kalan is
+
+---
+### [2026-03-22 02:25] TASK-092 resmi acilis ve kapsam kilidi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `TASK-092` resmi olarak `agent/codex/task-092` branch'i uzerinde acildi ve aktif lock kaydi dogrulandi.
+  - Task karti placeholder durumdan cikarilip SimplePricingV1 validation, admin-owner parity ve `label_only` temizligi kapsamiyla netlestirildi.
+  - Session handoff kaydi yeni aktif goreve gore guncellendi; bu taskin StructuredPricingV1 veya fiyat baglama taski olmadigi acik yazildi.
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-092.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && pwd && git rev-parse --show-toplevel && git branch --show-current && git status --short"`
+  - `Get-Content docs/tasks/TASK-092.md`
+  - `Get-Content docs/TASK_LOCKS.md`
+  - `Get-Content docs/NEXT_TASK.md`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Kod degisikligine henuz gecilmedi; bu kayit yalniz resmi acilis ve kapsam kilidi icindir.`
 
 ---
 
@@ -1738,7 +1759,7 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Is Ozeti:
   - `AJAN-B owner branch'te merge sonrasi preview/runtime lifecycle standardini tamamladi.`
   - `Review URL / Final URL ayrimi, design-preview lane davranisi ve runtime refresh kaniti dokumanlara islendi.`
-  - `Agent teslim kaniti 4f95fa0 commit hash'i ve pre-pr PASS olarak merkezi kayitlara aktarÄ±ldi.`
+  - `Agent teslim kaniti 4f95fa0 commit hash'i ve pre-pr PASS olarak merkezi kayitlara aktarýldi.`
 - Degisen Dosyalar:
   - `docs/TASK_LOCKS.md`
   - `docs/NEXT_TASK.md`
@@ -1760,7 +1781,7 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Is Ozeti:
   - `AJAN-C owner branch'te deterministic demo fixture standardini tamamladi.`
   - `Whitelist slug, repo ici medya kaynagi, idempotent update ve smoke/test ayrimi net kurala baglandi.`
-  - `Agent teslim kaniti 8351cba commit hash'i ve pre-pr PASS olarak merkezi kayitlara aktarÄ±ldi.`
+  - `Agent teslim kaniti 8351cba commit hash'i ve pre-pr PASS olarak merkezi kayitlara aktarýldi.`
 - Degisen Dosyalar:
   - `docs/TASK_LOCKS.md`
   - `docs/NEXT_TASK.md`
@@ -1923,7 +1944,7 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Sorumlu: `codex`
 - Is Ozeti:
   - `Paket 01 owner service area / coverage write-path isi repo disiplinine gore TASK-079 olarak acildi.`
-  - `Dar lock kapsamÄ± yalniz owner controller, owner create/edit view ve owner flow test alanina indirildi.`
+  - `Dar lock kapsamý yalniz owner controller, owner create/edit view ve owner flow test alanina indirildi.`
   - `Uygulama gorevi koordinator tarafinda degil, `codex-a` ajanina devredildi.`
 - Degisen Dosyalar:
   - `docs/tasks/TASK-079.md`
@@ -2120,7 +2141,7 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
 - Sonuc:
   - `PASS`
 - Not:
-  - `Bu task ortamsal guardrail standardini resmileÅŸtirdi; WSL credential helper ve start-task UNC davranisinin mekanik sertlestirmesi gerekirse ayrik operasyon taskina acilabilir.`
+  - `Bu task ortamsal guardrail standardini resmileþtirdi; WSL credential helper ve start-task UNC davranisinin mekanik sertlestirmesi gerekirse ayrik operasyon taskina acilabilir.`
 
 ---
 
@@ -2313,3 +2334,5 @@ PASS
 `
 - Not:
   - `TASK-056 ana hatta zaten dahil oldugu icin merge trenine alinmadi`
+
+

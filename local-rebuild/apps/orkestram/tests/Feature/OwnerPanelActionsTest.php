@@ -108,7 +108,7 @@ class OwnerPanelActionsTest extends TestCase
         ])->assertForbidden();
     }
 
-    public function test_owner_listing_create_and_update_syncs_coverage_mode_and_service_areas(): void
+    public function test_owner_listing_create_and_update_syncs_coverage_mode_and_simple_pricing(): void
     {
         $ownerRole = Role::create(['slug' => 'listing_owner', 'name' => 'Owner', 'is_active' => true]);
         $city = City::create(['name' => 'Izmir', 'slug' => 'izmir', 'sort_order' => 1]);
@@ -148,6 +148,9 @@ class OwnerPanelActionsTest extends TestCase
             'building_no' => '11',
             'unit_no' => '4',
             'service_type' => 'Dugun Muzik',
+            'price_type' => 'fixed',
+            'price_min' => '15000',
+            'currency' => 'TRY',
             'coverage_mode' => 'hybrid',
             'service_area_city_ids' => [(string) $serviceCity->id],
             'service_area_district_ids' => [(string) $serviceDistrict->id],
@@ -159,6 +162,10 @@ class OwnerPanelActionsTest extends TestCase
         $listing->load('serviceAreas');
 
         $this->assertSame('hybrid', $listing->coverage_mode);
+        $this->assertSame('fixed', $listing->price_type);
+        $this->assertSame('15000.00', $listing->price_min);
+        $this->assertNull($listing->price_max);
+        $this->assertSame('15000 TRY', $listing->price_label);
         $this->assertCount(1, $listing->serviceAreas);
         $this->assertSame('Manisa', $listing->serviceAreas->first()->city);
         $this->assertSame('Sehzadeler', $listing->serviceAreas->first()->district);
@@ -166,6 +173,7 @@ class OwnerPanelActionsTest extends TestCase
         $this->get('/owner/listings/' . $listing->id . '/edit')
             ->assertOk()
             ->assertSee('name="coverage_mode"', false)
+            ->assertSee('name="price_type"', false)
             ->assertSee("data-selected='[\"{$serviceCity->id}\"]'", false)
             ->assertSee("data-selected='[\"{$serviceDistrict->id}\"]'", false);
 
@@ -181,7 +189,10 @@ class OwnerPanelActionsTest extends TestCase
             'unit_no' => '4',
             'address_note' => '',
             'service_type' => 'Dugun Muzik',
-            'price_label' => '',
+            'price_type' => 'range',
+            'price_min' => '18000',
+            'price_max' => '24000',
+            'currency' => 'TRY',
             'coverage_mode' => 'service_area_only',
             'phone' => '',
             'whatsapp' => '',
@@ -195,9 +206,12 @@ class OwnerPanelActionsTest extends TestCase
         $listing->refresh()->load('serviceAreas');
 
         $this->assertSame('service_area_only', $listing->coverage_mode);
+        $this->assertSame('range', $listing->price_type);
+        $this->assertSame('18000.00', $listing->price_min);
+        $this->assertSame('24000.00', $listing->price_max);
+        $this->assertSame('18000 - 24000 TRY', $listing->price_label);
         $this->assertCount(1, $listing->serviceAreas);
         $this->assertSame('Manisa', $listing->serviceAreas->first()->city);
         $this->assertSame('', $listing->serviceAreas->first()->district);
     }
 }
-
