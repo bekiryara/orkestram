@@ -2185,3 +2185,22 @@ PASS
 `
 - Not:
   - `n/a`
+
+---
+
+### [2026-03-20 09:11] TASK-086 Fixture Layer Separation
+- Sorumlu: `
+codex
+`
+- Is Ozeti:
+  - `Smoke listingleri meta_json.fixture_layer ile isaretlendi,Review demo icin ayrik whitelist komutu ve parity testleri eklendi,Eksik DEMO fixture standardi dokumani repo icine geri getirildi`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-086.md,docs/DEMO_FIXTURE_STANDARD_TR.md,local-rebuild/apps/orkestram/routes/console.php,local-rebuild/apps/izmirorkestra/routes/console.php,local-rebuild/apps/orkestram/tests/Feature/FixtureCommandTest.php,local-rebuild/apps/izmirorkestra/tests/Feature/FixtureCommandTest.php`
+- Calistirilan Komutlar:
+  - `docker exec orkestram-local-web php artisan test --filter=FixtureCommandTest,docker exec izmirorkestra-local-web php artisan test --filter=FixtureCommandTest,powershell -ExecutionPolicy Bypass -File scripts/validate.ps1 -App both,powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `
+PASS
+`
+- Not:
+  - `apply_patch sandbox kirigi nedeniyle shell fallback ile kontrollu yazim yapildi,upstream git push -u origin agent/codex/task-086 ile baglandi`
