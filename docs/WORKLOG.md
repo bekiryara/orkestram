@@ -2294,3 +2294,22 @@ PASS
 `
 - Not:
   - `WSL manager-core helper kirigi nedeniyle upstream push Windows Git fallback ile tamamlandi`
+
+---
+
+### [2026-03-21 06:43] TASK-091 merge train integration
+- Sorumlu: `
+codex
+`
+- Is Ozeti:
+  - `TASK-085, TASK-086, TASK-087, TASK-088 ve TASK-090 zinciri tek merge branchte entegre edildi,merge conflictleri yalniz merkezi koordinasyon dosyalarinda cozuldu,pre-pr quick PASS alindi ve main fast-forward edilip pushlandi`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-091.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/SESSION_HANDOFF_TR.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick,git -C \\\\wsl$\\Ubuntu\\home\\bekir\\orkestram-k push origin main`
+- Sonuc:
+  - `
+PASS
+`
+- Not:
+  - `TASK-056 ana hatta zaten dahil oldugu icin merge trenine alinmadi`

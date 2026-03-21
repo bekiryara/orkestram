@@ -1,6 +1,6 @@
 ﻿# TASK-091
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex`  
 Branch: `agent/codex/task-091`  
 Baslangic: `2026-03-21 06:32`
@@ -48,41 +48,41 @@ Baslangic: `2026-03-21 06:32`
 - `local-rebuild/apps/izmirorkestra/resources/views/frontend/partials/listing-card.blade.php`
 
 ## Preview Kontrati
-- Lane: `main | design-preview | n/a`
+- Lane: `main`
 - Preview URL: `n/a`
 - Mount Source: `n/a`
 - Edit Source: `n/a`
-- UI review gerekir mi?: `yes | no`
-- UI Review Durumu: `pending | revize | approved | n/a`
+- UI review gerekir mi?: `no`
+- UI Review Durumu: `n/a`
 - Revize Notu: `n/a`
 
 ## Uygulama Adimlari
-- [ ] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
-- [ ] Branch dogrulandi: `agent/<ajan>/<task-id>`
-- [ ] Lock kapsam disina cikilmadi
-- [ ] Gorev kapsamindaki degisiklikler tamamlandi
-- [ ] Goreve ozel test/dogrulama calistirildi
+- [x] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
+- [x] Branch dogrulandi: `agent/codex/task-091`
+- [x] Lock kapsam disina cikilmadi
+- [x] Gorev kapsamindaki degisiklikler tamamlandi
+- [x] Goreve ozel test/dogrulama calistirildi
 
 ## Kabul Kriterleri
 - [ ] Beklenen davranis 1
 - [ ] Beklenen davranis 2
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
-- [ ] `git branch --show-current`
-- [ ] `git branch -vv`
-- [ ] `git status --short`
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
-- [ ] Goreve ozel test/komut sonucu
-- [ ] `Edit Source == Mount Source` kaniti
-- [ ] Commit hash
+- [x] `git branch --show-current`
+- [x] `git branch -vv`
+- [x] `git status --short`
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- [x] Goreve ozel test/komut sonucu: merge zinciri + `pre-pr` quick + smoke + `main` push
+- [x] `Edit Source == Mount Source` kaniti `n/a`
+- [x] Commit hash: `fa5d40c` (`main` merge), `0583ddc` (task open)
 
 ## Kapanis Adimlari
-- [ ] Task kartindaki checklistler gercek sonuca gore guncellendi
-- [ ] `docs/WORKLOG.md` guncellendi
-- [ ] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
-- [ ] `docs/NEXT_TASK.md` panosu guncellendi
-- [ ] Branch pushlandi
+- [x] Task kartindaki checklistler gercek sonuca gore guncellendi
+- [x] `docs/WORKLOG.md` guncellendi
+- [x] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
+- [x] `docs/NEXT_TASK.md` panosu guncellendi
+- [x] Branch pushlandi
 
 ## Komutlar
 ```powershell
@@ -92,4 +92,6 @@ powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-091
 
 ## Risk / Not
 - Riskler ve geri donus notu
+
+
 
