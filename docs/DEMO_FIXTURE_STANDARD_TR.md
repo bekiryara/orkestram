@@ -1,9 +1,9 @@
-﻿# Demo Fixture Standardi (TR)
+# Demo Fixture Standardi (TR)
 
 Tarih: 2026-03-20
 
 Amac:
-1. `baseline seed`, `smoke/test fixture` ve `review/demo fixture` katmanlarini karistirmadan tanimlamak.
+1. `baseline seed`, `local account fixture`, `smoke/test fixture` ve `review/demo fixture` katmanlarini karistirmadan tanimlamak.
 2. Yeni ajan task aldiginda hangi komutun hangi veri sinifina dokundugunu tek dokumanda gostermek.
 3. Shared DB icinde yanlis overwrite, yanlis smoke beklentisi ve preview drift riskini azaltmak.
 
@@ -12,14 +12,19 @@ Amac:
 1. `baseline`
    - Kaynak: `DatabaseSeeder` -> `RoleSeeder`, `CategoryTaxonomySeeder`, `InitialContentSeeder`
    - Amac: sistemin temel kategori, icerik ve referans verisiyle ayaga kalkmasi
-   - Kural: smoke veya review/demo whitelist listingleri bu katmana baglanmaz
-2. `smoke`
+   - Kural: local hesaplar, smoke ve review/demo whitelist listingleri bu katmana baglanmaz
+2. `local_account`
+   - Kaynak komut:
+     - `local:prepare-account-fixture`
+   - Amac: reset veya temiz runtime sonrasi deterministik admin/owner/customer/support hesaplarini idempotent sekilde geri kurmak
+   - Kural: yalniz `local-admin`, `local-owner`, `local-customer`, `local-support` hesaplarini ve rol baglarini yazar
+3. `smoke`
    - Kaynak komutlar:
      - `smoke:prepare-range-fixture`
      - `smoke:prepare-bando-fixture`
    - Amac: filtre, listeleme ve kritik akislar icin deterministik test listingleri uretmek
    - Kural: slug seti yalniz smoke whitelist ile sinirlidir
-3. `review_demo`
+4. `review_demo`
    - Kaynak komut:
      - `demo:prepare-bando-review-fixture`
    - Amac: design-preview ve parity review icin whitelist demo listinglerini tekrar kurulabilir sekilde hazirlamak
@@ -34,21 +39,27 @@ Amac:
    - `izmir-bandosu`
    - `sunnet-organizasyon-ekibi`
    - `nisan-organizasyon-grubu`
-2. `smoke`
+2. `local_account`
+   - `local-admin`
+   - `local-owner`
+   - `local-customer`
+   - `local-support`
+3. `smoke`
    - `smoke-range-ilan-a`
    - `smoke-range-ilan-b`
    - `test-bando-a`
    - `test-bando-b`
-3. `review_demo`
+4. `review_demo`
    - `demo-bando-sahil-seremonisi`
    - `demo-bando-kordon-alayi`
 
 Kural:
-1. Bir katman yalniz kendi whitelist slug setine dokunur.
-2. `review_demo` komutu `test-bando-*` veya `smoke-range-*` sluglarini mutate etmez.
-3. `smoke` komutlari `demo-bando-*` sluglarini mutate etmez.
+1. Bir katman yalniz kendi whitelist setine dokunur.
+2. `local_account` komutu listing verisi mutate etmez.
+3. `review_demo` komutu `test-bando-*` veya `smoke-range-*` sluglarini mutate etmez.
+4. `smoke` komutlari `demo-bando-*` sluglarini mutate etmez.
 
-## 3) Meta Isaretleme
+## 3) Meta ve Rol Isaretleme
 
 Kural:
 1. Fixture komutlari yazdiklari listinglerde `meta_json.fixture_layer` alanini doldurur.
@@ -56,7 +67,12 @@ Kural:
    - `smoke`
    - `review_demo`
 3. Review demo listinglerinde `meta_json.fixture_media_source = repo-canonical` beklenir.
-4. Bu isaret yeni ajan icin listing kaynaginin hizli kanitidir.
+4. Local hesap fixture katmaninda beklenen roller:
+   - `local-admin` -> `super_admin`
+   - `local-owner` -> `listing_owner`
+   - `local-customer` -> `customer`
+   - `local-support` -> `support_agent`
+5. Bu isaret yeni ajan icin veri kaynaginin hizli kanitidir.
 
 ## 4) Medya Kaynagi Kurali
 
@@ -69,19 +85,28 @@ Kural:
 
 ## 5) Operasyon Kurali
 
-1. Yeni ajan review/demo gorunumu icin once `demo:prepare-bando-review-fixture` calistirir.
-2. Smoke kapisi veya filtre dogrulamasi icin yalniz `smoke:*` komutlari kullanilir.
-3. `migrate:fresh --force` ortak DB'de koordinatorsuz kullanilmaz.
-4. Shared DB sarsildiysa geri donus sirasi:
+1. Reset veya bozulma sonrasi resmi geri donus sirasi:
    - baseline seed
+   - `local:prepare-account-fixture`
    - gerekiyorsa `locations:import`
    - smoke fixture
    - review demo fixture
+2. Bu akisin tek komutlu karsiligi:
+   - `local:prepare-reset-recovery`
+3. Smoke kapisi veya filtre dogrulamasi icin `scripts/smoke-test.ps1` once `local:prepare-account-fixture` sonra `smoke:*` komutlarini calistirir.
+4. `migrate:fresh --force` ortak DB'de koordinatorsuz kullanilmaz.
 5. Review demo medya yeniden eksikse masaustu klasorunden degil repo icindeki tracked media setinden geri gelir.
 
 ## 6) Komut Ozetleri
 
 ```powershell
+# local account katmani
+php artisan local:prepare-account-fixture
+
+# reset sonrasi toparlama
+php artisan local:prepare-reset-recovery
+php artisan local:prepare-reset-recovery --with-locations --with-smoke --with-review-demo
+
 # smoke katmani
 php artisan smoke:prepare-range-fixture --site=orkestram.net
 php artisan smoke:prepare-bando-fixture --site=orkestram.net
@@ -101,4 +126,8 @@ php artisan demo:prepare-bando-review-fixture --site=izmirorkestra.net
    - `cover_image_path`
    - `meta_json.fixture_layer`
    - fiziksel dosya varligi (`storage/app/public/uploads/listings/<slug>/...`)
-4. `pre-pr PASS` olmadan fixture standardi degisimi kapatilmaz.
+4. Hesap fixture kanitinda en az su alanlar gorulur:
+   - `username`
+   - rol slug
+   - `is_active`
+5. `pre-pr PASS` olmadan fixture standardi degisimi kapatilmaz.

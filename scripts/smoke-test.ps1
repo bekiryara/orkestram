@@ -1,4 +1,4 @@
-﻿param(
+param(
     [ValidateSet("orkestram", "izmirorkestra", "both")]
     [string]$App = "both",
     [ValidateSet("main", "design")]
@@ -22,10 +22,15 @@ function Invoke-DockerFixtureCommand {
     param(
         [string]$ContainerName,
         [string]$CommandName,
-        [string]$SiteArg
+        [string]$SiteArg = ""
     )
 
-    $output = & docker exec $ContainerName php artisan $CommandName "--site=$SiteArg" 2>&1
+    $artisanArgs = @($CommandName)
+    if (-not [string]::IsNullOrWhiteSpace($SiteArg)) {
+        $artisanArgs += "--site=$SiteArg"
+    }
+
+    $output = & docker exec $ContainerName php artisan @artisanArgs 2>&1
     $exitCode = $LASTEXITCODE
     $text = [string]::Join("`n", ($output | ForEach-Object { [string]$_ }))
 
@@ -35,7 +40,6 @@ function Invoke-DockerFixtureCommand {
         PermissionDenied = $permissionDenied
     }
 }
-
 function Resolve-ContainerName {
     param([string]$TargetName, [string]$LaneName)
 
@@ -620,6 +624,28 @@ foreach ($t in $targets) {
     else {
         Assert-StorageSymlink -Name $t.Name -ContainerName $containerName | Out-Null
         $siteArg = if ($t.Name -eq "izmirorkestra") { "izmirorkestra.net" } else { "orkestram.net" }
+        $accountResult = Invoke-DockerFixtureCommand -ContainerName $containerName -CommandName "local:prepare-account-fixture"
+        if ($accountResult.ExitCode -ne 0) {
+            if ($accountResult.PermissionDenied) {
+                $fixturesReady = $false
+                if (-not $global:FixtureWarningsPrinted) {
+                    Write-Host "[smoke] WARN docker fixture adimi izin nedeniyle atlandi; fixture-bagimli kontroller skip edilecek."
+                    $global:FixtureWarningsPrinted = $true
+                }
+            }
+            else {
+                $failures.Add("$($t.Name) local:prepare-account-fixture komutu basarisiz") | Out-Null
+            }
+        }
+        else {
+            Write-Host "[smoke] OK account-fixture prepared ($($t.Name))"
+        }
+
+        if (-not $fixturesReady) {
+            Write-Host "[smoke] SKIP range-fixture prepared ($($t.Name))"
+            continue
+        }
+
         $rangeResult = Invoke-DockerFixtureCommand -ContainerName $containerName -CommandName "smoke:prepare-range-fixture" -SiteArg $siteArg
         if ($rangeResult.ExitCode -ne 0) {
             if ($rangeResult.PermissionDenied) {
@@ -744,6 +770,10 @@ if ($failures.Count -gt 0) {
 
 Write-Host "[smoke] PASS"
 exit 0
+
+
+
+
 
 
 

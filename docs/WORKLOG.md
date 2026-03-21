@@ -2204,3 +2204,55 @@ PASS
 `
 - Not:
   - `apply_patch sandbox kirigi nedeniyle shell fallback ile kontrollu yazim yapildi,upstream git push -u origin agent/codex/task-086 ile baglandi`
+
+---
+
+### [2026-03-20 18:22] TASK-087 deterministic review demo medya kapanisi
+- Sorumlu: `
+codex
+`
+- Is Ozeti:
+  - `Desktop kaynakli review demo medya repo ici canonical sete tasindi,demo:prepare-bando-review-fixture fiziksel medya sync yapacak sekilde sertlestirildi,pre-pr quick PASS ile kapanis kapisi dogrulandi`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-087.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md,docs/SESSION_HANDOFF_TR.md,docs/DEMO_FIXTURE_STANDARD_TR.md,docs/demo-media/bando-review/**,local-rebuild/apps/orkestram/routes/console.php,local-rebuild/apps/izmirorkestra/routes/console.php,local-rebuild/apps/orkestram/tests/Feature/FixtureCommandTest.php,local-rebuild/apps/izmirorkestra/tests/Feature/FixtureCommandTest.php,local-rebuild/apps/orkestram/database/seeders/data/review_demo_media/**,local-rebuild/apps/izmirorkestra/database/seeders/data/review_demo_media/**`
+- Calistirilan Komutlar:
+  - `docker exec orkestram-local-web php artisan test --filter=FixtureCommandTest,docker exec izmirorkestra-local-web php artisan test --filter=FixtureCommandTest,powershell -ExecutionPolicy Bypass -File scripts/validate.ps1 -App both,powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `
+PASS
+`
+- Not:
+  - `branch evidence: agent/codex/task-087 @ 2824ba3,upstream: origin/agent/codex/task-087,repo hijyeni notu: Zone.Identifier metadata drift ayri taskta normalize edilmeli`
+
+---
+
+### [2026-03-20 20:20] TASK-088 deterministic account fixture
+- Sorumlu: `
+codex
+`
+- Is Ozeti:
+  - `local account fixture ayristirildi`
+  - `smoke helper zorunlu site varsayimi duzeltildi`
+  - `reset recovery komutu destructive olmayan resmi sira ile tamamlandi`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-088.md`
+  - `docs/DEMO_FIXTURE_STANDARD_TR.md`
+  - `scripts/smoke-test.ps1`
+  - `local-rebuild/apps/orkestram/routes/console.php`
+  - `local-rebuild/apps/izmirorkestra/routes/console.php`
+  - `local-rebuild/apps/orkestram/database/seeders/LocalAccountFixtureSeeder.php`
+  - `local-rebuild/apps/izmirorkestra/database/seeders/LocalAccountFixtureSeeder.php`
+  - `local-rebuild/apps/orkestram/tests/Feature/LocalAccountFixtureCommandTest.php`
+  - `local-rebuild/apps/izmirorkestra/tests/Feature/LocalAccountFixtureCommandTest.php`
+- Calistirilan Komutlar:
+  - `docker exec orkestram-local-web php artisan test --filter=LocalAccountFixtureCommandTest`
+  - `docker exec izmirorkestra-local-web php artisan test --filter=LocalAccountFixtureCommandTest`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `
+PASS
+`
+- Not:
+  - `implementation commit: d832d22`
+  - `upstream: origin/agent/codex/task-088`
+  - `repo genelindeki Zone.Identifier drift bu taskin kapsami disinda tutuldu`
