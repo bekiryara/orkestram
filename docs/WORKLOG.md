@@ -2336,3 +2336,38 @@ PASS
   - `TASK-056 ana hatta zaten dahil oldugu icin merge trenine alinmadi`
 
 
+
+---
+
+### [2026-03-22 02:45] TASK-092 simple pricing v1 validation ve ui sadelestirme
+- Sorumlu: `
+codex
+`
+- Is Ozeti:
+  - `admin-owner parity kuruldu`
+  - `label_only secenegi kaldirildi`
+  - `simple pricing formu price_type odakli sadelestirildi`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-092.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `local-rebuild/apps/orkestram/app/Models/Listing.php`
+  - `local-rebuild/apps/orkestram/app/Http/Requests/Admin/StoreListingRequest.php`
+  - `local-rebuild/apps/orkestram/app/Http/Requests/Admin/UpdateListingRequest.php`
+  - `local-rebuild/apps/orkestram/app/Http/Controllers/Owner/OwnerDashboardController.php`
+  - `local-rebuild/apps/orkestram/resources/views/admin/listings/form.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-create.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-edit.blade.php`
+  - `local-rebuild/apps/orkestram/tests/Feature/AdminListingMediaFlowTest.php`
+  - `local-rebuild/apps/orkestram/tests/Feature/OwnerPanelActionsTest.php`
+- Calistirilan Komutlar:
+  - `php artisan test --filter=OwnerPanelActionsTest`
+  - `php artisan test --filter=AdminListingMediaFlowTest`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `
+PASS
+`
+- Not:
+  - `n/a`
