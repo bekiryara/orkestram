@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Listing;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class FixtureCommandTest extends TestCase
@@ -29,7 +30,7 @@ class FixtureCommandTest extends TestCase
         $this->assertSame('smoke-bando-a', $listing->meta_json['fixture_key'] ?? null);
     }
 
-    public function test_review_demo_fixture_uses_whitelist_slug_and_does_not_touch_smoke_listing(): void
+    public function test_review_demo_fixture_syncs_canonical_media_and_does_not_touch_smoke_listing(): void
     {
         Artisan::call('smoke:prepare-bando-fixture', [
             '--site' => 'izmirorkestra.net',
@@ -37,6 +38,8 @@ class FixtureCommandTest extends TestCase
 
         $smokeBefore = Listing::query()->where('site', 'izmirorkestra.net')->where('slug', 'test-bando-a')->firstOrFail();
         $smokeUpdatedAt = $smokeBefore->updated_at;
+
+        Storage::disk('public')->deleteDirectory('uploads/listings/demo-bando-kordon-alayi');
 
         $exitCode = Artisan::call('demo:prepare-bando-review-fixture', [
             '--site' => 'izmirorkestra.net',
@@ -52,8 +55,10 @@ class FixtureCommandTest extends TestCase
 
         $demoListing = Listing::query()->where('site', 'izmirorkestra.net')->where('slug', 'demo-bando-kordon-alayi')->firstOrFail();
         $this->assertSame('review_demo', $demoListing->meta_json['fixture_layer'] ?? null);
-        $this->assertSame('repo-storage', $demoListing->meta_json['fixture_media_source'] ?? null);
+        $this->assertSame('repo-canonical', $demoListing->meta_json['fixture_media_source'] ?? null);
         $this->assertCount(4, (array) $demoListing->gallery_json);
+        $this->assertTrue(Storage::disk('public')->exists('uploads/listings/demo-bando-kordon-alayi/cover.jpg'));
+        $this->assertTrue(Storage::disk('public')->exists('uploads/listings/demo-bando-kordon-alayi/gallery-4.jpg'));
 
         $smokeAfter = Listing::query()->where('site', 'izmirorkestra.net')->where('slug', 'test-bando-a')->firstOrFail();
         $this->assertSame($smokeUpdatedAt?->toAtomString(), $smokeAfter->updated_at?->toAtomString());

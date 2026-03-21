@@ -55,13 +55,17 @@ Kural:
 2. Beklenen degerler:
    - `smoke`
    - `review_demo`
-3. Bu isaret yeni ajan icin listing kaynaginin hizli kanitidir.
+3. Review demo listinglerinde `meta_json.fixture_media_source = repo-canonical` beklenir.
+4. Bu isaret yeni ajan icin listing kaynaginin hizli kanitidir.
 
 ## 4) Medya Kaynagi Kurali
 
-1. `review_demo` listingleri repo ici `storage/uploads/listings/<slug>/...` pathleri kullanir.
-2. Harici masaustu klasoru, manuel kopya veya kullanici makinesine bagimli path kullanilmaz.
-3. Medya dosyasi eksikse smoke bug'i gibi yorumlanmaz; eksik repo fixture olarak ayrik kayda alinir.
+1. Review demo runtime kaynagi iki appte de track edilir:
+   - `local-rebuild/apps/<app>/database/seeders/data/review_demo_media/<slug>/...`
+2. `demo:prepare-bando-review-fixture` komutu bu tracked seti `storage/uploads/listings/<slug>/...` pathlerine senkronlar.
+3. Harici masaustu klasoru yalniz ilk kaynak alma icin kullanilir; runtime ve rebuild bu klasore bagimli kalmaz.
+4. Provenance kaniti olarak masaustu kaynagi ile repo eslesmesini `docs/demo-media/bando-review/manifest.json` dosyasi tasir.
+5. Medya dosyasi eksikse smoke bug'i gibi yorumlanmaz; eksik repo fixture olarak ayrik kayda alinir.
 
 ## 5) Operasyon Kurali
 
@@ -73,6 +77,7 @@ Kural:
    - gerekiyorsa `locations:import`
    - smoke fixture
    - review demo fixture
+5. Review demo medya yeniden eksikse masaustu klasorunden degil repo icindeki tracked media setinden geri gelir.
 
 ## 6) Komut Ozetleri
 
@@ -89,9 +94,11 @@ php artisan demo:prepare-bando-review-fixture --site=izmirorkestra.net
 ## 7) Kanit Beklentisi
 
 1. Task tesliminde ilgili komut ciktilari yazilir.
-2. Listing kanitinda en az su alanlar gorulur:
+2. Provenance kaniti olarak `docs/demo-media/bando-review/manifest.json` tutulur.
+3. Listing kanitinda en az su alanlar gorulur:
    - `site`
    - `slug`
    - `cover_image_path`
    - `meta_json.fixture_layer`
-3. `pre-pr PASS` olmadan fixture standardi degisimi kapatilmaz.
+   - fiziksel dosya varligi (`storage/app/public/uploads/listings/<slug>/...`)
+4. `pre-pr PASS` olmadan fixture standardi degisimi kapatilmaz.
