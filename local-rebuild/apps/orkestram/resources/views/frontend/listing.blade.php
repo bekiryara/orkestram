@@ -3,19 +3,9 @@
 @php
     $metaTitle = $item->seo_title ?: $item->name;
     $metaDescription = $item->seo_description ?: ($item->summary ?: 'Ilan detayi');
-    $priceLabelRaw = trim((string) ($item->price_label ?? ''));
-    $parsedPrice = null;
-    if (preg_match('/\d+(?:[.,]\d+)?/', $priceLabelRaw, $matches)) {
-        $numeric = str_replace(',', '.', (string) $matches[0]);
-        if (is_numeric($numeric)) {
-            $parsedPrice = (float) $numeric;
-        }
-    }
-    $offerPrice = number_format((float) ($parsedPrice ?? 0), 2, '.', '');
-    $offerCurrency = strtoupper((string) data_get($item, 'meta_json.price_currency', 'TRY'));
-    if ($offerCurrency === '') {
-        $offerCurrency = 'TRY';
-    }
+    $displayPrice = $item->displayPriceLabel('Bilgi icin iletisime gecin');
+    $offerPrice = number_format((float) ($item->publicPriceValue() ?? 0), 2, '.', '');
+    $offerCurrency = $item->publicPriceCurrency();
     $categoryLabel = trim((string) ($item->service_type ?: 'Muzik Hizmeti'));
     $identityLine = collect([$categoryLabel, trim((string) $item->city), trim((string) $item->district)])->filter()->implode(' / ');
     $commentCount = count($publicComments ?? []);
@@ -82,7 +72,7 @@
 
                 <div class="listing-price-band">
                     <span class="listing-price-label">Baslangic fiyati</span>
-                    <strong class="listing-price-value">{{ $item->price_label ?: 'Bilgi icin iletisime gecin' }}</strong>
+                    <strong class="listing-price-value">{{ $displayPrice }}</strong>
                     <div class="listing-proof-row" aria-label="Sosyal kanit">
                         <span>{{ $commentCount }} yorum</span>
                         <span>{{ $likeCount }} begeni</span>
@@ -457,6 +447,8 @@
         })();
     </script>
 @endsection
+
+
 
 
 

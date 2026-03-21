@@ -3,7 +3,7 @@
     $ctaText = $ctaText ?? ($siteMeta['listing_cta'] ?? 'Detaylari Incele');
     $featureOne = (string) ($cardAttributes[0]['value'] ?? '-');
     $featureTwo = (string) ($cardAttributes[1]['value'] ?? '-');
-    $priceText = trim((string) ($item->price_label ?? '')) !== '' ? (string) $item->price_label : 'Iletisim ile netlesir';
+    $priceText = $item->displayPriceLabel();
 
     $ratingRaw = $item->rating_avg ?? $item->rating ?? data_get($item, 'meta_json.rating');
     $ratingText = is_numeric($ratingRaw) ? number_format((float) $ratingRaw, 1) : '0.0';
@@ -43,4 +43,5 @@
         <a class="btn card-btn listing-card-cta" href="{{ route('listing.show', ['slug' => $item->slug]) }}">{{ $ctaText }}</a>
     </div>
 </article>
+
 
