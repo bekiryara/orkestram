@@ -1,19 +1,19 @@
 ﻿# NEXT TASK (Koordinasyon Panosu)
 
-Durum: `ACTIVE`  
+Durum: `READY`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Merkezi Koordinasyon)
-1. `TASK-090` - Structured fiyat modeli gecisi: public filtre/sort ve detail JSON-LD hattini price_label parse yerine price_min/price_max/currency/price_type kaynak modeline tasimak
+1. `YOK` - aktif koordinasyon gorevi bulunmuyor
 ## Son Koordinator Kapanisi
-1. `TASK-089` - koordinator drift hijyeni tamamlandi
-2. `TASK-088` - deterministic account fixture ve reset recovery akisi tamamlandi
-3. `TASK-087` - Deterministic review demo medya hatti tamamlandi
+1. `TASK-090` - structured fiyat modeli gecisi tamamlandi
+2. `TASK-089` - koordinator drift hijyeni tamamlandi
+3. `TASK-088` - deterministic account fixture ve reset recovery akisi tamamlandi
 ## Son Kapanis
-1. `TASK-089` - koordinator drift hijyeni tamamlandi
-2. `TASK-088` - deterministic account fixture ve reset recovery akisi tamamlandi
-3. `TASK-087` - Deterministic review demo medya hatti tamamlandi
+1. `TASK-090` - structured fiyat modeli gecisi tamamlandi
+2. `TASK-089` - koordinator drift hijyeni tamamlandi
+3. `TASK-088` - deterministic account fixture ve reset recovery akisi tamamlandi
 ## Kapanis Kurali (Zorunlu)
 1. Kapanis kaniti olmadan task `closed` edilemez.
 2. Zorunlu kanit paketi:

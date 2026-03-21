@@ -2275,3 +2275,22 @@ PASS
 `
 - Not:
   - `n/a`
+
+---
+
+### [2026-03-21 06:02] TASK-090 structured pricing transition
+- Sorumlu: `
+codex
+`
+- Is Ozeti:
+  - `public filtre ve sort hatti structured fiyat alanlarina tasindi,detail JSON-LD ve fiyat sunumu iki appte ayni helper modeline baglandi,pre-pr quick PASS ve upstream push kaniti tamamlandi`
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/app/Models/Listing.php,local-rebuild/apps/orkestram/app/Http/Controllers/PublicController.php,local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php,local-rebuild/apps/orkestram/resources/views/frontend/partials/listing-card.blade.php,local-rebuild/apps/orkestram/tests/Feature/CategorySystemFlowTest.php,local-rebuild/apps/izmirorkestra/app/Models/Listing.php,local-rebuild/apps/izmirorkestra/app/Http/Controllers/PublicController.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/partials/listing-card.blade.php,local-rebuild/apps/izmirorkestra/tests/Feature/CategorySystemFlowTest.php,docs/tasks/TASK-090.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git -C \\\\wsl$\\Ubuntu\\home\\bekir\\orkestram-k push -u origin agent/codex/task-090,powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `
+PASS
+`
+- Not:
+  - `WSL manager-core helper kirigi nedeniyle upstream push Windows Git fallback ile tamamlandi`

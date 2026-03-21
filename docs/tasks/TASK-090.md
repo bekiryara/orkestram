@@ -1,6 +1,6 @@
 ﻿# TASK-090
 
-Durum: `DOING`  
+Durum: `DONE`  
 Ajan: `codex`  
 Branch: `agent/codex/task-090`  
 Baslangic: `2026-03-21 05:01`
@@ -67,37 +67,37 @@ Baslangic: `2026-03-21 05:01`
 - [x] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
 - [x] Branch dogrulandi: `agent/codex/task-090`
 - [x] Lock kapsam disina cikilmadi
-- [ ] Once iki appte mevcut fiyat davranisinin dayandigi noktalar haritalanacak: model, public controller, listing card, detail JSON-LD ve parity testleri
-- [ ] Orkestram uygulamasinda fiyat filter/sort hattini structured alanlara geciren minimal cekirdek degisiklik yapilacak
-- [ ] Ayni degisiklik izmirorkestra tarafina parity ile tasinacak
-- [ ] Legacy display fallback kurali testle kilitlenecek; numeric davranis structured alanlardan gelecegi netlestirilecek
-- [ ] Gorev kapsamindaki degisiklikler tamamlandi
-- [ ] Goreve ozel test/dogrulama calistirildi
+- [x] Once iki appte mevcut fiyat davranisinin dayandigi noktalar haritalandi: model, public controller, listing card, detail JSON-LD ve parity testleri
+- [x] Orkestram uygulamasinda fiyat filter/sort hatti structured alanlara gecirildi
+- [x] Ayni degisiklik izmirorkestra tarafina parity ile tasindi
+- [x] Legacy display fallback kurali testle kilitlendi; numeric davranisin structured alanlardan geldigi netlestirildi
+- [x] Gorev kapsamindaki degisiklikler tamamlandi
+- [x] Goreve ozel test/dogrulama calistirildi
 
 ## Kabul Kriterleri
-- [ ] `/ilanlar` icindeki `price_asc`, `price_desc`, `price_min`, `price_max` davranisi `price_label` parse etmeden structured fiyat alanlariyla calisir
-- [ ] `/hizmet/<slug>` ve sehir/semt varyantlarindaki fiyat araligi filtreleri ayni structured fiyat hattini kullanir
-- [ ] Detail JSON-LD `Offer` verisi `price_min`, `price_max`, `currency`, `price_type` alanlarindan uretilir; `meta_json.price_currency` veya regex parse ana kaynak olmaz
-- [ ] Listing card ve detail fiyat metni ayni helper/veri modeline baglanir; iki appte ayni sonucu verir
-- [ ] Structured fiyat bos legacy kayitlarda display fallback acik, fakat numeric filtre/sort davranisinin fallback kurali task icinde acikca test edilir
-- [ ] Orkestram ve izmirorkestra tarafinda ilgili feature testleri PASS olur
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
+- [x] `/ilanlar` icindeki `price_asc`, `price_desc`, `price_min`, `price_max` davranisi `price_label` parse etmeden structured fiyat alanlariyla calisir
+- [x] `/hizmet/<slug>` ve sehir/semt varyantlarindaki fiyat araligi filtreleri ayni structured fiyat hattini kullanir
+- [x] Detail JSON-LD `Offer` verisi `price_min`, `price_max`, `currency`, `price_type` alanlarindan uretilir; `meta_json.price_currency` veya regex parse ana kaynak olmaz
+- [x] Listing card ve detail fiyat metni ayni helper/veri modeline baglanir; iki appte ayni sonucu verir
+- [x] Structured fiyat bos legacy kayitlarda display fallback acik, fakat numeric filtre/sort davranisinin fallback kurali task icinde acikca test edilir
+- [x] Orkestram ve izmirorkestra tarafinda ilgili feature testleri PASS olur
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
-- [ ] `git branch --show-current`
-- [ ] `git branch -vv`
-- [ ] `git status --short`
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
-- [ ] Goreve ozel test/komut sonucu: `CategorySystemFlowTest` ve gerekiyorsa ek fiyat/parity testleri
+- [x] `git branch --show-current`
+- [x] `git branch -vv`
+- [x] `git status --short`
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- [x] Goreve ozel test/komut sonucu: hedefli structured pricing/parity testleri ve `pre-pr` quick
 - [x] `Edit Source == Mount Source` kaniti `n/a`
-- [ ] Commit hash
+- [x] Commit hash: `e02d562`
 
 ## Kapanis Adimlari
-- [ ] Task kartindaki checklistler gercek sonuca gore guncellendi
-- [ ] `docs/WORKLOG.md` guncellendi
-- [ ] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
-- [ ] `docs/NEXT_TASK.md` panosu guncellendi
-- [ ] Branch pushlandi
+- [x] Task kartindaki checklistler gercek sonuca gore guncellendi
+- [x] `docs/WORKLOG.md` guncellendi
+- [x] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
+- [x] `docs/NEXT_TASK.md` panosu guncellendi
+- [x] Branch pushlandi
 
 ## Komutlar
 ```powershell
@@ -113,3 +113,5 @@ powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-090
 - JSON-LD cikisi SEO etkili oldugu icin fiyat/currency alanlari task sonunda manuel kanit ve feature test ile birlikte dogrulanir.
 - Iki app parity zorunludur; orkestram tarafi bitmeden izmirorkestra aynalanmis kabul edilmez.
 - Geri donus plani: structured fiyat hattinda regresyon gorulurse `price_label` parse davranisi ayni task icinde kontrollu fallback olarak gecici tutulur; ancak task kapanisinda son model acikca belgeye yazilir.
+
+
