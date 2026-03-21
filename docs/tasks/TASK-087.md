@@ -1,8 +1,8 @@
 ﻿# TASK-087
 
-Durum: `DOING`  
-Ajan: `codex`  
-Branch: `agent/codex/task-087`  
+Durum: `DONE`
+Ajan: `codex`
+Branch: `agent/codex/task-087`
 Baslangic: `2026-03-20 09:31`
 
 ## Gorev Ozeti
@@ -57,7 +57,7 @@ Baslangic: `2026-03-20 09:31`
 - Script Katmani: `PowerShell`
 - App/Test Katmani: `container`
 - Runtime Readiness: `ready`
-- Upstream Durumu: `yok (ilk push -u bekleniyor)`
+- Upstream Durumu: `origin/agent/codex/task-087`
 - Not: `Desktop kaynak klasoru yalniz ilk alma icin kullanildi; runtime deterministic kaynak artik repo icindeki tracked media setidir.`
 
 ## Uygulama Adimlari
@@ -72,23 +72,23 @@ Baslangic: `2026-03-20 09:31`
 - [x] `demo:prepare-bando-review-fixture` komutu canonical medya setini storage altina fiziksel olarak senkronlar
 - [x] Komut tekrar calistiginda listing metadata ve fiziksel medya deterministik kalir
 - [x] Iki appte parity fixture testleri fiziksel dosya varligini kanitlar
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick` PASS
 
 ## Teslimde Zorunlu Kanit
-- [ ] `git branch --show-current`
-- [ ] `git branch -vv`
-- [ ] `git status --short`
-- [ ] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- [x] `git branch --show-current`
+- [x] `git branch -vv`
+- [x] `git status --short`
+- [x] `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
 - [x] Goreve ozel test/komut sonucu
 - [x] `Edit Source == Mount Source` kaniti `n/a (UI gorevi degil)`
-- [ ] Commit hash
+- [x] Commit hash (`2824ba3`)
 
 ## Kapanis Adimlari
-- [ ] Task kartindaki checklistler gercek sonuca gore guncellendi
-- [ ] `docs/WORKLOG.md` guncellendi
-- [ ] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
-- [ ] `docs/NEXT_TASK.md` panosu guncellendi
-- [ ] Branch pushlandi
+- [x] Task kartindaki checklistler gercek sonuca gore guncellendi
+- [x] `docs/WORKLOG.md` guncellendi
+- [x] `docs/TASK_LOCKS.md` kaydi `closed` yapildi
+- [x] `docs/NEXT_TASK.md` panosu guncellendi
+- [x] Branch pushlandi
 
 ## Komutlar
 ```powershell
@@ -104,3 +104,4 @@ powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick
 - `docs/demo-media/bando-review/manifest.json` kaynak kaniti icindir; runtime kaynagi app icindeki tracked `review_demo_media` klasorleridir.
 - Bu task smoke medya setini degistirmedi; yalniz review demo rebuild kaliciligini kapatti.
 - `agent-status` false-positive kirli status riski ayrik operasyon konusu olarak acik kalir.
+- Push kaniti alinmis branch: origin/agent/codex/task-087 pre-pr -Mode quick PASS alindi; kapanis zinciri mekanik olarak tamamlanabilir.

@@ -2256,3 +2256,22 @@ PASS
   - `implementation commit: d832d22`
   - `upstream: origin/agent/codex/task-088`
   - `repo genelindeki Zone.Identifier drift bu taskin kapsami disinda tutuldu`
+
+---
+
+### [2026-03-21 04:04] TASK-089 coordinator drift hygiene
+- Sorumlu: `
+codex
+`
+- Is Ozeti:
+  - `TASK-087 closure drift normalize edildi,manifest ve eski task kartlarindaki satir-sonu hizasi resmi hale getirildi`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-089.md,docs/tasks/TASK-087.md,docs/demo-media/bando-review/manifest.json,docs/tasks/TASK-085.md,docs/tasks/TASK-086.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git diff --numstat,powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `
+PASS
+`
+- Not:
+  - `n/a`
