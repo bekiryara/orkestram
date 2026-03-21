@@ -252,6 +252,41 @@ class Listing extends Model
             ->implode("\n");
     }
 
+    public function publicPriceValue(): ?float
+    {
+        if ($this->price_min !== null) {
+            return (float) $this->price_min;
+        }
+
+        if ($this->price_max !== null) {
+            return (float) $this->price_max;
+        }
+
+        return null;
+    }
+
+    public function publicPriceCurrency(): string
+    {
+        return self::normalizeCurrency($this->currency) ?? 'TRY';
+    }
+
+    public function displayPriceLabel(string $fallback = 'Iletisim ile netlesir'): string
+    {
+        $label = self::normalizeText($this->price_label);
+        if ($label !== null) {
+            return $label;
+        }
+
+        $built = self::buildPriceLabel(
+            $this->price_min !== null ? (float) $this->price_min : null,
+            $this->price_max !== null ? (float) $this->price_max : null,
+            self::normalizeCurrency($this->currency),
+            self::normalizePriceType($this->price_type)
+        );
+
+        return $built ?? $fallback;
+    }
+
     private static function normalizeText(mixed $value): ?string
     {
         $normalized = trim((string) ($value ?? ''));
@@ -340,3 +375,4 @@ class Listing extends Model
         return $formatted;
     }
 }
+

@@ -988,7 +988,11 @@ class CategorySystemFlowTest extends TestCase
             'category_id' => $category->id,
             'city' => 'Izmir',
             'district' => 'Konak',
-            'price_label' => '1500 TL',
+            'price_label' => 'Paket A',
+            'price_min' => 1500,
+            'price_max' => 1500,
+            'currency' => 'TRY',
+            'price_type' => 'fixed',
         ]);
 
         Listing::create([
@@ -1001,7 +1005,11 @@ class CategorySystemFlowTest extends TestCase
             'category_id' => $category->id,
             'city' => 'Izmir',
             'district' => 'Konak',
-            'price_label' => '900 TL',
+            'price_label' => 'Paket B',
+            'price_min' => 900,
+            'price_max' => 900,
+            'currency' => 'TRY',
+            'price_type' => 'fixed',
         ]);
 
         Listing::create([
@@ -1014,7 +1022,11 @@ class CategorySystemFlowTest extends TestCase
             'category_id' => $category->id,
             'city' => 'Izmir',
             'district' => 'Konak',
-            'price_label' => '3200 TL',
+            'price_label' => 'Paket C',
+            'price_min' => 3200,
+            'price_max' => 3200,
+            'currency' => 'TRY',
+            'price_type' => 'fixed',
         ]);
 
         Listing::create([
@@ -1097,7 +1109,11 @@ class CategorySystemFlowTest extends TestCase
             'category_id' => $category->id,
             'city' => 'Izmir',
             'district' => 'Konak',
-            'price_label' => '1100 TL',
+            'price_label' => 'Kategori A',
+            'price_min' => 1100,
+            'price_max' => 1100,
+            'currency' => 'TRY',
+            'price_type' => 'fixed',
         ]);
 
         Listing::create([
@@ -1110,7 +1126,11 @@ class CategorySystemFlowTest extends TestCase
             'category_id' => $category->id,
             'city' => 'Izmir',
             'district' => 'Konak',
-            'price_label' => '3500 TL',
+            'price_label' => 'Kategori B',
+            'price_min' => 3500,
+            'price_max' => 3500,
+            'currency' => 'TRY',
+            'price_type' => 'fixed',
         ]);
 
         $this->get('/hizmet/' . $category->slug . '?price_min=1000&price_max=2000')
@@ -1134,8 +1154,12 @@ class CategorySystemFlowTest extends TestCase
             'district' => 'Konak',
             'summary' => 'Schema test ozeti',
             'content' => 'Schema test icerigi.',
-            'price_label' => '1500 TL',
-            'meta_json' => ['price_currency' => 'USD'],
+            'price_label' => 'Schema Label',
+            'price_min' => 1500,
+            'price_max' => 1500,
+            'currency' => 'USD',
+            'price_type' => 'fixed',
+            'meta_json' => ['price_currency' => 'TRY'],
         ]);
 
         $this->get('/ilan/' . $listing->slug)
@@ -1169,3 +1193,9 @@ class CategorySystemFlowTest extends TestCase
             ->assertSee('"priceCurrency":"TRY"', false);
     }
 }
+
+
+
+
+
+

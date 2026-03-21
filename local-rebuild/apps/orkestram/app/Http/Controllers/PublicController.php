@@ -922,7 +922,7 @@ class PublicController extends Controller
         $metaRows = $rows->map(function (Listing $listing): array {
             return [
                 'listing' => $listing,
-                'price' => $this->numericPriceFromLabel($listing->price_label),
+                'price' => $listing->publicPriceValue(),
                 'published_at' => optional($listing->published_at)->getTimestamp() ?? 0,
                 'name' => mb_strtolower((string) $listing->name),
                 'id' => (int) $listing->id,
@@ -968,20 +968,6 @@ class PublicController extends Controller
         return $sorted->values()->map(fn(array $row): Listing => $row['listing']);
     }
 
-    private function numericPriceFromLabel(?string $priceLabel): ?float
-    {
-        $label = trim((string) $priceLabel);
-        if ($label === '') {
-            return null;
-        }
-
-        if (!preg_match('/\d+(?:[.,]\d+)?/', $label, $matches)) {
-            return null;
-        }
-
-        $numeric = str_replace(',', '.', (string) $matches[0]);
-        return is_numeric($numeric) ? (float) $numeric : null;
-    }
 
     private function paginateCollection(Collection $rows, int $perPage, Request $request): LengthAwarePaginator
     {
@@ -1003,4 +989,6 @@ class PublicController extends Controller
         return $paginator->withQueryString();
     }
 }
+
+
 

@@ -2256,3 +2256,41 @@ PASS
   - `implementation commit: d832d22`
   - `upstream: origin/agent/codex/task-088`
   - `repo genelindeki Zone.Identifier drift bu taskin kapsami disinda tutuldu`
+
+---
+
+### [2026-03-21 04:04] TASK-089 coordinator drift hygiene
+- Sorumlu: `
+codex
+`
+- Is Ozeti:
+  - `TASK-087 closure drift normalize edildi,manifest ve eski task kartlarindaki satir-sonu hizasi resmi hale getirildi`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-089.md,docs/tasks/TASK-087.md,docs/demo-media/bando-review/manifest.json,docs/tasks/TASK-085.md,docs/tasks/TASK-086.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git diff --numstat,powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `
+PASS
+`
+- Not:
+  - `n/a`
+
+---
+
+### [2026-03-21 06:02] TASK-090 structured pricing transition
+- Sorumlu: `
+codex
+`
+- Is Ozeti:
+  - `public filtre ve sort hatti structured fiyat alanlarina tasindi,detail JSON-LD ve fiyat sunumu iki appte ayni helper modeline baglandi,pre-pr quick PASS ve upstream push kaniti tamamlandi`
+- Degisen Dosyalar:
+  - `local-rebuild/apps/orkestram/app/Models/Listing.php,local-rebuild/apps/orkestram/app/Http/Controllers/PublicController.php,local-rebuild/apps/orkestram/resources/views/frontend/listing.blade.php,local-rebuild/apps/orkestram/resources/views/frontend/partials/listing-card.blade.php,local-rebuild/apps/orkestram/tests/Feature/CategorySystemFlowTest.php,local-rebuild/apps/izmirorkestra/app/Models/Listing.php,local-rebuild/apps/izmirorkestra/app/Http/Controllers/PublicController.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/listing.blade.php,local-rebuild/apps/izmirorkestra/resources/views/frontend/partials/listing-card.blade.php,local-rebuild/apps/izmirorkestra/tests/Feature/CategorySystemFlowTest.php,docs/tasks/TASK-090.md,docs/TASK_LOCKS.md,docs/NEXT_TASK.md,docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `git -C \\\\wsl$\\Ubuntu\\home\\bekir\\orkestram-k push -u origin agent/codex/task-090,powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `
+PASS
+`
+- Not:
+  - `WSL manager-core helper kirigi nedeniyle upstream push Windows Git fallback ile tamamlandi`
