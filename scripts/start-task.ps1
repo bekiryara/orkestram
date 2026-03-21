@@ -46,7 +46,7 @@ function Is-CoordinationTarget([string]$Target) {
     if ([string]::IsNullOrWhiteSpace($normalized)) {
         return $true
     }
-    if ($normalized -in @('docs/TASK_LOCKS.md', 'docs/NEXT_TASK.md', 'docs/WORKLOG.md')) {
+    if ($normalized -in @('docs/TASK_LOCKS.md', 'docs/NEXT_TASK.md', 'docs/WORKLOG.md', 'docs/SESSION_HANDOFF_TR.md')) {
         return $true
     }
     if ($normalized -match '^docs/tasks/TASK-[0-9]{3}\.md$') {
@@ -106,6 +106,35 @@ function Get-ActiveNextTaskEntries([string]$NextRaw) {
     return [regex]::Matches($body, '(?m)^\d+\. `TASK-\d{3}` - .+$')
 }
 
+function Get-WslRepoPath([string]$RepoPath) {
+    if ($RepoPath -match '^\\\\wsl\$\\[^\\]+\\(?<rest>.+)$') {
+        return '/' + (($matches['rest'] -replace '\\', '/').TrimStart('/'))
+    }
+    return $null
+}
+
+function New-BranchSafely([string]$BranchName, [string]$RepoPath) {
+    git checkout --quiet -b $BranchName 2>$null
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "[start-task] step-4 branch -> $BranchName (native)"
+        return
+    }
+
+    $wslRepoPath = Get-WslRepoPath $RepoPath
+    if ([string]::IsNullOrWhiteSpace($wslRepoPath)) {
+        Fail "Branch acilamadi ($BranchName) ve WSL fallback yolu cozulmedi."
+    }
+
+    $escapedRepo = $wslRepoPath.Replace("'", "'\''")
+    $escapedBranch = $BranchName.Replace("'", "'\''")
+    wsl -e bash -lc "cd '$escapedRepo' && git checkout --quiet -b '$escapedBranch'" 2>$null
+    if ($LASTEXITCODE -ne 0) {
+        Fail "Branch acilamadi ($BranchName); native ve WSL fallback fail verdi."
+    }
+
+    Write-Host "[start-task] step-4 branch -> $BranchName (wsl-fallback)"
+}
+
 if ($TaskId -notmatch '^TASK-[0-9]{3}$') {
     Fail "TaskId formati gecersiz. Beklenen: TASK-XXX"
 }
@@ -120,6 +149,7 @@ $templatePath = "docs/tasks/_TEMPLATE.md"
 $locksPath = "docs/TASK_LOCKS.md"
 $nextTaskPath = "docs/NEXT_TASK.md"
 $maxActiveTasks = 3
+$repoPath = (Get-Location).Path
 
 if (-not (Test-Path -LiteralPath $templatePath)) {
     Fail "Task template bulunamadi ($templatePath)."
@@ -188,6 +218,10 @@ $lockFiles = [System.Collections.Generic.List[string]]::new()
 $lockFiles.Add($taskFile)
 $lockFiles.Add('docs/TASK_LOCKS.md')
 $lockFiles.Add('docs/NEXT_TASK.md')
+$lockFiles.Add('docs/WORKLOG.md')
+if ($Agent -eq 'codex') {
+    $lockFiles.Add('docs/SESSION_HANDOFF_TR.md')
+}
 foreach ($file in $filesList) {
     if (-not $lockFiles.Contains($file)) {
         $lockFiles.Add($file)
@@ -232,15 +266,8 @@ if ($nextRaw -match '1\. `YOK`.*') {
 Set-Content -Encoding utf8 -Path $nextTaskPath -Value $nextRaw
 Write-Host "[start-task] step-3 next task -> $nextTaskPath"
 
-$branchOutput = cmd /c "git checkout --quiet -b $Branch" 2>&1
-if ($LASTEXITCODE -ne 0) {
-    Fail "Branch acilamadi ($Branch): $($branchOutput -join ' ')"
-}
-Write-Host "[start-task] step-4 branch -> $Branch"
+New-BranchSafely -BranchName $Branch -RepoPath $repoPath
 Write-Host "[start-task] started_at: $nowStamp"
 Write-Host "[start-task] OK"
 exit 0
-
-
-
 

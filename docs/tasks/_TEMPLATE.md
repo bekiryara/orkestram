@@ -34,6 +34,16 @@ Baslangic: `YYYY-MM-DD HH:mm`
 - UI Review Durumu: `pending | revize | approved | n/a`
 - Revize Notu: `n/a`
 
+## Runtime Kontrati
+- Runtime Source: `n/a`
+- Preview Source: `n/a`
+- Git Katmani: `WSL | Windows | n/a`
+- Script Katmani: `PowerShell | WSL | n/a`
+- App/Test Katmani: `container | WSL | n/a`
+- Runtime Readiness: `ready | ENV_BLOCKED | RUNTIME_BLOCKED | SANDBOX_BLOCKED | CODE_FAIL | n/a`
+- Upstream Durumu: `origin/<branch> | yok | n/a`
+- Not: `n/a`
+
 ## Uygulama Adimlari
 - [ ] Zorunlu dokumanlar okundu: `AGENTS.md`, `docs/REPO_DISCIPLINE_TR.md`, `docs/MULTI_AGENT_RULES_TR.md`
 - [ ] Branch dogrulandi: `agent/<ajan>/<task-id>`
@@ -70,3 +80,4 @@ powershell -ExecutionPolicy Bypass -File scripts/close-task.ps1 -TaskId TASK-XXX
 
 ## Risk / Not
 - Riskler ve geri donus notu
+

@@ -34,14 +34,14 @@ function Fail([string]$Message) {
     exit 1
 }
 
-function Normalize-Line([string]$line) {
-    return ($line -replace '\|', '/').Trim()
+function Normalize-Line([string]$Line) {
+    return ($Line -replace '\|', '/').Trim()
 }
 
-function Build-NumberedList([string[]]$items) {
+function Build-NumberedList([string[]]$Items) {
     $list = [System.Collections.Generic.List[string]]::new()
-    for ($i = 0; $i -lt $items.Count; $i++) {
-        [void]$list.Add("$($i + 1). $($items[$i])")
+    for ($i = 0; $i -lt $Items.Count; $i++) {
+        [void]$list.Add("$($i + 1). $($Items[$i])")
     }
     return $list
 }
@@ -67,6 +67,28 @@ function Replace-SectionLines {
     }
 }
 
+function Get-ActiveTaskEntries([System.Collections.Generic.List[string]]$Lines) {
+    $entries = @()
+    $activeStart = $Lines.IndexOf('## Aktif Gorevler (Merkezi Koordinasyon)')
+    $coordinatorStart = $Lines.IndexOf('## Son Koordinator Kapanisi')
+    if ($activeStart -lt 0 -or $coordinatorStart -le $activeStart) {
+        Fail 'NEXT_TASK aktif gorevler bolumu beklenen formatta degil.'
+    }
+
+    for ($i = $activeStart + 1; $i -lt $coordinatorStart; $i++) {
+        $line = $Lines[$i].Trim()
+        if ([string]::IsNullOrWhiteSpace($line)) {
+            continue
+        }
+        if ($line -like '1. `YOK` -*') {
+            continue
+        }
+        $entries += ($line -replace '^\d+\.\s+', '')
+    }
+
+    return $entries
+}
+
 if ($TaskId -notmatch '^TASK-[0-9]{3}$') {
     Fail "TaskId formati gecersiz. Beklenen: TASK-XXX"
 }
@@ -75,6 +97,8 @@ $taskFile = "docs/tasks/$TaskId.md"
 $locksPath = "docs/TASK_LOCKS.md"
 $nextTaskPath = "docs/NEXT_TASK.md"
 $worklogPath = "docs/WORKLOG.md"
+$taskEntryPrefix = '`' + $TaskId + '` - '
+$emptyActiveLine = '1. ' + '`YOK` - aktif koordinasyon gorevi bulunmuyor'
 
 foreach ($path in @($taskFile, $locksPath, $nextTaskPath, $worklogPath)) {
     if (-not (Test-Path -LiteralPath $path)) {
@@ -131,41 +155,75 @@ foreach ($entry in (Get-Content -Path $nextTaskPath)) {
     [void]$lineList.Add([string]$entry)
 }
 
+$activeStart = $lineList.IndexOf('## Aktif Gorevler (Merkezi Koordinasyon)')
+$coordinatorStart = $lineList.IndexOf('## Son Koordinator Kapanisi')
+if ($activeStart -lt 0 -or $coordinatorStart -le $activeStart) {
+    Fail 'NEXT_TASK aktif gorevler bolumu beklenen formatta degil.'
+}
+
+$remainingActiveItems = @(Get-ActiveTaskEntries -Lines $lineList | Where-Object { -not $_.StartsWith($taskEntryPrefix) })
+for ($i = $coordinatorStart - 1; $i -gt $activeStart; $i--) {
+    [void]$lineList.RemoveAt($i)
+}
+if ($remainingActiveItems.Count -eq 0) {
+    $lineList.Insert($activeStart + 1, $emptyActiveLine)
+}
+else {
+    $replacement = Build-NumberedList $remainingActiveItems
+    for ($idx = 0; $idx -lt $replacement.Count; $idx++) {
+        $lineList.Insert($activeStart + 1 + $idx, [string]$replacement[$idx])
+    }
+}
+
 for ($i = 0; $i -lt $lineList.Count; $i++) {
     if ($lineList[$i] -match '^Durum:\s+`') {
-        $lineList[$i] = 'Durum: `READY`  '
+        if ($remainingActiveItems.Count -eq 0) {
+            $lineList[$i] = 'Durum: `READY`  '
+        }
+        else {
+            $lineList[$i] = 'Durum: `ACTIVE`  '
+        }
         break
     }
 }
 
-$activeItems = @("`YOK` - ``$TaskId`` $cleanNote")
-$coordinatorItems = @(
-    "``$TaskId`` - $cleanNote",
-    '`TASK-071` - codex-a task-056 stale branch''i drift olarak dogrulandi ve kontrollu cleanup ile temizlendi.',
-    '`TASK-070` - codex-b ve codex-c worktree''leri kontrollu restore ile temizlendi; stale aday durumlari kapatildi.'
-)
-$closingItems = @(
-    "``$TaskId`` - $cleanNote",
-    '`TASK-071` - codex-a stale branch cleanup''i tamamlandi; boylece repo genel stale worktree problemi kapandi.',
-    '`TASK-070` - `codex-b` ve `codex-c` icin kontrollu cleanup uygulandi; her iki worktree de temiz duruma dondu.'
-)
-
-Replace-SectionLines -Lines $lineList -StartHeader '## Aktif Gorevler (Merkezi Koordinasyon)' -EndHeader '## Son Koordinator Kapanisi' -Items $activeItems
+$existingCoordinator = @()
+$existingClosing = @()
+$coordStart = $lineList.IndexOf('## Son Koordinator Kapanisi')
+$closeStart = $lineList.IndexOf('## Son Kapanis')
+$ruleStart = $lineList.IndexOf('## Kapanis Kurali (Zorunlu)')
+if ($coordStart -lt 0 -or $closeStart -lt 0 -or $ruleStart -lt 0) {
+    Fail 'NEXT_TASK kapanis bolumleri beklenen formatta degil.'
+}
+for ($i = $coordStart + 1; $i -lt $closeStart; $i++) {
+    if (-not [string]::IsNullOrWhiteSpace($lineList[$i])) {
+        $existingCoordinator += $lineList[$i] -replace '^\d+\.\s+', ''
+    }
+}
+for ($i = $closeStart + 1; $i -lt $ruleStart; $i++) {
+    if (-not [string]::IsNullOrWhiteSpace($lineList[$i])) {
+        $existingClosing += $lineList[$i] -replace '^\d+\.\s+', ''
+    }
+}
+$existingCoordinator = $existingCoordinator | Where-Object { -not $_.StartsWith($taskEntryPrefix) }
+$existingClosing = $existingClosing | Where-Object { -not $_.StartsWith($taskEntryPrefix) }
+$coordinatorItems = @($taskEntryPrefix + $cleanNote) + ($existingCoordinator | Select-Object -First 2)
+$closingItems = @($taskEntryPrefix + $cleanNote) + ($existingClosing | Select-Object -First 2)
 Replace-SectionLines -Lines $lineList -StartHeader '## Son Koordinator Kapanisi' -EndHeader '## Son Kapanis' -Items $coordinatorItems
 Replace-SectionLines -Lines $lineList -StartHeader '## Son Kapanis' -EndHeader '## Kapanis Kurali (Zorunlu)' -Items $closingItems
 Set-Content -Encoding utf8 -Path $nextTaskPath -Value $lineList
 Write-Host "[close-task] step-3 next task -> $nextTaskPath"
 
-$summaryLines = $WorklogSummary | ForEach-Object { "  - ``$(Normalize-Line $_)``" }
-$fileLines = $Files | ForEach-Object { "  - ``$(Normalize-Line $_)``" }
-$commandLines = $Commands | ForEach-Object { "  - ``$(Normalize-Line $_)``" }
-$noteLines = if ($WorklogNote.Count -gt 0) { $WorklogNote | ForEach-Object { "  - ``$(Normalize-Line $_)``" } } else { @('  - `n/a`') }
+$summaryLines = $WorklogSummary | ForEach-Object { '  - `' + [string](Normalize-Line $_) + '`' }
+$fileLines = $Files | ForEach-Object { '  - `' + [string](Normalize-Line $_) + '`' }
+$commandLines = $Commands | ForEach-Object { '  - `' + [string](Normalize-Line $_) + '`' }
+$noteLines = if ($WorklogNote.Count -gt 0) { $WorklogNote | ForEach-Object { '  - `' + [string](Normalize-Line $_) + '`' } } else { @('  - `n/a`') }
 $entryLines = @(
     '',
     '---',
     '',
     "### [$nowShort] $WorklogTitle",
-    "- Sorumlu: ``$Agent``",
+    '- Sorumlu: `' + $Agent + '`',
     '- Is Ozeti:'
 ) + $summaryLines + @(
     '- Degisen Dosyalar:'
@@ -173,7 +231,7 @@ $entryLines = @(
     '- Calistirilan Komutlar:'
 ) + $commandLines + @(
     '- Sonuc:',
-    "  - ``$Result``",
+    '  - `' + $Result + '`',
     '- Not:'
 ) + $noteLines
 Add-Content -Path $worklogPath -Value ($entryLines -join "`r`n")
@@ -181,4 +239,3 @@ Write-Host "[close-task] step-4 worklog -> $worklogPath"
 
 Write-Host "[close-task] OK"
 exit 0
-

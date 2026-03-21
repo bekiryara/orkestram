@@ -2028,3 +2028,160 @@ Kural: test sonucu yazilmayan kayit "tamamlandi" sayilmaz.
   - `PASS`
 - Not:
   - `Yeni branch upstream'i kurulmadan ilk pre-pr turu upstream kapisinda fail verdi; commit/push sonrasi tekrar kosulup PASS kaniti alinmistir.`
+
+---
+
+### [2026-03-20 00:50] TASK-081 Kanitli Drift Cleanup ve Stale Kapanis
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Koordinator worktree'de icerik farki tasimayan task dokumani/script drift'i restore edildi.`
+  - `codex-b` ve `codex-c` worktree'lerinde kanitli drift dosyalari restore edilip temiz status alindi.`
+  - `Stale gorunurlugu agent-status ve handoff kayitlarinda kapatildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-081.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+  - `docs/tasks/TASK-066.md`
+  - `docs/tasks/TASK-067.md`
+  - `docs/tasks/TASK-068.md`
+  - `docs/tasks/TASK-069.md`
+  - `docs/tasks/TASK-070.md`
+  - `docs/tasks/TASK-071.md`
+  - `docs/tasks/TASK-074.md`
+  - `docs/tasks/TASK-075.md`
+  - `docs/tasks/TASK-076.md`
+  - `docs/tasks/TASK-077.md`
+  - `docs/tasks/TASK-080.md`
+  - `docs/DEMO_FIXTURE_STANDARD_TR.md`
+  - `scripts/agent-status.ps1`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && git diff -- docs/tasks/TASK-066.md docs/tasks/TASK-067.md docs/tasks/TASK-068.md docs/tasks/TASK-069.md docs/tasks/TASK-070.md docs/tasks/TASK-071.md docs/tasks/TASK-074.md docs/tasks/TASK-075.md docs/tasks/TASK-076.md docs/tasks/TASK-077.md docs/tasks/TASK-080.md scripts/agent-status.ps1"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && git restore docs/tasks/TASK-066.md docs/tasks/TASK-067.md docs/tasks/TASK-068.md docs/tasks/TASK-069.md docs/tasks/TASK-070.md docs/tasks/TASK-071.md docs/tasks/TASK-074.md docs/tasks/TASK-075.md docs/tasks/TASK-076.md docs/tasks/TASK-077.md docs/tasks/TASK-080.md scripts/agent-status.ps1"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-b && git restore docs/tasks/TASK-074.md"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-c && git restore docs/DEMO_FIXTURE_STANDARD_TR.md docs/tasks/TASK-075.md"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/agent-status.ps1 -Detailed`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Cleanup yalniz icerik farki tasimayan satir-sonu/encoding drift dosyalarina uygulandi.`
+
+---
+
+### [2026-03-20 01:20] TASK-082 Ortam Guardrail Kisa Taski Acilisi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Runtime kontrati, readiness siniflari, shell/katman disiplini ve sandbox fallback kurallari icin TASK-082 acildi.`
+  - `Koordinator, task karti, lock, aktif pano ve handoff kaydini resmi disipline gore olusturdu.`
+  - `Bu turda urun kodu degistirilmedi; implementasyon uygun ajan owner'ina devredilecek sekilde planlandi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-082.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/start-task.ps1 -TaskId TASK-082 -Agent codex -Files "docs/SESSION_HANDOFF_TR.md,AGENTS.md,docs/REPO_DISCIPLINE_TR.md,docs/MULTI_AGENT_RULES_TR.md,docs/COORDINATOR_BOOTSTRAP_TR.md,docs/AGENT_DELIVERY_CHECKLIST_TR.md,docs/OPERATING_MODEL_TR.md,docs/tasks/_TEMPLATE.md,scripts/pre-pr.ps1,scripts/validate.ps1" -Note "Ortam guardrail kisa taski: runtime kontrati, readiness siniflari, shell/katman disiplini ve sandbox fallback kurallarini resmi hale getir"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k && git checkout -b agent/codex/task-082 && git branch --show-current && git status --short"`
+- Sonuc:
+  - `PASS (acilis zinciri)`
+- Not:
+  - `start-task.ps1` UNC uzerinde branch acilisinda kirildi; task/lock/pano kayitlari yazildiktan sonra branch WSL icinde dogru katmanda acildi.`
+
+---
+
+### [2026-03-20 01:55] TASK-082 Ortam Guardrail Standardizasyonu Kapanisi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Task template icine Runtime Kontrati bolumu eklendi; Edit/Mount/Runtime/Preview source ve execution-layer alanlari resmi hale getirildi.`
+  - `AGENTS, repo disiplini, multi-agent, koordinator bootstrap, delivery checklist ve operating model dokumanlarina ortam blokaj siniflari, quoting guardrail'i ve upstream baglama sirasi yazildi.`
+  - `pre-pr` ve `validate` scriptleri `ENV_BLOCKED`, `RUNTIME_BLOCKED`, `SANDBOX_BLOCKED` ve `CODE_FAIL` siniflarini yazacak sekilde guclendirildi.`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-082.md`
+  - `docs/tasks/_TEMPLATE.md`
+  - `AGENTS.md`
+  - `docs/REPO_DISCIPLINE_TR.md`
+  - `docs/MULTI_AGENT_RULES_TR.md`
+  - `docs/COORDINATOR_BOOTSTRAP_TR.md`
+  - `docs/AGENT_DELIVERY_CHECKLIST_TR.md`
+  - `docs/OPERATING_MODEL_TR.md`
+  - `scripts/pre-pr.ps1`
+  - `scripts/validate.ps1`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `powershell -NoProfile -Command "[void][scriptblock]::Create((Get-Content 'scripts/pre-pr.ps1' -Raw)); 'PARSE_OK'"`
+  - `powershell -NoProfile -Command "[void][scriptblock]::Create((Get-Content 'scripts/validate.ps1' -Raw)); 'PARSE_OK'"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `Bu task ortamsal guardrail standardini resmileştirdi; WSL credential helper ve start-task UNC davranisinin mekanik sertlestirmesi gerekirse ayrik operasyon taskina acilabilir.`
+
+---
+
+### [2026-03-20 02:36] TASK-083 mekanik task acma-kapatma sertlestirmesi
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `start-task.ps1 UNC branch acilisini WSL fallback ile sertlestirdi ve zorunlu koordinasyon locklarini otomatik hale getirdi.`
+  - `close-task.ps1 kalan aktif tasklari koruyan generic NEXT_TASK guncellemesine gecirildi.`
+  - `Repo-local kirik credential helper kaydi temizlenmis durum dogrulandi ve upstream push akisi canonical origin uzerinden tamamlandi.`
+- Degisen Dosyalar:
+  - `scripts/start-task.ps1`
+  - `scripts/close-task.ps1`
+  - `docs/tasks/TASK-083.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+  - `docs/WORKLOG.md`
+- Calistirilan Komutlar:
+  - `parse-check start-task`
+  - `parse-check close-task`
+  - `credential-helper proof`
+  - `git push -u origin agent/codex/task-083`
+  - `pre-pr -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `n/a`
+
+### [2026-03-20 08:12] TASK-085 Baslangic (Smoke + Locations Stabilizasyonu)
+- Yapilanlar:
+  - `scripts/smoke-test.ps1` admin listing thumb kontrolu, kapak gorseli olmayan listinglerde optional fallback kabul edecek sekilde hizalandi.
+  - `docs/category-catalog/ready/locations_v1/manifest_v1.json` icindeki checksumlar repo snapshot dosyalarinin gercek SHA256 degerleriyle guncellendi ve encoding normalize edildi.
+  - `locations:import --from=/tmp/locations_v1` tekrar calistirilip root MySQL kaniti ile `cities=81`, `districts=973`, `neighborhoods=31855` dogrulandi.
+- Dosyalar:
+  - `scripts/smoke-test.ps1`
+  - `docs/category-catalog/ready/locations_v1/manifest_v1.json`
+  - `docs/tasks/TASK-085.md`
+  - `docs/SESSION_HANDOFF_TR.md`
+- Komutlar:
+  - `powershell -ExecutionPolicy Bypass -File scripts/validate.ps1 -App both`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k/local-rebuild && docker compose exec -T orkestram-web php artisan locations:import --from=/tmp/locations_v1"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k/local-rebuild && docker compose exec -T mysql mysql -uroot -proot -e 'USE orkestram_local; SELECT COUNT(*) FROM cities; SELECT COUNT(*) FROM districts; SELECT COUNT(*) FROM neighborhoods;'"`
+- Sonuc:
+  - Smoke PASS, validate PASS, pre-pr PASS; lokasyon sozlugu geri oturdu.
+
+---
+
+### [2026-03-20 08:26] TASK-085 Resmi Kapanis
+- Sorumlu: `
+codex
+`
+- Is Ozeti:
+  - `smoke gate repo gercegine hizalandi,locations manifest hash/encoding duzeltildi,locations import ve pre-pr PASS ile zemin tekrar oturdu`
+- Degisen Dosyalar:
+  - `scripts/smoke-test.ps1,docs/category-catalog/ready/locations_v1/manifest_v1.json,docs/tasks/TASK-085.md,docs/SESSION_HANDOFF_TR.md`
+- Calistirilan Komutlar:
+  - `scripts/validate.ps1,scripts/pre-pr.ps1,php artisan locations:import --from=/tmp/locations_v1`
+- Sonuc:
+  - `
+PASS
+`
+- Not:
+  - `n/a`

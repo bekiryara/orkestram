@@ -119,6 +119,16 @@ Asagidaki durumlardan biri varsa koordinator isi durdurur:
 4. ayni kapsam icin gereksiz yeni task acilmaya calisiliyor
 5. task karti checklistleri veya kapanis kaniti eksik
 6. repo genelindeki aktif task sayisi 3'u asiyor
+7. `SANDBOX_BLOCKED`, `ENV_BLOCKED` veya `RUNTIME_BLOCKED` sinifi goruldu ama blocker resmi kayda alinmadi
+8. PowerShell/WSL katmani yanlis secildi ve komut tekrar kor sekilde deneniyor
+
+## Ortam Fallback Kurali
+1. `apply_patch`, `Get-Content` veya benzeri arac sandbox kirigina duserse ayni arac kor tekrar edilmez.
+2. Ilk fallback sirasiyla:
+   - WSL kaniti
+   - dogru shell/katman
+   - gerekiyorsa izinli komut
+3. WSL git `read` akisi calisiyor ama `push` auth bekliyorsa bu durum `ENV_BLOCKED` sayilir.
 
 ## Merge Taski Istisna Karari
 1. Multi-agent sistemde her owner teslim otomatik olarak ikinci bir merge taski dogurmaz.
@@ -186,6 +196,7 @@ Koordinator karar cevabi yalniz su 4 satirla verilir:
    - `Preview URL`
 4. Farkli worktree'de patch yazip baska worktree preview'u gostermek yasaktir.
 5. UI merge karari yalniz `Edit Source == Mount Source` dogrulandiysa verilir.
+
 
 
 

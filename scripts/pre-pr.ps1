@@ -12,6 +12,26 @@ $ciGateScript = Convert-Path (Join-Path $scriptDir 'ci-gate.ps1')
 $securityGateScript = Convert-Path (Join-Path $scriptDir 'security-gate.ps1')
 $validateScript = Convert-Path (Join-Path $scriptDir 'validate.ps1')
 
+function Fail-Step {
+    param(
+        [string]$Name,
+        [string]$Reason,
+        [string]$Class = "",
+        [string]$Solution = ""
+    )
+
+    Write-Host "[pre-pr] FAIL -> $Name"
+    if (-not [string]::IsNullOrWhiteSpace($Class)) {
+        Write-Host "[pre-pr] sinif: $Class"
+    }
+    if (-not [string]::IsNullOrWhiteSpace($Reason)) {
+        Write-Host "[pre-pr] neden: $Reason"
+    }
+    if (-not [string]::IsNullOrWhiteSpace($Solution)) {
+        Write-Host "[pre-pr] cozum: $Solution"
+    }
+}
+
 function Run-Step {
     param(
         [string]$Name,
@@ -23,16 +43,12 @@ function Run-Step {
         & $Action
     } catch {
         $raw = $_.Exception.Message
-        Write-Host "[pre-pr] FAIL -> $Name"
-        if (-not [string]::IsNullOrWhiteSpace($raw)) {
-            Write-Host "[pre-pr] neden: $raw"
-        }
+        Fail-Step -Name $Name -Reason $raw
         exit 1
     }
 
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "[pre-pr] FAIL -> $Name"
-        Write-Host "[pre-pr] neden: Komut exit code=$LASTEXITCODE"
+        Fail-Step -Name $Name -Reason "Komut exit code=$LASTEXITCODE"
         exit $LASTEXITCODE
     }
     Write-Host "[pre-pr] OK -> $Name"
@@ -60,12 +76,12 @@ Run-Step -Name "git remote/upstream discipline" -Action {
 
     $upstream = (git rev-parse --abbrev-ref --symbolic-full-name "@{u}" 2>$null).Trim()
     if ($LASTEXITCODE -ne 0 -or [string]::IsNullOrWhiteSpace($upstream)) {
-        throw "upstream tanimi yok; once git push -u origin $currentBranch"
+        Fail-Step -Name "git remote/upstream discipline" -Class "ENV_BLOCKED" -Reason "upstream tanimi yok" -Solution "yeni branch ise once git push -u origin $currentBranch ile upstream kur"; exit 1
     }
 
     $expectedUpstream = "origin/$currentBranch"
     if ($upstream -ne $expectedUpstream) {
-        throw "upstream uyumsuz: $upstream (beklenen: $expectedUpstream)"
+        Fail-Step -Name "git remote/upstream discipline" -Class "ENV_BLOCKED" -Reason "upstream uyumsuz: $upstream (beklenen: $expectedUpstream)" -Solution "git branch --set-upstream-to=$expectedUpstream veya dogru push -u adimini uygula"; exit 1
     }
 }
 
@@ -89,3 +105,5 @@ if ($Mode -eq "full") {
 
 Write-Host "[pre-pr] PASS (mode=$Mode)"
 exit 0
+
+
