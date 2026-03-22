@@ -21,6 +21,7 @@
                         <th>ID</th>
                         <th>Ad</th>
                         <th>Telefon</th>
+                        <th>Ilan / Fiyat</th>
                         <th>Mesaj</th>
                         <th>Durum</th>
                         <th>Not</th>
@@ -33,6 +34,14 @@
                             <td>{{ $r->id }}</td>
                             <td>{{ $r->name }}</td>
                             <td>{{ $r->phone }}</td>
+                            <td>
+                                <div>{{ $r->listing?->name ?? 'Genel talep' }}</div>
+                                @if($r->hasPricingSnapshot())
+                                    <div class="muted">{{ $r->snapshotPriceLabel() }}</div>
+                                @else
+                                    <div class="muted">-</div>
+                                @endif
+                            </td>
                             <td>{{ $r->message }}</td>
                             <td>{{ $r->status }}</td>
                             <td>{{ $r->internal_note }}</td>
@@ -48,7 +57,7 @@
                             </td>
                         </tr>
                     @empty
-                        <tr><td colspan="7">Kayit yok.</td></tr>
+                        <tr><td colspan="8">Kayit yok.</td></tr>
                     @endforelse
                     </tbody>
                 </table>

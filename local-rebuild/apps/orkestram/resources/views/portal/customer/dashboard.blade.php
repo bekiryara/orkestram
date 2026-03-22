@@ -6,6 +6,13 @@
         <p class="muted">Etkinligin icin ihtiyacini yaz, uygun ekipler seninle iletisime gecsin.</p>
         @if($listing)
             <p class="muted mt-8">Secili ilan: <strong>{{ $listing->name }}</strong></p>
+            @if($listing->canPublishWithSimplePricing())
+                <p class="muted">Talep olustugunda sabitlenecek fiyat: <strong>{{ $listing->displayPriceLabel() }}</strong></p>
+            @elseif($listing->usesStructuredPricing())
+                <p class="muted">Bu ilan structured pricing akisini bekliyor. Bu form sadece simple pricing kaydi icin kullanilir.</p>
+            @else
+                <p class="muted">Bu ilanin simple pricing bilgisi henuz tam degil. Fiyat sabitleme icin once ilan fiyat alanlari tamamlanmali.</p>
+            @endif
         @endif
         <form method="post" action="/customer/requests">
             @csrf

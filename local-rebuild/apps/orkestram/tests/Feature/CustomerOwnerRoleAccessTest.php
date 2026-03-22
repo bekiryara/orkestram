@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Listing;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -45,14 +46,52 @@ class CustomerOwnerRoleAccessTest extends TestCase
             'PHP_AUTH_PW' => 'customer-pass',
         ];
 
+        $listing = Listing::create([
+            'site' => 'orkestram.net',
+            'slug' => 'role-access-simple-listing',
+            'name' => 'Role Access Listing',
+            'status' => 'published',
+            'price_type' => 'fixed',
+            'price_min' => 5000,
+            'currency' => 'TRY',
+            'meta_json' => ['pricing_mode' => Listing::PRICING_MODE_SIMPLE],
+        ]);
+
         $this->withServerVariables($headers)->get('/customer')->assertOk();
         $this->withServerVariables($headers)->get('/customer/requests')->assertOk();
         $this->withServerVariables($headers)->postJson('/customer/requests', [
+            'listing_slug' => $listing->slug,
             'name' => 'Test Musteri',
             'message' => 'Talep metni',
         ])->assertCreated();
         $this->withServerVariables($headers)->get('/owner')->assertForbidden();
         $this->withServerVariables($headers)->get('/support')->assertForbidden();
+    }
+
+    public function test_customer_request_rejects_structured_pricing_listing(): void
+    {
+        $headers = [
+            'PHP_AUTH_USER' => 'customer',
+            'PHP_AUTH_PW' => 'customer-pass',
+        ];
+
+        $listing = Listing::create([
+            'site' => 'orkestram.net',
+            'slug' => 'structured-listing',
+            'name' => 'Structured Listing',
+            'status' => 'published',
+            'price_type' => 'fixed',
+            'price_min' => 9000,
+            'currency' => 'TRY',
+            'meta_json' => ['pricing_mode' => Listing::PRICING_MODE_STRUCTURED],
+        ]);
+
+        $this->withServerVariables($headers)->postJson('/customer/requests', [
+            'listing_slug' => $listing->slug,
+            'name' => 'Test Musteri',
+            'message' => 'Talep metni',
+        ])->assertStatus(422)
+            ->assertJsonValidationErrors(['listing_slug']);
     }
 
     public function test_support_agent_can_access_support_requests_only(): void

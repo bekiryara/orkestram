@@ -2401,3 +2401,38 @@ PASS
   - `PASS`
 - Not:
   - `TASK-094 request reservation price binding icin sonraki zorunlu adim olarak kalir.`
+
+---
+
+### [2026-03-22 04:20] TASK-094 simple pricing v1 request binding
+- Sorumlu: `
+codex
+`
+- Is Ozeti:
+  - `customer request write-path'ine simple pricing snapshot alanlari baglandi`
+  - `customer ve owner panellerinde snapshot fiyat okunurlugu eklendi`
+  - `request snapshot davranisi feature testlerle kilitlendi`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-094.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `local-rebuild/apps/orkestram/database/migrations/2026_03_22_041500_add_simple_pricing_snapshot_to_customer_requests_table.php`
+  - `local-rebuild/apps/orkestram/app/Models/CustomerRequest.php`
+  - `local-rebuild/apps/orkestram/app/Http/Controllers/Customer/CustomerDashboardController.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/customer/dashboard.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/customer/requests.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/owner/leads.blade.php`
+  - `local-rebuild/apps/orkestram/tests/Feature/OwnerCustomerDbFlowTest.php`
+  - `local-rebuild/apps/orkestram/tests/Feature/CustomerOwnerRoleAccessTest.php`
+- Calistirilan Komutlar:
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k/local-rebuild && docker compose exec -T orkestram-web php artisan test --filter=OwnerCustomerDbFlowTest"`
+  - `wsl -e bash -lc "cd /home/bekir/orkestram-k/local-rebuild && docker compose exec -T orkestram-web php artisan test --filter=CustomerOwnerRoleAccessTest"`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `
+PASS
+`
+- Not:
+  - `Task acilisindaki git fetch --all --prune denemesi canonical/a/b/c remote drift nedeniyle ENV_BLOCKED verdi; implementasyon akisina engel olmadi`
+  - `StructuredPricingV1 resolver veya yeni rezervasyon omurgasi bu taskta yazilmadi`

@@ -8,6 +8,7 @@ use App\Models\Listing;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class CustomerDashboardController extends Controller
@@ -59,24 +60,20 @@ class CustomerDashboardController extends Controller
         ]);
 
         $site = $this->site($request);
-        $listingId = null;
-        if (!empty($data['listing_slug'])) {
-            $listingId = Listing::query()
-                ->where('site', $site)
-                ->where('slug', $data['listing_slug'])
-                ->value('id');
-        }
+        $listing = $this->resolveListing($site, $data['listing_slug'] ?? null);
+        $snapshot = $this->pricingSnapshot($listing);
 
         $adminUserId = (int) $request->attributes->get('admin_user_id');
         $created = CustomerRequest::query()->create([
             'site' => $site,
             'user_id' => $adminUserId > 0 ? $adminUserId : null,
-            'listing_id' => $listingId,
+            'listing_id' => $listing?->id,
             'name' => $data['name'],
             'phone' => $data['phone'] ?? null,
             'email' => $data['email'] ?? null,
             'message' => $data['message'] ?? null,
             'status' => 'new',
+            ...$snapshot,
         ]);
 
         if (! $request->expectsJson()) {
@@ -87,6 +84,62 @@ class CustomerDashboardController extends Controller
             'ok' => true,
             'request_id' => $created->id,
         ], 201);
+    }
+
+    private function resolveListing(string $site, ?string $listingSlug): ?Listing
+    {
+        $slug = trim((string) ($listingSlug ?? ''));
+        if ($slug === '') {
+            return null;
+        }
+
+        $listing = Listing::query()
+            ->where('site', $site)
+            ->where('slug', $slug)
+            ->first();
+
+        if (! $listing) {
+            throw ValidationException::withMessages([
+                'listing_slug' => 'Secili ilan bulunamadi.',
+            ]);
+        }
+
+        return $listing;
+    }
+
+    private function pricingSnapshot(?Listing $listing): array
+    {
+        if (! $listing) {
+            return [
+                'pricing_mode' => null,
+                'price_type' => null,
+                'price_min' => null,
+                'price_max' => null,
+                'currency' => null,
+                'price_label' => null,
+            ];
+        }
+
+        if ($listing->usesStructuredPricing()) {
+            throw ValidationException::withMessages([
+                'listing_slug' => 'Bu ilan structured pricing akisini bekliyor. Bu formdan fiyat sabitlenemez.',
+            ]);
+        }
+
+        if (! $listing->hasCompleteSimplePricing()) {
+            throw ValidationException::withMessages([
+                'listing_slug' => 'Bu ilanin simple pricing bilgisi eksik. Talep olusturmadan once fiyat alani tamamlanmali.',
+            ]);
+        }
+
+        return [
+            'pricing_mode' => $listing->pricingMode() ?? Listing::PRICING_MODE_SIMPLE,
+            'price_type' => $listing->price_type,
+            'price_min' => $listing->price_min,
+            'price_max' => $listing->price_max,
+            'currency' => $listing->currency,
+            'price_label' => $listing->displayPriceLabel(),
+        ];
     }
 
     private function site(Request $request): string

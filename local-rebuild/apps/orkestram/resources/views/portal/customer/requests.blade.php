@@ -23,7 +23,13 @@
                 <tbody>
                 @forelse($rows as $r)
                     <tr>
-                        <td>#{{ $r->id }} - {{ $r->name }}</td>
+                        <td>
+                            <div>#{{ $r->id }} - {{ $r->name }}</div>
+                            <div class="muted">Ilan: {{ $r->listing?->name ?? 'Genel talep' }}</div>
+                            @if($r->hasPricingSnapshot())
+                                <div class="muted">Fiyat snapshot: {{ $r->snapshotPriceLabel() }}</div>
+                            @endif
+                        </td>
                         <td>{{ $r->phone ?: '-' }}<br>{{ $r->email ?: '-' }}</td>
                         <td>{{ $r->message ?: '-' }}</td>
                         <td>

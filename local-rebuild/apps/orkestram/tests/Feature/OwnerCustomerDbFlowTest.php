@@ -79,7 +79,7 @@ class OwnerCustomerDbFlowTest extends TestCase
         $response->assertDontSee('Owner B Listing');
     }
 
-    public function test_customer_request_is_saved_with_db_user_id(): void
+    public function test_customer_request_is_saved_with_db_user_id_and_simple_pricing_snapshot(): void
     {
         $customerRole = Role::create(['slug' => 'customer', 'name' => 'Customer', 'is_active' => true]);
 
@@ -92,12 +92,26 @@ class OwnerCustomerDbFlowTest extends TestCase
         ]);
         $customer->roles()->attach($customerRole->id);
 
+        $listing = Listing::create([
+            'site' => 'orkestram.net',
+            'owner_user_id' => $customer->id,
+            'slug' => 'simple-pricing-listing',
+            'name' => 'Simple Pricing Listing',
+            'status' => 'published',
+            'price_type' => 'hourly',
+            'price_min' => 750,
+            'price_max' => null,
+            'currency' => 'TRY',
+            'meta_json' => ['pricing_mode' => Listing::PRICING_MODE_SIMPLE],
+        ]);
+
         $headers = [
             'PHP_AUTH_USER' => 'customer-db',
             'PHP_AUTH_PW' => 'customer-pass',
         ];
 
         $this->withServerVariables($headers)->postJson('/customer/requests', [
+            'listing_slug' => $listing->slug,
             'name' => 'Ali Veli',
             'phone' => '05321112233',
             'message' => 'Teklif istiyorum',
@@ -105,11 +119,74 @@ class OwnerCustomerDbFlowTest extends TestCase
 
         $this->assertDatabaseHas('customer_requests', [
             'user_id' => $customer->id,
+            'listing_id' => $listing->id,
             'name' => 'Ali Veli',
             'status' => 'new',
+            'pricing_mode' => Listing::PRICING_MODE_SIMPLE,
+            'price_type' => 'hourly',
+            'price_min' => 750,
+            'price_max' => null,
+            'currency' => 'TRY',
+            'price_label' => '750 TRY / saat',
         ]);
 
         $this->assertSame(1, CustomerRequest::query()->count());
+    }
+
+    public function test_customer_request_snapshot_stays_fixed_after_listing_price_changes(): void
+    {
+        $customerRole = Role::create(['slug' => 'customer', 'name' => 'Customer', 'is_active' => true]);
+
+        $customer = User::create([
+            'name' => 'Snapshot User',
+            'username' => 'snapshot-user',
+            'email' => 'snapshot-user@example.test',
+            'password' => Hash::make('customer-pass'),
+            'is_active' => true,
+        ]);
+        $customer->roles()->attach($customerRole->id);
+
+        $listing = Listing::create([
+            'site' => 'orkestram.net',
+            'owner_user_id' => $customer->id,
+            'slug' => 'snapshot-listing',
+            'name' => 'Snapshot Listing',
+            'status' => 'published',
+            'price_type' => 'range',
+            'price_min' => 1000,
+            'price_max' => 1500,
+            'currency' => 'TRY',
+            'meta_json' => ['pricing_mode' => Listing::PRICING_MODE_SIMPLE],
+        ]);
+
+        $headers = [
+            'PHP_AUTH_USER' => 'snapshot-user',
+            'PHP_AUTH_PW' => 'customer-pass',
+        ];
+
+        $this->withServerVariables($headers)->postJson('/customer/requests', [
+            'listing_slug' => $listing->slug,
+            'name' => 'Snapshot Talebi',
+            'message' => 'Ilk fiyat kaydi',
+        ])->assertCreated();
+
+        $requestRow = CustomerRequest::query()->sole();
+        $this->assertSame('1000 - 1500 TRY', $requestRow->price_label);
+
+        $listing->forceFill([
+            'price_type' => 'hourly',
+            'price_min' => 2200,
+            'price_max' => null,
+            'currency' => 'USD',
+        ])->save();
+
+        $requestRow->refresh();
+
+        $this->assertSame('range', $requestRow->price_type);
+        $this->assertSame('1000.00', (string) $requestRow->price_min);
+        $this->assertSame('1500.00', (string) $requestRow->price_max);
+        $this->assertSame('TRY', $requestRow->currency);
+        $this->assertSame('1000 - 1500 TRY', $requestRow->price_label);
     }
 
     public function test_owner_can_create_listing_from_owner_panel(): void
@@ -149,6 +226,10 @@ class OwnerCustomerDbFlowTest extends TestCase
             'building_no' => '11',
             'unit_no' => '4',
             'service_type' => 'Dugun Muzik',
+            'price_type' => 'fixed',
+            'price_min' => '15000',
+            'currency' => 'TRY',
+            'coverage_mode' => 'location_only',
         ])->assertRedirect('/owner/listings');
 
         $this->assertDatabaseHas('listings', [
@@ -159,3 +240,4 @@ class OwnerCustomerDbFlowTest extends TestCase
         ]);
     }
 }
+
