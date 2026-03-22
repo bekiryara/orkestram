@@ -155,6 +155,7 @@ class OwnerDashboardController extends Controller
             'site_scope' => 'single',
         ];
         $listingData = $mediaService->apply($request, $listingData);
+        $listingData = $this->prepareSimplePricingPayload($listingData, null, 'draft');
 
         $listing = Listing::query()->create($listingData);
         $coverageService->syncFromRawText($listing, (string) ($data['service_areas_text'] ?? ''));
@@ -232,6 +233,7 @@ class OwnerDashboardController extends Controller
             'content' => $data['content'] ?? null,
         ];
         $listingData = $mediaService->apply($request, $listingData, $listing);
+        $listingData = $this->prepareSimplePricingPayload($listingData, $listing, (string) $listing->status);
 
         $listing->update($listingData);
         $coverageService->syncFromRawText($listing, (string) ($data['service_areas_text'] ?? ''));
@@ -246,7 +248,23 @@ class OwnerDashboardController extends Controller
             'status' => ['required', 'in:draft,published,paused'],
         ]);
 
-        $listing->update(['status' => $data['status']]);
+        $payload = ['status' => $data['status']];
+        if ($listing->usesStructuredPricing()) {
+            throw ValidationException::withMessages([
+                'status' => 'Bu ilanda structured pricing aktif. Simple pricing yayini ile ayni ilanda birlikte kullanilamaz.',
+            ]);
+        }
+
+        $listing->markSimplePricing();
+        $payload['meta_json'] = $listing->meta_json;
+
+        if ($data['status'] === 'published' && !$listing->canPublishWithSimplePricing()) {
+            throw ValidationException::withMessages([
+                'status' => 'Ilan yayinlanmadan once simple pricing alanlari eksiksiz ve tutarli olmalidir.',
+            ]);
+        }
+
+        $listing->update($payload);
 
         return back()->with('ok', 'Ilan durumu guncellendi.');
     }
@@ -265,7 +283,28 @@ class OwnerDashboardController extends Controller
 
         return back()->with('ok', 'Lead guncellendi.');
     }
+    private function prepareSimplePricingPayload(array $data, ?Listing $listing, string $targetStatus): array
+    {
+        if ($listing?->usesStructuredPricing()) {
+            throw ValidationException::withMessages([
+                'price_type' => 'Bu ilanda structured pricing aktif. Simple pricing formu ile ayni ilanda birlikte kullanilamaz.',
+            ]);
+        }
 
+        $candidate = $listing ?? new Listing();
+        $candidate->fill($data);
+        $candidate->markSimplePricing();
+
+        if ($targetStatus === 'published' && !$candidate->canPublishWithSimplePricing()) {
+            throw ValidationException::withMessages([
+                'status' => 'Ilan yayinlanmadan once simple pricing alanlari eksiksiz ve tutarli olmalidir.',
+            ]);
+        }
+
+        $data['meta_json'] = $candidate->meta_json;
+
+        return $data;
+    }
     private function validateListingPayload(Request $request): array
     {
         if ($request->filled('currency')) {
@@ -399,6 +438,4 @@ class OwnerDashboardController extends Controller
         return [(string) $city->name, (string) $district->name];
     }
 }
-
-
 

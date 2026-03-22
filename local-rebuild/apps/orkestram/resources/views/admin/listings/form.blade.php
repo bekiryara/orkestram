@@ -18,6 +18,7 @@
         <form method="post" enctype="multipart/form-data" action="{{ $item->exists ? route('admin.listings.update', $item) : route('admin.listings.store') }}" class="vstack gap-4">
             @csrf
             @if($item->exists) @method('put') @endif
+            <input type="hidden" name="pricing_mode" value="simple">
             @php($categoriesByMain = $categoriesByMain ?? collect())
 
             <section>
@@ -182,6 +183,9 @@
                     <div class="col-md-6">
                         <label class="form-label">Hizmet Turu</label>
                         <input name="service_type" class="form-control" value="{{ old('service_type', $item->service_type) }}">
+                    </div>
+                    <div class="col-12">
+                        <div class="alert alert-secondary mb-0">Bu form Simple Pricing V1 icindir. Structured pricing bu formda acilmaz.</div>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Fiyat Tipi *</label>
@@ -691,5 +695,6 @@
         })();
     </script>
 @endsection
+
 
 

@@ -39,6 +39,7 @@
             <form method="post" enctype="multipart/form-data" action="{{ route('owner.listings.update', ['listing' => $item->id]) }}" class="vstack gap-3">
                 @csrf
                 @method('PUT')
+                <input type="hidden" name="pricing_mode" value="simple">
 
                 <div class="row g-3">
                     <div class="col-md-6">
@@ -104,6 +105,9 @@
                     <div class="col-md-6">
                         <label class="form-label">Servis Tipi</label>
                         <input type="text" name="service_type" class="form-control" value="{{ old('service_type', $item->service_type) }}">
+                    </div>
+                    <div class="col-12">
+                        <div class="alert alert-secondary mb-0">Bu form Simple Pricing V1 icindir. Structured pricing bu ilanda ayri akista yonetilir.</div>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Fiyat Tipi *</label>
@@ -585,5 +589,6 @@
         })();
     </script>
 @endsection
+
 
 

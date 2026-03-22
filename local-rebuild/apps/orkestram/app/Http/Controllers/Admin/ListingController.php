@@ -15,6 +15,7 @@ use App\Services\Listings\ListingCoverageService;
 use App\Services\Listings\ListingAttributeService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class ListingController extends Controller
@@ -59,6 +60,7 @@ class ListingController extends Controller
         $attributeService->validateForCategory($request, (int) ($data['category_id'] ?? 0));
         $this->syncServiceTypeFromCategory($data);
         $data = $mediaService->apply($request, $data);
+        $data = $this->prepareSimplePricingPayload($data, null, (string) ($data['status'] ?? 'draft'));
         $listing = Listing::create($data);
         $coverageService->syncFromRawText($listing, (string) $request->input('service_areas_text', ''));
         $attributeService->syncForRequest($request, $listing, (int) ($data['category_id'] ?? 0));
@@ -91,6 +93,7 @@ class ListingController extends Controller
         $attributeService->validateForCategory($request, (int) ($data['category_id'] ?? 0));
         $this->syncServiceTypeFromCategory($data);
         $data = $mediaService->apply($request, $data, $listing);
+        $data = $this->prepareSimplePricingPayload($data, $listing, (string) ($data['status'] ?? $listing->status));
         $listing->update($data);
         $coverageService->syncFromRawText($listing, (string) $request->input('service_areas_text', ''));
         $attributeService->syncForRequest($request, $listing, (int) ($data['category_id'] ?? 0));
@@ -120,6 +123,28 @@ class ListingController extends Controller
             ->get();
     }
 
+    private function prepareSimplePricingPayload(array $data, ?Listing $listing, string $targetStatus): array
+    {
+        if ($listing?->usesStructuredPricing()) {
+            throw ValidationException::withMessages([
+                'price_type' => 'Bu ilanda structured pricing aktif. Simple pricing formu ile ayni ilanda birlikte kullanilamaz.',
+            ]);
+        }
+
+        $candidate = $listing ?? new Listing();
+        $candidate->fill($data);
+        $candidate->markSimplePricing();
+
+        if ($targetStatus === 'published' && !$candidate->canPublishWithSimplePricing()) {
+            throw ValidationException::withMessages([
+                'status' => 'Ilan yayinlanmadan once simple pricing alanlari eksiksiz ve tutarli olmalidir.',
+            ]);
+        }
+
+        $data['meta_json'] = $candidate->meta_json;
+
+        return $data;
+    }
     private function syncServiceTypeFromCategory(array &$data): void
     {
         $categoryId = (int) ($data['category_id'] ?? 0);
@@ -137,3 +162,5 @@ class ListingController extends Controller
         }
     }
 }
+
+

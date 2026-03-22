@@ -57,6 +57,9 @@ class OwnerPanelActionsTest extends TestCase
             'slug' => 'owner-a-listing',
             'name' => 'Owner A Listing',
             'status' => 'draft',
+            'price_min' => 10000,
+            'currency' => 'TRY',
+            'price_type' => 'fixed',
         ]);
         $bListing = Listing::create([
             'site' => 'orkestram.net',
@@ -64,6 +67,9 @@ class OwnerPanelActionsTest extends TestCase
             'slug' => 'owner-b-listing',
             'name' => 'Owner B Listing',
             'status' => 'draft',
+            'price_min' => 12000,
+            'currency' => 'TRY',
+            'price_type' => 'fixed',
         ]);
 
         $aLead = CustomerRequest::create([
@@ -88,6 +94,7 @@ class OwnerPanelActionsTest extends TestCase
             'status' => 'published',
         ])->assertRedirect();
         $this->assertDatabaseHas('listings', ['id' => $aListing->id, 'status' => 'published']);
+        $this->assertSame('simple', Listing::query()->findOrFail($aListing->id)->pricingMode());
 
         $this->post('/owner/leads/' . $aLead->id . '/status', [
             'status' => 'contacted',
@@ -108,6 +115,45 @@ class OwnerPanelActionsTest extends TestCase
         ])->assertForbidden();
     }
 
+
+    public function test_owner_cannot_publish_structured_pricing_listing_via_simple_flow(): void
+    {
+        $ownerRole = Role::create(['slug' => 'listing_owner', 'name' => 'Owner', 'is_active' => true]);
+        $owner = User::create([
+            'name' => 'Owner Structured',
+            'username' => 'owner-structured',
+            'email' => 'owner-structured@example.test',
+            'password' => Hash::make('owner-pass'),
+            'is_active' => true,
+        ]);
+        $owner->roles()->attach($ownerRole->id);
+
+        $listing = Listing::create([
+            'site' => 'orkestram.net',
+            'owner_user_id' => $owner->id,
+            'slug' => 'owner-structured-listing',
+            'name' => 'Owner Structured Listing',
+            'status' => 'draft',
+            'price_min' => 15000,
+            'currency' => 'TRY',
+            'price_type' => 'fixed',
+            'meta_json' => ['pricing_mode' => 'structured'],
+        ]);
+
+        $this->post('/giris', [
+            'username' => 'owner-structured',
+            'password' => 'owner-pass',
+        ])->assertRedirect('/hesabim');
+
+        $response = $this->from('/owner/listings')->post('/owner/listings/' . $listing->id . '/status', [
+            'status' => 'published',
+        ]);
+
+        $response->assertRedirect('/owner/listings');
+        $response->assertSessionHasErrors('status');
+        $this->assertSame('draft', $listing->fresh()->status);
+        $this->assertSame('structured', $listing->fresh()->pricingMode());
+    }
     public function test_owner_listing_create_and_update_syncs_coverage_mode_and_simple_pricing(): void
     {
         $ownerRole = Role::create(['slug' => 'listing_owner', 'name' => 'Owner', 'is_active' => true]);
@@ -166,6 +212,7 @@ class OwnerPanelActionsTest extends TestCase
         $this->assertSame('15000.00', $listing->price_min);
         $this->assertNull($listing->price_max);
         $this->assertSame('15000 TRY', $listing->price_label);
+        $this->assertSame('simple', $listing->pricingMode());
         $this->assertCount(1, $listing->serviceAreas);
         $this->assertSame('Manisa', $listing->serviceAreas->first()->city);
         $this->assertSame('Sehzadeler', $listing->serviceAreas->first()->district);
@@ -210,8 +257,12 @@ class OwnerPanelActionsTest extends TestCase
         $this->assertSame('18000.00', $listing->price_min);
         $this->assertSame('24000.00', $listing->price_max);
         $this->assertSame('18000 - 24000 TRY', $listing->price_label);
+        $this->assertSame('simple', $listing->pricingMode());
         $this->assertCount(1, $listing->serviceAreas);
         $this->assertSame('Manisa', $listing->serviceAreas->first()->city);
         $this->assertSame('', $listing->serviceAreas->first()->district);
     }
 }
+
+
+

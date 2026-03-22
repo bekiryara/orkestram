@@ -27,6 +27,7 @@
 
             <form method="post" enctype="multipart/form-data" action="{{ route('owner.listings.store') }}" class="vstack gap-3">
                 @csrf
+                <input type="hidden" name="pricing_mode" value="simple">
                 @php($locationOptions = $locationOptions ?? ['cities' => [], 'district_map' => [], 'neighborhood_map' => []])
                 @php($selectedCityId = (int) old('city_id'))
                 @php($selectedDistrictId = (int) old('district_id'))
@@ -106,6 +107,9 @@
                     <div class="col-md-6">
                         <label class="form-label">Servis Tipi</label>
                         <input type="text" name="service_type" class="form-control" value="{{ old('service_type') }}">
+                    </div>
+                    <div class="col-12">
+                        <div class="alert alert-secondary mb-0">Bu form Simple Pricing V1 icindir. Structured pricing ayri akista acilacaktir.</div>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Fiyat Tipi *</label>
@@ -564,5 +568,6 @@
         })();
     </script>
 @endsection
+
 
 

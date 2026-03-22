@@ -39,10 +39,56 @@ class AdminListingMediaFlowTest extends TestCase
         $this->assertNotNull($listing);
         $this->assertStringStartsWith('storage/uploads/listings/test-medya-ilan/', (string) $listing->cover_image_path);
         $this->assertCount(2, (array) $listing->gallery_json);
+        $this->assertSame('simple', $listing->pricingMode());
         Storage::disk('public')->assertExists(str_replace('storage/', '', (string) $listing->cover_image_path));
         Storage::disk('public')->assertExists(str_replace('storage/', '', (string) $listing->gallery_json[0]));
     }
 
+
+    public function test_admin_cannot_update_structured_pricing_listing_via_simple_form(): void
+    {
+        Storage::fake('public');
+        [$city, $district, $neighborhood] = $this->createLocation();
+
+        $listing = Listing::create([
+            'site' => 'orkestram.net',
+            'slug' => 'structured-admin-test',
+            'name' => 'Structured Admin Test',
+            'status' => 'draft',
+            'city_id' => $city->id,
+            'district_id' => $district->id,
+            'neighborhood_id' => $neighborhood->id,
+            'city' => 'Izmir',
+            'district' => 'Bornova',
+            'avenue_name' => 'Anadolu',
+            'street_name' => '1200',
+            'building_no' => '8',
+            'unit_no' => '2',
+            'service_type' => 'Bando',
+            'price_min' => 9000,
+            'currency' => 'TRY',
+            'price_type' => 'fixed',
+            'summary' => 'Bu ozet metni test icin yeterli uzunlukta tutulmustur.',
+            'content' => str_repeat('Detay metni. ', 12),
+            'meta_json' => ['pricing_mode' => 'structured'],
+        ]);
+
+        $response = $this->from('/admin/listings/' . $listing->id . '/edit')
+            ->withServerVariables($this->adminHeaders())
+            ->put('/admin/listings/' . $listing->id, $this->basePayload($city, $district, $neighborhood, [
+                'slug' => 'structured-admin-test',
+                'name' => 'Structured Admin Test',
+                'status' => 'published',
+                'price_type' => 'fixed',
+                'price_min' => '9500',
+                'price_max' => '',
+            ]));
+
+        $response->assertRedirect('/admin/listings/' . $listing->id . '/edit');
+        $response->assertSessionHasErrors('price_type');
+        $this->assertSame('structured', $listing->fresh()->pricingMode());
+        $this->assertSame('draft', $listing->fresh()->status);
+    }
     public function test_admin_update_migrates_legacy_paths_reorders_gallery_and_deletes_removed_file(): void
     {
         Storage::fake('public');
@@ -241,5 +287,6 @@ class AdminListingMediaFlowTest extends TestCase
         ];
     }
 }
+
 
 

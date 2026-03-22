@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Listing extends Model
 {
+    public const PRICING_MODE_SIMPLE = 'simple';
+    public const PRICING_MODE_STRUCTURED = 'structured';
+
     public const SIMPLE_PRICE_TYPES = [
         'fixed',
         'starting_from',
@@ -123,6 +126,64 @@ class Listing extends Model
         return self::SIMPLE_PRICE_TYPES;
     }
 
+    public function pricingMode(): ?string
+    {
+        $meta = $this->meta_json;
+        if (!is_array($meta)) {
+            return null;
+        }
+
+        $mode = self::normalizeText($meta['pricing_mode'] ?? null);
+        return in_array($mode, [self::PRICING_MODE_SIMPLE, self::PRICING_MODE_STRUCTURED], true) ? $mode : null;
+    }
+
+    public function usesSimplePricing(): bool
+    {
+        return $this->pricingMode() === self::PRICING_MODE_SIMPLE;
+    }
+
+    public function usesStructuredPricing(): bool
+    {
+        return $this->pricingMode() === self::PRICING_MODE_STRUCTURED;
+    }
+
+    public function markSimplePricing(): void
+    {
+        $meta = $this->meta_json;
+        if (!is_array($meta)) {
+            $meta = [];
+        }
+
+        $meta['pricing_mode'] = self::PRICING_MODE_SIMPLE;
+        $this->meta_json = $meta;
+    }
+
+    public function hasCompleteSimplePricing(): bool
+    {
+        $priceType = self::normalizePriceType($this->price_type);
+        $currency = self::normalizeCurrency($this->currency);
+        $priceMin = $this->price_min !== null ? (float) $this->price_min : null;
+        $priceMax = $this->price_max !== null ? (float) $this->price_max : null;
+
+        if ($priceType === null || $currency === null || $priceMin === null) {
+            return false;
+        }
+
+        if ($priceType !== 'range') {
+            return true;
+        }
+
+        if ($priceMax === null) {
+            return false;
+        }
+
+        return $priceMax >= $priceMin;
+    }
+
+    public function canPublishWithSimplePricing(): bool
+    {
+        return !$this->usesStructuredPricing() && $this->hasCompleteSimplePricing();
+    }
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -403,3 +464,4 @@ class Listing extends Model
         return $formatted;
     }
 }
+
