@@ -2371,3 +2371,33 @@ PASS
 `
 - Not:
   - `n/a`
+
+---
+
+### [2026-03-22 03:30] TASK-093 simple pricing v1 pricing_mode ve publish guard
+- Sorumlu: `codex`
+- Is Ozeti:
+  - `Listing modelinde resmi simple pricing_mode zemini kuruldu`
+  - `Admin ve owner publish akislarina structured cakisma guard'i ve simple publish kontrolu eklendi`
+  - `Owner/admin formlari ve feature testleri simple pricing v1 davranisina gore kilitlendi`
+- Degisen Dosyalar:
+  - `docs/tasks/TASK-093.md`
+  - `docs/TASK_LOCKS.md`
+  - `docs/NEXT_TASK.md`
+  - `docs/WORKLOG.md`
+  - `local-rebuild/apps/orkestram/app/Models/Listing.php`
+  - `local-rebuild/apps/orkestram/app/Http/Controllers/Admin/ListingController.php`
+  - `local-rebuild/apps/orkestram/app/Http/Controllers/Owner/OwnerDashboardController.php`
+  - `local-rebuild/apps/orkestram/resources/views/admin/listings/form.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-create.blade.php`
+  - `local-rebuild/apps/orkestram/resources/views/portal/owner/listings-edit.blade.php`
+  - `local-rebuild/apps/orkestram/tests/Feature/AdminListingMediaFlowTest.php`
+  - `local-rebuild/apps/orkestram/tests/Feature/OwnerPanelActionsTest.php`
+- Calistirilan Komutlar:
+  - `docker compose exec -T orkestram-web php artisan test --filter=OwnerPanelActionsTest`
+  - `docker compose exec -T orkestram-web php artisan test --filter=AdminListingMediaFlowTest`
+  - `powershell -ExecutionPolicy Bypass -File scripts/pre-pr.ps1 -Mode quick`
+- Sonuc:
+  - `PASS`
+- Not:
+  - `TASK-094 request reservation price binding icin sonraki zorunlu adim olarak kalir.`

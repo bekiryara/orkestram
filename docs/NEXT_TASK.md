@@ -1,19 +1,19 @@
 ﻿# NEXT TASK (Koordinasyon Panosu)
 
-Durum: `ACTIVE`  
+Durum: `READY`  
 Koordinator: `codex`  
 Kaynak Gercek: `docs/TASK_LOCKS.md`
 
 ## Aktif Gorevler (Merkezi Koordinasyon)
-1. `TASK-093` - SimplePricingV1 pricing_mode ve publish guard: listing pricing_mode zemini, simple publish kurallari ve yayin oncesi fiyat gecerlilik kontrolunu kapat
+1. `YOK` - aktif koordinasyon gorevi bulunmuyor
 ## Son Koordinator Kapanisi
-1. `TASK-092` - simple pricing v1 validation ve ui sadelestirme tamamlandi
-2. `TASK-091` - 085-090 merge treni ana hatta tasindi
-3. `TASK-085` - Smoke gate thumb fallback ve locations manifest/import stabilizasyonu tamamlandi
+1. `TASK-093` - simple pricing v1 pricing_mode ve publish guard tamamlandi
+2. `TASK-092` - simple pricing v1 validation ve ui sadelestirme tamamlandi
+3. `TASK-091` - 085-090 merge treni ana hatta tasindi
 ## Son Kapanis
-1. `TASK-092` - simple pricing v1 validation ve ui sadelestirme tamamlandi
-2. `TASK-091` - 085-090 merge treni ana hatta tasindi
-3. `TASK-085` - Smoke gate thumb fallback ve locations manifest/import stabilizasyonu tamamlandi
+1. `TASK-093` - simple pricing v1 pricing_mode ve publish guard tamamlandi
+2. `TASK-092` - simple pricing v1 validation ve ui sadelestirme tamamlandi
+3. `TASK-091` - 085-090 merge treni ana hatta tasindi
 ## Kapanis Kurali (Zorunlu)
 1. Kapanis kaniti olmadan task `closed` edilemez.
 2. Zorunlu kanit paketi:
